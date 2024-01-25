@@ -145,6 +145,7 @@
 			buttonOK.TabIndex = 1;
 			buttonOK.Text = "OK";
 			buttonOK.UseVisualStyleBackColor = true;
+			buttonOK.Click += buttonOK_Click;
 			// 
 			// buttonExit
 			// 
@@ -157,6 +158,7 @@
 			buttonExit.TabIndex = 2;
 			buttonExit.Text = "Exit";
 			buttonExit.UseVisualStyleBackColor = true;
+			buttonExit.Click += buttonExit_Click;
 			// 
 			// FormSetupCOM
 			// 
