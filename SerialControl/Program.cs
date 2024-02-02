@@ -2,6 +2,8 @@ namespace SerialControl
 {
 	internal static class Program
 	{
+		public static string SelectedModule = string.Empty;
+
 		/// <summary>
 		///  The main entry point for the application.
 		/// </summary>
@@ -12,6 +14,19 @@ namespace SerialControl
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 			Application.Run(new FormSetupCOM());
+			Application.Run(new FormMenu());
+
+			switch (SelectedModule)
+			{
+				case "Module01":
+					Application.Run(new FormModule01());
+					break;
+				case "Module02":
+					Application.Run(new FormModule02());
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }

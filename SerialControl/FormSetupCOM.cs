@@ -28,7 +28,7 @@ namespace SerialControl
 					SerialConnection.SelectedBaudrate = baudrate;
 					SerialConnection.SelectedStopBits = stopbits;
 					SerialConnection.SelectedDataBits = databits;
-					return;
+					this.Close();
 				}
 				else
 				{
