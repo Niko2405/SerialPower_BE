@@ -10,7 +10,7 @@
 		<DockPanel.Background>
 			<SolidColorBrush Color="White"></SolidColorBrush>
 		</DockPanel.Background>
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="28">Settings</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="18">Settings</Label>
 		<Grid DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>

@@ -8,7 +8,7 @@
 		mc:Ignorable="d"
 		MinHeight="720" MinWidth="1280"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
-		Title="Serial Power" Height="720" Width="1280">
+		Title="Serial Power" Height="720" Width="1320">
 	<Window.Background>
 		<SolidColorBrush>White</SolidColorBrush>
 	</Window.Background>
@@ -32,20 +32,20 @@
 					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
-				<Button x:Name="ButtonBaugruppe1" Grid.Row="0" Content="Ernst Leitz" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe1_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe2" Grid.Row="1" Content="IDE" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe2_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe3" Grid.Row="2" Content="Baugruppe 3" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe3_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe4" Grid.Row="3" Content="Baugruppe 4" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe4_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe5" Grid.Row="4" Content="Baugruppe 5" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe5_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe6" Grid.Row="5" Content="Baugruppe 6" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe6_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe7" Grid.Row="6" Content="Baugruppe 7" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe7_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe8_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe9_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe10_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe11" Grid.Row="10" Content="Baugruppe 11" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe11_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonInfo" Grid.Row="11" Content="Info" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonInfo_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonSettings" Grid.Row="12" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonSettings_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonExit" Grid.Row="13" Content="Exit" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonExit_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe1" Grid.Row="0" Style="{StaticResource ButtonStyle}" Content="Ernst Leitz" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe1_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe2" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="IDE" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe2_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe3" Grid.Row="2" Style="{StaticResource ButtonStyle}" Content="Baugruppe 3" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe3_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe4" Grid.Row="3" Style="{StaticResource ButtonStyle}" Content="Baugruppe 4" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe4_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe5" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Baugruppe 5" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe5_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe6" Grid.Row="5" Style="{StaticResource ButtonStyle}" Content="Baugruppe 6" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe6_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe7" Grid.Row="6" Style="{StaticResource ButtonStyle}" Content="Baugruppe 7" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe7_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe8_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe9_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe10_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe11" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Baugruppe 11" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe11_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonInfo" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Info" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonInfo_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonSettings" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonSettings_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonExit" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Exit" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonExit_Click" ClickMode="Press"/>
 			</Grid>
 		</ScrollViewer>
 

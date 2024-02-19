@@ -36,6 +36,7 @@ namespace SerialPower
 
 		private void Baugruppe1_Click(object sender, RoutedEventArgs e)
 		{
+			// CWSO Ernst Leitz
 			SetActiveUserControl(UserControlBaugruppe1);
 		}
 
@@ -103,7 +104,7 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.0\nCompiled: 24.01.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.2a\nCompiled: 219.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
