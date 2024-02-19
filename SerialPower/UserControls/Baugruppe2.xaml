@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="SerialPower.UserControls.Baugruppe2"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:SerialPower.UserControls"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="720" d:DesignWidth="1280">
+	<DockPanel LastChildFill="True">
+		<DockPanel.Background>
+			<SolidColorBrush Color="White"></SolidColorBrush>
+		</DockPanel.Background>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="36">IDE [87/10582]</Label>
+		<Grid DockPanel.Dock="Top">
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			
+			<!-- CH1 - Valve Control -->
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Valve Control</Label>
+						<ListBox x:Name="ListBox_CH1Valve" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="ListBox_CH1Valve_SelectionChanged">
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 9V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 0V</ListBoxItem>
+						</ListBox>
+					</StackPanel>
+				</Canvas>
+			</Border>
+
+			<!--- CH1 - Position Amplifier -->
+			<Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Position Amplifier</Label>
+						<ListBox x:Name="ListBox_CH1Pos" SelectionChanged="ListBox_CH1Pos_SelectionChanged">
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1,629V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 4,829V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 8,029V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 0,900V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 4,789V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 8,678V</ListBoxItem>
+						</ListBox>
+					</StackPanel>
+				</Canvas>
+			</Border>
+
+			<!-- CH1 - Temperature Amplifier -->
+			<Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Temperature Amplifier</Label>
+						<ListBox x:Name="ListBox_CH1Temp" SelectionChanged="ListBox_CH1Temp_SelectionChanged">
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 2,928V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 3,239V</ListBoxItem>
+							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 3,549V</ListBoxItem>
+						</ListBox>
+					</StackPanel>
+				</Canvas>
+			</Border>
+
+			<!-- CH2 - Voltage -->
+			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20" HorizontalAlignment="Stretch">CH2 - Voltage</Label>
+						<TextBox x:Name="TextBoxCH2Voltage" FontSize="16" Height="auto" Width="auto">24,000</TextBox>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
+						</Grid>
+						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource ButtonStyle}" FontSize="16" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+					</StackPanel>
+				</Canvas>
+			</Border>
+
+			<!-- Control output -->
+			<Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" HorizontalAlignment="Stretch" FontSize="20">Output</Label>
+						<StackPanel>
+							<CheckBox x:Name="CheckBoxCH1" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
+							<CheckBox x:Name="CheckBoxCH2" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
+						</StackPanel>
+					</StackPanel>
+				</Canvas>
+			</Border>
+			
+			<!-- CH1 - Temperature Amplifier [Feineinstellung] -->
+			<Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20" Padding="15">CH1 - Feineinstellung</Label>
+						<TextBox x:Name="TextBoxCH1Voltage" FontSize="16" Height="auto" Width="auto">24,000</TextBox>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition></ColumnDefinition>
+								<ColumnDefinition></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
+						</Grid>
+						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource ButtonStyle}" FontSize="16" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+					</StackPanel>
+				</Canvas>
+			</Border>
+			
+			<!-- CH 1 - Current -->
+			<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20" HorizontalAlignment="Stretch">CH1 - Current</Label>
+						<TextBox x:Name="TextBoxCH1Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">No func</TextBox>
+					</StackPanel>
+				</Canvas>
+			</Border>
+
+			<!-- CH2 - Current -->
+			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
+				<Canvas>
+					<StackPanel>
+						<Label Style="{StaticResource TitleStyle}" FontSize="20" HorizontalAlignment="Stretch">CH2 - Current</Label>
+						<TextBox x:Name="TextBoxCH2Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">Current</TextBox>
+					</StackPanel>
+				</Canvas>
+			</Border>
+		</Grid>
+	</DockPanel>
+</UserControl>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!--<TargetFramework>net8.0-windows7.0</TargetFramework> -->
+	<TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Program.ico</ApplicationIcon>
+    <Title>SerialPower</Title>
+    <Copyright>Nils Kornmann</Copyright>
+    <StartupObject>SerialPower.App</StartupObject>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fonts\OpenSans-Bold.ttf" />
+    <None Remove="fonts\OpenSans-ExtraBold.ttf" />
+    <None Remove="fonts\OpenSans-Regular.ttf" />
+    <None Remove="fonts\OpenSans-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Program.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fonts\OpenSans-Bold.ttf" />
+    <Resource Include="fonts\OpenSans-ExtraBold.ttf" />
+    <Resource Include="fonts\OpenSans-Regular.ttf" />
+    <Resource Include="fonts\OpenSans-SemiBold.ttf" />
+  </ItemGroup>
+
+</Project>

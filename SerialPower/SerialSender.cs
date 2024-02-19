@@ -5,10 +5,11 @@ using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
-namespace SerialControl
+namespace SerialPower
 {
-	internal class SerialConnection
+	internal class SerialSender
 	{
 		public static string SelectedPortName = string.Empty;
 		public static int SelectedBaudrate = 9600;
@@ -43,13 +44,14 @@ namespace SerialControl
 			};
 			while (locked)
 			{
-				Thread.Sleep(100);
+				Thread.Sleep(10);
 				Debug.WriteLine("Waiting...");
 			}
 			if (!serialPort.IsOpen)
 			{
 				try
 				{
+					locked = true;
 					serialPort.Open();
 					serialPort.WriteLine(command);
 					if (wait)
@@ -57,13 +59,13 @@ namespace SerialControl
 						response = serialPort.ReadLine();
 					}
 					serialPort.Close();
+					locked = false;
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("ERROR", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("ERROR", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
 					return ex.Message;
 				}
-
 			}
 			return response;
 		}
