@@ -5,15 +5,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;	
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace SerialPower.UserControls
 {
@@ -22,12 +17,48 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class Baugruppe2 : UserControl
 	{
+		private static readonly double STEPS = 0.010d;
+		public bool active = false;
+
 		public Baugruppe2()
 		{
 			InitializeComponent();
+			RunUpdaters();
 		}
 
-		private static readonly double STEPS = 0.010d;
+		private async void RunUpdaters()
+		{
+			Thread.Sleep(1000);
+			await Task.Factory.StartNew(() =>
+			{
+				CurrentUpdateTimer();
+			});
+		}
+
+		private void CurrentUpdateTimer()
+		{
+			string data = string.Empty;
+			while (true)
+			{
+				Thread.Sleep(1000);
+				if (SerialSender.SelectedPortName != string.Empty && active)
+				{
+					data = SerialSender.SendCommand("I1O?", true);
+					Debug.WriteLine($"Current CH1: {data}");
+					this.Dispatcher.Invoke(() =>
+					{
+						TextBoxCH1Current.Text = data;
+					});
+
+					data = SerialSender.SendCommand("I2O?", true);
+					Debug.WriteLine($"Current CH2: {data}");
+					this.Dispatcher.Invoke(() =>
+					{
+						TextBoxCH2Current.Text = data;
+					});
+				}
+			}
+		}
 
 		/// <summary>
 		/// Sende eingestellte Spannung am Kanal 2
@@ -189,6 +220,7 @@ namespace SerialPower.UserControls
 
 		private void ListBox_CH1Valve_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			Thread.Sleep(1000);
 			if (e.AddedItems.Count > 0)
 			{
 				string selectedItem = e.AddedItems[0].ToString();
@@ -240,26 +272,6 @@ namespace SerialPower.UserControls
 		{
 			Debug.WriteLine("CH1 Offline");
 			SerialSender.SendCommand("OP1 0");
-		}
-		public void StartUpdateCH2Current()
-		{
-			/*
-			string data = string.Empty;
-			while (true)
-			{
-				Thread.Sleep(1000);
-				if (SerialSender.SelectedPortName != string.Empty)
-				{
-					Debug.WriteLine("Ask for current");
-					data = SerialSender.ReadNextCommand("I2O?");
-					Debug.WriteLine($"Current: {data}");
-					this.Dispatcher.Invoke(() =>
-					{
-						TextBoxCH2Current.Text = data;
-					});
-				}
-			}
-			*/
 		}
 	}
 }

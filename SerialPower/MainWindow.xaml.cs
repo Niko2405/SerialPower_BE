@@ -38,13 +38,14 @@ namespace SerialPower
 		{
 			// CWSO Ernst Leitz
 			SetActiveUserControl(UserControlBaugruppe1);
+			UserControlBaugruppe2.active = false;
 		}
 
 		private void Baugruppe2_Click(object sender, RoutedEventArgs e)
 		{
 			// IDE
 			SetActiveUserControl(UserControlBaugruppe2);
-			new Thread(UserControlBaugruppe2.StartUpdateCH2Current).Start();
+			UserControlBaugruppe2.active = true;
 		}
 
 		private void Baugruppe3_Click(object sender, RoutedEventArgs e)
@@ -104,7 +105,7 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.2a\nCompiled: 219.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.2b\nCompiled: 21.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

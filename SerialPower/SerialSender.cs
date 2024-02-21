@@ -11,6 +11,7 @@ namespace SerialPower
 {
 	internal class SerialSender
 	{
+		public static bool isLocked = false;
 		public static string SelectedPortName = string.Empty;
 		public static int SelectedBaudrate = 9600;
 		public static int SelectedStopBits = 1;
@@ -31,7 +32,6 @@ namespace SerialPower
 		/// <returns></returns>
 		public static string SendCommand(string command, bool wait = false)
 		{
-			bool locked = false;
 			string response = string.Empty;
 
 			serialPort = new SerialPort
@@ -42,7 +42,7 @@ namespace SerialPower
 				DataBits = SelectedDataBits,
 				Parity = 0,
 			};
-			while (locked)
+			while (isLocked)
 			{
 				Thread.Sleep(10);
 				Debug.WriteLine("Waiting...");
@@ -51,19 +51,22 @@ namespace SerialPower
 			{
 				try
 				{
-					locked = true;
+					isLocked = true;
 					serialPort.Open();
-					serialPort.WriteLine(command);
-					if (wait)
+					if (serialPort.IsOpen)
 					{
-						response = serialPort.ReadLine();
+						serialPort.WriteLine(command);
+						if (wait)
+						{
+							response = serialPort.ReadLine();
+						}
+						serialPort.Close();
+						isLocked = false;
 					}
-					serialPort.Close();
-					locked = false;
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("ERROR", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show("ERROR", ex.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
 					return ex.Message;
 				}
 			}
