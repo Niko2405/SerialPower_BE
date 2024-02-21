@@ -25,9 +25,36 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<!-- Settings -->
+			
+			<!-- COM Settings -->
 			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">COM Ports:</Label>
-			<ListBox x:Name="ListBoxComPorts" Grid.Row="0" Grid.Column="1" SelectionChanged="ListBoxComPorts_SelectionChanged" BorderBrush="Black"></ListBox>
+			<ListBox x:Name="ListBoxComPorts" Grid.Row="0" Grid.Column="1" SelectionChanged="ListBoxComPorts_SelectionChanged" BorderBrush="Black" FontSize="14" Margin="5"/>
+
+			<!-- Baudrate Settings -->
+			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Baudrate:</Label>
+			<TextBox x:Name="TextBox_Baudrate" Grid.Row="1" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">9600</TextBox>
+
+			<!-- StopBits Settings -->
+			<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">StopBits:</Label>
+			<TextBox x:Name="TextBox_StopBits" Grid.Row="2" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">1</TextBox>
+
+			<!-- DataBits Settings -->
+			<Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">DataBits:</Label>
+			<TextBox x:Name="TextBox_DataBits" Grid.Row="3" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">8</TextBox>
+
+			<!-- Parity Settings -->
+			<Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Parity:</Label>
+			<TextBox x:Name="TextBox_Parity" Grid.Row="4" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">0</TextBox>
+
+			<!-- ReadTimeout Settings -->
+			<Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">ReadTimeout (ms):</Label>
+			<TextBox x:Name="TextBox_ReadTimeout" Grid.Row="5" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">100</TextBox>
+
+			<!-- WriteTimeout Settings -->
+			<Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">WriteTimeout (ms):</Label>
+			<TextBox x:Name="TextBox_WriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">100</TextBox>
+
+			<Button x:Name="ButtonRun" Grid.Row="7" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="5" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Run</Button>
 		</Grid>
 	</DockPanel>
 </UserControl>

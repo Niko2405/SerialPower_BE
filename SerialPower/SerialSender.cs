@@ -13,13 +13,11 @@ namespace SerialPower
 		public static int SelectedBaudrate = 9600;
 		public static int SelectedStopBits = 1;
 		public static int SelectedDataBits = 8;
+		public static int SelectedParity = 0;
+		public static int SelectedReadTimeout = 100;
+		public static int SelectedWriteTimeout = 100;
 
 		private static SerialPort? serialPort;
-
-		public static string[] GetPortNames()
-		{
-			return SerialPort.GetPortNames();
-		}
 
 		/// <summary>
 		/// Send Command to COM
@@ -27,8 +25,9 @@ namespace SerialPower
 		/// <param name="command">Command to send</param>
 		/// <param name="wait">Should the func wait for feedback</param>
 		/// <returns></returns>
-		public static string SendCommand(string command, bool wait = false)
+		public static string SendCommand(string command, bool readLine = false)
 		{
+			Debug.WriteLine("Send command: " +  command);
 			// create empty string
 			string response = string.Empty;
 
@@ -41,8 +40,9 @@ namespace SerialPower
 					BaudRate = SelectedBaudrate,
 					StopBits = (StopBits)SelectedStopBits,
 					DataBits = SelectedDataBits,
-					Parity = 0,
-					ReadTimeout = 500,
+					Parity = (Parity)SelectedParity,
+					ReadTimeout = SelectedReadTimeout,
+					WriteTimeout = SelectedWriteTimeout
 				};
 
 				if (!serialPort.IsOpen)
@@ -57,7 +57,7 @@ namespace SerialPower
 						{
 							serialPort.WriteLine(command);
 							// if wait, read next line and remove \r
-							if (wait)
+							if (readLine)
 							{
 								response = serialPort.ReadLine().Trim();
 							}
@@ -67,17 +67,26 @@ namespace SerialPower
 							isLocked = false;
 						}
 					}
-					catch (TimeoutException ex)
+					catch (TimeoutException)
 					{
+						// reset connection
 						if (serialPort.IsOpen)
 						{
 							serialPort.Close();
 							isLocked = false;
 						}
+						//MessageBox.Show("WARN", "Timeout", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 					catch (Exception ex)
 					{
-						MessageBox.Show("ERROR", ex.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+						// reset connection
+						if (serialPort.IsOpen)
+						{
+							serialPort.Close();
+							isLocked = false;
+						}
+
+						MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 						return ex.Message;
 					}
 				}

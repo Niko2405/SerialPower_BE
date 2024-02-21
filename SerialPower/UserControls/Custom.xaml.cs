@@ -25,7 +25,11 @@ namespace SerialPower.UserControls
 		{
 			InitializeComponent();
 		}
-
+		// remove chars like V and empty. Replace , to .
+		private static string ClearInputData(string rawData)
+		{
+			return rawData.Replace(",", ".").Replace("V", "").Replace(" ", "");
+		}
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
 			Debug.WriteLine("CH1 Online");
@@ -49,5 +53,31 @@ namespace SerialPower.UserControls
 			Debug.WriteLine("CH1 Offline");
 			SerialSender.SendCommand("OP1 0");
 		}
-	}
+
+		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
+		{
+			// current setter
+			string current = TextBox_CH1Current.Text;
+			current = ClearInputData(current);
+			SerialSender.SendCommand($"I1 {current}");
+
+			// voltage setter
+			string voltage = TextBox_CH1Voltage.Text;
+			voltage = ClearInputData(voltage);
+			SerialSender.SendCommand($"V1 {voltage}");
+		}
+
+		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
+		{
+			// current setter
+			string current = TextBox_CH2Current.Text;
+			current = ClearInputData(current);
+			SerialSender.SendCommand($"I2 {current}");
+
+			// voltage setter
+			string voltage = TextBox_CH2Voltage.Text;
+			voltage = ClearInputData(voltage);
+			SerialSender.SendCommand($"V2 {voltage}");
+		}
+    }
 }

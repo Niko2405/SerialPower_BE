@@ -17,8 +17,8 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class Baugruppe2 : UserControl
 	{
-		private static readonly double STEPS = 0.010d;
-		public bool active = false;
+		private static readonly float STEPS = 0.010f;
+		private static readonly int UPDATE_RATE = 500;
 
 		public Baugruppe2()
 		{
@@ -37,21 +37,21 @@ namespace SerialPower.UserControls
 			});
 		}
 
-		public static void SetCurrentLimit()
-		{
-			SerialSender.SendCommand("I1 0.1");
-			SerialSender.SendCommand("I2 0.1");
-		}
-
 		private void CurrentUpdateTimer()
 		{
 			string data = string.Empty;
 			while (true)
 			{
-				Thread.Sleep(1000);
-				if (SerialSender.SelectedPortName != string.Empty && active)
+				Thread.Sleep(UPDATE_RATE);
+
+				// Only check current when ComPort is selected and visibility is true
+				if (SerialSender.SelectedPortName != string.Empty && this.Visibility == Visibility.Visible)
 				{
-					SetCurrentLimit();
+					// Set current limit
+					SerialSender.SendCommand("I1 0.1");
+					SerialSender.SendCommand("I2 0.1");
+
+					// get current on port 1
 					data = SerialSender.SendCommand("I1O?", true);
 					Debug.WriteLine($"Current CH1: {data}");
 					this.Dispatcher.Invoke(() =>
@@ -59,6 +59,7 @@ namespace SerialPower.UserControls
 						TextBoxCH1Current.Text = data;
 					});
 
+					// get current on port 2
 					data = SerialSender.SendCommand("I2O?", true);
 					Debug.WriteLine($"Current CH2: {data}");
 					this.Dispatcher.Invoke(() =>
@@ -105,17 +106,17 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				double currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
 
 				// Wert um 0,001 verringern
-				double newValue = currentValue - STEPS;
-				newValue = Math.Round(newValue, 3);
+				float newValue = currentValue - STEPS;
+				newValue = (float)Math.Round(newValue, 3);
 				Debug.WriteLine($"{currentValue} => {newValue}");
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -129,17 +130,17 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				double currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
 
 				// Wert um 0,001 verringern
-				double newValue = currentValue + STEPS;
-				newValue = Math.Round(newValue, 3);
+				float newValue = currentValue + STEPS;
+				newValue = (float)Math.Round(newValue, 3);
 				Debug.WriteLine($"{currentValue} => {newValue}");
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -153,17 +154,17 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				double currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
 
 				// Wert um 0,001 verringern
-				double newValue = currentValue - STEPS;
-				newValue = Math.Round(newValue, 3);
+				float newValue = currentValue - STEPS;
+				newValue = (float)Math.Round(newValue, 3);
 				Debug.WriteLine($"{currentValue} => {newValue}");
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -177,17 +178,17 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				double currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
 
 				// Wert um 0,001 verringern
-				double newValue = currentValue + STEPS;
-				newValue = Math.Round(newValue, 3);
+				float newValue = currentValue + STEPS;
+				newValue = (float)Math.Round(newValue, 3);
 				Debug.WriteLine($"{currentValue} => {newValue}");
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -196,7 +197,7 @@ namespace SerialPower.UserControls
 			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
-				string selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
 					// Remove System.ListBox:
@@ -215,7 +216,7 @@ namespace SerialPower.UserControls
 			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
-				string selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
 					// Remove System.ListBox:
@@ -234,7 +235,7 @@ namespace SerialPower.UserControls
 			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
-				string selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
 					// Remove System.ListBox:

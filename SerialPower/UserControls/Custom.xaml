@@ -26,7 +26,7 @@
 				
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
-				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0">Send data</Button>
+				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0" Click="ButtonCH1_Click">Send data</Button>
 			</StackPanel>
 			
 			<!-- Kanal 2-->
@@ -42,7 +42,7 @@
 				
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
-				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0">Send data</Button>
+				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0" Click="ButtonCH2_Click">Send data</Button>
 			</StackPanel>
 		</Grid>
 	</DockPanel>

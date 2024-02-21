@@ -49,8 +49,8 @@
 
 		<Grid DockPanel.Dock="Right">
 			<UserControls:Baugruppe1 x:Name="UserControlBaugruppe1" Visibility="Collapsed"></UserControls:Baugruppe1>
-			<UserControls:Custom x:Name="UserControlCustom" Visibility="Collapsed"></UserControls:Custom>
 			<UserControls:Baugruppe2 x:Name="UserControlBaugruppe2" Visibility="Collapsed"></UserControls:Baugruppe2>
+			<UserControls:Custom x:Name="UserControlCustom" Visibility="Collapsed"></UserControls:Custom>
 			<UserControls:Settings x:Name="UserControlSettings" Visibility="Visible"></UserControls:Settings>
 		</Grid>
 	</DockPanel>

@@ -71,8 +71,8 @@
 				<Canvas>
 					<StackPanel>
 						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Feineinstellung</Label>
-						<TextBox x:Name="TextBoxCH2Voltage" FontSize="16" Height="auto" Width="auto">24,000</TextBox>
-						<Grid>
+						<TextBox x:Name="TextBoxCH2Voltage" FontSize="16">24,000</TextBox>
+						<Grid Margin="10">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
@@ -104,7 +104,7 @@
 					<StackPanel>
 						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Feineinstellung</Label>
 						<TextBox x:Name="TextBoxCH1Voltage" FontSize="16">24,000</TextBox>
-						<Grid>
+						<Grid Margin="10">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
@@ -122,7 +122,7 @@
 				<Canvas>
 					<StackPanel>
 						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Current</Label>
-						<TextBox x:Name="TextBoxCH1Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">No func</TextBox>
+						<TextBox x:Name="TextBoxCH1Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">No Value</TextBox>
 					</StackPanel>
 				</Canvas>
 			</Border>
@@ -132,7 +132,7 @@
 				<Canvas>
 					<StackPanel>
 						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Current</Label>
-						<TextBox x:Name="TextBoxCH2Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">Current</TextBox>
+						<TextBox x:Name="TextBoxCH2Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">No Value</TextBox>
 					</StackPanel>
 				</Canvas>
 			</Border>

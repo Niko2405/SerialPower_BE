@@ -34,6 +34,7 @@ namespace SerialPower.UserControls
 
 		private void ListBoxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			/*
 			if (e.AddedItems.Count > 0)
 			{
 				var selectedItem = e.AddedItems[0];
@@ -43,6 +44,45 @@ namespace SerialPower.UserControls
 					SerialSender.SelectedPortName = selectedItem.ToString();
 				}
 			}
+			*/
 		}
-	}
+
+		private void ButtonRun_Click(object sender, RoutedEventArgs e)
+		{
+			if (ListBoxComPorts.SelectedValue != null)
+			{
+				try
+				{
+					string? portName = ListBoxComPorts.SelectedValue.ToString();
+					int baudrate = int.Parse(TextBox_Baudrate.Text);
+					int stopbits = int.Parse(TextBox_StopBits.Text);
+					int databits = int.Parse(TextBox_DataBits.Text);
+					int parity = int.Parse(TextBox_Parity.Text);
+					int readTimeout = int.Parse(TextBox_ReadTimeout.Text);
+					int writeTimeout = int.Parse(TextBox_WriteTimeout.Text);
+
+					if (portName != null)
+					{
+						SerialSender.SelectedPortName = portName;
+						SerialSender.SelectedBaudrate = baudrate;
+						SerialSender.SelectedStopBits = stopbits;
+						SerialSender.SelectedDataBits = databits;
+						SerialSender.SelectedParity = parity;
+						SerialSender.SelectedReadTimeout = readTimeout;
+						SerialSender.SelectedWriteTimeout = writeTimeout;
+						MessageBox.Show($"Settings saved\nPort name: {SerialSender.SelectedPortName}\nBaudrate: {SerialSender.SelectedBaudrate}\nStopBits: {SerialSender.SelectedStopBits}\nDataBits: {SerialSender.SelectedDataBits}\nParity: {SerialSender.SelectedParity}\nReadTimeout: {SerialSender.SelectedReadTimeout}\nWriteTimeout: {SerialSender.SelectedWriteTimeout}", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
+						return;
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Port not selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+        }
+    }
 }

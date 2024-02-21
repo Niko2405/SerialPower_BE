@@ -22,8 +22,16 @@ namespace SerialPower
 		{
 			InitializeComponent();
 		}
+
+		/// <summary>
+		/// Change primary user control
+		/// </summary>
+		/// <param name="userControl"></param>
 		public void SetActiveUserControl(UserControl userControl)
 		{
+			// Disable Settings Button
+			ButtonSettings.IsEnabled = false;
+
 			Debug.WriteLine($"Change UserControl to: {userControl.GetType().Name}");
 			//BaugruppeOne.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe1.Visibility = Visibility.Collapsed;
@@ -39,60 +47,57 @@ namespace SerialPower
 		{
 			// CWSO Ernst Leitz
 			SetActiveUserControl(UserControlBaugruppe1);
-			UserControlBaugruppe2.active = false;
 		}
 
 		private void Baugruppe2_Click(object sender, RoutedEventArgs e)
 		{
 			// IDE
 			SetActiveUserControl(UserControlBaugruppe2);
-			UserControlBaugruppe2.active = true;
 		}
 
 		private void Baugruppe3_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe4_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe5_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe6_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe7_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe8_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe9_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void Baugruppe10_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
 		private void ButtonSettings_Click(object sender, RoutedEventArgs e)
 		{
 			SetActiveUserControl(UserControlSettings);
-			UserControlBaugruppe2.active = false;
 		}
 
 		private void ButtonExit_Click(object sender, RoutedEventArgs e)
@@ -102,13 +107,12 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.3a\nCompiled: 22.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("Developer: Nils Kornmann\nDeveloped for: Brückmann Elektronik GmbH\nVersion: 2.3b\nCompiled: 22.02.2024\nCompiled with: DotNet SDK 8.0.2\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 		private void ButtonCustom_Click(object sender, RoutedEventArgs e)
 		{
 			SetActiveUserControl(UserControlCustom);
-			UserControlBaugruppe2.active = false;
 		}
     }
 }
