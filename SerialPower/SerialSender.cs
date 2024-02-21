@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SerialPower
@@ -32,45 +29,61 @@ namespace SerialPower
 		/// <returns></returns>
 		public static string SendCommand(string command, bool wait = false)
 		{
+			// create empty string
 			string response = string.Empty;
 
-			serialPort = new SerialPort
+			// if func is not locked
+			if (!isLocked)
 			{
-				PortName = SelectedPortName,
-				BaudRate = SelectedBaudrate,
-				StopBits = (StopBits)SelectedStopBits,
-				DataBits = SelectedDataBits,
-				Parity = 0,
-			};
-			while (isLocked)
-			{
-				Thread.Sleep(10);
-				Debug.WriteLine("Waiting...");
-			}
-			if (!serialPort.IsOpen)
-			{
-				try
+				serialPort = new SerialPort
 				{
+					PortName = SelectedPortName,
+					BaudRate = SelectedBaudrate,
+					StopBits = (StopBits)SelectedStopBits,
+					DataBits = SelectedDataBits,
+					Parity = 0,
+					ReadTimeout = 500,
+				};
+
+				if (!serialPort.IsOpen)
+				{
+					// Lock function
 					isLocked = true;
-					serialPort.Open();
-					if (serialPort.IsOpen)
+					try
 					{
-						serialPort.WriteLine(command);
-						if (wait)
+						// Open Port
+						serialPort.Open();
+						if (serialPort.IsOpen)
 						{
-							response = serialPort.ReadLine();
+							serialPort.WriteLine(command);
+							// if wait, read next line and remove \r
+							if (wait)
+							{
+								response = serialPort.ReadLine().Trim();
+							}
+							serialPort.Close();
+
+							// unlock function
+							isLocked = false;
 						}
-						serialPort.Close();
-						isLocked = false;
+					}
+					catch (TimeoutException ex)
+					{
+						if (serialPort.IsOpen)
+						{
+							serialPort.Close();
+							isLocked = false;
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("ERROR", ex.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+						return ex.Message;
 					}
 				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("ERROR", ex.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
-					return ex.Message;
-				}
+				return response;
 			}
-			return response;
+			return "N/A";
 		}
 	}
 }

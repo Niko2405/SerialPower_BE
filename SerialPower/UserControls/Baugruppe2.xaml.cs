@@ -23,6 +23,8 @@ namespace SerialPower.UserControls
 		public Baugruppe2()
 		{
 			InitializeComponent();
+
+			// Init
 			RunUpdaters();
 		}
 
@@ -35,6 +37,12 @@ namespace SerialPower.UserControls
 			});
 		}
 
+		public static void SetCurrentLimit()
+		{
+			SerialSender.SendCommand("I1 0.1");
+			SerialSender.SendCommand("I2 0.1");
+		}
+
 		private void CurrentUpdateTimer()
 		{
 			string data = string.Empty;
@@ -43,6 +51,7 @@ namespace SerialPower.UserControls
 				Thread.Sleep(1000);
 				if (SerialSender.SelectedPortName != string.Empty && active)
 				{
+					SetCurrentLimit();
 					data = SerialSender.SendCommand("I1O?", true);
 					Debug.WriteLine($"Current CH1: {data}");
 					this.Dispatcher.Invoke(() =>
@@ -184,6 +193,7 @@ namespace SerialPower.UserControls
 
 		private void ListBox_CH1Temp_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
 				string selectedItem = e.AddedItems[0].ToString();
@@ -202,6 +212,7 @@ namespace SerialPower.UserControls
 
 		private void ListBox_CH1Pos_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
 				string selectedItem = e.AddedItems[0].ToString();
@@ -220,7 +231,7 @@ namespace SerialPower.UserControls
 
 		private void ListBox_CH1Valve_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			Thread.Sleep(1000);
+			Thread.Sleep(100);
 			if (e.AddedItems.Count > 0)
 			{
 				string selectedItem = e.AddedItems[0].ToString();

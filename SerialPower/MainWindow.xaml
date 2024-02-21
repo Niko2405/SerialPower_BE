@@ -6,14 +6,12 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="720" MinWidth="1280"
+		MinHeight="720" MinWidth="1350"
+		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
-		Title="Serial Power" Height="720" Width="1320">
-	<Window.Background>
-		<SolidColorBrush>White</SolidColorBrush>
-	</Window.Background>
+		Title="Serial Power" Height="720" Width="1375">
 	<DockPanel LastChildFill="True" Margin="5">
-		<ScrollViewer DockPanel.Dock="Left" Background="Black" Width="215">
+		<ScrollViewer DockPanel.Dock="Left" Background="Black" Width="225">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition></RowDefinition>
@@ -42,7 +40,7 @@
 				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe8_Click" ClickMode="Press"/>
 				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe9_Click" ClickMode="Press"/>
 				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe10_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe11" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Baugruppe 11" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe11_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonCustom" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Custom" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonCustom_Click" ClickMode="Press"/>
 				<Button x:Name="ButtonInfo" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Info" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonInfo_Click" ClickMode="Press"/>
 				<Button x:Name="ButtonSettings" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonSettings_Click" ClickMode="Press"/>
 				<Button x:Name="ButtonExit" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Exit" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonExit_Click" ClickMode="Press"/>
@@ -51,6 +49,7 @@
 
 		<Grid DockPanel.Dock="Right">
 			<UserControls:Baugruppe1 x:Name="UserControlBaugruppe1" Visibility="Collapsed"></UserControls:Baugruppe1>
+			<UserControls:Custom x:Name="UserControlCustom" Visibility="Collapsed"></UserControls:Custom>
 			<UserControls:Baugruppe2 x:Name="UserControlBaugruppe2" Visibility="Collapsed"></UserControls:Baugruppe2>
 			<UserControls:Settings x:Name="UserControlSettings" Visibility="Visible"></UserControls:Settings>
 		</Grid>

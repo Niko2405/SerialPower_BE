@@ -5,12 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SerialPower.UserControls"
              mc:Ignorable="d" 
+			 Background="{StaticResource BackgroundStyle}"
              d:DesignHeight="450" d:DesignWidth="800">
 	<DockPanel LastChildFill="True" Margin="5">
-		<DockPanel.Background>
-			<SolidColorBrush Color="White"></SolidColorBrush>
-		</DockPanel.Background>
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Ernst Leitz [85/15186]</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">Ernst Leitz [85/15186]</Label>
 		<Grid DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>

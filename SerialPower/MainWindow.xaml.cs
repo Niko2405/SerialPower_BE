@@ -24,10 +24,11 @@ namespace SerialPower
 		}
 		public void SetActiveUserControl(UserControl userControl)
 		{
-			Debug.WriteLine($"Change usercotnrol to: {userControl.GetType().Name}");
+			Debug.WriteLine($"Change UserControl to: {userControl.GetType().Name}");
 			//BaugruppeOne.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe1.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe2.Visibility = Visibility.Collapsed;
+			UserControlCustom.Visibility = Visibility.Collapsed;
 			UserControlSettings.Visibility = Visibility.Collapsed;
 
 			// only show current usercontrol
@@ -88,14 +89,10 @@ namespace SerialPower
 			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 
-		private void Baugruppe11_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Keine Baugruppe registriert", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-		}
-
 		private void ButtonSettings_Click(object sender, RoutedEventArgs e)
 		{
 			SetActiveUserControl(UserControlSettings);
+			UserControlBaugruppe2.active = false;
 		}
 
 		private void ButtonExit_Click(object sender, RoutedEventArgs e)
@@ -105,7 +102,13 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.2b\nCompiled: 21.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("Delevoper: Nils Kornmann\nVersion: 2.3a\nCompiled: 22.02.2024\nCompiled with dotnet SDK 8.0\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+		private void ButtonCustom_Click(object sender, RoutedEventArgs e)
+		{
+			SetActiveUserControl(UserControlCustom);
+			UserControlBaugruppe2.active = false;
+		}
     }
 }

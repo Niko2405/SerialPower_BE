@@ -5,13 +5,11 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d" 
+			 Background="{StaticResource BackgroundStyle}"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True">
-		<DockPanel.Background>
-			<SolidColorBrush Color="White"></SolidColorBrush>
-		</DockPanel.Background>
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="36">IDE [87/10582]</Label>
-		<Grid DockPanel.Dock="Top">
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">IDE [87/10582]</Label>
+		<Grid DockPanel.Dock="Bottom">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
@@ -27,7 +25,7 @@
 			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18">CH1 - Valve Control</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Valve Control</Label>
 						<ListBox x:Name="ListBox_CH1Valve" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="ListBox_CH1Valve_SelectionChanged">
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1V</ListBoxItem>
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 9V</ListBoxItem>
@@ -41,7 +39,7 @@
 			<Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18">CH1 - Position Amplifier</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Position Amplifier</Label>
 						<ListBox x:Name="ListBox_CH1Pos" SelectionChanged="ListBox_CH1Pos_SelectionChanged">
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1,629V</ListBoxItem>
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 4,829V</ListBoxItem>
@@ -58,7 +56,7 @@
 			<Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18">CH1 - Temperature Amplifier</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Temperature Amplifier</Label>
 						<ListBox x:Name="ListBox_CH1Temp" SelectionChanged="ListBox_CH1Temp_SelectionChanged">
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 2,928V</ListBoxItem>
 							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 3,239V</ListBoxItem>
@@ -72,7 +70,7 @@
 			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" HorizontalAlignment="Stretch">CH2 - Feineinstellung</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Feineinstellung</Label>
 						<TextBox x:Name="TextBoxCH2Voltage" FontSize="16" Height="auto" Width="auto">24,000</TextBox>
 						<Grid>
 							<Grid.ColumnDefinitions>
@@ -91,10 +89,10 @@
 			<Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" HorizontalAlignment="Stretch" FontSize="18">Output</Label>
+						<Label Style="{StaticResource TitleStyle}" Padding="10" FontSize="18">Output</Label>
 						<StackPanel>
-							<CheckBox x:Name="CheckBoxCH1" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
-							<CheckBox x:Name="CheckBoxCH2" FontSize="16" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
+							<CheckBox x:Name="CheckBoxCH1" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
+							<CheckBox x:Name="CheckBoxCH2" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
 						</StackPanel>
 					</StackPanel>
 				</Canvas>
@@ -104,8 +102,8 @@
 			<Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="15">CH1 - Feineinstellung</Label>
-						<TextBox x:Name="TextBoxCH1Voltage" FontSize="16" Height="auto" Width="auto">24,000</TextBox>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Feineinstellung</Label>
+						<TextBox x:Name="TextBoxCH1Voltage" FontSize="16">24,000</TextBox>
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition></ColumnDefinition>
@@ -123,7 +121,7 @@
 			<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" HorizontalAlignment="Stretch">CH1 - Current</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Current</Label>
 						<TextBox x:Name="TextBoxCH1Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">No func</TextBox>
 					</StackPanel>
 				</Canvas>
@@ -133,7 +131,7 @@
 			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" HorizontalAlignment="Stretch">CH2 - Current</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Current</Label>
 						<TextBox x:Name="TextBoxCH2Current" FontSize="16" IsReadOnly="True" VerticalContentAlignment="Center">Current</TextBox>
 					</StackPanel>
 				</Canvas>
