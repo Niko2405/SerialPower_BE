@@ -8,7 +8,7 @@
 			 Background="{StaticResource BackgroundStyle}"
 			 d:DesignHeight="450" d:DesignWidth="800">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">Settings</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">Einstellungen</Label>
 		<Grid DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -54,7 +54,7 @@
 			<Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">WriteTimeout (ms):</Label>
 			<TextBox x:Name="TextBox_WriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">100</TextBox>
 
-			<Button x:Name="ButtonRun" Grid.Row="7" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="5" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Run</Button>
+			<Button x:Name="ButtonRun" Grid.Row="7" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="10" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Run</Button>
 		</Grid>
 	</DockPanel>
 </UserControl>

@@ -37,6 +37,7 @@ namespace SerialPower
 			UserControlBaugruppe1.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe2.Visibility = Visibility.Collapsed;
 			UserControlCustom.Visibility = Visibility.Collapsed;
+			UserControlInfo.Visibility = Visibility.Collapsed;
 			UserControlSettings.Visibility = Visibility.Collapsed;
 
 			// only show current usercontrol
@@ -107,7 +108,7 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Developer: Nils Kornmann\nDeveloped for: Brückmann Elektronik GmbH\nVersion: 2.3b\nCompiled: 22.02.2024\nCompiled with: DotNet SDK 8.0.2\nLicense: MIT", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			SetActiveUserControl(UserControlInfo);
         }
 
 		private void ButtonCustom_Click(object sender, RoutedEventArgs e)

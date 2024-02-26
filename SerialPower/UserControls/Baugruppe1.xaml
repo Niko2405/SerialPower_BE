@@ -24,14 +24,14 @@
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 			<!-- V_Int -->
-			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V Intern</Label>
+			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V internal</Label>
 			<Button x:Name="Button0V_Intern" Grid.Row="1" Grid.Column="0" Content="Set 0V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button0V_Intern_Click" ClickMode="Press"/>
 			<Button x:Name="Button6V_Intern" Grid.Row="2" Grid.Column="0" Content="Set 6V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button6V_Intern_Click" ClickMode="Press"/>
 			<Button x:Name="Button12V_Intern" Grid.Row="3" Grid.Column="0" Content="Set 12V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button12V_Intern_Click" ClickMode="Press"/>
 			<Button x:Name="Button24V_Intern" Grid.Row="4" Grid.Column="0" Content="Set 24V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button24V_Intern_Click" ClickMode="Press"/>
 			<Button x:Name="Button48V_Intern" Grid.Row="5" Grid.Column="0" Content="Set 48V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button48V_Intern_Click" ClickMode="Press"/>
             <!-- V_Ext -->
-            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V Extern</Label>
+			<Label Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V external</Label>
 			<Button x:Name="Button0V_Extern" Grid.Row="1" Grid.Column="2" Content="Set 0V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button0V_Extern_Click" ClickMode="Press"/>
 			<Button x:Name="Button6V_Extern" Grid.Row="2" Grid.Column="2" Content="Set 6V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button6V_Extern_Click" ClickMode="Press"/>
 			<Button x:Name="Button12V_Extern" Grid.Row="3" Grid.Column="2" Content="Set 12V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="5" FontSize="20" Click="Button12V_Extern_Click" ClickMode="Press"/>

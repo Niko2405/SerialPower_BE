@@ -7,7 +7,7 @@
 			 mc:Ignorable="d" 
 			 d:DesignHeight="450" d:DesignWidth="800">
 	<DockPanel Margin="10">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Custom Settings</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Manual control</Label>
 		<Grid DockPanel.Dock="Bottom">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition></ColumnDefinition>
@@ -16,33 +16,33 @@
 			<!--Kanal 1 -->
 			<StackPanel Grid.Column="0">
 				<!-- Spannung -->
-				<Label Style="{StaticResource TitleStyle}" FontSize="24">Kanal 1</Label>
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 1</Label>
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH1Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16"></TextBox>
+				<TextBox x:Name="TextBox_CH1Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">12</TextBox>
 				
 				<!-- Strom -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
-				<TextBox x:Name="TextBox_CH1Current" Width="160" HorizontalAlignment="Left" FontSize="16"></TextBox>
+				<TextBox x:Name="TextBox_CH1Current" Width="160" HorizontalAlignment="Left" FontSize="16">1.0</TextBox>
 				
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
-				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0" Click="ButtonCH1_Click">Send data</Button>
+				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
+				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Margin="0,50,0,0" Width="150" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send data</Button>
 			</StackPanel>
 			
 			<!-- Kanal 2-->
 			<StackPanel Grid.Column="1">
 				<!-- Spannung -->
-				<Label Style="{StaticResource TitleStyle}" FontSize="24">Kanal 2</Label>
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 2</Label>
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH2Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16"></TextBox>
+				<TextBox x:Name="TextBox_CH2Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">6.0</TextBox>
 				
 				<!-- Strom -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
-				<TextBox x:Name="TextBox_CH2Current" Width="160" HorizontalAlignment="Left" FontSize="16"></TextBox>
+				<TextBox x:Name="TextBox_CH2Current" Width="160" HorizontalAlignment="Left" FontSize="16">0.5</TextBox>
 				
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
-				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Margin="0,100,0,0" Click="ButtonCH2_Click">Send data</Button>
+				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
+				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Margin="0,50,0,0" Width="150" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send data</Button>
 			</StackPanel>
 		</Grid>
 	</DockPanel>

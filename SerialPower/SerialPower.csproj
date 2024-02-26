@@ -11,8 +11,10 @@
     <Title>SerialPower</Title>
     <Copyright>Nils Kornmann</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
+    <AssemblyVersion>1.0.2.4</AssemblyVersion>
+    <FileVersion>1.0.2.4</FileVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,10 +22,18 @@
     <None Remove="fonts\OpenSans-ExtraBold.ttf" />
     <None Remove="fonts\OpenSans-Regular.ttf" />
     <None Remove="fonts\OpenSans-SemiBold.ttf" />
+    <None Remove="images\powersupplie.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Program.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +45,7 @@
     <Resource Include="fonts\OpenSans-ExtraBold.ttf" />
     <Resource Include="fonts\OpenSans-Regular.ttf" />
     <Resource Include="fonts\OpenSans-SemiBold.ttf" />
+    <Resource Include="images\powersupplie.png" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,6 @@
 	<FontFamily x:Key="OpenSansExtraBold">./fonts/OpenSans-ExtraBold.ttf#Open Sans</FontFamily>
 
 	<!-- Border Color -->
-	<SolidColorBrush x:Key="PurpleBrush" Color="#5A00AA"/>
 	<SolidColorBrush x:Key="WhiteBrush" Color="White"/>
 	<SolidColorBrush x:Key="BackgroundStyle" Color="#FF292929"/>
 

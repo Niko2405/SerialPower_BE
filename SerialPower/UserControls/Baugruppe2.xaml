@@ -70,7 +70,7 @@
 			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Feineinstellung</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH2 - Fine adjustment</Label>
 						<TextBox x:Name="TextBoxCH2Voltage" FontSize="16">24,000</TextBox>
 						<Grid Margin="10">
 							<Grid.ColumnDefinitions>
@@ -91,8 +91,8 @@
 					<StackPanel>
 						<Label Style="{StaticResource TitleStyle}" Padding="10" FontSize="18">Output</Label>
 						<StackPanel>
-							<CheckBox x:Name="CheckBoxCH1" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Kanal 1 Online</CheckBox>
-							<CheckBox x:Name="CheckBoxCH2" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Kanal 2 Online</CheckBox>
+							<CheckBox x:Name="CheckBoxCH1" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
+							<CheckBox x:Name="CheckBoxCH2" FontSize="16" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
 						</StackPanel>
 					</StackPanel>
 				</Canvas>
@@ -102,7 +102,7 @@
 			<Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
 				<Canvas>
 					<StackPanel>
-						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Feineinstellung</Label>
+						<Label Style="{StaticResource TitleStyle}" FontSize="18" Padding="10">CH1 - Fine adjustment</Label>
 						<TextBox x:Name="TextBoxCH1Voltage" FontSize="16">24,000</TextBox>
 						<Grid Margin="10">
 							<Grid.ColumnDefinitions>

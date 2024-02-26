@@ -6,12 +6,13 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="720" MinWidth="1350"
+		MinHeight="620" MinWidth="960"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
-		Title="Serial Power" Height="720" Width="1375">
+		Title="Serial Power"
+		Height="720" Width="1375">
 	<DockPanel LastChildFill="True" Margin="5">
-		<ScrollViewer DockPanel.Dock="Left" Background="Black" Width="225">
+		<ScrollViewer DockPanel.Dock="Left" Background="Black" Width="230">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition></RowDefinition>
@@ -30,20 +31,20 @@
 					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
 				</Grid.RowDefinitions>
-				<Button x:Name="ButtonBaugruppe1" Grid.Row="0" Style="{StaticResource ButtonStyle}" Content="Ernst Leitz" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe1_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe2" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="IDE" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe2_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe3" Grid.Row="2" Style="{StaticResource ButtonStyle}" Content="Baugruppe 3" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe3_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe4" Grid.Row="3" Style="{StaticResource ButtonStyle}" Content="Baugruppe 4" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe4_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe5" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Baugruppe 5" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe5_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe6" Grid.Row="5" Style="{StaticResource ButtonStyle}" Content="Baugruppe 6" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe6_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe7" Grid.Row="6" Style="{StaticResource ButtonStyle}" Content="Baugruppe 7" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe7_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe8_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe9_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="Baugruppe10_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonCustom" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Custom" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonCustom_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonInfo" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Info" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonInfo_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonSettings" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonSettings_Click" ClickMode="Press"/>
-				<Button x:Name="ButtonExit" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Exit" HorizontalAlignment="Stretch" Margin="5" Height="60" FontSize="20" Click="ButtonExit_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe1" Grid.Row="0" Style="{StaticResource ButtonStyle}" Content="Ernst Leitz [85/15186]" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe1_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe2" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="IDE [87/10582]" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe2_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe3" Grid.Row="2" Style="{StaticResource ButtonStyle}" Content="Baugruppe 3" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe3_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe4" Grid.Row="3" Style="{StaticResource ButtonStyle}" Content="Baugruppe 4" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe4_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe5" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Baugruppe 5" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe5_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe6" Grid.Row="5" Style="{StaticResource ButtonStyle}" Content="Baugruppe 6" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe6_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe7" Grid.Row="6" Style="{StaticResource ButtonStyle}" Content="Baugruppe 7" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe7_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe8_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe9_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="Baugruppe10_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonCustom" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Manual" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="ButtonCustom_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonInfo" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Info" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="ButtonInfo_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonSettings" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="ButtonSettings_Click" ClickMode="Press"/>
+				<Button x:Name="ButtonExit" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Exit" HorizontalAlignment="Stretch" Margin="5" Height="40" FontSize="18" Click="ButtonExit_Click" ClickMode="Press"/>
 			</Grid>
 		</ScrollViewer>
 
@@ -51,6 +52,7 @@
 			<UserControls:Baugruppe1 x:Name="UserControlBaugruppe1" Visibility="Collapsed"></UserControls:Baugruppe1>
 			<UserControls:Baugruppe2 x:Name="UserControlBaugruppe2" Visibility="Collapsed"></UserControls:Baugruppe2>
 			<UserControls:Custom x:Name="UserControlCustom" Visibility="Collapsed"></UserControls:Custom>
+			<UserControls:Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:Info>
 			<UserControls:Settings x:Name="UserControlSettings" Visibility="Visible"></UserControls:Settings>
 		</Grid>
 	</DockPanel>
