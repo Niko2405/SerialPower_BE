@@ -6,9 +6,9 @@
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
 			 Background="{StaticResource BackgroundStyle}"
-			 d:DesignHeight="450" d:DesignWidth="800">
+			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">Einstellungen</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Settings</Label>
 		<Grid DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -28,7 +28,7 @@
 			
 			<!-- COM Settings -->
 			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">COM Ports:</Label>
-			<ListBox x:Name="ListBoxComPorts" Grid.Row="0" Grid.Column="1" SelectionChanged="ListBoxComPorts_SelectionChanged" BorderBrush="Black" FontSize="14" Margin="5"/>
+			<ListBox x:Name="ListBoxComPorts" Grid.Row="0" Grid.Column="1" BorderBrush="Black" FontSize="14" Margin="5"/>
 
 			<!-- Baudrate Settings -->
 			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Baudrate:</Label>

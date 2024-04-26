@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Ports;
 using System.Windows;
@@ -75,6 +74,7 @@ namespace SerialPower
 							serialPort.Close();
 							isLocked = false;
 						}
+						return "Timeout";
 						//MessageBox.Show("WARN", "Timeout", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 					catch (Exception ex)

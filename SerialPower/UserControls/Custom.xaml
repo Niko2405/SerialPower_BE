@@ -5,7 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d" 
-			 d:DesignHeight="450" d:DesignWidth="800">
+			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel Margin="10">
 		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Manual control</Label>
 		<Grid DockPanel.Dock="Bottom">
@@ -13,6 +13,7 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
+			
 			<!--Kanal 1 -->
 			<StackPanel Grid.Column="0">
 				<!-- Spannung -->

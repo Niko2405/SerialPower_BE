@@ -24,7 +24,7 @@
 	<!-- New Title -->
 	<Style x:Key="TitleStyle" TargetType="{x:Type Label}">
 		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="FontSize" Value="36"/>
+		<Setter Property="FontSize" Value="32"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"/>
 		<Setter Property="VerticalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>

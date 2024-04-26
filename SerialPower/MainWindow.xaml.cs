@@ -24,6 +24,26 @@ namespace SerialPower
 		}
 
 		/// <summary>
+		/// If settings set, activate all buttons
+		/// </summary>
+		/// <param name="enable"></param>
+		public void SetAllButtonState(bool enable)
+		{
+			ButtonBaugruppe1.IsEnabled = enable;
+			ButtonBaugruppe2.IsEnabled = enable;
+			ButtonBaugruppe3.IsEnabled = enable;
+			ButtonBaugruppe4.IsEnabled = enable;
+			ButtonBaugruppe5.IsEnabled = enable;
+			ButtonBaugruppe6.IsEnabled = enable;
+			ButtonBaugruppe7.IsEnabled = enable;
+			ButtonBaugruppe8.IsEnabled = enable;
+			ButtonBaugruppe9.IsEnabled = enable;
+			ButtonBaugruppe10.IsEnabled = enable;
+			ButtonCustom.IsEnabled = enable;
+			ButtonInfo.IsEnabled = enable;
+		}
+
+		/// <summary>
 		/// Change primary user control
 		/// </summary>
 		/// <param name="userControl"></param>

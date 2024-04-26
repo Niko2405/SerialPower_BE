@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,13 @@ namespace SerialPower.UserControls
 		public Info()
 		{
 			InitializeComponent();
+		}
+
+		private void InfoLoaded(object sender, RoutedEventArgs e)
+		{
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+			LabelVersion.Content = $"Version: {fileVersionInfo.FileVersion}";
 		}
 	}
 }

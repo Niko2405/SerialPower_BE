@@ -32,21 +32,6 @@ namespace SerialPower.UserControls
 			}
 		}
 
-		private void ListBoxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			/*
-			if (e.AddedItems.Count > 0)
-			{
-				var selectedItem = e.AddedItems[0];
-				if (selectedItem != null)
-				{
-					MessageBox.Show($"COM Port is now set to {selectedItem}", "COM Port Set", MessageBoxButton.OK, MessageBoxImage.Warning);
-					SerialSender.SelectedPortName = selectedItem.ToString();
-				}
-			}
-			*/
-		}
-
 		private void ButtonRun_Click(object sender, RoutedEventArgs e)
 		{
 			if (ListBoxComPorts.SelectedValue != null)
@@ -70,7 +55,12 @@ namespace SerialPower.UserControls
 						SerialSender.SelectedParity = parity;
 						SerialSender.SelectedReadTimeout = readTimeout;
 						SerialSender.SelectedWriteTimeout = writeTimeout;
-						MessageBox.Show($"Settings saved\nPort name: {SerialSender.SelectedPortName}\nBaudrate: {SerialSender.SelectedBaudrate}\nStopBits: {SerialSender.SelectedStopBits}\nDataBits: {SerialSender.SelectedDataBits}\nParity: {SerialSender.SelectedParity}\nReadTimeout: {SerialSender.SelectedReadTimeout}\nWriteTimeout: {SerialSender.SelectedWriteTimeout}", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
+						MessageBox.Show($"Port name: {SerialSender.SelectedPortName}\nBaudrate: {SerialSender.SelectedBaudrate}\nStopBits: {SerialSender.SelectedStopBits}\nDataBits: {SerialSender.SelectedDataBits}\nParity: {SerialSender.SelectedParity}\nReadTimeout: {SerialSender.SelectedReadTimeout}\nWriteTimeout: {SerialSender.SelectedWriteTimeout}", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
+						
+						// get instance of mainwindow to access functions.
+						MainWindow mainWindow = (MainWindow) Window.GetWindow(this);
+						Debug.WriteLine("Enable all buttons");
+						mainWindow.SetAllButtonState(true);
 						return;
 					}
 				}

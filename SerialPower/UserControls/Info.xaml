@@ -6,19 +6,19 @@
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
 			 Background="{StaticResource BackgroundStyle}"
-			 d:DesignHeight="450" d:DesignWidth="800">
+			 d:DesignHeight="720" d:DesignWidth="1280" Loaded="InfoLoaded">
 	<DockPanel LastChildFill="True">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="32">Info</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Info</Label>
 		<StackPanel DockPanel.Dock="Left">
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Developer: Nils Kornmann</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Developed for: Brückmann Elektronik GmbH</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Version: 1.0.2.5</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Compiled: 16.04.2024</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Compiled with: DotNet SDK 8.0.4</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">License: MIT</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="12">Connections: USB, RS232</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developer: Nils Kornmann</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developed for: Brückmann Elektronik GmbH</Label>
+			<Label x:Name="LabelVersion" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Version: Unknown</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled: 16.04.2024</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled with: DotNet SDK 8.0.4</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">License: MIT</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Connections: USB and RS232</Label>
 		</StackPanel>
-		<StackPanel Margin="10">
+		<StackPanel Margin="15">
 			<Label Style="{StaticResource TitleStyle}" HorizontalAlignment="Right" FontSize="16">only for: Aim TTi CPX200DP</Label>
 			<Image Source="{StaticResource ImagePowerSupplie}"/>
 		</StackPanel>
