@@ -19,11 +19,11 @@
 				<!-- Spannung -->
 				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 1</Label>
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH1Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">12</TextBox>
+				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">12.0</TextBox>
 				
 				<!-- Strom -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
-				<TextBox x:Name="TextBox_CH1Current" Width="160" HorizontalAlignment="Left" FontSize="16">1.0</TextBox>
+				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.0</TextBox>
 				
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
@@ -35,11 +35,11 @@
 				<!-- Spannung -->
 				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 2</Label>
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH2Voltage" Width="160" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">6.0</TextBox>
+				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">6.0</TextBox>
 				
 				<!-- Strom -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
-				<TextBox x:Name="TextBox_CH2Current" Width="160" HorizontalAlignment="Left" FontSize="16">0.5</TextBox>
+				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">0.5</TextBox>
 				
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>

@@ -8,12 +8,12 @@
 			 Background="{StaticResource BackgroundStyle}"
 			 d:DesignHeight="720" d:DesignWidth="1280" Loaded="InfoLoaded">
 	<DockPanel LastChildFill="True">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Info</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Information</Label>
 		<StackPanel DockPanel.Dock="Left">
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developer: Nils Kornmann</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developed for: Brückmann Elektronik GmbH</Label>
 			<Label x:Name="LabelVersion" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Version: Unknown</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled: 16.04.2024</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled: 13.05.2024</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled with: DotNet SDK 8.0.4</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">License: MIT</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Connections: USB and RS232</Label>

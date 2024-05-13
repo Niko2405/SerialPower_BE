@@ -11,8 +11,8 @@
     <Title>SerialPower</Title>
     <Copyright>Nils Kornmann</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.0.2.7</AssemblyVersion>
-    <FileVersion>1.0.2.7</FileVersion>
+    <AssemblyVersion>1.0.2.9</AssemblyVersion>
+    <FileVersion>1.0.2.9</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>false</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>

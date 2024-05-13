@@ -27,6 +27,7 @@ namespace SerialPower
 		public static string SendCommand(string command, bool readLine = false)
 		{
 			Debug.WriteLine("Send command: " +  command);
+
 			// create empty string
 			string response = string.Empty;
 
