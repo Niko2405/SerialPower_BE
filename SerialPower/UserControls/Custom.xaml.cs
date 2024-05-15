@@ -32,30 +32,31 @@ namespace SerialPower.UserControls
 		}
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
-			Debug.WriteLine("CH1 Online");
+			Logging.PrintHeader("Channel 1 online");
 			SerialSender.SendCommand("OP1 1");
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
-			Debug.WriteLine("CH2 Online");
+			Logging.PrintHeader("Channel 2 online");
 			SerialSender.SendCommand("OP2 1");
 		}
 
 		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Debug.WriteLine("CH1 Offline");
+			Logging.PrintHeader("Channel 2 offline");
 			SerialSender.SendCommand("OP2 0");
 		}
 
 		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Debug.WriteLine("CH1 Offline");
+			Logging.PrintHeader("Channel 1 offline");
 			SerialSender.SendCommand("OP1 0");
 		}
 
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
 		{
+			Logging.PrintHeader("Channel 1 send data");
 			// current setter
 			string current = TextBox_CH1Current.Text;
 			current = ClearInputData(current);
@@ -69,6 +70,8 @@ namespace SerialPower.UserControls
 
 		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
 		{
+			Logging.PrintHeader("Channel 2 send data");
+
 			// current setter
 			string current = TextBox_CH2Current.Text;
 			current = ClearInputData(current);

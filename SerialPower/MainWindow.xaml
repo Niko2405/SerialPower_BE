@@ -12,9 +12,12 @@
 		Title="Serial Power"
 		Height="720" Width="1375">
 	<DockPanel LastChildFill="True" Margin="5">
-		<ScrollViewer DockPanel.Dock="Left" Background="Black" Width="230">
+		<ScrollViewer DockPanel.Dock="Left" Background="{StaticResource BackgroundStyle}" Width="230">
 			<Grid>
 				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
 					<RowDefinition></RowDefinition>
@@ -41,10 +44,14 @@
 				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe8_Click" ClickMode="Press" IsEnabled="False"/>
 				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe9_Click" ClickMode="Press" IsEnabled="False"/>
 				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe10_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonCustom" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Manual control" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonCustom_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonInfo" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Information" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonInfo_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonSettings" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonSettings_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonExit" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Exit program" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonExit_Click" ClickMode="Press" IsEnabled="True"/>
+				<Button x:Name="ButtonBaugruppe11" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Baugruppe 11" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe11_Click" ClickMode="Press" IsEnabled="False"/>
+				<Button x:Name="ButtonBaugruppe12" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Baugruppe 12" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe12_Click" ClickMode="Press" IsEnabled="False"/>
+				<Button x:Name="ButtonBaugruppe13" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Baugruppe 13" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe13_Click" ClickMode="Press" IsEnabled="False"/>
+				
+				<Button x:Name="ButtonCustom" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Manual control" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonCustom_Click" ClickMode="Press" IsEnabled="False"/>
+				<Button x:Name="ButtonInfo" Grid.Row="14" Style="{StaticResource ButtonStyle}" Content="Information" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonInfo_Click" ClickMode="Press" IsEnabled="False"/>
+				<Button x:Name="ButtonSettings" Grid.Row="15" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonSettings_Click" ClickMode="Press" IsEnabled="False"/>
+				<Button x:Name="ButtonExit" Grid.Row="16" Style="{StaticResource ButtonStyle}" Content="Exit program" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonExit_Click" ClickMode="Press" IsEnabled="True"/>
 			</Grid>
 		</ScrollViewer>
 

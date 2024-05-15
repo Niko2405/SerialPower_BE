@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,12 @@ namespace SerialPower.UserControls
 		public Settings()
 		{
 			InitializeComponent();
-			string[] coms = System.IO.Ports.SerialPort.GetPortNames();
+
+			// COM Liste ausfüllen
+			string[] coms = SerialPort.GetPortNames();
 			foreach (string com in coms)
 			{
-				Debug.WriteLine($"{com} found. Add to list");
+				Logging.Info($"{com} found. Add to listbox");
 				ListBoxComPorts.Items.Add(com);
 			}
 		}
@@ -74,5 +77,5 @@ namespace SerialPower.UserControls
 				MessageBox.Show("Port not selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
         }
-    }
+	}
 }

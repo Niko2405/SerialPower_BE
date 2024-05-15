@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Windows;
 
@@ -8,6 +9,7 @@ namespace SerialPower
 	internal class SerialSender
 	{
 		public static bool isLocked = false;
+
 		public static string SelectedPortName = string.Empty;
 		public static int SelectedBaudrate = 9600;
 		public static int SelectedStopBits = 1;
@@ -56,10 +58,12 @@ namespace SerialPower
 						if (serialPort.IsOpen)
 						{
 							serialPort.WriteLine(command);
+							Logging.Info("Send: " + command);
 							// if wait, read next line and remove \r
 							if (readLine)
 							{
 								response = serialPort.ReadLine().Trim();
+								Logging.Info("Recv: " + response);
 							}
 							serialPort.Close();
 
@@ -67,7 +71,7 @@ namespace SerialPower
 							isLocked = false;
 						}
 					}
-					catch (TimeoutException)
+					catch (TimeoutException ex)
 					{
 						// reset connection
 						if (serialPort.IsOpen)
@@ -75,6 +79,7 @@ namespace SerialPower
 							serialPort.Close();
 							isLocked = false;
 						}
+						Logging.Error(ex.Message);
 						return "Timeout";
 						//MessageBox.Show("WARN", "Timeout", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
@@ -83,6 +88,7 @@ namespace SerialPower
 						// reset connection
 						if (serialPort.IsOpen)
 						{
+							Logging.Error(ex.Message);
 							serialPort.Close();
 							isLocked = false;
 						}

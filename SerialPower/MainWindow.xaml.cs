@@ -39,6 +39,10 @@ namespace SerialPower
 			ButtonBaugruppe8.IsEnabled = enable;
 			ButtonBaugruppe9.IsEnabled = enable;
 			ButtonBaugruppe10.IsEnabled = enable;
+			ButtonBaugruppe11.IsEnabled = enable;
+			ButtonBaugruppe12.IsEnabled = enable;
+			ButtonBaugruppe13.IsEnabled = enable;
+
 			ButtonCustom.IsEnabled = enable;
 			ButtonInfo.IsEnabled = enable;
 		}
@@ -52,7 +56,7 @@ namespace SerialPower
 			// Disable Settings Button
 			ButtonSettings.IsEnabled = false;
 
-			Debug.WriteLine($"Change UserControl to: {userControl.GetType().Name}");
+			Logging.Warn($"Change UserControl to: {userControl.GetType().Name}");
 			//BaugruppeOne.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe1.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe2.Visibility = Visibility.Collapsed;
@@ -115,6 +119,20 @@ namespace SerialPower
 		{
 			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
+		private void Baugruppe11_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+		}
+
+		private void Baugruppe12_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+		}
+
+		private void Baugruppe13_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Keine Baugruppe registriert", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+		}
 
 		private void ButtonSettings_Click(object sender, RoutedEventArgs e)
 		{
@@ -135,5 +153,5 @@ namespace SerialPower
 		{
 			SetActiveUserControl(UserControlCustom);
 		}
-    }
+	}
 }

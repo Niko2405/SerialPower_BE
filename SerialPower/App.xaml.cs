@@ -16,7 +16,9 @@ namespace SerialPower
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-
+			Logging.Info("Info message");
+			Logging.Warn("Warn message");
+			Logging.Error("Error message");
 		}
 	}
 }
