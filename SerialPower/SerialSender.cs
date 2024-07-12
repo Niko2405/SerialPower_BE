@@ -28,8 +28,6 @@ namespace SerialPower
 		/// <returns></returns>
 		public static string SendCommand(string command, bool readLine = false)
 		{
-			Debug.WriteLine("Send command: " +  command);
-
 			// create empty string
 			string response = string.Empty;
 
@@ -58,12 +56,12 @@ namespace SerialPower
 						if (serialPort.IsOpen)
 						{
 							serialPort.WriteLine(command);
-							Logging.Info("Send: " + command);
+							Logging.Info("Send command: " + command);
 							// if wait, read next line and remove \r
 							if (readLine)
 							{
 								response = serialPort.ReadLine().Trim();
-								Logging.Info("Recv: " + response);
+								Logging.Info("Recv data: " + response);
 							}
 							serialPort.Close();
 

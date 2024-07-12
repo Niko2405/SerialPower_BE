@@ -22,7 +22,7 @@
 				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">12.0</TextBox>
 				
 				<!-- Strom -->
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Max. current</Label>
 				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.0</TextBox>
 				
 				<!-- etc -->
@@ -38,7 +38,7 @@
 				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">6.0</TextBox>
 				
 				<!-- Strom -->
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Current</Label>
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Max. current</Label>
 				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">0.5</TextBox>
 				
 				<!-- etc -->

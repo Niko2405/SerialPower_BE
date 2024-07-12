@@ -34,7 +34,7 @@ namespace SerialPower
 			short titleLenght = (short)title.Length;
 
 			ConsoleColor currentForegroundColor = Console.ForegroundColor;
-			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.ForegroundColor = ConsoleColor.Magenta;
 
 			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 1; i++)
 			{

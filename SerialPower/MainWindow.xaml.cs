@@ -54,6 +54,7 @@ namespace SerialPower
 		public void SetActiveUserControl(UserControl userControl)
 		{
 			// Disable Settings Button
+			Console.Clear();
 			ButtonSettings.IsEnabled = false;
 
 			Logging.Warn($"Change UserControl to: {userControl.GetType().Name}");
@@ -71,12 +72,14 @@ namespace SerialPower
 		private void Baugruppe1_Click(object sender, RoutedEventArgs e)
 		{
 			// CWSO Ernst Leitz
+			Console.Title = "85/15186";
 			SetActiveUserControl(UserControlBaugruppe1);
 		}
 
 		private void Baugruppe2_Click(object sender, RoutedEventArgs e)
 		{
 			// IDE
+			Console.Title = "87/10582";
 			SetActiveUserControl(UserControlBaugruppe2);
 		}
 
@@ -146,11 +149,13 @@ namespace SerialPower
 
 		private void ButtonInfo_Click(object sender, RoutedEventArgs e)
 		{
+			Console.Title = "Info";
 			SetActiveUserControl(UserControlInfo);
         }
 
 		private void ButtonCustom_Click(object sender, RoutedEventArgs e)
 		{
+			Console.Title = "Manual control";
 			SetActiveUserControl(UserControlCustom);
 		}
 	}

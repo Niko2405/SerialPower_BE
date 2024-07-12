@@ -26,6 +26,7 @@ namespace SerialPower.UserControls
 
 			// Init
 			RunUpdaters();
+			
 		}
 
 		private async void RunUpdaters()
@@ -33,43 +34,39 @@ namespace SerialPower.UserControls
 			Thread.Sleep(1000);
 			await Task.Factory.StartNew(() =>
 			{
-				CurrentUpdateTimer();
-			});
-		}
+				string data = string.Empty;
 
-		private void CurrentUpdateTimer()
-		{
-			string data = string.Empty;
-			while (true)
-			{
-				Thread.Sleep(UPDATE_RATE);
-
-				// Only check current when ComPort is selected and visibility is true
-				if (SerialSender.SelectedPortName != string.Empty && this.Visibility == Visibility.Visible)
+				while (true)
 				{
-					Logging.PrintHeader("Read current");
+					Thread.Sleep(UPDATE_RATE);
 
-					// Set current limit
-					SerialSender.SendCommand("I1 0.1");
-					SerialSender.SendCommand("I2 0.1");
-
-					// get current on port 1
-					data = SerialSender.SendCommand("I1O?", true);
-					Logging.Info($"Current CH1: {data}");
-					this.Dispatcher.Invoke(() =>
+					// Only check current when ComPort is selected and visibility is true
+					if (SerialSender.SelectedPortName != string.Empty && this.Visibility == Visibility.Visible)
 					{
-						TextBoxCH1Current.Text = data;
-					});
+						Logging.PrintHeader("Read current");
 
-					// get current on port 2
-					data = SerialSender.SendCommand("I2O?", true);
-					Logging.Info($"Current CH2: {data}");
-					this.Dispatcher.Invoke(() =>
-					{
-						TextBoxCH2Current.Text = data;
-					});
+						// Set current limit
+						SerialSender.SendCommand("I1 0.1");
+						SerialSender.SendCommand("I2 0.1");
+
+						// get current on port 1
+						data = SerialSender.SendCommand("I1O?", true);
+						Logging.Info($"Current CH1: {data}");
+						this.Dispatcher.Invoke(() =>
+						{
+							TextBoxCH1Current.Text = data;
+						});
+
+						// get current on port 2
+						data = SerialSender.SendCommand("I2O?", true);
+						Logging.Info($"Current CH2: {data}");
+						this.Dispatcher.Invoke(() =>
+						{
+							TextBoxCH2Current.Text = data;
+						});
+					}
 				}
-			}
+			});
 		}
 
 		/// <summary>
