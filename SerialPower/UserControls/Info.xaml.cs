@@ -32,6 +32,7 @@ namespace SerialPower.UserControls
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 			LabelVersion.Content = $"Version: {fileVersionInfo.FileVersion}";
+			LabelDotNetVersion.Content = $"DotNet Version: {Environment.Version}";
 		}
 	}
 }

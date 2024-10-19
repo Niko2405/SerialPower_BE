@@ -15,8 +15,8 @@ namespace SerialPower
 		public static int SelectedStopBits = 1;
 		public static int SelectedDataBits = 8;
 		public static int SelectedParity = 0;
-		public static int SelectedReadTimeout = 100;
-		public static int SelectedWriteTimeout = 100;
+		public static int SelectedReadTimeout = 50;
+		public static int SelectedWriteTimeout = 50;
 
 		private static SerialPort? serialPort;
 
@@ -24,9 +24,9 @@ namespace SerialPower
 		/// Send Command to COM
 		/// </summary>
 		/// <param name="command">Command to send</param>
-		/// <param name="wait">Should the func wait for feedback</param>
+		/// <param name="waitForResponse">Should the func wait for feedback</param>
 		/// <returns></returns>
-		public static string SendCommand(string command, bool readLine = false)
+		public static string SendCommand(string command, bool waitForResponse = false)
 		{
 			// create empty string
 			string response = string.Empty;
@@ -56,12 +56,13 @@ namespace SerialPower
 						if (serialPort.IsOpen)
 						{
 							serialPort.WriteLine(command);
-							Logging.Info("Send command: " + command);
+							Logger.PrintStatus("Sending command: " + command, Logger.StatusCode.INFO);
+
 							// if wait, read next line and remove \r
-							if (readLine)
+							if (waitForResponse)
 							{
 								response = serialPort.ReadLine().Trim();
-								Logging.Info("Recv data: " + response);
+								Logger.PrintStatus("Received data: " + response, Logger.StatusCode.INFO);
 							}
 							serialPort.Close();
 
@@ -77,16 +78,16 @@ namespace SerialPower
 							serialPort.Close();
 							isLocked = false;
 						}
-						Logging.Error(ex.Message);
+						
+						Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
 						return "Timeout";
-						//MessageBox.Show("WARN", "Timeout", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 					catch (Exception ex)
 					{
 						// reset connection
 						if (serialPort.IsOpen)
 						{
-							Logging.Error(ex.Message);
+							Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
 							serialPort.Close();
 							isLocked = false;
 						}
@@ -97,7 +98,13 @@ namespace SerialPower
 				}
 				return response;
 			}
-			return "N/A";
+			else if (isLocked)
+			{
+				// retry send command
+				Thread.Sleep(1);
+				return SendCommand(command, waitForResponse: false);
+			}
+			return string.Empty;
 		}
 	}
 }

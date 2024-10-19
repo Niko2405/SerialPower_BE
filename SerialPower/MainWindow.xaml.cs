@@ -26,25 +26,25 @@ namespace SerialPower
 		/// <summary>
 		/// If settings set, activate all buttons
 		/// </summary>
-		/// <param name="enable"></param>
-		public void SetAllButtonState(bool enable)
+		/// <param name="state"></param>
+		public void SetAllButtonState(bool state)
 		{
-			ButtonBaugruppe1.IsEnabled = enable;
-			ButtonBaugruppe2.IsEnabled = enable;
-			ButtonBaugruppe3.IsEnabled = enable;
-			ButtonBaugruppe4.IsEnabled = enable;
-			ButtonBaugruppe5.IsEnabled = enable;
-			ButtonBaugruppe6.IsEnabled = enable;
-			ButtonBaugruppe7.IsEnabled = enable;
-			ButtonBaugruppe8.IsEnabled = enable;
-			ButtonBaugruppe9.IsEnabled = enable;
-			ButtonBaugruppe10.IsEnabled = enable;
-			ButtonBaugruppe11.IsEnabled = enable;
-			ButtonBaugruppe12.IsEnabled = enable;
-			ButtonBaugruppe13.IsEnabled = enable;
+			ButtonBaugruppe1.IsEnabled = state;
+			ButtonBaugruppe2.IsEnabled = state;
+			ButtonBaugruppe3.IsEnabled = state;
+			ButtonBaugruppe4.IsEnabled = state;
+			ButtonBaugruppe5.IsEnabled = state;
+			ButtonBaugruppe6.IsEnabled = state;
+			ButtonBaugruppe7.IsEnabled = state;
+			ButtonBaugruppe8.IsEnabled = state;
+			ButtonBaugruppe9.IsEnabled = state;
+			ButtonBaugruppe10.IsEnabled = state;
+			ButtonBaugruppe11.IsEnabled = state;
+			ButtonBaugruppe12.IsEnabled = state;
+			ButtonBaugruppe13.IsEnabled = state;
 
-			ButtonCustom.IsEnabled = enable;
-			ButtonInfo.IsEnabled = enable;
+			ButtonCustom.IsEnabled = state;
+			ButtonInfo.IsEnabled = state;
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace SerialPower
 			Console.Clear();
 			ButtonSettings.IsEnabled = false;
 
-			Logging.Warn($"Change UserControl to: {userControl.GetType().Name}");
+			Logger.PrintStatus($"Change UserControl to: {userControl.GetType().Name}", Logger.StatusCode.INFO);
 			//BaugruppeOne.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe1.Visibility = Visibility.Collapsed;
 			UserControlBaugruppe2.Visibility = Visibility.Collapsed;
@@ -157,6 +157,12 @@ namespace SerialPower
 		{
 			Console.Title = "Manual control";
 			SetActiveUserControl(UserControlCustom);
+		}
+
+		private void WindowClosed(object sender, EventArgs e)
+		{
+			Logger.PrintStatus("Exit", Logger.StatusCode.INFO);
+			Environment.Exit(0);
 		}
 	}
 }

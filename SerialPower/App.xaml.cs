@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Windows;
 
 namespace SerialPower
 {
@@ -16,9 +18,23 @@ namespace SerialPower
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			Logging.Info("Info message");
-			Logging.Warn("Warn message");
-			Logging.Error("Error message");
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+			Console.WriteLine("Loading program...\n");
+			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
+			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
+			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");
+			Console.WriteLine($"Machine name:\t\t\t{Environment.MachineName}");
+			Console.WriteLine($"Admin override:\t\t\t{Environment.IsPrivilegedProcess}");
+			Console.WriteLine($"OS:\t\t\t\t{Environment.OSVersion}");
+
+			Logger.PrintHeader("Test Logger System");
+			Logger.PrintStatus("Info logging", Logger.StatusCode.INFO);
+			Logger.PrintStatus("OK logging", Logger.StatusCode.OK);
+			Logger.PrintStatus("FAILED logging", Logger.StatusCode.FAILED);
+
+			Logger.PrintHeader("Starting application");
 		}
 	}
 }

@@ -12,14 +12,15 @@
 		<StackPanel DockPanel.Dock="Left">
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developer: Nils Kornmann</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Developed for: Brückmann Elektronik GmbH</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Repository: https://github.com/Niko2405/SerialPower_BE</Label>
 			<Label x:Name="LabelVersion" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Version: Unknown</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled: 15.05.2024</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled with: DotNet SDK 8.0.5</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled: 20.10.2024</Label>
+			<Label x:Name="LabelDotNetVersion" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Compiled with: Unknown</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">License: MIT</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Connections: USB and RS232</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="14">Available connections: USB and RS232</Label>
 		</StackPanel>
 		<StackPanel Margin="15">
-			<Label Style="{StaticResource TitleStyle}" HorizontalAlignment="Right" FontSize="16">only for: Aim TTi CPX200DP</Label>
+			<Label Style="{StaticResource TitleStyle}" HorizontalAlignment="Right" FontSize="16">only for: Aim TTi CPX200 Series</Label>
 			<Image Source="{StaticResource ImagePowerSupplie}"/>
 		</StackPanel>
 	</DockPanel>

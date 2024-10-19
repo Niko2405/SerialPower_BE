@@ -27,7 +27,7 @@ namespace SerialPower.UserControls
 
 		private void Button0V_Intern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 0V - Intern");
+			Logger.PrintHeader("Button 0V - Intern");
 
 			// Quelle 1 und 2 auf 0V setzen
 			SerialSender.SendCommand("V1 0; V2 0");
@@ -41,7 +41,7 @@ namespace SerialPower.UserControls
 
 		private void Button6V_Intern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 6V - Intern");
+			Logger.PrintHeader("Button 6V - Intern");
 
 			SerialSender.SendCommand("V1 6; V2 0");
 			SerialSender.SendCommand("I1 0.25; I2 0.25");
@@ -50,7 +50,7 @@ namespace SerialPower.UserControls
 
 		private void Button12V_Intern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 12V - Intern");
+			Logger.PrintHeader("Button 12V - Intern");
 
 			SerialSender.SendCommand("V1 12; V2 0");
 			SerialSender.SendCommand("I1 0.15; I2 0.15");
@@ -59,7 +59,7 @@ namespace SerialPower.UserControls
 
 		private void Button24V_Intern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 24V - Intern");
+			Logger.PrintHeader("Button 24V - Intern");
 
 			SerialSender.SendCommand("V1 24; V2 0");
 			SerialSender.SendCommand("I1 0.10; I2 0.10");
@@ -68,7 +68,7 @@ namespace SerialPower.UserControls
 
 		private void Button48V_Intern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 48V - Intern");
+			Logger.PrintHeader("Button 48V - Intern");
 
 			SerialSender.SendCommand("V1 48; V2 0");
 			SerialSender.SendCommand("I1 0.10; I2 0.10");
@@ -77,7 +77,7 @@ namespace SerialPower.UserControls
 
 		private void Button0V_Extern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 0V - Extern");
+			Logger.PrintHeader("Button 0V - Extern");
 
 			SerialSender.SendCommand("V1 0; V2 0");
 			SerialSender.SendCommand("I1 0.15; I2 0.15");
@@ -86,7 +86,7 @@ namespace SerialPower.UserControls
 
 		private void Button6V_Extern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 6V - Extern");
+			Logger.PrintHeader("Button 6V - Extern");
 
 			SerialSender.SendCommand("V1 0; V2 6");
 			SerialSender.SendCommand("I1 0.25; I2 0.25");
@@ -95,7 +95,7 @@ namespace SerialPower.UserControls
 
 		private void Button12V_Extern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 12V - Extern");
+			Logger.PrintHeader("Button 12V - Extern");
 
 			SerialSender.SendCommand("V1 0; V2 12");
 			SerialSender.SendCommand("I1 0.15; I2 0.15");
@@ -104,7 +104,7 @@ namespace SerialPower.UserControls
 
 		private void Button24V_Extern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 24V - Extern");
+			Logger.PrintHeader("Button 24V - Extern");
 
 			SerialSender.SendCommand("V1 0; V2 24");
 			SerialSender.SendCommand("I1 0.10; I2 0.10");
@@ -113,7 +113,7 @@ namespace SerialPower.UserControls
 
 		private void Button48V_Extern_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("Button 48V - Extern");
+			Logger.PrintHeader("Button 48V - Extern");
 
 			SerialSender.SendCommand("V1 0; V2 48");
 			SerialSender.SendCommand("I1 0.10; I2 0.10");

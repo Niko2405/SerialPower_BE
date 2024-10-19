@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,17 +17,17 @@ namespace SerialPower.UserControls
 	public partial class Baugruppe2 : UserControl
 	{
 		private static readonly float STEPS = 0.010f;
-		private static readonly int UPDATE_RATE = 500;
+		//private static readonly int UPDATE_RATE = 500;
 
 		public Baugruppe2()
 		{
 			InitializeComponent();
 
 			// Init
-			RunUpdaters();
-			
+			//RunUpdaters();
 		}
 
+		/*
 		private async void RunUpdaters()
 		{
 			Thread.Sleep(1000);
@@ -68,6 +67,7 @@ namespace SerialPower.UserControls
 				}
 			});
 		}
+		*/
 
 		/// <summary>
 		/// Sende eingestellte Spannung am Kanal 2
@@ -76,10 +76,10 @@ namespace SerialPower.UserControls
 		/// <param name="e"></param>
 		private void ButtonCH2_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("CH2 - Send voltage");
+			Logger.PrintHeader("CH2 - Send voltage");
 			string voltage = TextBoxCH2Voltage.Text;
 			voltage = voltage.Replace(",", ".");
-			Logging.Info($"[CH2] Set voltage to [{voltage}]");
+			Logger.PrintStatus($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.OK);
 			SerialSender.SendCommand($"V2 {voltage}");
 		}
 
@@ -90,10 +90,10 @@ namespace SerialPower.UserControls
 		/// <param name="e"></param>
 		private void ButtonCH1_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
-			Logging.PrintHeader("CH1 - Send voltage");
+			Logger.PrintHeader("CH1 - Send voltage");
 			string voltage = TextBoxCH1Voltage.Text;
 			voltage = voltage.Replace(",", ".");
-			Logging.Info($"[CH1] Set voltage to [{voltage}]");
+			Logger.PrintStatus($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.OK);
 			SerialSender.SendCommand($"V1 {voltage}");
 		}
 
@@ -112,7 +112,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logging.Info($"{currentValue} => {newValue}");
+				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -136,7 +136,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logging.Info($"{currentValue} => {newValue}");
+				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -160,7 +160,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logging.Info($"{currentValue} => {newValue}");
+				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -184,7 +184,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logging.Info($"{currentValue} => {newValue}");
+				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -203,7 +203,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logging.Info($"Set voltage of CH1 to {command}V");
+					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -222,7 +222,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logging.Info($"Set voltage of CH1 to {command}V");
+					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -241,7 +241,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logging.Info($"Set voltage of CH1 to {command}V");
+					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -259,17 +259,19 @@ namespace SerialPower.UserControls
 		{
 			string command = selectedItem.Split(":")[1].Trim();
 			command = command.Replace(",", ".").Replace("V", "").Replace("set ", "");
-			Logging.Info($"Convert object '{selectedItem}' to '{command}'");
+			Logger.PrintStatus($"Convert object '{selectedItem}' to '{command}'", Logger.StatusCode.OK);
 			return command;
 		}
 
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
+			SerialSender.SendCommand("I1 0.20; I2 0.20");
 			SerialSender.SendCommand("OP1 1");
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
+			SerialSender.SendCommand("I1 0.20; I2 0.20");
 			SerialSender.SendCommand("OP2 1");
 		}
 

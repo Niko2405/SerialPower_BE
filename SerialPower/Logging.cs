@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SerialPower
 {
+	[Obsolete]
 	internal class Logging
 	{
 		public static void Info(string message)

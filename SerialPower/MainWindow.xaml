@@ -6,11 +6,11 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="620" MinWidth="960"
+		MinHeight="500" MinWidth="750"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
 		Title="Serial Power"
-		Height="720" Width="1375">
+		Height="720" Width="1380" Closed="WindowClosed">
 	<DockPanel LastChildFill="True" Margin="5">
 		<ScrollViewer DockPanel.Dock="Left" Background="{StaticResource BackgroundStyle}" Width="230">
 			<Grid>

@@ -26,11 +26,11 @@ namespace SerialPower.UserControls
 		{
 			InitializeComponent();
 
-			// COM Liste ausfüllen
+			// COM Liste füllen
 			string[] coms = SerialPort.GetPortNames();
 			foreach (string com in coms)
 			{
-				Logging.Info($"{com} found. Add to listbox");
+				Logger.PrintStatus($"New device found: {com}. Add to selection", Logger.StatusCode.INFO);
 				ListBoxComPorts.Items.Add(com);
 			}
 		}
@@ -42,12 +42,13 @@ namespace SerialPower.UserControls
 				try
 				{
 					string? portName = ListBoxComPorts.SelectedValue.ToString();
-					int baudrate = int.Parse(TextBox_Baudrate.Text);
-					int stopbits = int.Parse(TextBox_StopBits.Text);
-					int databits = int.Parse(TextBox_DataBits.Text);
-					int parity = int.Parse(TextBox_Parity.Text);
-					int readTimeout = int.Parse(TextBox_ReadTimeout.Text);
-					int writeTimeout = int.Parse(TextBox_WriteTimeout.Text);
+					int baudrate = int.Parse(TextBoxBaudrate.Text);
+					int stopbits = int.Parse(TextBoxStopBits.Text);
+					int databits = int.Parse(TextBoxDataBits.Text);
+					int parity = int.Parse(TextBoxParity.Text);
+					int readTimeout = int.Parse(TextBoxReadTimeout.Text);
+					int writeTimeout = int.Parse(TextBoxWriteTimeout.Text);
+					int currentRefreshRate = int.Parse(TextBoxCurrentRefreshRate.Text);
 
 					if (portName != null)
 					{
@@ -58,12 +59,29 @@ namespace SerialPower.UserControls
 						SerialSender.SelectedParity = parity;
 						SerialSender.SelectedReadTimeout = readTimeout;
 						SerialSender.SelectedWriteTimeout = writeTimeout;
-						MessageBox.Show($"Port name: {SerialSender.SelectedPortName}\nBaudrate: {SerialSender.SelectedBaudrate}\nStopBits: {SerialSender.SelectedStopBits}\nDataBits: {SerialSender.SelectedDataBits}\nParity: {SerialSender.SelectedParity}\nReadTimeout: {SerialSender.SelectedReadTimeout}\nWriteTimeout: {SerialSender.SelectedWriteTimeout}", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
-						
+
+						// TODO: Add settings to config file
+
 						// get instance of mainwindow to access functions.
-						MainWindow mainWindow = (MainWindow) Window.GetWindow(this);
-						Debug.WriteLine("Enable all buttons");
+						MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+						Logger.PrintStatus("Settings saved in runtime. Enabling all buttons", Logger.StatusCode.OK);
 						mainWindow.SetAllButtonState(true);
+
+						// Show all settings
+						MessageBox.Show($"Port name: {SerialSender.SelectedPortName}\nBaudrate: {SerialSender.SelectedBaudrate}\nStopBits: {SerialSender.SelectedStopBits}\nDataBits: {SerialSender.SelectedDataBits}\nParity: {SerialSender.SelectedParity}\nReadTimeout: {SerialSender.SelectedReadTimeout}\nWriteTimeout: {SerialSender.SelectedWriteTimeout}\nCurrent - Refresh rate: {currentRefreshRate}", "SerialPower - Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
+
+						// open seperate window of current; place on topmost
+						CurrentWindow currentWindow = new CurrentWindow();
+						Logger.PrintStatus($"Set current refresh rate to {currentRefreshRate}ms", Logger.StatusCode.OK);
+						currentWindow.SetCurrentRefreshRate(currentRefreshRate);
+						currentWindow.Show();
+						currentWindow.Topmost = true;
+
+						// deactivate run button
+						Logger.PrintStatus("Disable Run button", Logger.StatusCode.OK);
+						ButtonRun.Content = "Running...";
+						ButtonRun.IsEnabled = false;
+
 						return;
 					}
 				}
@@ -76,6 +94,6 @@ namespace SerialPower.UserControls
 			{
 				MessageBox.Show("Port not selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-        }
+		}
 	}
 }

@@ -66,7 +66,7 @@
 			</Border>
 
 			<!-- CH2 - Voltage -->
-			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
+			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
 				<Canvas x:Name="Canvas_CH2Voltage">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH2Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH2Voltage}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH2 - Fine adjustment</Label>
@@ -98,7 +98,7 @@
 			</Border>
 			
 			<!-- CH1 - Temperature Amplifier [Feineinstellung] -->
-			<Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
 				<Canvas x:Name="Canvas_CH1Voltage">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Voltage}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Fine adjustment</Label>
@@ -115,9 +115,9 @@
 					</StackPanel>
 				</Canvas>
 			</Border>
-			
-			<!-- CH 1 - Current -->
-			<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
+
+			<!-- CH 1 - Current HIDDEN -->
+			<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1" Visibility="Hidden">
 				<Canvas x:Name="Canvas_CH1Current">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Current}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Current}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Current</Label>
@@ -126,8 +126,8 @@
 				</Canvas>
 			</Border>
 
-			<!-- CH2 - Current -->
-			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
+			<!-- CH2 - Current HIDDEN -->
+			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1" Visibility="Hidden">
 				<Canvas x:Name="Canvas_CH2Current">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH2Current}" Height="{Binding ActualHeight, ElementName=Canvas_CH2Current}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH2 - Current</Label>

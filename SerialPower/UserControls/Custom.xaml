@@ -4,46 +4,51 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
-			 mc:Ignorable="d" 
+			 mc:Ignorable="d"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel Margin="10">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Manual control</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Custom control</Label>
 		<Grid DockPanel.Dock="Bottom">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition></ColumnDefinition>
-				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			
-			<!--Kanal 1 -->
-			<StackPanel Grid.Column="0">
-				<!-- Spannung -->
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<!-- Channel 1 -->
+			<StackPanel Grid.Row="0" Grid.Column="0">
 				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 1</Label>
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">12.0</TextBox>
-				
-				<!-- Strom -->
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Max. current</Label>
-				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.0</TextBox>
-				
+
+				<!-- Voltage -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage</Label>
+				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">24.00</TextBox>
+
+				<!-- Current -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Max. current</Label>
+				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
-				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Margin="0,50,0,0" Width="150" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send data</Button>
+				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8">Channel 1 online</CheckBox>
+				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Width="150" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send new data</Button>
 			</StackPanel>
-			
-			<!-- Kanal 2-->
-			<StackPanel Grid.Column="1">
-				<!-- Spannung -->
+
+			<!-- Channel 2 -->
+			<StackPanel Grid.Row="1" Grid.Column="0">
 				<Label Style="{StaticResource TitleStyle}" FontSize="24">Channel 2</Label>
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" Margin="0,25,0,0" FontSize="18">Voltage</Label>
-				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" Margin="0,0,0,25" FontSize="16">6.0</TextBox>
 				
-				<!-- Strom -->
-				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18">Max. current</Label>
-				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">0.5</TextBox>
+				<!-- Voltage -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage</Label>
+				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">24.00</TextBox>
+
+				<!-- Current -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Max. current</Label>
+				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 				
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" Margin="0,25,0,0" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
-				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Margin="0,50,0,0" Width="150" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send data</Button>
+				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8">Channel 2 online</CheckBox>
+				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Width="150" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send new data</Button>
 			</StackPanel>
 		</Grid>
 	</DockPanel>
