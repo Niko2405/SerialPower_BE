@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="SerialPower.UserControls.UC_CustomControl"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:SerialPower.UserControls"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
+	<DockPanel LastChildFill="True">
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Custom Control</Label>
+		<!-- Overview -->
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			
+			<!-- Channel 1 -->
+			<StackPanel Grid.Row="0" Grid.Column="0">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24" HorizontalAlignment="Left">Channel 1</Label>
+
+				<!-- Voltage -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage</Label>
+				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+
+				<!-- Current -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Current limit:</Label>
+				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+
+				<!-- etc -->
+				<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8">Channel 1 - Online</CheckBox>
+				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Width="240" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send to Channel 1</Button>
+			</StackPanel>
+			
+			<!-- Channel 1 - Presets -->
+			<StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets</Label>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<StackPanel Grid.Row="0" Grid.Column="0">
+						<Label Style="{StaticResource LabelStyle}">3.300V</Label>
+						<ListBox x:Name="ListBoxCH1Presets33" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH1Presets33_SelectionChanged" IsSynchronizedWithCurrentItem="False">
+							<ListBoxItem Content="3.300V - 0.100A"/>
+							<ListBoxItem Content="3.300V - 0.250A"/>
+							<ListBoxItem Content="3.300V - 0.500A"/>
+							<ListBoxItem Content="3.300V - 1.000A"/>
+							<ListBoxItem Content="3.300V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="1">
+						<Label Style="{StaticResource LabelStyle}">5.000V</Label>
+						<ListBox x:Name="ListBoxCH1Presets50" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH1Presets50_SelectionChanged" IsSynchronizedWithCurrentItem="False">
+							<ListBoxItem Content="5.000V - 0.100A"/>
+							<ListBoxItem Content="5.000V - 0.250A"/>
+							<ListBoxItem Content="5.000V - 0.500A"/>
+							<ListBoxItem Content="5.000V - 1.000A"/>
+							<ListBoxItem Content="5.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="2">
+						<Label Style="{StaticResource LabelStyle}">12.000V</Label>
+						<ListBox x:Name="ListBoxCH1Presets120" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH1Presets120_SelectionChanged">
+							<ListBoxItem Content="12.000V - 0.100A"/>
+							<ListBoxItem Content="12.000V - 0.250A"/>
+							<ListBoxItem Content="12.000V - 0.500A"/>
+							<ListBoxItem Content="12.000V - 1.000A"/>
+							<ListBoxItem Content="12.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="3">
+						<Label Style="{StaticResource LabelStyle}">18.000V</Label>
+						<ListBox x:Name="ListBoxCH1Presets180" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH1Presets180_SelectionChanged">
+							<ListBoxItem Content="18.000V - 0.100A"/>
+							<ListBoxItem Content="18.000V - 0.250A"/>
+							<ListBoxItem Content="18.000V - 0.500A"/>
+							<ListBoxItem Content="18.000V - 1.000A"/>
+							<ListBoxItem Content="18.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="4">
+						<Label Style="{StaticResource LabelStyle}">24.000V</Label>
+						<ListBox x:Name="ListBoxCH1Presets240" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH1Presets240_SelectionChanged">
+							<ListBoxItem Content="24.000V - 0.100A"/>
+							<ListBoxItem Content="24.000V - 0.250A"/>
+							<ListBoxItem Content="24.000V - 0.500A"/>
+							<ListBoxItem Content="24.000V - 1.000A"/>
+							<ListBoxItem Content="24.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+				</Grid>
+			</StackPanel>
+			
+			<!-- Channel 2 -->
+			<StackPanel Grid.Row="1" Grid.Column="0">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24" HorizontalAlignment="Left">Channel 2</Label>
+
+				<!-- Voltage -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage:</Label>
+				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+
+				<!-- Current -->
+				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Current limit:</Label>
+				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+
+				<!-- etc -->
+				<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8">Channel 2 - Online</CheckBox>
+				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Width="240" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send to Channel 2</Button>
+			</StackPanel>
+
+			<!-- Channel 2 - Presets -->
+			<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets</Label>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<StackPanel Grid.Row="0" Grid.Column="0">
+						<Label Style="{StaticResource LabelStyle}">3.300V</Label>
+						<ListBox x:Name="ListBoxCH2Presets33" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH2Presets33_SelectionChanged">
+							<ListBoxItem Content="3.300V - 0.100A"/>
+							<ListBoxItem Content="3.300V - 0.250A"/>
+							<ListBoxItem Content="3.300V - 0.500A"/>
+							<ListBoxItem Content="3.300V - 1.000A"/>
+							<ListBoxItem Content="3.300V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="1">
+						<Label Style="{StaticResource LabelStyle}">5.000V</Label>
+						<ListBox x:Name="ListBoxCH2Presets50" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH2Presets50_SelectionChanged">
+							<ListBoxItem Content="5.000V - 0.100A"/>
+							<ListBoxItem Content="5.000V - 0.250A"/>
+							<ListBoxItem Content="5.000V - 0.500A"/>
+							<ListBoxItem Content="5.000V - 1.000A"/>
+							<ListBoxItem Content="5.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="2">
+						<Label Style="{StaticResource LabelStyle}">12.000V</Label>
+						<ListBox x:Name="ListBoxCH2Presets120" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH2Presets120_SelectionChanged">
+							<ListBoxItem Content="12.000V - 0.100A"/>
+							<ListBoxItem Content="12.000V - 0.250A"/>
+							<ListBoxItem Content="12.000V - 0.500A"/>
+							<ListBoxItem Content="12.000V - 1.000A"/>
+							<ListBoxItem Content="12.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="3">
+						<Label Style="{StaticResource LabelStyle}">18.000V</Label>
+						<ListBox x:Name="ListBoxCH2Presets180" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH2Presets180_SelectionChanged">
+							<ListBoxItem Content="18.000V - 0.100A"/>
+							<ListBoxItem Content="18.000V - 0.250A"/>
+							<ListBoxItem Content="18.000V - 0.500A"/>
+							<ListBoxItem Content="18.000V - 1.000A"/>
+							<ListBoxItem Content="18.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+					<StackPanel Grid.Row="0" Grid.Column="4">
+						<Label Style="{StaticResource LabelStyle}">24.000V</Label>
+						<ListBox x:Name="ListBoxCH2Presets240" HorizontalContentAlignment="Center" SelectionChanged="ListBoxCH2Presets240_SelectionChanged">
+							<ListBoxItem Content="24.000V - 0.100A"/>
+							<ListBoxItem Content="24.000V - 0.250A"/>
+							<ListBoxItem Content="24.000V - 0.500A"/>
+							<ListBoxItem Content="24.000V - 1.000A"/>
+							<ListBoxItem Content="24.000V - 2.000A"/>
+						</ListBox>
+					</StackPanel>
+				</Grid>
+			</StackPanel>
+		</Grid>
+	</DockPanel>
+</UserControl>

@@ -6,61 +6,46 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="500" MinWidth="750"
+		MinHeight="680" MinWidth="1080"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
-		Title="Serial Power"
+		Title="SerialPower"
 		Height="720" Width="1380" Closed="WindowClosed">
-	<DockPanel LastChildFill="True" Margin="5">
-		<ScrollViewer DockPanel.Dock="Left" Background="{StaticResource BackgroundStyle}" Width="230">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
-				</Grid.RowDefinitions>
-				<Button x:Name="ButtonBaugruppe1" Grid.Row="0" Style="{StaticResource ButtonStyle}" Content="Ernst Leitz [85/15186]" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe1_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe2" Grid.Row="1" Style="{StaticResource ButtonStyle}" Content="IDE [87/10582]" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe2_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe3" Grid.Row="2" Style="{StaticResource ButtonStyle}" Content="Baugruppe 3" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe3_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe4" Grid.Row="3" Style="{StaticResource ButtonStyle}" Content="Baugruppe 4" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe4_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe5" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Baugruppe 5" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe5_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe6" Grid.Row="5" Style="{StaticResource ButtonStyle}" Content="Baugruppe 6" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe6_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe7" Grid.Row="6" Style="{StaticResource ButtonStyle}" Content="Baugruppe 7" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe7_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe8" Grid.Row="7" Style="{StaticResource ButtonStyle}" Content="Baugruppe 8" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe8_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe9" Grid.Row="8" Style="{StaticResource ButtonStyle}" Content="Baugruppe 9" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe9_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe10" Grid.Row="9" Style="{StaticResource ButtonStyle}" Content="Baugruppe 10" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe10_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe11" Grid.Row="10" Style="{StaticResource ButtonStyle}" Content="Baugruppe 11" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe11_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe12" Grid.Row="11" Style="{StaticResource ButtonStyle}" Content="Baugruppe 12" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe12_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonBaugruppe13" Grid.Row="12" Style="{StaticResource ButtonStyle}" Content="Baugruppe 13" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="Baugruppe13_Click" ClickMode="Press" IsEnabled="False"/>
-				
-				<Button x:Name="ButtonCustom" Grid.Row="13" Style="{StaticResource ButtonStyle}" Content="Manual control" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonCustom_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonInfo" Grid.Row="14" Style="{StaticResource ButtonStyle}" Content="Information" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonInfo_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonSettings" Grid.Row="15" Style="{StaticResource ButtonStyle}" Content="Settings" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonSettings_Click" ClickMode="Press" IsEnabled="False"/>
-				<Button x:Name="ButtonExit" Grid.Row="16" Style="{StaticResource ButtonStyle}" Content="Exit program" HorizontalAlignment="Stretch" Margin="5" Height="40" Click="ButtonExit_Click" ClickMode="Press" IsEnabled="True"/>
-			</Grid>
-		</ScrollViewer>
-
-		<Grid DockPanel.Dock="Right">
-			<UserControls:Baugruppe1 x:Name="UserControlBaugruppe1" Visibility="Collapsed"></UserControls:Baugruppe1>
-			<UserControls:Baugruppe2 x:Name="UserControlBaugruppe2" Visibility="Collapsed"></UserControls:Baugruppe2>
-			<UserControls:Custom x:Name="UserControlCustom" Visibility="Collapsed"></UserControls:Custom>
-			<UserControls:Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:Info>
-			<UserControls:Settings x:Name="UserControlSettings" Visibility="Visible"></UserControls:Settings>
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
+				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
+			</MenuItem>
+			<MenuItem Header="_Tucker">
+				<MenuItem Header="_E649"/>
+				<MenuItem Header="_E650"/>
+				<MenuItem Header="_E760"/>
+			</MenuItem>
+			<MenuItem Header="_Ernst Leitz">
+				<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
+			</MenuItem>
+			<MenuItem Header="_IDE">
+				<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
+			</MenuItem>
+			<MenuItem Header="_LEIMI">
+				<MenuItem Header="_None"/>
+			</MenuItem>
+			<MenuItem Header="_Misc">
+				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
+				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
+			</MenuItem>
+		</Menu>
+		<StatusBar DockPanel.Dock="Bottom">
+			<StatusBarItem>
+				<TextBlock x:Name="StatusBarConnectionInfo"/>
+			</StatusBarItem>
+		</StatusBar>
+		<Grid Margin="10">
+			<UserControls:UC_ErnstLeitz1 x:Name="UserControlErnstLeitz1" Visibility="Collapsed"></UserControls:UC_ErnstLeitz1>
+			<UserControls:UC_IDE1 x:Name="UserControlIDE1" Visibility="Collapsed"></UserControls:UC_IDE1>
+			<UserControls:UC_Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:UC_Info>
+			<UserControls:UC_CustomControl x:Name="UserControlCustomControl" Visibility="Visible"></UserControls:UC_CustomControl>
 		</Grid>
 	</DockPanel>
 </Window>

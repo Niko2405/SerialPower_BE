@@ -12,62 +12,16 @@ using System.Windows.Controls;
 namespace SerialPower.UserControls
 {
 	/// <summary>
-	/// Interaktionslogik für Baugruppe2.xaml
+	/// Interaktionslogik für UC_IDE1.xaml
 	/// </summary>
-	public partial class Baugruppe2 : UserControl
+	public partial class UC_IDE1 : UserControl
 	{
 		private static readonly float STEPS = 0.010f;
-		//private static readonly int UPDATE_RATE = 500;
 
-		public Baugruppe2()
+		public UC_IDE1()
 		{
 			InitializeComponent();
-
-			// Init
-			//RunUpdaters();
 		}
-
-		/*
-		private async void RunUpdaters()
-		{
-			Thread.Sleep(1000);
-			await Task.Factory.StartNew(() =>
-			{
-				string data = string.Empty;
-
-				while (true)
-				{
-					Thread.Sleep(UPDATE_RATE);
-
-					// Only check current when ComPort is selected and visibility is true
-					if (SerialSender.SelectedPortName != string.Empty && this.Visibility == Visibility.Visible)
-					{
-						Logging.PrintHeader("Read current");
-
-						// Set current limit
-						SerialSender.SendCommand("I1 0.1");
-						SerialSender.SendCommand("I2 0.1");
-
-						// get current on port 1
-						data = SerialSender.SendCommand("I1O?", true);
-						Logging.Info($"Current CH1: {data}");
-						this.Dispatcher.Invoke(() =>
-						{
-							TextBoxCH1Current.Text = data;
-						});
-
-						// get current on port 2
-						data = SerialSender.SendCommand("I2O?", true);
-						Logging.Info($"Current CH2: {data}");
-						this.Dispatcher.Invoke(() =>
-						{
-							TextBoxCH2Current.Text = data;
-						});
-					}
-				}
-			});
-		}
-		*/
 
 		/// <summary>
 		/// Sende eingestellte Spannung am Kanal 2

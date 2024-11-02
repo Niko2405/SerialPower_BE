@@ -8,16 +8,7 @@ namespace SerialPower
 {
 	internal class SerialSender
 	{
-		public static bool isLocked = false;
-
-		public static string SelectedPortName = string.Empty;
-		public static int SelectedBaudrate = 9600;
-		public static int SelectedStopBits = 1;
-		public static int SelectedDataBits = 8;
-		public static int SelectedParity = 0;
-		public static int SelectedReadTimeout = 50;
-		public static int SelectedWriteTimeout = 50;
-
+		private static bool isLocked = false;
 		private static SerialPort? serialPort;
 
 		/// <summary>
@@ -25,86 +16,96 @@ namespace SerialPower
 		/// </summary>
 		/// <param name="command">Command to send</param>
 		/// <param name="waitForResponse">Should the func wait for feedback</param>
+		/// <param name="enableLogging">Should the data logged</param>
 		/// <returns></returns>
-		public static string SendCommand(string command, bool waitForResponse = false)
+		public static string SendCommand(string command, bool waitForResponse = false, bool enableLogging = true)
 		{
 			// create empty string
 			string response = string.Empty;
 
-			// if func is not locked
-			if (!isLocked)
+			if (ConfigHandler.currentConfig != null)
 			{
-				serialPort = new SerialPort
+				// if func is not locked
+				if (!isLocked)
 				{
-					PortName = SelectedPortName,
-					BaudRate = SelectedBaudrate,
-					StopBits = (StopBits)SelectedStopBits,
-					DataBits = SelectedDataBits,
-					Parity = (Parity)SelectedParity,
-					ReadTimeout = SelectedReadTimeout,
-					WriteTimeout = SelectedWriteTimeout
-				};
-
-				if (!serialPort.IsOpen)
-				{
-					// Lock function
-					isLocked = true;
-					try
+					serialPort = new SerialPort
 					{
-						// Open Port
-						serialPort.Open();
-						if (serialPort.IsOpen)
-						{
-							serialPort.WriteLine(command);
-							Logger.PrintStatus("Sending command: " + command, Logger.StatusCode.INFO);
+						PortName = ConfigHandler.currentConfig.SerialPortName,
+						BaudRate = ConfigHandler.currentConfig.SerialPortBaudrate,
+						StopBits = (StopBits)ConfigHandler.currentConfig.SerialPortStopBits,
+						DataBits = ConfigHandler.currentConfig.SerialPortDataBits,
+						Parity = (Parity)ConfigHandler.currentConfig.SerialPortParity,
+						ReadTimeout = ConfigHandler.currentConfig.SerialPortReadTimeOut,
+						WriteTimeout = ConfigHandler.currentConfig.SerialPortWriteTimeOut
+					};
 
-							// if wait, read next line and remove \r
-							if (waitForResponse)
+					if (!serialPort.IsOpen)
+					{
+						// Lock function
+						isLocked = true;
+						try
+						{
+							// Open Port
+							serialPort.Open();
+							if (serialPort.IsOpen)
 							{
-								response = serialPort.ReadLine().Trim();
-								Logger.PrintStatus("Received data: " + response, Logger.StatusCode.INFO);
+								serialPort.WriteLine(command);
+								if (enableLogging)
+									Logger.PrintStatus("Sending data:\t" + command, Logger.StatusCode.OK);
+
+								// if wait, read next line and remove \r
+								if (waitForResponse)
+								{
+									response = serialPort.ReadLine().Trim();
+									if (enableLogging)
+										Logger.PrintStatus("Received data:\t" + response, Logger.StatusCode.OK);
+								}
+								serialPort.Close();
+
+								// unlock function
+								isLocked = false;
 							}
-							serialPort.Close();
+						}
+						catch (TimeoutException ex)
+						{
+							// reset connection
+							if (serialPort.IsOpen)
+							{
+								serialPort.Close();
+								isLocked = false;
+							}
 
-							// unlock function
-							isLocked = false;
-						}
-					}
-					catch (TimeoutException ex)
-					{
-						// reset connection
-						if (serialPort.IsOpen)
-						{
-							serialPort.Close();
-							isLocked = false;
-						}
-						
-						Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
-						return "Timeout";
-					}
-					catch (Exception ex)
-					{
-						// reset connection
-						if (serialPort.IsOpen)
-						{
 							Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
-							serialPort.Close();
-							isLocked = false;
+							return "Timeout";
 						}
+						catch (Exception ex)
+						{
+							// reset connection
+							if (serialPort.IsOpen)
+							{
+								Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
+								serialPort.Close();
+								isLocked = false;
+							}
 
-						MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-						return ex.Message;
+							MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+							return ex.Message;
+						}
 					}
+					return response;
 				}
-				return response;
+				else if (isLocked)
+				{
+					// retry send data
+					Thread.Sleep(1);
+					return SendCommand(command, waitForResponse: false);
+				}
+				return string.Empty;
 			}
-			else if (isLocked)
+			else
 			{
-				// retry send command
-				Thread.Sleep(1);
-				return SendCommand(command, waitForResponse: false);
+				return "Config Handler is dead.";
 			}
-			return string.Empty;
 		}
 	}
 }

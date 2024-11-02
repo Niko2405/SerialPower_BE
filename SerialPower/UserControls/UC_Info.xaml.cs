@@ -18,11 +18,11 @@ using System.Windows.Shapes;
 namespace SerialPower.UserControls
 {
 	/// <summary>
-	/// Interaktionslogik für Info.xaml
+	/// Interaktionslogik für UC_Info.xaml
 	/// </summary>
-	public partial class Info : UserControl
+	public partial class UC_Info : UserControl
 	{
-		public Info()
+		public UC_Info()
 		{
 			InitializeComponent();
 		}

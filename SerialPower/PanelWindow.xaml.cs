@@ -15,24 +15,22 @@ using System.Windows.Shapes;
 namespace SerialPower
 {
 	/// <summary>
-	/// Interaktionslogik für CurrentWindow.xaml
+	/// Interaktionslogik für PanelWindow.xaml
 	/// </summary>
-	public partial class CurrentWindow : Window
+	public partial class PanelWindow : Window
 	{
-		private static int currentRefreshRate = 500;
-		private static bool windowsClosed = false;
+		private static bool currentWindowClosed = false;
 
-		public CurrentWindow()
+		public PanelWindow()
 		{
 			InitializeComponent();
 			RunUpdaters();
 		}
 		
-		public void SetCurrentRefreshRate(int refreshRate)
-		{
-			currentRefreshRate = refreshRate;
-		}
 
+		/// <summary>
+		/// Backgroundworker to update the current
+		/// </summary>
 		private async void RunUpdaters()
 		{
 			await Task.Factory.StartNew(() =>
@@ -41,24 +39,31 @@ namespace SerialPower
 
 				while (true)
 				{
-					Thread.Sleep(currentRefreshRate);
-
-					// If current window closed. Kill background worker
-					if (windowsClosed)
+					if (ConfigHandler.currentConfig != null)
+					{
+						Thread.Sleep(ConfigHandler.currentConfig.CurrentMonitorRate);
+					}
+					else if (ConfigHandler.currentConfig == null)
+					{
+						Thread.Sleep(1000);
+					}
+						
+					// If current window closed. Kill backgroundworker
+					if (currentWindowClosed)
 						return;
 
 					// Only check current when ComPort is selected and visibility is true
-					if (SerialSender.SelectedPortName != string.Empty && this.Visibility == Visibility.Visible)
+					if (this.Visibility == Visibility.Visible)
 					{
 						// get current on channel 1
-						data = SerialSender.SendCommand("I1O?", true);
+						data = SerialSender.SendCommand("I1O?", true, false);
 						this.Dispatcher.Invoke(() =>
 						{
 							TextBoxCH1Current.Text = data;
 						});
 
 						// get current on channel 2
-						data = SerialSender.SendCommand("I2O?", true);
+						data = SerialSender.SendCommand("I2O?", true, false);
 						this.Dispatcher.Invoke(() =>
 						{
 							TextBoxCH2Current.Text = data;
@@ -70,8 +75,8 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.PrintStatus("Current Window closed. Disable background worker", Logger.StatusCode.INFO);
-			windowsClosed = true;
+			Logger.PrintStatus("PanelWindow closed. Backgroundworker killed.", Logger.StatusCode.INFO);
+			currentWindowClosed = true;
 		}
 	}
 }

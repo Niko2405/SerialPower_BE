@@ -58,16 +58,23 @@ namespace SerialPower
 					break;
 			}
 		}
-		public static void PrintHeaderOld(string title)
-		{
 
+		public static void PrintHeader(string title)
+		{
 			short x = (short)Console.WindowWidth;
 			short titleLenght = (short)title.Length;
+			short offset = 0;
+
+			// if the title is odd, set offset to 1. To prevent '=' in newline
+			if (titleLenght % 2 != 0)
+			{
+				offset = 1;
+			}
 
 			ConsoleColor currentForegroundColor = Console.ForegroundColor;
-			Console.ForegroundColor = ConsoleColor.Magenta;
+			Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 1; i++)
+			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 1 - offset; i++)
 			{
 				Console.Write('=');
 			}
@@ -82,12 +89,13 @@ namespace SerialPower
 			Console.ForegroundColor = currentForegroundColor;
 		}
 
-		public static void PrintHeader(string title)
+		[Obsolete]
+		public static void PrintHeaderOld(string title)
 		{
 			ConsoleColor currentForegroundColor = Console.ForegroundColor;
-			Console.ForegroundColor = ConsoleColor.Magenta;
+			Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-			Console.Write($" ==================[ {title} ]==================");
+			Console.Write($"==================[ {title} ]==================");
 			Console.WriteLine();
 
 			Console.ForegroundColor = currentForegroundColor;

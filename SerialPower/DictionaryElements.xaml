@@ -21,13 +21,41 @@
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 	</Style>
 
+	<Style x:Key="RoundedButton" TargetType="{x:Type Button}">
+		<Style.Setters>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Border x:Name="button" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Background="#FF606060">
+							<TextBlock Text="{TemplateBinding Button.Content}" Foreground="White" FontSize="18" FontFamily="{StaticResource OpenSansRegular}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="button" Property="BorderBrush" Value="Black"/>
+								<Setter TargetName="button" Property="Background" Value="#FF606060"/>
+								<Setter Property="Foreground" Value="White"/>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="button" Property="Background" Value="Red"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter TargetName="button" Property="BorderBrush" Value="Red"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style.Setters>
+	</Style>
+	
 	<!-- New Title -->
 	<Style x:Key="TitleStyle" TargetType="{x:Type Label}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="FontSize" Value="32"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"/>
-		<Setter Property="VerticalAlignment" Value="Stretch"/>
-		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
 	</Style>
 
 	<!-- New Label -->

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SerialPower.UserControls
 {
 	/// <summary>
-	/// Interaktionslogik für Baugruppe1.xaml
+	/// Interaktionslogik für UC_ErnstLeitz1.xaml
 	/// </summary>
-	public partial class Baugruppe1 : UserControl
+	public partial class UC_ErnstLeitz1 : UserControl
 	{
-		public Baugruppe1()
+		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
 		}

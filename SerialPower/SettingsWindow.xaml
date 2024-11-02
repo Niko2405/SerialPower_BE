@@ -1,12 +1,13 @@
-﻿<UserControl x:Class="SerialPower.UserControls.Settings"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-			 xmlns:local="clr-namespace:SerialPower.UserControls"
-			 mc:Ignorable="d"
-			 Background="{StaticResource BackgroundStyle}"
-			 d:DesignHeight="720" d:DesignWidth="1280">
+﻿<Window x:Class="SerialPower.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SerialPower"
+        mc:Ignorable="d"
+		Title="Settings"
+		Background="{StaticResource BackgroundStyle}"
+		Height="620" Width="925">
 	<DockPanel LastChildFill="True" Margin="5">
 		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Settings</Label>
 		<Grid DockPanel.Dock="Top">
@@ -27,9 +28,9 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			
+
 			<!-- COM Settings -->
-			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">COM port list:</Label>
+			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Serial Port list:</Label>
 			<ListBox x:Name="ListBoxComPorts" Grid.Row="0" Grid.Column="1" BorderBrush="Black" FontSize="14" Margin="5" Grid.RowSpan="2"/>
 
 			<!-- Baudrate Settings -->
@@ -57,10 +58,10 @@
 			<TextBox x:Name="TextBoxWriteTimeout" Grid.Row="7" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">50</TextBox>
 
 			<!-- Current Refresh rate Settings -->
-			<Label Grid.Row="8" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Current refresh rate (ms):</Label>
+			<Label Grid.Row="8" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="18">Current monitor refresh rate (ms):</Label>
 			<TextBox x:Name="TextBoxCurrentRefreshRate" Grid.Row="8" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">1000</TextBox>
-
-			<Button x:Name="ButtonRun" Grid.Row="9" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="10" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Connect</Button>
+			<CheckBox x:Name="CheckBoxCurrentMon" Grid.Row="8" Grid.Column="2" Foreground="White" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="False">Current monitoring</CheckBox>
+			<Button x:Name="ButtonRun" Grid.Row="9" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="10" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Connect device</Button>
 		</Grid>
 	</DockPanel>
-</UserControl>
+</Window>
