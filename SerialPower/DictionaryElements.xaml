@@ -8,7 +8,7 @@
 
 	<!-- Border Color -->
 	<SolidColorBrush x:Key="WhiteBrush" Color="White"/>
-	<SolidColorBrush x:Key="BackgroundStyle" Color="#FF292929"/>
+	<SolidColorBrush x:Key="BackgroundStyle" Color="#262626"/>
 
 	<!-- Button -->
 	<Style x:Key="ButtonStyle" TargetType="Button">

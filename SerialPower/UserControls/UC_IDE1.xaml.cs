@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,7 +28,7 @@ namespace SerialPower.UserControls
 			string voltage = TextBoxCH2Voltage.Text;
 			voltage = voltage.Replace(",", ".");
 			Logger.PrintStatus($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.OK);
-			SerialSender.SendCommand($"V2 {voltage}");
+			SerialSender.SendData($"V2 {voltage}");
 		}
 
 		/// <summary>
@@ -48,7 +42,7 @@ namespace SerialPower.UserControls
 			string voltage = TextBoxCH1Voltage.Text;
 			voltage = voltage.Replace(",", ".");
 			Logger.PrintStatus($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.OK);
-			SerialSender.SendCommand($"V1 {voltage}");
+			SerialSender.SendData($"V1 {voltage}");
 		}
 
 		/// <summary>
@@ -161,7 +155,7 @@ namespace SerialPower.UserControls
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendCommand($"V1 {command}");
+					SerialSender.SendData($"V1 {command}");
 				}
 			}
 		}
@@ -180,7 +174,7 @@ namespace SerialPower.UserControls
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendCommand($"V1 {command}");
+					SerialSender.SendData($"V1 {command}");
 				}
 			}
 		}
@@ -199,7 +193,7 @@ namespace SerialPower.UserControls
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendCommand($"V1 {command}");
+					SerialSender.SendData($"V1 {command}");
 				}
 			}
 		}
@@ -219,24 +213,24 @@ namespace SerialPower.UserControls
 
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendCommand("I1 0.20; I2 0.20");
-			SerialSender.SendCommand("OP1 1");
+			SerialSender.SendData("I1 0.20; I2 0.20");
+			SerialSender.SendData("OP1 1");
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendCommand("I1 0.20; I2 0.20");
-			SerialSender.SendCommand("OP2 1");
+			SerialSender.SendData("I1 0.20; I2 0.20");
+			SerialSender.SendData("OP2 1");
 		}
 
 		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendCommand("OP2 0");
+			SerialSender.SendData("OP2 0");
 		}
 
 		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendCommand("OP1 0");
+			SerialSender.SendData("OP1 0");
 		}
 	}
 }

@@ -49,6 +49,11 @@ namespace SerialPower
 
 			Logger.PrintHeader("Booting");
 			Console.WriteLine("Loading program...\n");
+			Console.WriteLine("Start Arguments:\t\t" + e.Args.Length);
+			foreach (var arg in e.Args)
+			{
+				Console.WriteLine(arg);
+			}
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
@@ -65,7 +70,7 @@ namespace SerialPower
 			BuildFilesystem();
 			ConfigHandler.Init();
 			string configData = File.ReadAllText(ConfigHandler.CONFIG_FILE);
-			Logger.PrintStatus("Config:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
+			Logger.PrintStatus("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
 
 			Logger.PrintHeader("Booting finished");
 			Thread.Sleep(2500);

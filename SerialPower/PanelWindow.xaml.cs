@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace SerialPower
 {
@@ -26,7 +14,7 @@ namespace SerialPower
 			InitializeComponent();
 			RunUpdaters();
 		}
-		
+
 
 		/// <summary>
 		/// Backgroundworker to update the current
@@ -47,7 +35,7 @@ namespace SerialPower
 					{
 						Thread.Sleep(1000);
 					}
-						
+
 					// If current window closed. Kill backgroundworker
 					if (currentWindowClosed)
 						return;
@@ -55,15 +43,29 @@ namespace SerialPower
 					// Only check current when ComPort is selected and visibility is true
 					if (this.Visibility == Visibility.Visible)
 					{
+						// get voltage on channel 1
+						data = SerialSender.SendDataAndRecv("V1O?", false);
+						this.Dispatcher.Invoke(() =>
+						{
+							TextBoxCH1Voltage.Text = data;
+						});
+
 						// get current on channel 1
-						data = SerialSender.SendCommand("I1O?", true, false);
+						data = SerialSender.SendDataAndRecv("I1O?", false);
 						this.Dispatcher.Invoke(() =>
 						{
 							TextBoxCH1Current.Text = data;
 						});
 
+						// get voltage on channel 2
+						data = SerialSender.SendDataAndRecv("V2O?", false);
+						this.Dispatcher.Invoke(() =>
+						{
+							TextBoxCH2Voltage.Text = data;
+						});
+
 						// get current on channel 2
-						data = SerialSender.SendCommand("I2O?", true, false);
+						data = SerialSender.SendDataAndRecv("I2O?", false);
 						this.Dispatcher.Invoke(() =>
 						{
 							TextBoxCH2Current.Text = data;
@@ -75,7 +77,7 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.PrintStatus("PanelWindow closed. Backgroundworker killed.", Logger.StatusCode.INFO);
+			Logger.PrintStatus("PanelWindow closed. Thread killed.", Logger.StatusCode.INFO);
 			currentWindowClosed = true;
 		}
 	}

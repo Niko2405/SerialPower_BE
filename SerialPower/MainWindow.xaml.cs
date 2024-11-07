@@ -1,15 +1,5 @@
-﻿using SerialPower.UserControls;
-using System.Diagnostics;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SerialPower
 {
@@ -23,14 +13,21 @@ namespace SerialPower
 			InitializeComponent();
 			if (ConfigHandler.currentConfig != null)
 			{
-				StatusBarConnectionInfo.Text = $"Port: {ConfigHandler.currentConfig.SerialPortName}\t\tBaudrate: {ConfigHandler.currentConfig.SerialPortBaudrate}\t\tStopBits: {ConfigHandler.currentConfig.SerialPortStopBits}\t\tDataBits: {ConfigHandler.currentConfig.SerialPortDataBits}\t\tParity: {ConfigHandler.currentConfig.SerialPortParity}\t\tReadTimeout: {ConfigHandler.currentConfig.SerialPortReadTimeOut}\t\tWriteTimeout: {ConfigHandler.currentConfig.SerialPortWriteTimeOut}\t\tCurrent Monitor Rate: {ConfigHandler.currentConfig.CurrentMonitorRate}";
+				TextBlockPortName.Text = "Port: " + ConfigHandler.currentConfig.SerialPortName;
+				TextBlockBaudrate.Text = "Baudrate: " + ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
+				TextBlockStopBits.Text = "StopBits: " + ConfigHandler.currentConfig.SerialPortStopBits.ToString();
+				TextBlockDataBits.Text = "DataBits: " + ConfigHandler.currentConfig.SerialPortDataBits.ToString();
+				TextBlockParity.Text = "Parity: " + ConfigHandler.currentConfig.SerialPortParity.ToString();
+				TextBlockReadTimeout.Text = "ReadTimeout: " + ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
+				TextBlockWriteTimeout.Text = "WriteTimeout: " + ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
+				TextBlockCurrentRefreshRate.Text = "CurrentRefreshRate: " + ConfigHandler.currentConfig.CurrentMonitorRate.ToString();
 				return;
 			}
 			else
 			{
-				StatusBarConnectionInfo.Text = "ERROR";
+				TextBlockPortName.Text = "CONFIG NOT READABLE";
+				return;
 			}
-			
 		}
 
 		/// <summary>
@@ -53,8 +50,11 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.PrintStatus("Closing program. Disconnect target.", Logger.StatusCode.OK);
-			SerialSender.SendCommand("LOCAL");
+			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
+			SerialSender.SendData("LOCAL");
+
+			SerialSender.DisconnectDevice();
+
 			Environment.Exit(0);
 		}
 
@@ -85,8 +85,11 @@ namespace SerialPower
 
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintStatus("Closing program. Disconnect target.", Logger.StatusCode.OK);
-			SerialSender.SendCommand("LOCAL");
+			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
+			SerialSender.SendData("LOCAL");
+
+			SerialSender.DisconnectDevice();
+
 			Environment.Exit(0);
 		}
 	}

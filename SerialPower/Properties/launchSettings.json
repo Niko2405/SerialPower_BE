@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SerialPower": {
+      "commandName": "Project"
+    },
+    "SerialPower Debug": {
+      "commandName": "Project",
+      "commandLineArgs": "--showOverflow"
+    }
+  }
+}

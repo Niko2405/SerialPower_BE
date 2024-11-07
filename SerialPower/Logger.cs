@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SerialPower
+﻿namespace SerialPower
 {
 	internal class Logger
 	{
@@ -16,6 +10,7 @@ namespace SerialPower
 			INFO,
 			OK,
 			FAILED,
+			ERROR,
 		}
 
 		/// <summary>
@@ -28,6 +23,7 @@ namespace SerialPower
 			// [FAILED]
 			// [ INFO ]
 			// [  OK  ]
+			// [ERROR ]
 			switch (code)
 			{
 				case StatusCode.INFO:
@@ -53,6 +49,16 @@ namespace SerialPower
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.Write("] ");
 					Console.WriteLine(message);
+					break;
+				case StatusCode.ERROR:
+					Console.Write("[");
+					Console.ForegroundColor = ConsoleColor.DarkRed;
+					Console.Write("ERROR!");
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.Write("] ");
+					Console.ForegroundColor = ConsoleColor.DarkRed;
+					Console.WriteLine(message);
+					Console.ForegroundColor = ConsoleColor.White;
 					break;
 				default:
 					break;

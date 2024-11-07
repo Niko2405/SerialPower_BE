@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SerialPower
 {
@@ -77,7 +72,7 @@ namespace SerialPower
 		{
 			// default settings
 			public string SerialPortName { get; set; } = "COM1";
-			public int SerialPortBaudrate { get; set; } = 9600;
+			public int SerialPortBaudrate { get; set; } = 115200;
 			public int SerialPortParity { get; set; } = 0;
 			public int SerialPortStopBits { get; set; } = 1;
 			public int SerialPortDataBits { get; set; } = 8;

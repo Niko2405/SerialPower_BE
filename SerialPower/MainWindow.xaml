@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="680" MinWidth="1080"
+		MinHeight="640" MinWidth="720"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen" WindowState="Normal"
 		Title="SerialPower"
@@ -38,7 +38,16 @@
 		</Menu>
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>
-				<TextBlock x:Name="StatusBarConnectionInfo"/>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock x:Name="TextBlockPortName" Text="Port: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockParity" Text="Parity: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockCurrentRefreshRate" Text="CurrentRefreshRate: X" Padding="15,0,15,0"/>
+				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>
 		<Grid Margin="10">

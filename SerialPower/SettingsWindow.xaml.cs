@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO.Ports;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SerialPower
 {
@@ -82,14 +70,22 @@ namespace SerialPower
 							ConfigHandler.currentConfig.CurrentMonitorRate = currentRefreshRate;
 
 							ConfigHandler.SaveConfig();
-							Logger.PrintStatus("New config saved", Logger.StatusCode.OK);
+							Logger.PrintStatus("Config saved", Logger.StatusCode.OK);
 						}
+
+						#region OPEN_PORT
+						SerialSender.ConnectDevice();
+						if (SerialSender.serialPort == null)
+						{
+							Logger.PrintStatus("Open serial port", Logger.StatusCode.FAILED);
+						}
+						#endregion
 
 						MainWindow mainWindow = new();
 						mainWindow.Show();
 
 						// open seperate window of current; place on topmost
-						Logger.PrintHeader("System");
+						Logger.PrintHeader("MainWindow");
 
 						if (CheckBoxCurrentMon.IsChecked == true)
 						{
@@ -98,7 +94,7 @@ namespace SerialPower
 							panelWindow.Show();
 							panelWindow.Topmost = true;
 						}
-						
+
 						this.Hide();
 						return;
 					}

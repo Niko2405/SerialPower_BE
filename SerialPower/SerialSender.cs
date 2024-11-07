@@ -1,32 +1,21 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using System.Windows;
 
 namespace SerialPower
 {
 	internal class SerialSender
 	{
-		private static bool isLocked = false;
-		private static SerialPort? serialPort;
+		public static SerialPort? serialPort;
+
 
 		/// <summary>
-		/// Send Command to COM
+		/// Connect to device
 		/// </summary>
-		/// <param name="command">Command to send</param>
-		/// <param name="waitForResponse">Should the func wait for feedback</param>
-		/// <param name="enableLogging">Should the data logged</param>
-		/// <returns></returns>
-		public static string SendCommand(string command, bool waitForResponse = false, bool enableLogging = true)
+		public static void ConnectDevice()
 		{
-			// create empty string
-			string response = string.Empty;
-
 			if (ConfigHandler.currentConfig != null)
 			{
-				// if func is not locked
-				if (!isLocked)
+				try
 				{
 					serialPort = new SerialPort
 					{
@@ -41,71 +30,109 @@ namespace SerialPower
 
 					if (!serialPort.IsOpen)
 					{
-						// Lock function
-						isLocked = true;
-						try
-						{
-							// Open Port
-							serialPort.Open();
-							if (serialPort.IsOpen)
-							{
-								serialPort.WriteLine(command);
-								if (enableLogging)
-									Logger.PrintStatus("Sending data:\t" + command, Logger.StatusCode.OK);
-
-								// if wait, read next line and remove \r
-								if (waitForResponse)
-								{
-									response = serialPort.ReadLine().Trim();
-									if (enableLogging)
-										Logger.PrintStatus("Received data:\t" + response, Logger.StatusCode.OK);
-								}
-								serialPort.Close();
-
-								// unlock function
-								isLocked = false;
-							}
-						}
-						catch (TimeoutException ex)
-						{
-							// reset connection
-							if (serialPort.IsOpen)
-							{
-								serialPort.Close();
-								isLocked = false;
-							}
-
-							Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
-							return "Timeout";
-						}
-						catch (Exception ex)
-						{
-							// reset connection
-							if (serialPort.IsOpen)
-							{
-								Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
-								serialPort.Close();
-								isLocked = false;
-							}
-
-							MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-							return ex.Message;
-						}
+						serialPort.Open();
+						Logger.PrintStatus("Connect device", Logger.StatusCode.OK);
 					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Diconnect device
+		/// </summary>
+		public static void DisconnectDevice()
+		{
+			if (serialPort != null)
+			{
+				if (serialPort.IsOpen)
+				{
+					try
+					{
+						serialPort.Close();
+						Logger.PrintStatus("Disconnect device", Logger.StatusCode.OK);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Send data to device
+		/// </summary>
+		/// <param name="data">Command</param>
+		/// <param name="showLogging">Should the message logged</param>
+		public static void SendData(string data, bool showLogging = true)
+		{
+			if (serialPort != null)
+			{
+				if (!serialPort.IsOpen)
+				{
+					ConnectDevice();
+				}
+				try
+				{
+					serialPort.Write(data + Environment.NewLine);
+
+					if (showLogging)
+						Logger.PrintStatus($"[{serialPort.PortName}] Sending data:\t" + data, Logger.StatusCode.OK);
+				}
+				catch (TimeoutException ex)
+				{
+					Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Send data and wait for response
+		/// </summary>
+		/// <param name="data">Command</param>
+		/// <param name="showLogging">Should the message logged</param>
+		/// <returns>Response of given data</returns>
+		public static string SendDataAndRecv(string data, bool showLogging = true)
+		{
+			if (serialPort != null)
+			{
+				if (!serialPort.IsOpen)
+				{
+					ConnectDevice();
+				}
+				try
+				{
+					serialPort.Write(data + Environment.NewLine);
+
+					if (showLogging)
+						Logger.PrintStatus($"[{serialPort.PortName}] Sending data:\t" + data, Logger.StatusCode.OK);
+
+					string response = serialPort.ReadLine().Trim();
+
+					if (showLogging)
+						Logger.PrintStatus($"[{serialPort.PortName}] Received data:\t" + response, Logger.StatusCode.OK);
+
 					return response;
 				}
-				else if (isLocked)
+				catch (TimeoutException ex)
 				{
-					// retry send data
-					Thread.Sleep(1);
-					return SendCommand(command, waitForResponse: false);
+					Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
+					return "Timeout";
 				}
-				return string.Empty;
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 			}
-			else
-			{
-				return "Config Handler is dead.";
-			}
+			return "SerialPort is null";
 		}
 	}
 }

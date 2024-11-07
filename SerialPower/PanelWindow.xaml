@@ -9,8 +9,8 @@
 		WindowStartupLocation="CenterScreen"
 		Background="{StaticResource BackgroundStyle}"
 		ResizeMode="NoResize"
-		Title="Serial Power - Panel overview" Height="180" Width="360" Closed="WindowClosed">
-	<Grid>
+		Title="Serial Power - Panel overview" Height="160" Width="360" Closed="WindowClosed">
+	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition></ColumnDefinition>
 			<ColumnDefinition></ColumnDefinition>
@@ -29,13 +29,13 @@
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
-				<RowDefinition></RowDefinition>
 			</Grid.RowDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource TitleStyle}" FontSize="16">Channel 1</Label>
-			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="12">Current:</Label>
-			<TextBox x:Name="TextBoxCH1Current" Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" Text="N/A" VerticalContentAlignment="Center"></TextBox>
-			<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="12">CC:</Label>
-			<Rectangle Grid.Row="2" Grid.Column="1" x:Name="RectangleCCChannel1" Fill="RoyalBlue" Margin="5"></Rectangle>
+			<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource TitleStyle}" FontSize="18">Channel 1</Label>
+			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontFamily="{StaticResource OpenSansBold}" FontSize="12">Voltage:</Label>
+			<TextBox x:Name="TextBoxCH1Voltage" Grid.Row="1" Grid.Column="1" Margin="5" FontFamily="{StaticResource OpenSansBold}" IsReadOnly="True" Text="No Data" VerticalContentAlignment="Center"></TextBox>
+
+			<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" FontFamily="{StaticResource OpenSansBold}" FontSize="12">Current:</Label>
+			<TextBox x:Name="TextBoxCH1Current" Grid.Row="2" Grid.Column="1" Margin="5" FontFamily="{StaticResource OpenSansBold}" IsReadOnly="True" Text="No Data" VerticalContentAlignment="Center"></TextBox>
 		</Grid>
 
 		<!-- Channel 2 -->
@@ -48,13 +48,13 @@
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
-				<RowDefinition></RowDefinition>
 			</Grid.RowDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource TitleStyle}" FontSize="16">Channel 2</Label>
-			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="12">Current:</Label>
-			<TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBoxCH2Current" Margin="5" IsReadOnly="True" Text="N/A" VerticalContentAlignment="Center"></TextBox>
-			<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="12">CC:</Label>
-			<Rectangle Grid.Row="2" Grid.Column="1" x:Name="RectangleCCChannel2" Fill="RoyalBlue" Margin="5"></Rectangle>
+			<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource TitleStyle}" FontSize="18">Channel 2</Label>
+			<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" FontFamily="{StaticResource OpenSansBold}" FontSize="12">Voltage:</Label>
+			<TextBox x:Name="TextBoxCH2Voltage" Grid.Row="1" Grid.Column="1" Margin="5" FontFamily="{StaticResource OpenSansBold}" IsReadOnly="True" Text="No Data" VerticalContentAlignment="Center"></TextBox>
+
+			<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" FontFamily="{StaticResource OpenSansBold}" FontSize="12">Current:</Label>
+			<TextBox Grid.Row="2" Grid.Column="1" x:Name="TextBoxCH2Current" Margin="5" FontFamily="{StaticResource OpenSansBold}" IsReadOnly="True" Text="No Data" VerticalContentAlignment="Center"></TextBox>
 		</Grid>
 	</Grid>
 </Window>
