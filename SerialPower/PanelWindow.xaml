@@ -9,7 +9,7 @@
 		WindowStartupLocation="CenterScreen"
 		Background="{StaticResource BackgroundStyle}"
 		ResizeMode="NoResize"
-		Title="Serial Power - Panel overview" Height="160" Width="360" Closed="WindowClosed">
+		Title="SerialPower - Panel overview" Height="160" Width="360" Closed="WindowClosed">
 	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition></ColumnDefinition>

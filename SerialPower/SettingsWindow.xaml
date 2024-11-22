@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerialPower"
         mc:Ignorable="d"
-		Title="Settings"
+		Title="SerialPower - Settings"
 		Background="{StaticResource BackgroundStyle}"
 		Height="610" Width="980">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Settings</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Configuration</Label>
 		<Grid DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -61,7 +61,7 @@
 			<Label Grid.Row="8" Grid.Column="0" Style="{StaticResource TitleStyle}" FontSize="18">Current monitor refresh rate (ms):</Label>
 			<TextBox x:Name="TextBoxCurrentRefreshRate" Grid.Row="8" Grid.Column="1" FontSize="16" Margin="5" VerticalAlignment="Center">1000</TextBox>
 			<CheckBox x:Name="CheckBoxCurrentMon" Grid.Row="8" Grid.Column="2" Foreground="White" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="False">Show current monitoring</CheckBox>
-			<Button x:Name="ButtonRun" Grid.Row="9" Grid.Column="1" Style="{StaticResource ButtonStyle}" Margin="10" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Connect device</Button>
+			<Button x:Name="ButtonRun" Grid.Row="9" Grid.Column="1" Style="{StaticResource RoundedButton}" Margin="10" HorizontalAlignment="Stretch" Click="ButtonRun_Click">Connect device</Button>
 		</Grid>
 	</DockPanel>
 </Window>

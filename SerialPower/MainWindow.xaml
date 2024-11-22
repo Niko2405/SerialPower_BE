@@ -14,39 +14,53 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
+				<MenuItem Header="_Config" >
+					<MenuItem Header="_Open Config"/>
+					<MenuItem Header="_Recreate Config"/>
+					<MenuItem Header="_Init Config"/>
+				</MenuItem>
 				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
 				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
 			</MenuItem>
-			<MenuItem Header="_Tucker">
-				<MenuItem Header="_E649"/>
-				<MenuItem Header="_E650"/>
-				<MenuItem Header="_E760"/>
+			
+			<!-- Baugruppen -->
+			<MenuItem Header="_Programs">
+				<MenuItem Header="_Tucker">
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+				</MenuItem>
+				<MenuItem Header="_Ernst Leitz">
+					<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
+				</MenuItem>
+				<MenuItem Header="_IDE">
+					<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
+				</MenuItem>
+				<MenuItem Header="_LEIMI">
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+				</MenuItem>
 			</MenuItem>
-			<MenuItem Header="_Ernst Leitz">
-				<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
-			</MenuItem>
-			<MenuItem Header="_IDE">
-				<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
-			</MenuItem>
-			<MenuItem Header="_LEIMI">
-				<MenuItem Header="_None"/>
-			</MenuItem>
-			<MenuItem Header="_Misc">
+			
+			<MenuItem Header="_Tools">
 				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
 				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
 			</MenuItem>
 		</Menu>
+		
+		<!-- Status Bar -->
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock x:Name="TextBlockPortName" Text="Port: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockParity" Text="Parity: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: X" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockCurrentRefreshRate" Text="CurrentRefreshRate: X" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockCurrentRefreshRate" Text="CurrentRefreshRate: None" Padding="15,0,15,0"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>
@@ -54,6 +68,7 @@
 			<UserControls:UC_ErnstLeitz1 x:Name="UserControlErnstLeitz1" Visibility="Collapsed"></UserControls:UC_ErnstLeitz1>
 			<UserControls:UC_IDE1 x:Name="UserControlIDE1" Visibility="Collapsed"></UserControls:UC_IDE1>
 			<UserControls:UC_Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:UC_Info>
+			<UserControls:UC_Terminal x:Name="UserControlTerminal" Visibility="Collapsed"></UserControls:UC_Terminal>
 			<UserControls:UC_CustomControl x:Name="UserControlCustomControl" Visibility="Visible"></UserControls:UC_CustomControl>
 		</Grid>
 	</DockPanel>

@@ -10,7 +10,6 @@
 			INFO,
 			OK,
 			FAILED,
-			ERROR,
 		}
 
 		/// <summary>
@@ -50,16 +49,6 @@
 					Console.Write("] ");
 					Console.WriteLine(message);
 					break;
-				case StatusCode.ERROR:
-					Console.Write("[");
-					Console.ForegroundColor = ConsoleColor.DarkRed;
-					Console.Write("ERROR!");
-					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write("] ");
-					Console.ForegroundColor = ConsoleColor.DarkRed;
-					Console.WriteLine(message);
-					Console.ForegroundColor = ConsoleColor.White;
-					break;
 				default:
 					break;
 			}
@@ -80,14 +69,14 @@
 			ConsoleColor currentForegroundColor = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 1 - offset; i++)
+			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 2 - offset; i++)
 			{
 				Console.Write('=');
 			}
 
-			Console.Write($" {title} ");
+			Console.Write($"[ {title} ]");
 
-			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 1; i++)
+			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 2; i++)
 			{
 				Console.Write('=');
 			}

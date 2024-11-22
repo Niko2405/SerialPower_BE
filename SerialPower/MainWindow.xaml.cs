@@ -25,7 +25,7 @@ namespace SerialPower
 			}
 			else
 			{
-				TextBlockPortName.Text = "CONFIG NOT READABLE";
+				TextBlockPortName.Text = "CONFIG IS NOT READABLE";
 				return;
 			}
 		}
@@ -41,6 +41,7 @@ namespace SerialPower
 			UserControlErnstLeitz1.Visibility = Visibility.Collapsed;
 			UserControlIDE1.Visibility = Visibility.Collapsed;
 			UserControlCustomControl.Visibility = Visibility.Collapsed;
+			UserControlTerminal.Visibility = Visibility.Collapsed;
 			UserControlInfo.Visibility = Visibility.Collapsed;
 
 			// only show current usercontrol
@@ -52,7 +53,7 @@ namespace SerialPower
 		{
 			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
 			SerialSender.SendData("LOCAL");
-
+			Thread.Sleep(2000);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
@@ -75,7 +76,7 @@ namespace SerialPower
 
 		private void MenuItemTerminal_Click(object sender, RoutedEventArgs e)
 		{
-
+			SetActiveUserControl(UserControlTerminal);
 		}
 
 		private void MenuItemInfo_Click(object sender, RoutedEventArgs e)
@@ -87,7 +88,7 @@ namespace SerialPower
 		{
 			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
 			SerialSender.SendData("LOCAL");
-
+			Thread.Sleep(2000);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);

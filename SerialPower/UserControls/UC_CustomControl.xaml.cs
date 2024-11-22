@@ -42,7 +42,7 @@ namespace SerialPower.UserControls
 			dataVoltage = dataVoltage.Replace("V", "");
 			dataCurrent = dataCurrent.Replace("A", "");
 
-			Logger.PrintStatus($"Convert object '{selectedItem}' => '{dataVoltage}' and '{dataCurrent}'", Logger.StatusCode.INFO);
+			Logger.PrintStatus($"Convert object [{selectedItem}] => [{dataVoltage}] and [{dataCurrent}]", Logger.StatusCode.INFO);
 			return Tuple.Create(dataVoltage, dataCurrent);
 		}
 
@@ -126,8 +126,9 @@ namespace SerialPower.UserControls
 
 					// Remove V1 or I1 from data (V1 5.45 => 5.45)
 					TextBox_CH1Voltage.Text = voltageCH1;
-					TextBox_CH2Voltage.Text = voltageCH2;
 					TextBox_CH1Current.Text = currentCH1;
+
+					TextBox_CH2Voltage.Text = voltageCH2;
 					TextBox_CH2Current.Text = currentCH2;
 					Logger.PrintStatus("Insert data into textboxes", Logger.StatusCode.OK);
 					return;
@@ -138,12 +139,20 @@ namespace SerialPower.UserControls
 				}
 			}
 		}
+
 		#region Presets
 		private void ListBoxCH1Presets33_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
 			if (e.AddedItems.Count > 0)
 			{
+				// uncheck CH1
+				if (CheckBoxCH1.IsChecked == true)
+				{
+					CheckBoxCH1.IsChecked = false;
+				}
+
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
@@ -171,10 +180,17 @@ namespace SerialPower.UserControls
 
 		private void ListBoxCH1Presets50_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			string? selectedItem;
 			Thread.Sleep(SELECT_DELAY);
 			if (e.AddedItems.Count > 0)
 			{
-				string? selectedItem = e.AddedItems[0].ToString();
+				// uncheck CH1
+				if (CheckBoxCH1.IsChecked == true)
+				{
+					CheckBoxCH1.IsChecked = false;
+				}
+
+				selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
 					Logger.PrintHeader("Channel 1 - 5.000V");
@@ -204,6 +220,12 @@ namespace SerialPower.UserControls
 			Thread.Sleep(SELECT_DELAY);
 			if (e.AddedItems.Count > 0)
 			{
+				// uncheck CH1
+				if (CheckBoxCH1.IsChecked == true)
+				{
+					CheckBoxCH1.IsChecked = false;
+				}
+
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
@@ -234,6 +256,12 @@ namespace SerialPower.UserControls
 			Thread.Sleep(SELECT_DELAY);
 			if (e.AddedItems.Count > 0)
 			{
+				// uncheck CH1
+				if (CheckBoxCH1.IsChecked == true)
+				{
+					CheckBoxCH1.IsChecked = false;
+				}
+
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
@@ -264,6 +292,12 @@ namespace SerialPower.UserControls
 			Thread.Sleep(SELECT_DELAY);
 			if (e.AddedItems.Count > 0)
 			{
+				// uncheck CH1
+				if (CheckBoxCH1.IsChecked == true)
+				{
+					CheckBoxCH1.IsChecked = false;
+				}
+
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
@@ -292,6 +326,13 @@ namespace SerialPower.UserControls
 		private void ListBoxCH2Presets33_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
+			// uncheck CH2
+			if (CheckBoxCH2.IsChecked == true)
+			{
+				CheckBoxCH2.IsChecked = false;
+			}
+
 			if (e.AddedItems.Count > 0)
 			{
 				string? selectedItem = e.AddedItems[0].ToString();
@@ -322,6 +363,13 @@ namespace SerialPower.UserControls
 		private void ListBoxCH2Presets50_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
+			// uncheck CH2
+			if (CheckBoxCH2.IsChecked == true)
+			{
+				CheckBoxCH2.IsChecked = false;
+			}
+
 			if (e.AddedItems.Count > 0)
 			{
 				string? selectedItem = e.AddedItems[0].ToString();
@@ -352,6 +400,13 @@ namespace SerialPower.UserControls
 		private void ListBoxCH2Presets120_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
+			// uncheck CH2
+			if (CheckBoxCH2.IsChecked == true)
+			{
+				CheckBoxCH2.IsChecked = false;
+			}
+
 			if (e.AddedItems.Count > 0)
 			{
 				string? selectedItem = e.AddedItems[0].ToString();
@@ -382,6 +437,13 @@ namespace SerialPower.UserControls
 		private void ListBoxCH2Presets180_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
+			// uncheck CH2
+			if (CheckBoxCH2.IsChecked == true)
+			{
+				CheckBoxCH2.IsChecked = false;
+			}
+
 			if (e.AddedItems.Count > 0)
 			{
 				string? selectedItem = e.AddedItems[0].ToString();
@@ -412,6 +474,13 @@ namespace SerialPower.UserControls
 		private void ListBoxCH2Presets240_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Thread.Sleep(SELECT_DELAY);
+
+			// uncheck CH2
+			if (CheckBoxCH2.IsChecked == true)
+			{
+				CheckBoxCH2.IsChecked = false;
+			}
+
 			if (e.AddedItems.Count > 0)
 			{
 				string? selectedItem = e.AddedItems[0].ToString();

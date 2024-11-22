@@ -32,8 +32,8 @@
 				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH1" FontSize="20" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8">Channel 1 - Online</CheckBox>
-				<Button x:Name="ButtonCH1" Style="{StaticResource ButtonStyle}" Width="210" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send to Channel 1</Button>
+				<CheckBox x:Name="CheckBoxCH1" FontSize="20" Foreground="White" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8" VerticalContentAlignment="Center" HorizontalAlignment="Left">Channel 1 - Online</CheckBox>
+				<Button x:Name="ButtonCH1" Style="{StaticResource RoundedButton}" Width="210" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send to Channel 1</Button>
 			</StackPanel>
 			
 			<!-- Channel 1 - Presets -->
@@ -116,8 +116,8 @@
 				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 
 				<!-- etc -->
-				<CheckBox x:Name="CheckBoxCH2" FontSize="20" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8">Channel 2 - Online</CheckBox>
-				<Button x:Name="ButtonCH2" Style="{StaticResource ButtonStyle}" Width="210" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send to Channel 2</Button>
+				<CheckBox x:Name="CheckBoxCH2" FontSize="20" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8" HorizontalAlignment="Left">Channel 2 - Online</CheckBox>
+				<Button x:Name="ButtonCH2" Style="{StaticResource RoundedButton}" Width="210" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send to Channel 2</Button>
 			</StackPanel>
 
 			<!-- Channel 2 - Presets -->

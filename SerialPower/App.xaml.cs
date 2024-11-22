@@ -73,6 +73,7 @@ namespace SerialPower
 			Logger.PrintStatus("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
 
 			Logger.PrintHeader("Booting finished");
+			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2500);
 		}
 	}

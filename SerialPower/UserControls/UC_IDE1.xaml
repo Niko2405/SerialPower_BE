@@ -76,10 +76,10 @@
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
+							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
 						</Grid>
-						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource ButtonStyle}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource RoundedButton}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 					</StackPanel>
 				</Canvas>
 			</Border>
@@ -108,30 +108,10 @@
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
+							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
 						</Grid>
-						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource ButtonStyle}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
-					</StackPanel>
-				</Canvas>
-			</Border>
-
-			<!-- CH 1 - Current HIDDEN -->
-			<Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1" Visibility="Hidden">
-				<Canvas x:Name="Canvas_CH1Current">
-					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Current}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Current}">
-						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Current</Label>
-						<TextBox x:Name="TextBoxCH1Current" FontSize="18" IsReadOnly="True" VerticalContentAlignment="Center">No Value</TextBox>
-					</StackPanel>
-				</Canvas>
-			</Border>
-
-			<!-- CH2 - Current HIDDEN -->
-			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1" Visibility="Hidden">
-				<Canvas x:Name="Canvas_CH2Current">
-					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH2Current}" Height="{Binding ActualHeight, ElementName=Canvas_CH2Current}">
-						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH2 - Current</Label>
-						<TextBox x:Name="TextBoxCH2Current" FontSize="18" IsReadOnly="True" VerticalContentAlignment="Center">No Value</TextBox>
+						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource RoundedButton}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 					</StackPanel>
 				</Canvas>
 			</Border>

@@ -107,5 +107,10 @@ namespace SerialPower.UserControls
 			SerialSender.SendData("I1 0.10; I2 0.10");
 			SerialSender.SendData("OP1 0; OP2 1");
 		}
+
+		private void UserControlErnstLietz_Loaded(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }
