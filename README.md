@@ -2,7 +2,6 @@
 
 ## Installation
 ### Requirements
-- DotNet Runtime 8.0.x
 - Windows 7 - 11
 - Power Supply AIM TTi CPX200 - Series
 - RS232 or USB-B
