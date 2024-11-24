@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SerialPower"
         mc:Ignorable="d"
 		Title="SerialPower - Settings"
+		WindowStartupLocation="CenterScreen"
 		Background="{StaticResource BackgroundStyle}"
 		Height="610" Width="980">
 	<DockPanel LastChildFill="True" Margin="5">

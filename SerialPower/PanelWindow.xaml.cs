@@ -77,7 +77,7 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.PrintStatus("PanelWindow closed. Thread killed.", Logger.StatusCode.INFO);
+			Logger.Write("PanelWindow closed. Thread killed.", Logger.StatusCode.INFO);
 			currentWindowClosed = true;
 		}
 	}

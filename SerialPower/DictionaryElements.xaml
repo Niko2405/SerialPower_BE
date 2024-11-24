@@ -14,17 +14,7 @@
 	<SolidColorBrush x:Key="ButtonMouseNotOver" Color="#FF505050"/>
 	<SolidColorBrush x:Key="ButtonMouseOver" Color="#FF787878"/>
 	
-	<!-- Button -->
-	<Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="Background" Value="#FF606060"/>
-		<Setter Property="Cursor" Value="Hand"/>
-		<Setter Property="FontSize" Value="18"/>
-		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
-		<Setter Property="VerticalAlignment" Value="Stretch"/>
-		<Setter Property="HorizontalAlignment" Value="Center"/>
-	</Style>
-
+	<!-- Rounded Button -->
 	<Style x:Key="RoundedButton" TargetType="{x:Type Button}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="{StaticResource ButtonMouseNotOver}"/>
@@ -34,7 +24,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
-					<Border CornerRadius="5" BorderBrush="White" BorderThickness="1" Background="{TemplateBinding Background}">
+					<Border CornerRadius="10" BorderBrush="White" BorderThickness="1" Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 					</Border>
 				</ControlTemplate>
@@ -65,5 +55,13 @@
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+	</Style>
+
+	<!-- Label -->
+	<Style x:Key="TextBoxTerminal" TargetType="{x:Type TextBox}">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="{StaticResource BackgroundStyleAlternativ}"/>
+		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 	</Style>
 </ResourceDictionary>

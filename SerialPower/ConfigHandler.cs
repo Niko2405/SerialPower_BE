@@ -31,21 +31,21 @@ namespace SerialPower
 				try
 				{
 					File.WriteAllText(CONFIG_FILE, JsonSerializer.Serialize(new ConfigObject(), JsonOptions));
-					Logger.PrintStatus("Create config at " + CONFIG_FILE, Logger.StatusCode.OK);
+					Logger.Write("Create config at " + CONFIG_FILE, Logger.StatusCode.INFO);
 				}
 				catch (UnauthorizedAccessException)
 				{
-					Logger.PrintStatus("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
+					Logger.Write("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.ERROR);
 					Environment.Exit(1);
 				}
 			}
 			currentConfig = JsonSerializer.Deserialize<ConfigObject>(File.ReadAllText(CONFIG_FILE), JsonOptions);
 			if (currentConfig == null)
 			{
-				Logger.PrintStatus("Init config", Logger.StatusCode.FAILED);
+				Logger.Write("Init config", Logger.StatusCode.ERROR);
 				return;
 			}
-			Logger.PrintStatus("Init config", Logger.StatusCode.OK);
+			Logger.Write("Init config", Logger.StatusCode.INFO);
 		}
 
 		/// <summary>
@@ -56,11 +56,11 @@ namespace SerialPower
 			try
 			{
 				File.WriteAllText(CONFIG_FILE, JsonSerializer.Serialize(currentConfig, JsonOptions));
-				Logger.PrintStatus("Config file saved at " + CONFIG_FILE, Logger.StatusCode.OK);
+				Logger.Write("Config file saved at " + CONFIG_FILE, Logger.StatusCode.INFO);
 			}
 			catch (UnauthorizedAccessException)
 			{
-				Logger.PrintStatus("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
+				Logger.Write("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.ERROR);
 				Environment.Exit(1);
 			}
 		}

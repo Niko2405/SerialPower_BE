@@ -8,16 +8,16 @@
 		mc:Ignorable="d"
 		MinHeight="640" MinWidth="720"
 		Background="{StaticResource BackgroundStyle}"
-		WindowStartupLocation="CenterScreen" WindowState="Normal"
+		WindowStartupLocation="CenterScreen"
 		Title="SerialPower"
 		Height="720" Width="1380" Closed="WindowClosed">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
 				<MenuItem Header="_Config" >
-					<MenuItem Header="_Open Config"/>
-					<MenuItem Header="_Recreate Config"/>
-					<MenuItem Header="_Init Config"/>
+					<MenuItem x:Name="MenuItemOpenConfig" Header="_Open Config" Click="MenuItemOpenConfig_Click"/>
+					<MenuItem x:Name="MenuItemRecreateConfig" Header="_Recreate Config" Click="MenuItemRecreateConfig_Click"/>
+					<MenuItem x:Name="MenuItemReloadConfig" Header="_Reload Config" Click="MenuItemReloadConfig_Click"/>
 				</MenuItem>
 				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
 				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>

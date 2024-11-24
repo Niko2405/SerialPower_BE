@@ -14,13 +14,50 @@ namespace SerialPower
 
 			// scan all serial ports
 			string[] coms = SerialPort.GetPortNames();
-			foreach (string com in coms)
+			SerialPort? serialPort = null;
+			foreach (string currentCom in coms)
 			{
-				Logger.PrintStatus($"New serial device found: {com}. Add to selection list.", Logger.StatusCode.OK);
-				ListBoxComPorts.Items.Add(com);
+				Logger.Write($"New serial device found: {currentCom}", Logger.StatusCode.INFO);
+				try
+				{
+					// check if connected device is a power supply
+					serialPort = new(currentCom, 115200, Parity.None, 8, StopBits.One);
+					serialPort.ReadTimeout = 500;
+					serialPort.WriteTimeout = 500;
+
+					serialPort.Open();
+					Logger.Write($"Check port: {currentCom}", Logger.StatusCode.INFO);
+					serialPort.Write("*IDN?" + Environment.NewLine);
+					string response = serialPort.ReadLine().Trim();
+
+					// if the answer is CPX200 then add to list selection or port verify is disabled
+					if (response.Contains("CPX200"))
+					{
+						Console.WriteLine(currentCom);
+						ListBoxComPorts.Items.Add(currentCom);
+					}
+					serialPort.Close();
+					
+				}
+				catch (TimeoutException)
+				{
+					if (SerialSender.DisablePortVerify)
+					{
+						if (serialPort != null)
+						{
+							if (serialPort.IsOpen)
+							{
+								serialPort.Close();
+							}
+						}
+						Logger.Write("Port verify is disabled. Forcing add COM to list. Use with caution.", Logger.StatusCode.WARNING);
+						ListBoxComPorts.Items.Add(currentCom);
+					}
+				}
+				Thread.Sleep(1000);
 			}
 
-			// reading config file
+			// reading config file and load data
 			if (ConfigHandler.currentConfig != null)
 			{
 				TextBoxBaudrate.Text = ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
@@ -32,7 +69,7 @@ namespace SerialPower
 				TextBoxWriteTimeout.Text = ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
 
 				TextBoxCurrentRefreshRate.Text = ConfigHandler.currentConfig.CurrentMonitorRate.ToString();
-				Logger.PrintStatus("Config file found. Load data into window.", Logger.StatusCode.OK);
+				Logger.Write("Config file found. Load data into window.", Logger.StatusCode.INFO);
 			}
 		}
 
@@ -70,31 +107,31 @@ namespace SerialPower
 							ConfigHandler.currentConfig.CurrentMonitorRate = currentRefreshRate;
 
 							ConfigHandler.SaveConfig();
-							Logger.PrintStatus("Config saved", Logger.StatusCode.OK);
+							Logger.Write("Config saved", Logger.StatusCode.INFO);
 						}
 
 						#region OPEN_PORT
 						SerialSender.ConnectDevice();
 						if (SerialSender.serialPort == null)
 						{
-							Logger.PrintStatus("Open serial port", Logger.StatusCode.FAILED);
+							Logger.Write("Open serial port", Logger.StatusCode.ERROR);
 						}
 						#endregion
 
+						// open mainwindow
 						MainWindow mainWindow = new();
 						mainWindow.Show();
 
 						// open seperate window of current; place on topmost
-						Logger.PrintHeader("MainWindow");
-
 						if (CheckBoxCurrentMon.IsChecked == true)
 						{
-							Logger.PrintStatus($"Set current refresh rate to {currentRefreshRate}ms", Logger.StatusCode.OK);
+							Logger.Write($"Set current refresh rate to {currentRefreshRate}ms", Logger.StatusCode.INFO);
 							PanelWindow panelWindow = new();
 							panelWindow.Show();
 							panelWindow.Topmost = true;
 						}
 
+						// hide current settings window
 						this.Hide();
 						return;
 					}

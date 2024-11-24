@@ -14,7 +14,7 @@
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">Developed for: Brückmann Elektronik GmbH</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">Repository: https://github.com/Niko2405/SerialPower_BE</Label>
 			<Label Style="{StaticResource LabelStyle}" x:Name="LabelVersion" HorizontalAlignment="Left" FontSize="15">Version: Unknown</Label>
-			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">Compiled: 07.11.2024</Label>
+			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">Compiled: 24.11.2024</Label>
 			<Label Style="{StaticResource LabelStyle}" x:Name="LabelDotNetVersion" HorizontalAlignment="Left" FontSize="15">Compiled with: Unknown</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">License: MIT</Label>
 			<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="15">Available connections: USB and RS232</Label>

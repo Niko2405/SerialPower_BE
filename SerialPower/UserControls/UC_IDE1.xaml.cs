@@ -24,10 +24,10 @@ namespace SerialPower.UserControls
 		/// <param name="e"></param>
 		private void ButtonCH2_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("CH2 - Send voltage");
+			Logger.Write("CH2 - Send voltage", Logger.StatusCode.INFO);
 			string voltage = TextBoxCH2Voltage.Text;
 			voltage = voltage.Replace(",", ".");
-			Logger.PrintStatus($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.OK);
+			Logger.Write($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
 			SerialSender.SendData($"V2 {voltage}");
 		}
 
@@ -38,10 +38,10 @@ namespace SerialPower.UserControls
 		/// <param name="e"></param>
 		private void ButtonCH1_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("CH1 - Send voltage");
+			Logger.Write("CH1 - Send voltage", Logger.StatusCode.INFO);
 			string voltage = TextBoxCH1Voltage.Text;
 			voltage = voltage.Replace(",", ".");
-			Logger.PrintStatus($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.OK);
+			Logger.Write($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
 			SerialSender.SendData($"V1 {voltage}");
 		}
 
@@ -60,7 +60,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -84,7 +84,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -108,7 +108,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -132,7 +132,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.PrintStatus($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -151,7 +151,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -170,7 +170,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -189,7 +189,7 @@ namespace SerialPower.UserControls
 				{
 					// Remove System.ListBox:
 					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.PrintStatus($"Set voltage of CH1 to {command}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
 					TextBoxCH1Voltage.Text = command;
@@ -207,7 +207,7 @@ namespace SerialPower.UserControls
 		{
 			string command = selectedItem.Split(":")[1].Trim();
 			command = command.Replace(",", ".").Replace("V", "").Replace("set ", "");
-			Logger.PrintStatus($"Convert object '{selectedItem}' to '{command}'", Logger.StatusCode.OK);
+			Logger.Write($"Convert object '{selectedItem}' to '{command}'", Logger.StatusCode.INFO);
 			return command;
 		}
 

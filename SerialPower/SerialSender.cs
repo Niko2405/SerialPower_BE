@@ -6,7 +6,7 @@ namespace SerialPower
 	internal class SerialSender
 	{
 		public static SerialPort? serialPort;
-
+		public static bool DisablePortVerify = false;
 
 		/// <summary>
 		/// Connect to device
@@ -31,7 +31,7 @@ namespace SerialPower
 					if (!serialPort.IsOpen)
 					{
 						serialPort.Open();
-						Logger.PrintStatus("Connect device", Logger.StatusCode.OK);
+						Logger.Write("Connect device", Logger.StatusCode.INFO);
 					}
 				}
 				catch (Exception ex)
@@ -53,7 +53,7 @@ namespace SerialPower
 					try
 					{
 						serialPort.Close();
-						Logger.PrintStatus("Disconnect device", Logger.StatusCode.OK);
+						Logger.Write("Disconnect device", Logger.StatusCode.INFO);
 					}
 					catch (Exception ex)
 					{
@@ -81,11 +81,11 @@ namespace SerialPower
 					serialPort.Write(data + Environment.NewLine);
 
 					if (showLogging)
-						Logger.PrintStatus($"[{serialPort.PortName}] Sending data:\t" + data, Logger.StatusCode.OK);
+						Logger.Write("Sending data: " + data, Logger.StatusCode.INFO);
 				}
 				catch (TimeoutException ex)
 				{
-					Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
+					Logger.Write(ex.Message, Logger.StatusCode.ERROR);
 				}
 				catch (Exception ex)
 				{
@@ -113,19 +113,19 @@ namespace SerialPower
 					serialPort.Write(data + Environment.NewLine);
 
 					if (showLogging)
-						Logger.PrintStatus($"[{serialPort.PortName}] Sending data:\t" + data, Logger.StatusCode.OK);
+						Logger.Write("Sending data: " + data, Logger.StatusCode.INFO);
 
 					string response = serialPort.ReadLine().Trim();
 
 					if (showLogging)
-						Logger.PrintStatus($"[{serialPort.PortName}] Received data:\t" + response, Logger.StatusCode.OK);
+						Logger.Write("Received data: " + response, Logger.StatusCode.INFO);
 
 					return response;
 				}
 				catch (TimeoutException ex)
 				{
-					Logger.PrintStatus(ex.Message, Logger.StatusCode.FAILED);
-					return "Timeout";
+					Logger.Write(ex.Message, Logger.StatusCode.ERROR);
+					return "TIMEOUT";
 				}
 				catch (Exception ex)
 				{

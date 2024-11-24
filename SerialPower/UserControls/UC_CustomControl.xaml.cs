@@ -42,37 +42,37 @@ namespace SerialPower.UserControls
 			dataVoltage = dataVoltage.Replace("V", "");
 			dataCurrent = dataCurrent.Replace("A", "");
 
-			Logger.PrintStatus($"Convert object [{selectedItem}] => [{dataVoltage}] and [{dataCurrent}]", Logger.StatusCode.INFO);
+			Logger.Write($"Convert object [{selectedItem}] => [{dataVoltage}] and [{dataCurrent}]", Logger.StatusCode.INFO);
 			return Tuple.Create(dataVoltage, dataCurrent);
 		}
 
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Channel 1 - Online");
+			Logger.Write("Channel 1 - Online", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP1 1");
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Channel 2 - Online");
+			Logger.Write("Channel 2 - Online", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP2 1");
 		}
 
 		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Channel 2 - Offline");
+			Logger.Write("Channel 2 - Offline", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP2 0");
 		}
 
 		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Channel 1 - Offline");
+			Logger.Write("Channel 1 - Offline", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP1 0");
 		}
 
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Send data to Channel 1");
+			Logger.Write("Send data to Channel 1", Logger.StatusCode.INFO);
 
 			// voltage setter
 			string voltage = TextBox_CH1Voltage.Text;
@@ -87,7 +87,7 @@ namespace SerialPower.UserControls
 
 		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintHeader("Send data to Channel 2");
+			Logger.Write("Send data to Channel 2", Logger.StatusCode.INFO);
 
 			// voltage setter
 			string voltage = TextBox_CH2Voltage.Text;
@@ -117,12 +117,12 @@ namespace SerialPower.UserControls
 					currentCH1 = currentCH1.Split(' ')[1];
 					voltageCH2 = voltageCH2.Split(' ')[1];
 					currentCH2 = currentCH2.Split(' ')[1];
-					Logger.PrintStatus("Get last given data from device", Logger.StatusCode.OK);
+					Logger.Write("Get last given data from device", Logger.StatusCode.INFO);
 
-					Logger.PrintStatus($"[CH1] Voltage = {voltageCH1}", Logger.StatusCode.INFO);
-					Logger.PrintStatus($"[CH1] Current = {currentCH1}", Logger.StatusCode.INFO);
-					Logger.PrintStatus($"[CH2] Voltage = {voltageCH2}", Logger.StatusCode.INFO);
-					Logger.PrintStatus($"[CH2] Current = {currentCH2}", Logger.StatusCode.INFO);
+					Logger.Write($"[CH1] Voltage = {voltageCH1}", Logger.StatusCode.INFO);
+					Logger.Write($"[CH1] Current = {currentCH1}", Logger.StatusCode.INFO);
+					Logger.Write($"[CH2] Voltage = {voltageCH2}", Logger.StatusCode.INFO);
+					Logger.Write($"[CH2] Current = {currentCH2}", Logger.StatusCode.INFO);
 
 					// Remove V1 or I1 from data (V1 5.45 => 5.45)
 					TextBox_CH1Voltage.Text = voltageCH1;
@@ -130,12 +130,12 @@ namespace SerialPower.UserControls
 
 					TextBox_CH2Voltage.Text = voltageCH2;
 					TextBox_CH2Current.Text = currentCH2;
-					Logger.PrintStatus("Insert data into textboxes", Logger.StatusCode.OK);
+					Logger.Write("Insert data into textboxes", Logger.StatusCode.INFO);
 					return;
 				}
 				else
 				{
-					Logger.PrintStatus("Reading data from device", Logger.StatusCode.FAILED);
+					Logger.Write("Reading data from device", Logger.StatusCode.ERROR);
 				}
 			}
 		}
@@ -156,18 +156,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 3.300V");
+					Logger.Write("Channel 1 - 3.300V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
 					SerialSender.SendData($"I1 {commandCurrent}");
@@ -193,18 +193,18 @@ namespace SerialPower.UserControls
 				selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 5.000V");
+					Logger.Write("Channel 1 - 5.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
 					SerialSender.SendData($"I1 {commandCurrent}");
@@ -229,18 +229,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 12.000V");
+					Logger.Write("Channel 1 - 12.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
 					SerialSender.SendData($"I1 {commandCurrent}");
@@ -265,18 +265,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 18.000V");
+					Logger.Write("Channel 1 - 18.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
 					SerialSender.SendData($"I1 {commandCurrent}");
@@ -301,18 +301,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 24.000V");
+					Logger.Write("Channel 1 - 24.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
 					SerialSender.SendData($"I1 {commandCurrent}");
@@ -338,18 +338,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 3.300V");
+					Logger.Write("Channel 2 - 3.300V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
 					SerialSender.SendData($"I2 {commandCurrent}");
@@ -375,18 +375,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 5.000V");
+					Logger.Write("Channel 2 - 5.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
 					SerialSender.SendData($"I2 {commandCurrent}");
@@ -412,18 +412,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 12.000V");
+					Logger.Write("Channel 2 - 12.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
 					SerialSender.SendData($"I2 {commandCurrent}");
@@ -449,18 +449,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 18.000V");
+					Logger.Write("Channel 2 - 18.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
 					SerialSender.SendData($"I2 {commandCurrent}");
@@ -486,18 +486,18 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0].ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 24.000V");
+					Logger.Write("Channel 2 - 24.000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.PrintStatus($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.OK);
+					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
 					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.PrintStatus($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.OK);
+					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
 					SerialSender.SendData($"I2 {commandCurrent}");

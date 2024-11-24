@@ -9,7 +9,7 @@
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True">
 		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Terminal</Label>
-		<TextBox x:Name="TextBoxCommandInput" DockPanel.Dock="Bottom" Margin="10">Eingabe</TextBox>
-		<TextBox x:Name="TextBoxCommandOutput" IsReadOnly="True" Margin="10,0,10,0">Ausgabe</TextBox>
+		<TextBox x:Name="TextBoxCommandInput" DockPanel.Dock="Bottom" Style="{StaticResource TextBoxTerminal}" Margin="10" KeyDown="TextBoxCommandInput_KeyDown"></TextBox>
+		<TextBox x:Name="TextBoxCommandOutput" IsReadOnly="True" Style="{StaticResource TextBoxTerminal}" Margin="10,0,10,0">Waiting for input...</TextBox>
 	</DockPanel>
 </UserControl>

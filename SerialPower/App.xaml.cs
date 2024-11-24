@@ -17,43 +17,64 @@ namespace SerialPower
 			Environment.Exit(1);
 		}
 
+		/// <summary>
+		/// Create base filesystem
+		/// </summary>
 		private static void BuildFilesystem()
 		{
-			Logger.PrintHeader("Build Filesystem");
 			try
 			{
 				Directory.CreateDirectory(ConfigHandler.DIR_ROOT);
-				Logger.PrintStatus("Checking " + ConfigHandler.DIR_ROOT, Logger.StatusCode.OK);
+				Logger.Write("Checking " + ConfigHandler.DIR_ROOT, Logger.StatusCode.INFO);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_CONFIGS);
-				Logger.PrintStatus("Checking " + ConfigHandler.DIR_CONFIGS, Logger.StatusCode.OK);
+				Logger.Write("Checking " + ConfigHandler.DIR_CONFIGS, Logger.StatusCode.INFO);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_DATABASE);
-				Logger.PrintStatus("Checking " + ConfigHandler.DIR_DATABASE, Logger.StatusCode.OK);
+				Logger.Write("Checking " + ConfigHandler.DIR_DATABASE, Logger.StatusCode.INFO);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_TEMP);
-				Logger.PrintStatus("Checking " + ConfigHandler.DIR_TEMP, Logger.StatusCode.OK);
+				Logger.Write("Checking " + ConfigHandler.DIR_TEMP, Logger.StatusCode.INFO);
 
-				Logger.PrintStatus("Build filesystem", Logger.StatusCode.OK);
+				Logger.Write("Build filesystem", Logger.StatusCode.INFO);
 			}
 			catch (Exception)
 			{
-				Logger.PrintStatus("Build filesystem", Logger.StatusCode.FAILED);
+				Logger.Write("Build filesystem", Logger.StatusCode.ERROR);
 			}
 		}
 
+		/// <summary>
+		/// First entry-point
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
-			Logger.PrintHeader("Booting");
 			Console.WriteLine("Loading program...\n");
-			Console.WriteLine("Start Arguments:\t\t" + e.Args.Length);
+			//Console.Beep(720, 750);
+			//Console.Beep(450, 250);
+
+			// read args
+			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
 			foreach (var arg in e.Args)
 			{
 				Console.WriteLine(arg);
+				if (arg == "--disablePortVerify")
+				{
+					SerialSender.DisablePortVerify = true;
+				}
+				else if (arg == "--help")
+				{
+					Console.WriteLine("Useable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
+					Environment.Exit(0);
+				}
 			}
+
+			// Print infos
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
@@ -62,19 +83,22 @@ namespace SerialPower
 			Console.WriteLine($"Admin override:\t\t\t{Environment.IsPrivilegedProcess}");
 			Console.WriteLine($"OS:\t\t\t\t{Environment.OSVersion}");
 
-			Logger.PrintHeader("Testing Logger System");
-			Logger.PrintStatus("Info logging", Logger.StatusCode.INFO);
-			Logger.PrintStatus("Ok logging", Logger.StatusCode.OK);
-			Logger.PrintStatus("Failed logging", Logger.StatusCode.FAILED);
-
+			// test logger
+			Logger.Write("Testing Logger System", Logger.StatusCode.INFO);
+			Logger.Write($"Logger Test: Info logging", Logger.StatusCode.INFO);
+			Logger.Write($"Logger Test: Warning logging", Logger.StatusCode.WARNING);
+			Logger.Write($"Logger Test: Failed logging", Logger.StatusCode.ERROR);
+			
+			// Create filesystem
 			BuildFilesystem();
+
+			// Load primary config
 			ConfigHandler.Init();
 			string configData = File.ReadAllText(ConfigHandler.CONFIG_FILE);
-			Logger.PrintStatus("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
+			Logger.Write("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
 
-			Logger.PrintHeader("Booting finished");
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
-			Thread.Sleep(2500);
+			Thread.Sleep(1000);
 		}
 	}
 }

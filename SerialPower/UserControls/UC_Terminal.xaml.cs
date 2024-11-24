@@ -24,5 +24,20 @@ namespace SerialPower.UserControls
         {
             InitializeComponent();
         }
-    }
+
+		private void TextBoxCommandInput_KeyDown(object sender, KeyEventArgs e)
+		{
+            if (e.Key == Key.Enter)
+            {
+                string inputData = TextBoxCommandInput.Text;
+                string responseData = SerialSender.SendDataAndRecv(inputData);
+                if (responseData == "TIMEOUT")
+                {
+                    responseData = string.Empty;
+                }
+                TextBoxCommandOutput.Text += responseData + Environment.NewLine;
+                TextBoxCommandInput.Text = string.Empty;
+            }
+		}
+	}
 }

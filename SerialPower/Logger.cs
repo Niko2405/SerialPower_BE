@@ -1,4 +1,7 @@
-﻿namespace SerialPower
+﻿using System.Diagnostics;
+using System.Reflection;
+
+namespace SerialPower
 {
 	internal class Logger
 	{
@@ -8,92 +11,40 @@
 		public enum StatusCode
 		{
 			INFO,
-			OK,
-			FAILED,
+			WARNING,
+			ERROR,
 		}
 
-		/// <summary>
-		/// Print Status log of given process name
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="code"></param>
-		public static void PrintStatus(string message, StatusCode code)
+		public static void Write(string text, StatusCode code)
 		{
-			// [FAILED]
-			// [ INFO ]
-			// [  OK  ]
-			// [ERROR ]
+#pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
+			var methodInfo = new StackTrace().GetFrame(1).GetMethod();
+			var classname = methodInfo.ReflectedType.Name;
+#pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
+			Console.Write($"{GetCurrentDate()} {Environment.UserName} {classname}: ");
+
 			switch (code)
 			{
 				case StatusCode.INFO:
-					Console.Write("[");
-					Console.ForegroundColor = ConsoleColor.Cyan;
-					Console.Write(" INFO ");
-					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write("] ");
-					Console.WriteLine(message);
-					break;
-				case StatusCode.OK:
-					Console.Write("[");
 					Console.ForegroundColor = ConsoleColor.Green;
-					Console.Write("  OK  ");
-					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write("] ");
-					Console.WriteLine(message);
 					break;
-				case StatusCode.FAILED:
-					Console.Write("[");
+				case StatusCode.WARNING:
+					Console.ForegroundColor = ConsoleColor.Yellow;
+					break;
+				case StatusCode.ERROR:
 					Console.ForegroundColor = ConsoleColor.Red;
-					Console.Write("FAILED");
-					Console.ForegroundColor = ConsoleColor.White;
-					Console.Write("] ");
-					Console.WriteLine(message);
 					break;
 				default:
+					Console.ForegroundColor = ConsoleColor.White;
 					break;
 			}
+			Console.WriteLine(text);
+			Console.ForegroundColor = ConsoleColor.White;
 		}
 
-		public static void PrintHeader(string title)
+		private static string GetCurrentDate()
 		{
-			short x = (short)Console.WindowWidth;
-			short titleLenght = (short)title.Length;
-			short offset = 0;
-
-			// if the title is odd, set offset to 1. To prevent '=' in newline
-			if (titleLenght % 2 != 0)
-			{
-				offset = 1;
-			}
-
-			ConsoleColor currentForegroundColor = Console.ForegroundColor;
-			Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 2 - offset; i++)
-			{
-				Console.Write('=');
-			}
-
-			Console.Write($"[ {title} ]");
-
-			for (int i = 0; i < (x / 2) - (titleLenght / 2) - 2; i++)
-			{
-				Console.Write('=');
-			}
-			Console.WriteLine();
-			Console.ForegroundColor = currentForegroundColor;
-		}
-
-		[Obsolete]
-		public static void PrintHeaderOld(string title)
-		{
-			ConsoleColor currentForegroundColor = Console.ForegroundColor;
-			Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-			Console.Write($"==================[ {title} ]==================");
-			Console.WriteLine();
-
-			Console.ForegroundColor = currentForegroundColor;
+			return DateTime.Now.ToString("HH:mm:ss");
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SerialPower
@@ -25,7 +26,7 @@ namespace SerialPower
 			}
 			else
 			{
-				TextBlockPortName.Text = "CONFIG IS NOT READABLE";
+				Logger.Write("Reading config", Logger.StatusCode.ERROR);
 				return;
 			}
 		}
@@ -37,7 +38,7 @@ namespace SerialPower
 		public void SetActiveUserControl(UserControl userControl)
 		{
 			Console.Clear();
-			Logger.PrintStatus($"Change UserControl to: {userControl.GetType().FullName}", Logger.StatusCode.OK);
+			Logger.Write($"Change UserControl to: {userControl.GetType().FullName}", Logger.StatusCode.INFO);
 			UserControlErnstLeitz1.Visibility = Visibility.Collapsed;
 			UserControlIDE1.Visibility = Visibility.Collapsed;
 			UserControlCustomControl.Visibility = Visibility.Collapsed;
@@ -51,9 +52,9 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
+			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
 			SerialSender.SendData("LOCAL");
-			Thread.Sleep(2000);
+			Thread.Sleep(1000);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
@@ -86,12 +87,30 @@ namespace SerialPower
 
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.PrintStatus("Closing program. Disconnect device.", Logger.StatusCode.OK);
+			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
 			SerialSender.SendData("LOCAL");
-			Thread.Sleep(2000);
+			Thread.Sleep(1000);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
+		}
+
+		private void MenuItemOpenConfig_Click(object sender, RoutedEventArgs e)
+		{
+			Process.Start("notepad.exe", ConfigHandler.CONFIG_FILE);
+		}
+
+		private void MenuItemRecreateConfig_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void MenuItemReloadConfig_Click(object sender, RoutedEventArgs e)
+		{
+			//ConfigHandler.Init();
+			ConfigHandler.SaveConfig();
+			ConfigHandler.Init();
+			MessageBox.Show("Config reloaded", "Config", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 	}
 }

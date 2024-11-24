@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SerialPower.UserControls"
              mc:Ignorable="d" 
 			 Background="{StaticResource BackgroundStyle}"
-             d:DesignHeight="720" d:DesignWidth="1280" Loaded="UserControlErnstLietz_Loaded">
+             d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True" Margin="5">
 		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Ernst Leitz [85/15186]</Label>
 		<Grid DockPanel.Dock="Top">
@@ -32,11 +32,11 @@
 			<Button x:Name="Button48V_Intern" Grid.Row="5" Grid.Column="0" Content="set 48V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button48V_Intern_Click" ClickMode="Press"/>
             <!-- V_Ext -->
 			<Label Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V external</Label>
-			<Button x:Name="Button0V_Extern" Grid.Row="1" Grid.Column="2" Content="set 0V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="25" Click="Button0V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button6V_Extern" Grid.Row="2" Grid.Column="2" Content="set 6V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="25" Click="Button6V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button12V_Extern" Grid.Row="3" Grid.Column="2" Content="set 12V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="25" Click="Button12V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button24V_Extern" Grid.Row="4" Grid.Column="2" Content="set 24V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="25" Click="Button24V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button48V_Extern" Grid.Row="5" Grid.Column="2" Content="set 48V" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch" Margin="25" Click="Button48V_Extern_Click" ClickMode="Press"/>
+			<Button x:Name="Button0V_Extern" Grid.Row="1" Grid.Column="2" Content="set 0V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button0V_Extern_Click" ClickMode="Press"/>
+			<Button x:Name="Button6V_Extern" Grid.Row="2" Grid.Column="2" Content="set 6V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button6V_Extern_Click" ClickMode="Press"/>
+			<Button x:Name="Button12V_Extern" Grid.Row="3" Grid.Column="2" Content="set 12V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button12V_Extern_Click" ClickMode="Press"/>
+			<Button x:Name="Button24V_Extern" Grid.Row="4" Grid.Column="2" Content="set 24V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button24V_Extern_Click" ClickMode="Press"/>
+			<Button x:Name="Button48V_Extern" Grid.Row="5" Grid.Column="2" Content="set 48V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button48V_Extern_Click" ClickMode="Press"/>
         </Grid>
 	</DockPanel>
 </UserControl>
