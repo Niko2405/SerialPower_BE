@@ -21,7 +21,7 @@ namespace SerialPower
 			var methodInfo = new StackTrace().GetFrame(1).GetMethod();
 			var classname = methodInfo.ReflectedType.Name;
 #pragma warning restore CS8602 // Dereferenzierung eines möglichen Nullverweises.
-			Console.Write($"{GetCurrentDate()} {Environment.UserName} {classname}: ");
+			Console.Write($"[{GetCurrentDate()}] {classname}: ");
 
 			switch (code)
 			{

@@ -8,6 +8,11 @@
 			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
 	<DockPanel LastChildFill="True">
 		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Custom Control</Label>
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+			<Label Style="{StaticResource TitleStyle}" FontSize="15" HorizontalAlignment="Left">Options:</Label>
+			<CheckBox x:Name="CheckBoxSyncSwitch" Foreground="White" FontSize="14" Margin="15,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckBoxSyncSwitch_Checked" Unchecked="CheckBoxSyncSwitch_Unchecked">Synchronous activation</CheckBox>
+		</StackPanel>
+		
 		<!-- Overview -->
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -25,11 +30,11 @@
 
 				<!-- Voltage -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage</Label>
-				<TextBox x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+				<TextBox Style="{StaticResource TextBoxTerminal}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
 
 				<!-- Current -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Current limit:</Label>
-				<TextBox x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+				<TextBox Style="{StaticResource TextBoxTerminal}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH1" FontSize="20" Foreground="White" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8" VerticalContentAlignment="Center" HorizontalAlignment="Left">Channel 1 - Online</CheckBox>
@@ -37,8 +42,8 @@
 			</StackPanel>
 			
 			<!-- Channel 1 - Presets -->
-			<StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets</Label>
+			<StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets - Channel 1</Label>
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition></ColumnDefinition>
@@ -109,11 +114,11 @@
 
 				<!-- Voltage -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Voltage:</Label>
-				<TextBox x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+				<TextBox Style="{StaticResource TextBoxTerminal}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
 
 				<!-- Current -->
 				<Label Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" FontSize="18" Padding="8">Current limit:</Label>
-				<TextBox x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+				<TextBox Style="{StaticResource TextBoxTerminal}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 
 				<!-- etc -->
 				<CheckBox x:Name="CheckBoxCH2" FontSize="20" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8" HorizontalAlignment="Left">Channel 2 - Online</CheckBox>
@@ -121,8 +126,8 @@
 			</StackPanel>
 
 			<!-- Channel 2 - Presets -->
-			<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets</Label>
+			<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+				<Label Style="{StaticResource TitleStyle}" FontSize="24">Presets - Channel 2</Label>
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition></ColumnDefinition>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SerialPower.UserControls
 {
@@ -50,24 +51,27 @@ namespace SerialPower.UserControls
 		{
 			Logger.Write("Channel 1 - Online", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP1 1");
+			CheckBoxCH1.Foreground = new SolidColorBrush(Colors.Green);
+		}
+		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
+		{
+			Logger.Write("Channel 1 - Offline", Logger.StatusCode.INFO);
+			SerialSender.SendData("OP1 0");
+			CheckBoxCH1.Foreground = new SolidColorBrush(Colors.Red);
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Channel 2 - Online", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP2 1");
+			CheckBoxCH2.Foreground = new SolidColorBrush(Colors.Green);
 		}
 
 		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Channel 2 - Offline", Logger.StatusCode.INFO);
 			SerialSender.SendData("OP2 0");
-		}
-
-		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Channel 1 - Offline", Logger.StatusCode.INFO);
-			SerialSender.SendData("OP1 0");
+			CheckBoxCH2.Foreground = new SolidColorBrush(Colors.Red);
 		}
 
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
@@ -105,6 +109,10 @@ namespace SerialPower.UserControls
 			// If current window is visible
 			if (Convert.ToBoolean(e.NewValue.ToString()))
 			{
+				// deactivate outputs
+				CheckBoxCH1.IsChecked = false;
+				CheckBoxCH2.IsChecked = false;
+
 				// get last data from device
 				string voltageCH1 = SerialSender.SendDataAndRecv("V1?"); // V1 5.45 ...
 				string currentCH1 = SerialSender.SendDataAndRecv("I1?"); // I1 2.15 ...
@@ -506,6 +514,24 @@ namespace SerialPower.UserControls
 					ListBoxCH2Presets240.SelectedItem = null;
 				}
 			}
+		}
+		#endregion
+
+		#region Options
+		private void CheckBoxSyncSwitch_Checked(object sender, RoutedEventArgs e)
+		{
+			Logger.Write("Synchronous activated", Logger.StatusCode.INFO);
+			SerialSender.SendData("OPALL 1");
+			CheckBoxCH1.IsChecked = true;
+			CheckBoxCH2.IsChecked = true;
+		}
+
+		private void CheckBoxSyncSwitch_Unchecked(object sender, RoutedEventArgs e)
+		{
+			Logger.Write("Synchronous deactivated", Logger.StatusCode.INFO);
+			SerialSender.SendData("OPALL 0");
+			CheckBoxCH1.IsChecked = false;
+			CheckBoxCH2.IsChecked = false;
 		}
 		#endregion
 	}

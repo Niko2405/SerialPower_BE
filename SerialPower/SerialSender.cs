@@ -25,20 +25,28 @@ namespace SerialPower
 						DataBits = ConfigHandler.currentConfig.SerialPortDataBits,
 						Parity = (Parity)ConfigHandler.currentConfig.SerialPortParity,
 						ReadTimeout = ConfigHandler.currentConfig.SerialPortReadTimeOut,
-						WriteTimeout = ConfigHandler.currentConfig.SerialPortWriteTimeOut
-					};
+						WriteTimeout = ConfigHandler.currentConfig.SerialPortWriteTimeOut,
+						DtrEnable = true,
+						RtsEnable = true,
 
+					};
+					serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 					if (!serialPort.IsOpen)
 					{
 						serialPort.Open();
-						Logger.Write("Connect device", Logger.StatusCode.INFO);
+						Logger.Write($"Connected to device [{serialPort.PortName}]", Logger.StatusCode.INFO);
 					}
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
+		}
+
+		private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+		{
+			// TODO: Erweitern
 		}
 
 		/// <summary>
@@ -57,7 +65,7 @@ namespace SerialPower
 					}
 					catch (Exception ex)
 					{
-						MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+						MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 				}
 			}
@@ -81,7 +89,7 @@ namespace SerialPower
 					serialPort.Write(data + Environment.NewLine);
 
 					if (showLogging)
-						Logger.Write("Sending data: " + data, Logger.StatusCode.INFO);
+						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
 				}
 				catch (TimeoutException ex)
 				{
@@ -89,7 +97,7 @@ namespace SerialPower
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
 		}
@@ -113,12 +121,13 @@ namespace SerialPower
 					serialPort.Write(data + Environment.NewLine);
 
 					if (showLogging)
-						Logger.Write("Sending data: " + data, Logger.StatusCode.INFO);
+						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
 
 					string response = serialPort.ReadLine().Trim();
+					//string response = "return";
 
 					if (showLogging)
-						Logger.Write("Received data: " + response, Logger.StatusCode.INFO);
+						Logger.Write($"[{serialPort.PortName}] Received data: " + response, Logger.StatusCode.INFO);
 
 					return response;
 				}

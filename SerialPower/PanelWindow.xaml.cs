@@ -2,46 +2,32 @@
 
 namespace SerialPower
 {
+	[Obsolete]
 	/// <summary>
 	/// Interaktionslogik für PanelWindow.xaml
 	/// </summary>
 	public partial class PanelWindow : Window
 	{
-		private static bool currentWindowClosed = false;
-
+		public static bool updaterRunning = false;
 		public PanelWindow()
 		{
 			InitializeComponent();
 			RunUpdaters();
 		}
 
-
 		/// <summary>
 		/// Backgroundworker to update the current
 		/// </summary>
-		private async void RunUpdaters()
+		public async void RunUpdaters()
 		{
 			await Task.Factory.StartNew(() =>
 			{
 				string data = string.Empty;
-
 				while (true)
 				{
-					if (ConfigHandler.currentConfig != null)
-					{
-						Thread.Sleep(ConfigHandler.currentConfig.CurrentMonitorRate);
-					}
-					else if (ConfigHandler.currentConfig == null)
-					{
-						Thread.Sleep(1000);
-					}
-
-					// If current window closed. Kill backgroundworker
-					if (currentWindowClosed)
-						return;
-
-					// Only check current when ComPort is selected and visibility is true
-					if (this.Visibility == Visibility.Visible)
+					Thread.Sleep(1000);
+					//Logger.Write("Task running", Logger.StatusCode.WARNING);
+					if (updaterRunning)
 					{
 						// get voltage on channel 1
 						data = SerialSender.SendDataAndRecv("V1O?", false);
@@ -77,8 +63,8 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.Write("PanelWindow closed. Thread killed.", Logger.StatusCode.INFO);
-			currentWindowClosed = true;
+			Logger.Write("PanelWindow closed. Thread killed.", Logger.StatusCode.WARNING);
+			updaterRunning = false;
 		}
 	}
 }

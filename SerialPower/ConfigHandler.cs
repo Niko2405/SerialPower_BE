@@ -66,11 +66,21 @@ namespace SerialPower
 		}
 
 		/// <summary>
+		/// Print current data in config file
+		/// </summary>
+		public static void PrintConfig()
+		{
+			string configData = File.ReadAllText(CONFIG_FILE);
+			Logger.Write("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
+		}
+
+		/// <summary>
 		/// Primary Config Interface
 		/// </summary>
 		public class ConfigObject
 		{
 			// default settings
+			public int FileVersion { get; set; } = 1;
 			public string SerialPortName { get; set; } = "COM1";
 			public int SerialPortBaudrate { get; set; } = 115200;
 			public int SerialPortParity { get; set; } = 0;
@@ -78,7 +88,6 @@ namespace SerialPower
 			public int SerialPortDataBits { get; set; } = 8;
 			public int SerialPortReadTimeOut { get; set; } = 50;
 			public int SerialPortWriteTimeOut { get; set; } = 50;
-			public int CurrentMonitorRate { get; set; } = 1000;
 		}
 	}
 }

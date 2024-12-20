@@ -55,8 +55,8 @@ namespace SerialPower
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
 			Console.WriteLine("Loading program...\n");
-			//Console.Beep(720, 750);
-			//Console.Beep(450, 250);
+			Console.Beep(720, 750);
+			Console.Beep(450, 250);
 
 			// read args
 			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
@@ -69,7 +69,7 @@ namespace SerialPower
 				}
 				else if (arg == "--help")
 				{
-					Console.WriteLine("Useable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
+					Console.WriteLine("usable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
 					Environment.Exit(0);
 				}
 			}
@@ -94,8 +94,15 @@ namespace SerialPower
 
 			// Load primary config
 			ConfigHandler.Init();
-			string configData = File.ReadAllText(ConfigHandler.CONFIG_FILE);
-			Logger.Write("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
+			ConfigHandler.PrintConfig();
+			if (ConfigHandler.currentConfig != null)
+			{
+				if (ConfigHandler.currentConfig.FileVersion != 1)
+				{
+					MessageBox.Show("File version of config is not supported. Please delete config file manually!", "Config file version not supported", MessageBoxButton.OK, MessageBoxImage.Error);
+					Environment.Exit(-1);
+				}
+			}
 
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(1000);

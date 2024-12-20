@@ -33,11 +33,9 @@ namespace SerialPower
 					// if the answer is CPX200 then add to list selection or port verify is disabled
 					if (response.Contains("CPX200"))
 					{
-						Console.WriteLine(currentCom);
-						ListBoxComPorts.Items.Add(currentCom);
+						ComboBoxComPorts.Items.Add(currentCom);
 					}
 					serialPort.Close();
-					
 				}
 				catch (TimeoutException)
 				{
@@ -50,8 +48,8 @@ namespace SerialPower
 								serialPort.Close();
 							}
 						}
-						Logger.Write("Port verify is disabled. Forcing add COM to list. Use with caution.", Logger.StatusCode.WARNING);
-						ListBoxComPorts.Items.Add(currentCom);
+						Logger.Write("Port verify failed. But verify is disabled. Forcing add COM to list. Use with caution!", Logger.StatusCode.WARNING);
+						ComboBoxComPorts.Items.Add(currentCom);
 					}
 				}
 				Thread.Sleep(1000);
@@ -68,18 +66,17 @@ namespace SerialPower
 				TextBoxReadTimeout.Text = ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
 				TextBoxWriteTimeout.Text = ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
 
-				TextBoxCurrentRefreshRate.Text = ConfigHandler.currentConfig.CurrentMonitorRate.ToString();
 				Logger.Write("Config file found. Load data into window.", Logger.StatusCode.INFO);
 			}
 		}
 
-		private void ButtonRun_Click(object sender, RoutedEventArgs e)
+		private void ButtonConnect_Click(object sender, RoutedEventArgs e)
 		{
-			if (ListBoxComPorts.SelectedValue != null)
+			if (ComboBoxComPorts.SelectedValue != null)
 			{
 				try
 				{
-					string? portName = ListBoxComPorts.SelectedValue.ToString();
+					string? portName = ComboBoxComPorts.SelectedValue.ToString();
 					int baudrate = int.Parse(TextBoxBaudrate.Text);
 					int stopbits = int.Parse(TextBoxStopBits.Text);
 					int databits = int.Parse(TextBoxDataBits.Text);
@@ -87,9 +84,6 @@ namespace SerialPower
 
 					int readTimeout = int.Parse(TextBoxReadTimeout.Text);
 					int writeTimeout = int.Parse(TextBoxWriteTimeout.Text);
-
-					int currentRefreshRate = int.Parse(TextBoxCurrentRefreshRate.Text);
-
 
 					if (portName != null)
 					{
@@ -104,32 +98,19 @@ namespace SerialPower
 
 							ConfigHandler.currentConfig.SerialPortReadTimeOut = readTimeout;
 							ConfigHandler.currentConfig.SerialPortWriteTimeOut = writeTimeout;
-							ConfigHandler.currentConfig.CurrentMonitorRate = currentRefreshRate;
 
 							ConfigHandler.SaveConfig();
 							Logger.Write("Config saved", Logger.StatusCode.INFO);
 						}
 
-						#region OPEN_PORT
 						SerialSender.ConnectDevice();
-						if (SerialSender.serialPort == null)
-						{
-							Logger.Write("Open serial port", Logger.StatusCode.ERROR);
-						}
-						#endregion
 
 						// open mainwindow
 						MainWindow mainWindow = new();
+						//PanelWindow panel = new();
 						mainWindow.Show();
-
-						// open seperate window of current; place on topmost
-						if (CheckBoxCurrentMon.IsChecked == true)
-						{
-							Logger.Write($"Set current refresh rate to {currentRefreshRate}ms", Logger.StatusCode.INFO);
-							PanelWindow panelWindow = new();
-							panelWindow.Show();
-							panelWindow.Topmost = true;
-						}
+						//panel.Show();
+						//panel.Topmost = true;
 
 						// hide current settings window
 						this.Hide();

@@ -14,10 +14,9 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
-				<MenuItem Header="_Config" >
+				<MenuItem Header="_Options">
 					<MenuItem x:Name="MenuItemOpenConfig" Header="_Open Config" Click="MenuItemOpenConfig_Click"/>
-					<MenuItem x:Name="MenuItemRecreateConfig" Header="_Recreate Config" Click="MenuItemRecreateConfig_Click"/>
-					<MenuItem x:Name="MenuItemReloadConfig" Header="_Reload Config" Click="MenuItemReloadConfig_Click"/>
+					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
 				</MenuItem>
 				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
 				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
@@ -53,14 +52,19 @@
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="15,0,15,0"/>
-					<TextBlock x:Name="TextBlockCurrentRefreshRate" Text="CurrentRefreshRate: None" Padding="15,0,15,0"/>
+					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="15,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
+					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
+
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightPink"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightPink"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>
