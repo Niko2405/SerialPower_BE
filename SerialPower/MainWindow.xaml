@@ -63,8 +63,8 @@
 					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
 					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
 
-					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightPink"/>
-					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightPink"/>
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>

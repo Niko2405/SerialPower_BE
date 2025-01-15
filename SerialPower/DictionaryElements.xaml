@@ -64,4 +64,12 @@
 		<Setter Property="FontSize" Value="18"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 	</Style>
+	
+	<!-- ListBox -->
+	<Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="{StaticResource BackgroundStyle}"/>
+		<Setter Property="FontSize" Value="15"/>
+		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
+	</Style>
 </ResourceDictionary>
