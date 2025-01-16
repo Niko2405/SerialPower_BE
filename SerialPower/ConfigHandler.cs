@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Text.Json;
 
 namespace SerialPower
@@ -80,7 +82,6 @@ namespace SerialPower
 		public class ConfigObject
 		{
 			// default settings
-			public int FileVersion { get; set; } = 1;
 			public string SerialPortName { get; set; } = "COM1";
 			public int SerialPortBaudrate { get; set; } = 115200;
 			public int SerialPortParity { get; set; } = 0;

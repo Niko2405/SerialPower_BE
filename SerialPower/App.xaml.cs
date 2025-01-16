@@ -37,6 +37,32 @@ namespace SerialPower
 				Logger.Write("Checking " + ConfigHandler.DIR_TEMP, Logger.StatusCode.INFO);
 
 				Logger.Write("Build filesystem", Logger.StatusCode.INFO);
+
+				// Check version of filesystem
+				Assembly assembly = Assembly.GetExecutingAssembly();
+				FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+				if (File.Exists(ConfigHandler.DIR_DATABASE + "version.dat"))
+				{
+					Logger.Write("Version file found. Reading version...", Logger.StatusCode.INFO);
+					string versionFile = File.ReadAllText(ConfigHandler.DIR_DATABASE + "version.dat");
+					if (versionFile != fileVersionInfo.FileVersion)
+					{
+						Logger.Write("Version of filesystem is not supported", Logger.StatusCode.ERROR);
+						MessageBox.Show("Current filesystem is unsupported. Delete program directory manueally!", "Unsupported filesystem", MessageBoxButton.OK, MessageBoxImage.Error);
+						Environment.Exit(1);
+					}
+					else if (versionFile == fileVersionInfo.FileVersion)
+					{
+						Logger.Write("Version of filesystem is supported", Logger.StatusCode.INFO);
+					}
+					return;
+				}
+				else
+				{
+					File.WriteAllText(ConfigHandler.DIR_DATABASE + "version.dat", fileVersionInfo.FileVersion);
+					Logger.Write("New version file created", Logger.StatusCode.INFO);
+				}
 			}
 			catch (Exception)
 			{
@@ -55,8 +81,8 @@ namespace SerialPower
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
 			Console.WriteLine("Loading program...\n");
-			Console.Beep(720, 750);
-			Console.Beep(450, 250);
+			Console.Beep(750, 750);
+			Console.Beep(460, 250);
 
 			// read args
 			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
@@ -81,7 +107,7 @@ namespace SerialPower
 			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");
 			Console.WriteLine($"Machine name:\t\t\t{Environment.MachineName}");
 			Console.WriteLine($"Admin override:\t\t\t{Environment.IsPrivilegedProcess}");
-			Console.WriteLine($"OS:\t\t\t\t{Environment.OSVersion}");
+			Console.WriteLine($"Operating system:\t\t{Environment.OSVersion}");
 
 			// test logger
 			Logger.Write("Testing Logger System", Logger.StatusCode.INFO);
@@ -95,14 +121,6 @@ namespace SerialPower
 			// Load primary config
 			ConfigHandler.Init();
 			ConfigHandler.PrintConfig();
-			if (ConfigHandler.currentConfig != null)
-			{
-				if (ConfigHandler.currentConfig.FileVersion != 1)
-				{
-					MessageBox.Show("File version of config is not supported. Please delete config file manually!", "Config file version not supported", MessageBoxButton.OK, MessageBoxImage.Error);
-					Environment.Exit(-1);
-				}
-			}
 
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(1000);

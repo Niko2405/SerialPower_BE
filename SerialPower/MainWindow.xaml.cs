@@ -24,6 +24,7 @@ namespace SerialPower
 					Thread.Sleep(1000);
 					this.Dispatcher.Invoke(() =>
 					{
+						
 						if (ConfigHandler.currentConfig != null)
 						{
 							TextBlockPortName.Text = "Port: " + ConfigHandler.currentConfig.SerialPortName;
@@ -36,10 +37,13 @@ namespace SerialPower
 
 							// current and and voltage
 							TextBlockVoltageCH1.Text = "Voltage CH1: " + SerialSender.SendDataAndRecv("V1O?", false);
+							Thread.Sleep(1);
 							TextBlockCurrentCH1.Text = "Current CH1: " + SerialSender.SendDataAndRecv("I1O?", false);
-
+							Thread.Sleep(1);
 							TextBlockVoltageCH2.Text = "Voltage CH2: " + SerialSender.SendDataAndRecv("V2O?", false);
+							Thread.Sleep(1);
 							TextBlockCurrentCH2.Text = "Current CH2: " + SerialSender.SendDataAndRecv("I2O?", false);
+							Thread.Sleep(1);
 							return;
 						}
 						else
@@ -75,7 +79,7 @@ namespace SerialPower
 		{
 			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
 			SerialSender.SendData("LOCAL");
-			Thread.Sleep(1000);
+			Thread.Sleep(500);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
@@ -108,7 +112,7 @@ namespace SerialPower
 
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
+			Logger.Write("Closing program. Disconnect power supply.", Logger.StatusCode.INFO);
 			SerialSender.SendData("LOCAL");
 			Thread.Sleep(1000);
 			SerialSender.DisconnectDevice();

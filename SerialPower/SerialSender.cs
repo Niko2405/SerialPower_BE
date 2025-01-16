@@ -65,7 +65,7 @@ namespace SerialPower
 					}
 					catch (Exception ex)
 					{
-						MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
+						MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 				}
 			}
@@ -97,7 +97,7 @@ namespace SerialPower
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
 		}

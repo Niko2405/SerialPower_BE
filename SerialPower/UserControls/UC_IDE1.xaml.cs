@@ -154,6 +154,7 @@ namespace SerialPower.UserControls
 					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
+					ListBox_CH1Temp.SelectedItem = null;
 					TextBoxCH1Voltage.Text = command;
 					SerialSender.SendData($"V1 {command}");
 				}
@@ -173,6 +174,7 @@ namespace SerialPower.UserControls
 					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
+					ListBox_CH1Pos.SelectedItem = null;
 					TextBoxCH1Voltage.Text = command;
 					SerialSender.SendData($"V1 {command}");
 				}
@@ -192,6 +194,7 @@ namespace SerialPower.UserControls
 					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
 
 					// Set TextBox CH1
+					ListBox_CH1Valve.SelectedItem = null;
 					TextBoxCH1Voltage.Text = command;
 					SerialSender.SendData($"V1 {command}");
 				}
