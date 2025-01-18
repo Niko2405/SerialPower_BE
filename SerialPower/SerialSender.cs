@@ -26,8 +26,6 @@ namespace SerialPower
 						Parity = (Parity)ConfigHandler.currentConfig.SerialPortParity,
 						ReadTimeout = ConfigHandler.currentConfig.SerialPortReadTimeOut,
 						WriteTimeout = ConfigHandler.currentConfig.SerialPortWriteTimeOut,
-						DtrEnable = true,
-						RtsEnable = true,
 
 					};
 					serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
@@ -47,6 +45,7 @@ namespace SerialPower
 		private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
 		{
 			// TODO: Erweitern
+			
 		}
 
 		/// <summary>

@@ -21,18 +21,21 @@ namespace SerialPower
 				try
 				{
 					// check if connected device is a power supply
-					serialPort = new(currentCom, 115200, Parity.None, 8, StopBits.One);
-					serialPort.ReadTimeout = 500;
-					serialPort.WriteTimeout = 500;
+					serialPort = new(currentCom, 9600, Parity.None, 8, StopBits.One)
+					{
+						ReadTimeout = 500,
+						WriteTimeout = 500
+					};
 
 					serialPort.Open();
 					Logger.Write($"Check port: {currentCom}", Logger.StatusCode.INFO);
 					serialPort.Write("*IDN?" + Environment.NewLine);
 					string response = serialPort.ReadLine().Trim();
 
-					// if the answer is CPX200 then add to list selection or port verify is disabled
+					// if the answer contains CPX200; add to selection list or port verify is disabled
 					if (response.Contains("CPX200"))
 					{
+						serialPort.Write("LOCAL");
 						ComboBoxComPorts.Items.Add(currentCom);
 					}
 					serialPort.Close();
@@ -107,10 +110,7 @@ namespace SerialPower
 
 						// open mainwindow
 						MainWindow mainWindow = new();
-						//PanelWindow panel = new();
 						mainWindow.Show();
-						//panel.Show();
-						//panel.Topmost = true;
 
 						// hide current settings window
 						this.Hide();

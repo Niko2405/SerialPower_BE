@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SerialPower
 {
@@ -9,51 +11,71 @@ namespace SerialPower
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private readonly BackgroundWorker MeasurementWorker = new();
+		private readonly BackgroundWorker HeartbeatIndicatorWorker = new();
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			RunUpdater();
+			if (ConfigHandler.currentConfig != null)
+			{
+				TextBlockPortName.Text = "Port: " + ConfigHandler.currentConfig.SerialPortName;
+				TextBlockBaudrate.Text = "Baudrate: " + ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
+				TextBlockStopBits.Text = "StopBits: " + ConfigHandler.currentConfig.SerialPortStopBits.ToString();
+				TextBlockDataBits.Text = "DataBits: " + ConfigHandler.currentConfig.SerialPortDataBits.ToString();
+				TextBlockParity.Text = "Parity: " + ConfigHandler.currentConfig.SerialPortParity.ToString();
+				TextBlockReadTimeout.Text = "ReadTimeout: " + ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
+				TextBlockWriteTimeout.Text = "WriteTimeout: " + ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
+			}
+			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
+			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
+
+			MeasurementWorker.RunWorkerAsync();
+			HeartbeatIndicatorWorker.RunWorkerAsync();
 		}
 
-		private async void RunUpdater()
+		private void HeartbeatIndicatorWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
-			await Task.Factory.StartNew(() =>
+			bool toggled = false;
+			while (true)
 			{
-				while (true)
+				Thread.Sleep(500);
+				this.Dispatcher.Invoke(() =>
 				{
-					Thread.Sleep(1000);
-					this.Dispatcher.Invoke(() =>
-					{
-						
-						if (ConfigHandler.currentConfig != null)
-						{
-							TextBlockPortName.Text = "Port: " + ConfigHandler.currentConfig.SerialPortName;
-							TextBlockBaudrate.Text = "Baudrate: " + ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
-							TextBlockStopBits.Text = "StopBits: " + ConfigHandler.currentConfig.SerialPortStopBits.ToString();
-							TextBlockDataBits.Text = "DataBits: " + ConfigHandler.currentConfig.SerialPortDataBits.ToString();
-							TextBlockParity.Text = "Parity: " + ConfigHandler.currentConfig.SerialPortParity.ToString();
-							TextBlockReadTimeout.Text = "ReadTimeout: " + ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
-							TextBlockWriteTimeout.Text = "WriteTimeout: " + ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
+					if (toggled)
+						RectangleData.Fill = new SolidColorBrush(Colors.Green);
+					if (!toggled)
+						RectangleData.Fill = new SolidColorBrush(Colors.Red);
+					toggled = !toggled;
+				});
+			}
+		}
 
-							// current and and voltage
-							TextBlockVoltageCH1.Text = "Voltage CH1: " + SerialSender.SendDataAndRecv("V1O?", false);
-							Thread.Sleep(1);
-							TextBlockCurrentCH1.Text = "Current CH1: " + SerialSender.SendDataAndRecv("I1O?", false);
-							Thread.Sleep(1);
-							TextBlockVoltageCH2.Text = "Voltage CH2: " + SerialSender.SendDataAndRecv("V2O?", false);
-							Thread.Sleep(1);
-							TextBlockCurrentCH2.Text = "Current CH2: " + SerialSender.SendDataAndRecv("I2O?", false);
-							Thread.Sleep(1);
-							return;
-						}
-						else
-						{
-							Logger.Write("Reading config", Logger.StatusCode.ERROR);
-							return;
-						}
-					});
-				}
-			});
+		private void MeasurementWorker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			while (true)
+			{
+				Thread.Sleep(1000);
+				this.Dispatcher.Invoke(() =>
+				{
+					string rawData = SerialSender.SendDataAndRecv("V1O?; I1O?; V2O?; I2O?", false).Replace("\r", "");
+					string[] data = rawData.Split("\n");
+					try
+					{
+						TextBlockVoltageCH1.Text = data[0];
+						TextBlockCurrentCH1.Text = data[1];
+						TextBlockVoltageCH2.Text = data[2];
+						TextBlockCurrentCH2.Text = data[3];
+					}
+					catch (Exception)
+					{
+						TextBlockVoltageCH1.Text = "No";
+						TextBlockCurrentCH1.Text = "Connection";
+						TextBlockVoltageCH2.Text = "No";
+						TextBlockCurrentCH2.Text = "Connection";
+					}
+				});
+			}
 		}
 
 		/// <summary>

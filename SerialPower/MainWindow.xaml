@@ -52,17 +52,23 @@
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="15,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+					<!-- New Data -->
+					<Rectangle x:Name="RectangleData" Fill="Blue" Height="15" Width="15"/>
+					
+					<!-- Current settings -->
+					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="10,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					
+					<!-- CH1 -->
 					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
 					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
-
+					
+					<!-- CH2 -->
 					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
 					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
 				</StackPanel>

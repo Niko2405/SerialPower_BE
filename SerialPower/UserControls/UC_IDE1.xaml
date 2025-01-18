@@ -70,16 +70,16 @@
 				<Canvas x:Name="Canvas_CH2Voltage">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH2Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH2Voltage}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH2 - Fine adjustment</Label>
-						<TextBox x:Name="TextBoxCH2Voltage" FontSize="18">24,000</TextBox>
+						<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxTerminal}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
 						<Grid Margin="10">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
+							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
 						</Grid>
-						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource RoundedButton}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource RoundedButton}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 					</StackPanel>
 				</Canvas>
 			</Border>
@@ -102,16 +102,16 @@
 				<Canvas x:Name="Canvas_CH1Voltage">
 					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Voltage}">
 						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Fine adjustment</Label>
-						<TextBox x:Name="TextBoxCH1Voltage" FontSize="18">24,000</TextBox>
+						<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxTerminal}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
 						<Grid Margin="10">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition></ColumnDefinition>
 								<ColumnDefinition></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
+							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
+							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
 						</Grid>
-						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource RoundedButton}" FontSize="18" HorizontalAlignment="Stretch" Margin="5" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource RoundedButton}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 					</StackPanel>
 				</Canvas>
 			</Border>
