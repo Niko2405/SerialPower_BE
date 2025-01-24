@@ -30,7 +30,8 @@ namespace SerialPower.UserControls
             if (e.Key == Key.Enter)
             {
                 string inputData = TextBoxCommandInput.Text;
-                string responseData = SerialSender.SendDataAndRecv(inputData);
+                //string responseData = SerialSender.SendDataAndRecv(inputData);
+                string responseData = string.Empty;
                 if (responseData == "TIMEOUT")
                 {
                     responseData = string.Empty;

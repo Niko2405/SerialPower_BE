@@ -21,7 +21,7 @@ namespace SerialPower
 				try
 				{
 					// check if connected device is a power supply
-					serialPort = new(currentCom, 9600, Parity.None, 8, StopBits.One)
+					serialPort = new(currentCom, 115200, Parity.None, 8, StopBits.One)
 					{
 						ReadTimeout = 500,
 						WriteTimeout = 500
@@ -35,6 +35,7 @@ namespace SerialPower
 					// if the answer contains CPX200; add to selection list or port verify is disabled
 					if (response.Contains("CPX200"))
 					{
+						// Auto disconnect
 						serialPort.Write("LOCAL");
 						ComboBoxComPorts.Items.Add(currentCom);
 					}

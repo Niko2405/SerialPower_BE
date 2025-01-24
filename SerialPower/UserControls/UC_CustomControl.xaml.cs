@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -41,38 +42,34 @@ namespace SerialPower.UserControls
 			dataVoltage = dataVoltage.Replace("V", "");
 			dataCurrent = dataCurrent.Replace("A", "");
 
-			Logger.Write($"Convert object [{selectedItem}] => [{dataVoltage}] and [{dataCurrent}]", Logger.StatusCode.INFO);
+			Logger.Write($"Convert object [{selectedItem}] => [{dataVoltage}] and [{dataCurrent}]", Logger.StatusCode.DEBUG);
 			return Tuple.Create(dataVoltage, dataCurrent);
 		}
 
 		#region CheckBoxes
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Channel 1 - Online", Logger.StatusCode.INFO);
-			SerialSender.SendData("OP1 1");
+			SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
 			CheckBoxCH1.Foreground = new SolidColorBrush(Colors.Green);
 			CheckBoxCH1.Content = "Channel 1 - Online";
 		}
 		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Channel 1 - Offline", Logger.StatusCode.INFO);
-			SerialSender.SendData("OP1 0");
+			SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
 			CheckBoxCH1.Foreground = new SolidColorBrush(Colors.Red);
 			CheckBoxCH1.Content = "Channel 1 - Offline";
 		}
 
 		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Channel 2 - Online", Logger.StatusCode.INFO);
-			SerialSender.SendData("OP2 1");
+			SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.ON);
 			CheckBoxCH2.Foreground = new SolidColorBrush(Colors.Green);
 			CheckBoxCH2.Content = "Channel 2 - Online";
 		}
 
 		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Channel 2 - Offline", Logger.StatusCode.INFO);
-			SerialSender.SendData("OP2 0");
+			SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
 			CheckBoxCH2.Foreground = new SolidColorBrush(Colors.Red);
 			CheckBoxCH2.Content = "Channel 2 - Offline";
 		}
@@ -85,12 +82,12 @@ namespace SerialPower.UserControls
 			// voltage setter
 			string voltage = TextBox_CH1Voltage.Text;
 			voltage = TrimData(voltage);
-			SerialSender.SendData($"V1 {voltage}");
 
 			// current setter
 			string current = TextBox_CH1Current.Text;
 			current = TrimData(current);
-			SerialSender.SendData($"I1 {current}");
+
+			SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
 		}
 
 		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
@@ -100,12 +97,12 @@ namespace SerialPower.UserControls
 			// voltage setter
 			string voltage = TextBox_CH2Voltage.Text;
 			voltage = TrimData(voltage);
-			SerialSender.SendData($"V2 {voltage}");
 
 			// current setter
 			string current = TextBox_CH2Current.Text;
 			current = TrimData(current);
-			SerialSender.SendData($"I2 {current}");
+
+			SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
 		}
 
 		private void VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -118,10 +115,10 @@ namespace SerialPower.UserControls
 				CheckBoxCH2.IsChecked = false;
 
 				// get last data from device
-				string voltageCH1 = SerialSender.SendDataAndRecv("V1?"); // V1 5.45 ...
-				string currentCH1 = SerialSender.SendDataAndRecv("I1?"); // I1 2.15 ...
-				string voltageCH2 = SerialSender.SendDataAndRecv("V2?");
-				string currentCH2 = SerialSender.SendDataAndRecv("I2?");
+				string voltageCH1 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.V); // V1 5.45 ...
+				string currentCH1 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.I); // I1 2.15 ...
+				string voltageCH2 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
+				string currentCH2 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
 
 				if (voltageCH1.StartsWith("V1") && voltageCH2.StartsWith("V2") && currentCH1.StartsWith("I1") && currentCH2.StartsWith("I2"))
 				{
@@ -163,24 +160,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH1.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 3.300V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 1 - 3,300V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
-					SerialSender.SendData($"I1 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
 
 					// clear selection
 					ListBoxCH1Presets33.SelectedItem = null;
@@ -198,24 +196,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH1.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 5.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 1 - 5,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
-					SerialSender.SendData($"I1 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
 
 					// clear selection
 					ListBoxCH1Presets50.SelectedItem = null;
@@ -233,24 +232,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH1.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 12.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 1 - 12,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
-					SerialSender.SendData($"I1 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
 
 					// clear selection
 					ListBoxCH1Presets120.SelectedItem = null;
@@ -268,24 +268,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH1.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 24.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 1 - 24,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH1Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V1 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH1Current.Text = commandCurrent;
-					SerialSender.SendData($"I1 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
 
 					// clear selection
 					ListBoxCH1Presets240.SelectedItem = null;
@@ -303,24 +304,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH2.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 3.300V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 2 - 3,300V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
-					SerialSender.SendData($"I2 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
 
 					// clear selection
 					ListBoxCH2Presets33.SelectedItem = null;
@@ -338,24 +340,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH2.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 5.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 2 - 5,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
-					SerialSender.SendData($"I2 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
 
 					// clear selection
 					ListBoxCH2Presets50.SelectedItem = null;
@@ -373,24 +376,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH2.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 12.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 2 - 12,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
-					SerialSender.SendData($"I2 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
 
 					// clear selection
 					ListBoxCH2Presets120.SelectedItem = null;
@@ -408,24 +412,25 @@ namespace SerialPower.UserControls
 					CheckBoxCH2.IsChecked = false;
 				}
 
-				string? selectedItem = e.AddedItems[0].ToString();
+				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 24.000V", Logger.StatusCode.INFO);
+					Logger.Write("Channel 2 - 24,000V", Logger.StatusCode.INFO);
 
 					// Set voltage
 					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
 					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
 
 					TextBox_CH2Voltage.Text = commandVoltage;
-					SerialSender.SendData($"V2 {commandVoltage}");
 
 					// Set current
 					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
 					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
 
 					TextBox_CH2Current.Text = commandCurrent;
-					SerialSender.SendData($"I2 {commandCurrent}");
+
+					// Send
+					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
 
 					// clear selection
 					ListBoxCH2Presets240.SelectedItem = null;
@@ -438,7 +443,7 @@ namespace SerialPower.UserControls
 		private void CheckBoxSyncSwitch_Checked(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Synchronous activated", Logger.StatusCode.INFO);
-			SerialSender.SendData("OPALL 1");
+			SerialSender.SetChannelState(SerialSender.State.ON);
 			CheckBoxCH1.IsChecked = true;
 			CheckBoxCH2.IsChecked = true;
 		}
@@ -446,7 +451,7 @@ namespace SerialPower.UserControls
 		private void CheckBoxSyncSwitch_Unchecked(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Synchronous deactivated", Logger.StatusCode.INFO);
-			SerialSender.SendData("OPALL 0");
+			SerialSender.SetChannelState(SerialSender.State.OFF);
 			CheckBoxCH1.IsChecked = false;
 			CheckBoxCH2.IsChecked = false;
 		}

@@ -1,15 +1,15 @@
 ﻿<UserControl x:Class="SerialPower.UserControls.UC_ErnstLeitz1"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SerialPower.UserControls"
-             mc:Ignorable="d" 
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:SerialPower.UserControls"
+			 mc:Ignorable="d" 
 			 Background="{StaticResource BackgroundStyle}"
-             d:DesignHeight="720" d:DesignWidth="1280">
+			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Ernst Leitz [85/15186]</Label>
-		<Grid DockPanel.Dock="Top">
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Ernst Leitz [85/15186]</Label>
+		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
@@ -22,21 +22,27 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<!-- V_Int -->
-			<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V internal</Label>
-			<Button x:Name="Button0V_Intern" Grid.Row="1" Grid.Column="0" Content="set 0V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button0V_Intern_Click" ClickMode="Press"/>
-			<Button x:Name="Button6V_Intern" Grid.Row="2" Grid.Column="0" Content="set 6V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button6V_Intern_Click" ClickMode="Press"/>
-			<Button x:Name="Button12V_Intern" Grid.Row="3" Grid.Column="0" Content="set 12V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button12V_Intern_Click" ClickMode="Press"/>
-			<Button x:Name="Button24V_Intern" Grid.Row="4" Grid.Column="0" Content="set 24V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button24V_Intern_Click" ClickMode="Press"/>
-			<Button x:Name="Button48V_Intern" Grid.Row="5" Grid.Column="0" Content="set 48V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button48V_Intern_Click" ClickMode="Press"/>
-            <!-- V_Ext -->
-			<Label Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelStyle}" FontSize="28" HorizontalAlignment="Stretch">V external</Label>
-			<Button x:Name="Button0V_Extern" Grid.Row="1" Grid.Column="2" Content="set 0V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button0V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button6V_Extern" Grid.Row="2" Grid.Column="2" Content="set 6V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button6V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button12V_Extern" Grid.Row="3" Grid.Column="2" Content="set 12V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button12V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button24V_Extern" Grid.Row="4" Grid.Column="2" Content="set 24V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button24V_Extern_Click" ClickMode="Press"/>
-			<Button x:Name="Button48V_Extern" Grid.Row="5" Grid.Column="2" Content="set 48V" Style="{StaticResource RoundedButton}" HorizontalAlignment="Stretch" Margin="25" Click="Button48V_Extern_Click" ClickMode="Press"/>
-        </Grid>
+			
+			<!-- Programming -->
+			<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+				<StackPanel>
+					<Label Style="{StaticResource LabelStyleDark}" Content="Programming mode 24V (Intern):"></Label>
+					<ToggleButton x:Name="ToggleButtonProgrammingMode" Style="{StaticResource ToggleButtonDark}" Margin="15" Content="Disabled" Click="ToggleButtonProgrammingMode_Click"></ToggleButton>
+				</StackPanel>
+			</Border>
+			
+			<!-- Test -->
+			<Border Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+				<StackPanel>
+					<Label Style="{StaticResource LabelStyleDark}" Content="Test Phase"></Label>
+					<Button x:Name="ButtonStart" Style="{StaticResource ButtonDark}" Content="Start Test" Margin="0,25,0,25" Height="40" Width="150" Click="ButtonStart_Click" HorizontalAlignment="Center"/>
+					<TextBox x:Name="TextBlockCurrentTestState" Text="READY" Style="{StaticResource TextBoxDark}" Margin="0,2,0,25" Height="40" Width="150" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Center"/>
+					<ProgressBar x:Name="ProgressBarTestPhase" VerticalAlignment="Center" Margin="50,0,50,0" Minimum="0" Maximum="100" Height="25"></ProgressBar>
+					<TextBox Style="{StaticResource TextBoxDark}" Background="Transparent" Margin="0,10,0,0" Text="{Binding ElementName=ProgressBarTestPhase, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+				</StackPanel>
+			</Border>
+		</Grid>
 	</DockPanel>
 </UserControl>

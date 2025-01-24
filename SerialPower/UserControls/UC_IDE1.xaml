@@ -7,7 +7,7 @@
 			 mc:Ignorable="d"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">IDE [87/10582]</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">IDE [87/10582]</Label>
 		<Grid DockPanel.Dock="Bottom">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -21,99 +21,81 @@
 			</Grid.ColumnDefinitions>
 			
 			<!-- CH1 - Valve Control -->
-			<Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_CH1ValveControl">
-					<DockPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1ValveControl}" Height="{Binding ActualHeight, ElementName=Canvas_CH1ValveControl}">
-						<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Valve Control</Label>
-						<ListBox x:Name="ListBox_CH1Valve" Style="{StaticResource ListBoxStyle}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="ListBox_CH1Valve_SelectionChanged">
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 9V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 0V</ListBoxItem>
-						</ListBox>
-					</DockPanel>
-				</Canvas>
+			<Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Valve Control</Label>
+					<RadioButton x:Name="RadioButtonValveControl1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl1_Click">1V</RadioButton>
+					<RadioButton x:Name="RadioButtonValveControl2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl2_Click">9V</RadioButton>
+					<RadioButton x:Name="RadioButtonValveControl3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl3_Click">0V</RadioButton>
+				</StackPanel>
 			</Border>
 
 			<!--- CH1 - Position Amplifier -->
-			<Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_CH1Pos">
-					<DockPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Pos}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Pos}">
-						<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Position Amplifier</Label>
-						<ListBox x:Name="ListBox_CH1Pos"  Style="{StaticResource ListBoxStyle}" SelectionChanged="ListBox_CH1Pos_SelectionChanged">
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 1,629V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 4,829V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 8,029V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 0,900V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 4,789V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 8,678V</ListBoxItem>
-						</ListBox>
-					</DockPanel>
-				</Canvas>
+			<Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Position Amplifier</Label>
+					<RadioButton x:Name="RadioButtonPosAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp1_Click">1,629V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp2_Click">4,829V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp3_Click">8,029V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp4" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp4_Click">0,900V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp5" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp5_Click">4,789V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp6" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp6_Click">8,678V</RadioButton>
+				</StackPanel>
 			</Border>
 
 			<!-- CH1 - Temperature Amplifier -->
-			<Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_CH1Temp">
-					<DockPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Temp}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Temp}">
-						<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Temperature Amplifier</Label>
-						<ListBox x:Name="ListBox_CH1Temp" Style="{StaticResource ListBoxStyle}" SelectionChanged="ListBox_CH1Temp_SelectionChanged">
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 2,928V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 3,239V</ListBoxItem>
-							<ListBoxItem FontSize="16" FontFamily="{StaticResource OpenSansRegular}">set 3,549V</ListBoxItem>
-						</ListBox>
-					</DockPanel>
-				</Canvas>
+			<Border Grid.Row="0" Grid.Column="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Temperature Amplifier</Label>
+					<RadioButton x:Name="RadioButtonTempAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp1_Click">2,928V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp2_Click">3,239V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp3_Click">3,549V</RadioButton>
+				</StackPanel>
 			</Border>
-
+			
 			<!-- CH2 - Voltage -->
-			<Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_CH2Voltage">
-					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH2Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH2Voltage}">
-						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH2 - Fine adjustment</Label>
-						<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxTerminal}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
-						<Grid Margin="10">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition></ColumnDefinition>
-								<ColumnDefinition></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
-						</Grid>
-						<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource RoundedButton}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
-					</StackPanel>
-				</Canvas>
+			<Border Grid.Row="1" Grid.Column="3" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">CH2 - Fine adjustment</Label>
+					<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<Grid Margin="10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
+						<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
+					</Grid>
+					<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource ButtonDark}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+				</StackPanel>
 			</Border>
 
 			<!-- Control output -->
-			<Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_ControlOutput">
-					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_ControlOutput}" Height="{Binding ActualHeight, ElementName=Canvas_ControlOutput}">
-						<Label Style="{StaticResource TitleStyle}" FontSize="20">Output</Label>
-						<StackPanel>
-							<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
-							<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
-						</StackPanel>
+			<Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">Output</Label>
+					<StackPanel>
+						<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked"  Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
+						<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
 					</StackPanel>
-				</Canvas>
+				</StackPanel>
 			</Border>
 			
 			<!-- CH1 - Temperature Amplifier [Feineinstellung] -->
-			<Border Grid.Row="0" Grid.Column="3" BorderBrush="Black" BorderThickness="1">
-				<Canvas x:Name="Canvas_CH1Voltage">
-					<StackPanel Width="{Binding ActualWidth, ElementName=Canvas_CH1Voltage}" Height="{Binding ActualHeight, ElementName=Canvas_CH1Voltage}">
-						<Label Style="{StaticResource TitleStyle}" FontSize="20">CH1 - Fine adjustment</Label>
-						<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxTerminal}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
-						<Grid Margin="10">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition></ColumnDefinition>
-								<ColumnDefinition></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
-							<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource RoundedButton}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
-						</Grid>
-						<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource RoundedButton}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
-					</StackPanel>
-				</Canvas>
+			<Border Grid.Row="0" Grid.Column="3" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+				<StackPanel>
+					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">CH1 - Fine adjustment</Label>
+					<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<Grid Margin="10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition></ColumnDefinition>
+							<ColumnDefinition></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
+						<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
+					</Grid>
+					<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource ButtonDark}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+				</StackPanel>
 			</Border>
 		</Grid>
 	</DockPanel>

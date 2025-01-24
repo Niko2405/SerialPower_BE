@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using System.Globalization;
+using System.IO.Ports;
 using System.Windows;
 
 namespace SerialPower
@@ -9,7 +10,109 @@ namespace SerialPower
 		public static bool DisablePortVerify = false;
 
 		/// <summary>
-		/// Connect to device
+		/// Channels of the power supply
+		/// </summary>
+		public enum Channel
+		{
+			CH1 = 1,
+			CH2 = 2
+		}
+
+		/// <summary>
+		/// State of channels. On or off
+		/// </summary>
+		public enum State
+		{
+			OFF = 0,
+			ON = 1,
+		}
+
+		/// <summary>
+		/// Voltage or current
+		/// </summary>
+		public enum TargetType
+		{
+			V,
+			I
+		}
+
+		/// <summary>
+		/// Send new values to the power supply
+		/// </summary>
+		/// <param name="voltage"></param>
+		/// <param name="current"></param>
+		/// <param name="channel"></param>
+		public static void SetPowerSupplyValues(float voltage, float current, Channel channel)
+		{
+			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace(",", ".");
+			SendData(command);
+		}
+
+		/// <summary>
+		/// Send new values to the power supply
+		/// </summary>
+		/// <param name="voltage"></param>
+		/// <param name="current"></param>
+		/// <param name="channel"></param>
+		public static void SetPowerSupplyValues(string voltage, string current, Channel channel)
+		{
+			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace (",", ".");
+			SendData(command);
+		}
+
+		public static string GetPowerSupplyValue(Channel channel, TargetType targetType)
+		{
+			return SendDataAndRecv($"{targetType}{(int)channel}?");
+		}
+
+		/// <summary>
+		/// Get all datas from power supply like voltage and current
+		/// </summary>
+		/// <returns>Tuple with V1, I1, V2, I2</returns>
+		public static Tuple<string, string, string, string> GetPowerSupplyValues()
+		{
+			try
+			{
+				if (serialPort != null)
+				{
+					serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
+					string voltageChannel1 = serialPort.ReadLine();
+					string currentChannel1 = serialPort.ReadLine();
+					string voltageChannel2 = serialPort.ReadLine();
+					string currentChannel2 = serialPort.ReadLine();
+					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
+				}
+			}
+			catch (TimeoutException)
+			{
+				return Tuple.Create("No", "Connection", "No", "Connection");
+			}
+			return Tuple.Create("Err", "Err", "Err", "Err");
+		}
+
+		/// <summary>
+		/// Switch on or off the channels
+		/// </summary>
+		/// <param name="channel"></param>
+		/// <param name="state"></param>
+		public static void SetChannelState(Channel channel, State state)
+		{
+			Logger.Write($"Change channel {channel} state to {state}", Logger.StatusCode.INFO);
+			SendData($"OP{(int)channel} {(int)state}");
+		}
+
+		/// <summary>
+		/// Switch state of all channels
+		/// </summary>
+		/// <param name="state"></param>
+		public static void SetChannelState(State state)
+		{
+			Logger.Write($"Change both channels state to {state}", Logger.StatusCode.INFO);
+			SendData($"OPALL {(int)state}");
+		}
+
+		/// <summary>
+		/// Connect to target COM Port
 		/// </summary>
 		public static void ConnectDevice()
 		{
@@ -37,6 +140,7 @@ namespace SerialPower
 				}
 				catch (Exception ex)
 				{
+					Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
 					MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
@@ -59,11 +163,17 @@ namespace SerialPower
 				{
 					try
 					{
+						serialPort.WriteLine("LOCAL");
 						serialPort.Close();
 						Logger.Write("Disconnect device", Logger.StatusCode.INFO);
 					}
+					catch (TimeoutException)
+					{
+						Logger.Write("Timeout", Logger.StatusCode.ERROR);
+					}
 					catch (Exception ex)
 					{
+						Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
 						MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 					}
 				}
@@ -75,7 +185,7 @@ namespace SerialPower
 		/// </summary>
 		/// <param name="data">Command</param>
 		/// <param name="showLogging">Should the message logged</param>
-		public static void SendData(string data, bool showLogging = true)
+		private static void SendData(string data, bool showLogging = true)
 		{
 			if (serialPort != null)
 			{
@@ -85,17 +195,18 @@ namespace SerialPower
 				}
 				try
 				{
-					serialPort.Write(data + Environment.NewLine);
+					serialPort.WriteLine(data);
 
 					if (showLogging)
 						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
 				}
-				catch (TimeoutException ex)
+				catch (TimeoutException)
 				{
-					Logger.Write(ex.Message, Logger.StatusCode.ERROR);
+					Logger.Write("Timeout", Logger.StatusCode.ERROR);
 				}
 				catch (Exception ex)
 				{
+					Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
 					MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
@@ -107,7 +218,7 @@ namespace SerialPower
 		/// <param name="data">Command</param>
 		/// <param name="showLogging">Should the message logged</param>
 		/// <returns>Response of given data</returns>
-		public static string SendDataAndRecv(string data, bool showLogging = true)
+		private static string SendDataAndRecv(string data, bool showLogging = true)
 		{
 			if (serialPort != null)
 			{
@@ -117,7 +228,7 @@ namespace SerialPower
 				}
 				try
 				{
-					serialPort.Write(data + Environment.NewLine);
+					serialPort.WriteLine(data);
 
 					if (showLogging)
 						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
@@ -130,9 +241,9 @@ namespace SerialPower
 
 					return response;
 				}
-				catch (TimeoutException ex)
+				catch (TimeoutException)
 				{
-					Logger.Write(ex.Message, Logger.StatusCode.ERROR);
+					Logger.Write("Timeout", Logger.StatusCode.ERROR);
 					return "TIMEOUT";
 				}
 				catch (Exception ex)

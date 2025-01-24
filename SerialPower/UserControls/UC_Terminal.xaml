@@ -8,8 +8,8 @@
 			 Background="{StaticResource BackgroundStyle}"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True">
-		<Label DockPanel.Dock="Top" Style="{StaticResource TitleStyle}">Terminal</Label>
-		<TextBox x:Name="TextBoxCommandInput" DockPanel.Dock="Bottom" Style="{StaticResource TextBoxTerminal}" Margin="10" KeyDown="TextBoxCommandInput_KeyDown"></TextBox>
-		<TextBox x:Name="TextBoxCommandOutput" IsReadOnly="True" Style="{StaticResource TextBoxTerminal}" Margin="10,0,10,0"></TextBox>
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Terminal</Label>
+		<TextBox x:Name="TextBoxCommandInput" DockPanel.Dock="Bottom" Style="{StaticResource TextBoxDark}" Margin="10" KeyDown="TextBoxCommandInput_KeyDown"></TextBox>
+		<TextBox x:Name="TextBoxCommandOutput" IsReadOnly="True" Style="{StaticResource TextBoxDark}" Margin="10,0,10,0"></TextBox>
 	</DockPanel>
 </UserControl>

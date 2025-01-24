@@ -11,24 +11,11 @@ namespace SerialPower.UserControls
 	public partial class UC_IDE1 : UserControl
 	{
 		private static readonly float STEPS = 0.010f;
+		private static readonly float CURRENT_LIMIT = 0.1f;
 
 		public UC_IDE1()
 		{
 			InitializeComponent();
-		}
-
-		/// <summary>
-		/// Sende eingestellte Spannung am Kanal 2
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ButtonCH2_SendVoltage_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("CH2 - Send voltage", Logger.StatusCode.INFO);
-			string voltage = TextBoxCH2Voltage.Text;
-			voltage = voltage.Replace(",", ".");
-			Logger.Write($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
-			SerialSender.SendData($"V2 {voltage}");
 		}
 
 		/// <summary>
@@ -39,10 +26,22 @@ namespace SerialPower.UserControls
 		private void ButtonCH1_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("CH1 - Send voltage", Logger.StatusCode.INFO);
-			string voltage = TextBoxCH1Voltage.Text;
-			voltage = voltage.Replace(",", ".");
+			float voltage = float.Parse(TextBoxCH1Voltage.Text);
 			Logger.Write($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
-			SerialSender.SendData($"V1 {voltage}");
+			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		/// <summary>
+		/// Sende eingestellte Spannung am Kanal 2
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ButtonCH2_SendVoltage_Click(object sender, RoutedEventArgs e)
+		{
+			Logger.Write("CH2 - Send voltage", Logger.StatusCode.INFO);
+			float voltage = float.Parse(TextBoxCH2Voltage.Text);
+			Logger.Write($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
+			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH2);
 		}
 
 		/// <summary>
@@ -55,7 +54,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text);
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
@@ -79,7 +78,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text);
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
@@ -141,99 +140,96 @@ namespace SerialPower.UserControls
 			}
 		}
 
-		private void ListBox_CH1Temp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void RadioButtonValveControl1_Click(object sender, RoutedEventArgs e)
 		{
-			Thread.Sleep(100);
-			if (e.AddedItems.Count > 0)
-			{
-				string? selectedItem = e.AddedItems[0].ToString();
-				if (selectedItem != null)
-				{
-					// Remove System.ListBox:
-					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
-
-					// Set TextBox CH1
-					ListBox_CH1Temp.SelectedItem = null;
-					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendData($"V1 {command}");
-				}
-			}
+			TextBoxCH1Voltage.Text = "1,000";
+			SerialSender.SetPowerSupplyValues(1f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
-		private void ListBox_CH1Pos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void RadioButtonValveControl2_Click(object sender, RoutedEventArgs e)
 		{
-			Thread.Sleep(100);
-			if (e.AddedItems.Count > 0)
-			{
-				string? selectedItem = e.AddedItems[0].ToString();
-				if (selectedItem != null)
-				{
-					// Remove System.ListBox:
-					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
-
-					// Set TextBox CH1
-					ListBox_CH1Pos.SelectedItem = null;
-					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendData($"V1 {command}");
-				}
-			}
+			TextBoxCH1Voltage.Text = "9,000";
+			SerialSender.SetPowerSupplyValues(9f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
-		private void ListBox_CH1Valve_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void RadioButtonValveControl3_Click(object sender, RoutedEventArgs e)
 		{
-			Thread.Sleep(100);
-			if (e.AddedItems.Count > 0)
-			{
-				string? selectedItem = e.AddedItems[0].ToString();
-				if (selectedItem != null)
-				{
-					// Remove System.ListBox:
-					string command = ConvertListBoxItemToCommand(selectedItem);
-					Logger.Write($"Set voltage of CH1 to {command}V", Logger.StatusCode.INFO);
-
-					// Set TextBox CH1
-					ListBox_CH1Valve.SelectedItem = null;
-					TextBoxCH1Voltage.Text = command;
-					SerialSender.SendData($"V1 {command}");
-				}
-			}
+			TextBoxCH1Voltage.Text = "0,000";
+			SerialSender.SetPowerSupplyValues(0f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
-		/// <summary>
-		/// Convert the raw list box item to send able command
-		/// </summary>
-		/// <param name="selectedItem"></param>
-		/// <returns></returns>
-		private static string ConvertListBoxItemToCommand(string selectedItem)
+		private void RadioButtonPosAmp1_Click(object sender, RoutedEventArgs e)
 		{
-			string command = selectedItem.Split(":")[1].Trim();
-			command = command.Replace(",", ".").Replace("V", "").Replace("set ", "");
-			Logger.Write($"Convert object '{selectedItem}' to '{command}'", Logger.StatusCode.INFO);
-			return command;
+			TextBoxCH1Voltage.Text = "1,629";
+			SerialSender.SetPowerSupplyValues(1.629f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonPosAmp2_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "4,829";
+			SerialSender.SetPowerSupplyValues(4.829f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonPosAmp3_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "8,029";
+			SerialSender.SetPowerSupplyValues(8.029f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonPosAmp4_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "0,900";
+			SerialSender.SetPowerSupplyValues(0.9f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonPosAmp5_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "4,789";
+			SerialSender.SetPowerSupplyValues(4.789f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonPosAmp6_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "8,678";
+			SerialSender.SetPowerSupplyValues(8.678f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonTempAmp1_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "2,928";
+			SerialSender.SetPowerSupplyValues(2.928f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonTempAmp2_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "3,239";
+			SerialSender.SetPowerSupplyValues(3.239f, CURRENT_LIMIT, SerialSender.Channel.CH1);
+		}
+
+		private void RadioButtonTempAmp3_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxCH1Voltage.Text = "3,549";
+			SerialSender.SetPowerSupplyValues(3.549f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void CheckBoxCH1_Checked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendData("I1 0.20; I2 0.20");
-			SerialSender.SendData("OP1 1");
-		}
-
-		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
-		{
-			SerialSender.SendData("I1 0.20; I2 0.20");
-			SerialSender.SendData("OP2 1");
-		}
-
-		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
-		{
-			SerialSender.SendData("OP2 0");
+			SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
 		}
 
 		private void CheckBoxCH1_Unchecked(object sender, RoutedEventArgs e)
 		{
-			SerialSender.SendData("OP1 0");
+			SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
+		}
+
+		private void CheckBoxCH2_Checked(object sender, RoutedEventArgs e)
+		{
+			SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.ON);
+		}
+
+		private void CheckBoxCH2_Unchecked(object sender, RoutedEventArgs e)
+		{
+			SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
 		}
 	}
 }

@@ -15,11 +15,11 @@
 	<SolidColorBrush x:Key="ButtonMouseOver" Color="#FF787878"/>
 	
 	<!-- Rounded Button -->
-	<Style x:Key="RoundedButton" TargetType="{x:Type Button}">
+	<Style x:Key="ButtonDark" TargetType="{x:Type Button}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="{StaticResource ButtonMouseNotOver}"/>
 		<Setter Property="Cursor" Value="Hand"/>
-		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontSize" Value="16"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -38,9 +38,9 @@
 	</Style>
 	
 	<!-- Title -->
-	<Style x:Key="TitleStyle" TargetType="{x:Type Label}">
+	<Style x:Key="LabelTitleDark" TargetType="{x:Type Label}">
 		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="FontSize" Value="32"/>
+		<Setter Property="FontSize" Value="30"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"/>
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
@@ -48,28 +48,58 @@
 	</Style>
 
 	<!-- Label -->
-	<Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+	<Style x:Key="LabelStyleDark" TargetType="{x:Type Label}">
 		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontSize" Value="16"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
 	</Style>
 
-	<!-- Label -->
-	<Style x:Key="TextBoxTerminal" TargetType="{x:Type TextBox}">
+	<!-- TextBox -->
+	<Style x:Key="TextBoxDark" TargetType="{x:Type TextBox}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="{StaticResource BackgroundStyleAlternativ}"/>
-		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontSize" Value="16"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 	</Style>
 	
 	<!-- ListBox -->
-	<Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+	<Style x:Key="ListBoxDark" TargetType="{x:Type ListBox}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="{StaticResource BackgroundStyle}"/>
-		<Setter Property="FontSize" Value="15"/>
+		<Setter Property="FontSize" Value="14"/>
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
+	</Style>
+	
+	<!-- RadioButton -->
+	<Style x:Key="RadioButtonDark" TargetType="{x:Type RadioButton}">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
+	</Style>
+	
+	<!-- ToggleButton -->
+	<Style x:Key="ToggleButtonDark" TargetType="{x:Type ToggleButton}">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="{StaticResource ButtonMouseNotOver}"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border CornerRadius="5" BorderBrush="White" BorderThickness="1" Background="{TemplateBinding Background}">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="{StaticResource ButtonMouseOver}"/>
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 </ResourceDictionary>

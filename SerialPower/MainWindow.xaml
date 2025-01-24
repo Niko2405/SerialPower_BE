@@ -42,9 +42,13 @@
 				</MenuItem>
 			</MenuItem>
 			
+			<!-- Tools -->
 			<MenuItem Header="_Tools">
 				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
+				<MenuItem x:Name="MenuItemSequencer" Header="_Sequencer" Click="MenuItemSequencer_Click"/>
 				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
+				<MenuItem x:Name="MenuItemLua" Header="_Lua" Click="MenuItemLua_Click"/>
+				
 			</MenuItem>
 		</Menu>
 		
@@ -52,25 +56,21 @@
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>
 				<StackPanel Orientation="Horizontal">
-					<!-- New Data -->
-					<Rectangle x:Name="RectangleData" Fill="Blue" Height="15" Width="15"/>
-					
-					<!-- Current settings -->
-					<TextBlock x:Name="TextBlockPortName" Text="Port: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockBaudrate" Text="Baudrate: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockStopBits" Text="StopBits: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockDataBits" Text="DataBits: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockParity" Text="Parity: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockReadTimeout" Text="ReadTimeout: None" Padding="10,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-					<TextBlock x:Name="TextBlockWriteTimeout" Text="WriteTimeout: None" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-					
+					<!-- Tick -->
+					<Rectangle x:Name="RectangleData" Fill="Blue" Margin="5,0,5,0" Height="16" Width="16"/>
+
 					<!-- CH1 -->
-					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
-					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
-					
+					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
+					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
+
 					<!-- CH2 -->
-					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
-					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
+
+					<!-- Sequencer -->
+					<TextBlock x:Name="TextBlockSequencer" Text="Sequencer:" Margin="5,0,5,0" Padding="15,0,15,0"></TextBlock>
+					<ProgressBar x:Name="ProgressBarSequencer" Width="320" Margin="5,0,5,0" Padding="15,0,15,0" IsIndeterminate="True" Foreground="Red"></ProgressBar>
+					<TextBlock Text="{Binding ElementName=ProgressBarSequencer, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>

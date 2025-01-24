@@ -13,28 +13,44 @@ namespace SerialPower
 	{
 		private readonly BackgroundWorker MeasurementWorker = new();
 		private readonly BackgroundWorker HeartbeatIndicatorWorker = new();
+		private readonly BackgroundWorker SequencerRunningIndicatorWorker = new();
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			if (ConfigHandler.currentConfig != null)
-			{
-				TextBlockPortName.Text = "Port: " + ConfigHandler.currentConfig.SerialPortName;
-				TextBlockBaudrate.Text = "Baudrate: " + ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
-				TextBlockStopBits.Text = "StopBits: " + ConfigHandler.currentConfig.SerialPortStopBits.ToString();
-				TextBlockDataBits.Text = "DataBits: " + ConfigHandler.currentConfig.SerialPortDataBits.ToString();
-				TextBlockParity.Text = "Parity: " + ConfigHandler.currentConfig.SerialPortParity.ToString();
-				TextBlockReadTimeout.Text = "ReadTimeout: " + ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
-				TextBlockWriteTimeout.Text = "WriteTimeout: " + ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
-			}
 			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
 			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
 
+			SequencerRunningIndicatorWorker.WorkerReportsProgress = true;
+			SequencerRunningIndicatorWorker.DoWork += SequencerRunningIndicatorWorker_DoWork;
+			SequencerRunningIndicatorWorker.ProgressChanged += SequencerRunningIndicatorWorker_ProgressChanged;
+			
 			MeasurementWorker.RunWorkerAsync();
 			HeartbeatIndicatorWorker.RunWorkerAsync();
+
+			// TODO: Implement LUA Sequencers
+			//SequencerRunningIndicatorWorker.RunWorkerAsync();
 		}
 
-		private void HeartbeatIndicatorWorker_DoWork(object sender, DoWorkEventArgs e)
+		private void SequencerRunningIndicatorWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+		{
+			ProgressBarSequencer.Value = e.ProgressPercentage;
+		}
+
+		private void SequencerRunningIndicatorWorker_DoWork(object? sender, DoWorkEventArgs e)
+		{
+			if (sender != null)
+			{
+				((BackgroundWorker)sender).ReportProgress(0);
+			}
+		}
+
+		/// <summary>
+		/// Show's the user, that program is not stuck
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void HeartbeatIndicatorWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
 			bool toggled = false;
 			while (true)
@@ -51,29 +67,23 @@ namespace SerialPower
 			}
 		}
 
-		private void MeasurementWorker_DoWork(object sender, DoWorkEventArgs e)
+		/// <summary>
+		/// Measure voltage and current
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void MeasurementWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
 			while (true)
 			{
 				Thread.Sleep(1000);
 				this.Dispatcher.Invoke(() =>
 				{
-					string rawData = SerialSender.SendDataAndRecv("V1O?; I1O?; V2O?; I2O?", false).Replace("\r", "");
-					string[] data = rawData.Split("\n");
-					try
-					{
-						TextBlockVoltageCH1.Text = data[0];
-						TextBlockCurrentCH1.Text = data[1];
-						TextBlockVoltageCH2.Text = data[2];
-						TextBlockCurrentCH2.Text = data[3];
-					}
-					catch (Exception)
-					{
-						TextBlockVoltageCH1.Text = "No";
-						TextBlockCurrentCH1.Text = "Connection";
-						TextBlockVoltageCH2.Text = "No";
-						TextBlockCurrentCH2.Text = "Connection";
-					}
+					var data = SerialSender.GetPowerSupplyValues();
+					TextBlockVoltageCH1.Text = data.Item1;
+					TextBlockCurrentCH1.Text = data.Item2;
+					TextBlockVoltageCH2.Text = data.Item3;
+					TextBlockCurrentCH2.Text = data.Item4;
 				});
 			}
 		}
@@ -100,8 +110,7 @@ namespace SerialPower
 		private void WindowClosed(object sender, EventArgs e)
 		{
 			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
-			SerialSender.SendData("LOCAL");
-			Thread.Sleep(500);
+			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
@@ -135,8 +144,7 @@ namespace SerialPower
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Closing program. Disconnect power supply.", Logger.StatusCode.INFO);
-			SerialSender.SendData("LOCAL");
-			Thread.Sleep(1000);
+			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
 
 			Environment.Exit(0);
@@ -163,6 +171,16 @@ namespace SerialPower
 			process.Start();
 			process.StandardInput.WriteLine("devmgmt.msc");
 			process.StandardInput.WriteLine("exit");
+		}
+
+		private void MenuItemLua_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Lua is currently not implemented", "Lua / Sequences", MessageBoxButton.OK, MessageBoxImage.Warning);
+		}
+
+		private void MenuItemSequencer_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Lua is currently not implemented", "Lua / Sequences", MessageBoxButton.OK, MessageBoxImage.Warning);
 		}
 	}
 }

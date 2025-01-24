@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SerialPower.UserControls
@@ -8,113 +9,130 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class UC_ErnstLeitz1 : UserControl
 	{
+		private readonly int DELAY = 2000;
+
 		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
+			SerialSender.SetChannelState(0);
 		}
 
-		private void Button0V_Intern_Click(object sender, RoutedEventArgs e)
+		private void ButtonStart_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Button 0V - Intern", Logger.StatusCode.INFO);
+			BackgroundWorker backgroundWorker = new BackgroundWorker();
+			backgroundWorker.WorkerReportsProgress = true;
+			backgroundWorker.DoWork += BackgroundWorker_DoWork;
+			backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+			backgroundWorker.RunWorkerAsync();
 
-			// Quelle 1 und 2 auf 0V setzen
-			SerialSender.SendData("V1 0; V2 0");
-
-			// Strombegrenzung setzen
-			SerialSender.SendData("I1 0.15; I2 0.15");
-
-			// Ausgänge einstellen
-			SerialSender.SendData("OPALL 0");
+			Logger.Write("Starting automatic test phase", Logger.StatusCode.INFO);
 		}
 
-		private void Button6V_Intern_Click(object sender, RoutedEventArgs e)
+		private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
 		{
-			Logger.Write("Button 6V - Intern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 6; V2 0");
-			SerialSender.SendData("I1 0.25; I2 0.25");
-			SerialSender.SendData("OP1 1; OP2 0");
+			ProgressBarTestPhase.Value = e.ProgressPercentage;
 		}
 
-		private void Button12V_Intern_Click(object sender, RoutedEventArgs e)
+		private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
-			Logger.Write("Button 12V - Intern", Logger.StatusCode.INFO);
+			if (sender != null)
+			{
+				// Intern 0V
+				this.Dispatcher.Invoke(() =>
+				{
+					TextBlockCurrentTestState.Text = "TEST: INTERN";
+					ToggleButtonProgrammingMode.IsEnabled = false;
+					ButtonStart.IsEnabled = false;
+				});
+				((BackgroundWorker)sender).ReportProgress(0);
+				SerialSender.SetChannelState(0);
+				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
+				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
 
-			SerialSender.SendData("V1 12; V2 0");
-			SerialSender.SendData("I1 0.15; I2 0.15");
-			SerialSender.SendData("OP1 1; OP2 0");
+				// Intern 6V
+				((BackgroundWorker)sender).ReportProgress(10);
+				SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
+				SerialSender.SetPowerSupplyValues(6f, 0.3f, SerialSender.Channel.CH1);
+				Thread.Sleep(DELAY);
+
+				// Intern 12V
+				((BackgroundWorker)sender).ReportProgress(20);
+				SerialSender.SetPowerSupplyValues(12f, 0.2f, SerialSender.Channel.CH1);
+				Thread.Sleep(DELAY);
+
+				// Intern 24V
+				((BackgroundWorker)sender).ReportProgress(30);
+				SerialSender.SetPowerSupplyValues(24f, 0.15f, SerialSender.Channel.CH1);
+				Thread.Sleep(DELAY);
+
+				// Intern 48V
+				((BackgroundWorker)sender).ReportProgress(40);
+				SerialSender.SetPowerSupplyValues(48f, 0.15f, SerialSender.Channel.CH1);
+				Thread.Sleep(DELAY);
+
+				/// ------------------------------------------------------ ///
+
+				// Extern 0V
+				this.Dispatcher.Invoke(() =>
+				{
+					TextBlockCurrentTestState.Text = "TEST: EXTERN";
+				});
+				((BackgroundWorker)sender).ReportProgress(50);
+				SerialSender.SetChannelState(0);
+				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
+				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
+
+				// Extern 6V
+				((BackgroundWorker)sender).ReportProgress(60);
+				SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.ON);
+				SerialSender.SetPowerSupplyValues(6f, 0.3f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
+
+				// Intern 12V
+				((BackgroundWorker)sender).ReportProgress(70);
+				SerialSender.SetPowerSupplyValues(12f, 0.2f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
+
+				// Intern 24V
+				((BackgroundWorker)sender).ReportProgress(80);
+				SerialSender.SetPowerSupplyValues(24f, 0.15f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
+
+				// Intern 48V
+				((BackgroundWorker)sender).ReportProgress(90);
+				SerialSender.SetPowerSupplyValues(48f, 0.15f, SerialSender.Channel.CH2);
+				Thread.Sleep(DELAY);
+
+				((BackgroundWorker)sender).ReportProgress(100);
+				SerialSender.SetChannelState(0);
+				this.Dispatcher.Invoke(() =>
+				{
+					TextBlockCurrentTestState.Text = "TEST: ENDED";
+					ButtonStart.IsEnabled = true;
+					ToggleButtonProgrammingMode.IsEnabled = true;
+				});
+				MessageBox.Show("Test is now finished", "Test phase ended", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
 		}
 
-		private void Button24V_Intern_Click(object sender, RoutedEventArgs e)
+		private void ToggleButtonProgrammingMode_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Button 24V - Intern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 24; V2 0");
-			SerialSender.SendData("I1 0.10; I2 0.10");
-			SerialSender.SendData("OP1 1; OP2 0");
-		}
-
-		private void Button48V_Intern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 48V - Intern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("OP1 1; OP2 0");
-
-			// increase power slowly
-			SerialSender.SendData("V1 12; V2 0");
-			SerialSender.SendData("V1 24; V2 0");
-			SerialSender.SendData("V1 48; V2 0");
-
-			SerialSender.SendData("I1 0.10; I2 0.10");
-		}
-
-		private void Button0V_Extern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 0V - Extern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 0; V2 0");
-			SerialSender.SendData("I1 0.15; I2 0.15");
-			SerialSender.SendData("OPALL 0");
-		}
-
-		private void Button6V_Extern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 6V - Extern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 0; V2 6");
-			SerialSender.SendData("I1 0.25; I2 0.25");
-			SerialSender.SendData("OP1 0; OP2 1");
-		}
-
-		private void Button12V_Extern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 12V - Extern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 0; V2 12");
-			SerialSender.SendData("I1 0.15; I2 0.15");
-			SerialSender.SendData("OP1 0; OP2 1");
-		}
-
-		private void Button24V_Extern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 24V - Extern", Logger.StatusCode.INFO);
-
-			SerialSender.SendData("V1 0; V2 24");
-			SerialSender.SendData("I1 0.10; I2 0.10");
-			SerialSender.SendData("OP1 0; OP2 1");
-		}
-
-		private void Button48V_Extern_Click(object sender, RoutedEventArgs e)
-		{
-			Logger.Write("Button 48V - Extern", Logger.StatusCode.INFO);
-
-			// increase power slowly
-			SerialSender.SendData("V1 0; V2 12");
-			SerialSender.SendData("V1 0; V2 24");
-			SerialSender.SendData("V1 0; V2 48");
-
-			SerialSender.SendData("I1 0.10; I2 0.10");
-			SerialSender.SendData("OP1 0; OP2 1");
+			if (ToggleButtonProgrammingMode.IsChecked == true)
+			{
+				SerialSender.SetPowerSupplyValues(12f, 0.2f, SerialSender.Channel.CH1);
+				SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
+				ToggleButtonProgrammingMode.Content = "Enabled";
+				ButtonStart.IsEnabled = false;
+			}
+			if (ToggleButtonProgrammingMode.IsChecked == false)
+			{
+				SerialSender.SetPowerSupplyValues(0f, 0.2f, SerialSender.Channel.CH1);
+				SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
+				ToggleButtonProgrammingMode.Content = "Disabled";
+				ButtonStart.IsEnabled = true;
+			}
 		}
 	}
 }

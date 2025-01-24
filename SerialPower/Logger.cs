@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Reflection;
 
 namespace SerialPower
 {
@@ -13,6 +12,7 @@ namespace SerialPower
 			INFO,
 			WARNING,
 			ERROR,
+			DEBUG
 		}
 
 		public static void Write(string text, StatusCode code)
@@ -33,6 +33,9 @@ namespace SerialPower
 					break;
 				case StatusCode.ERROR:
 					Console.ForegroundColor = ConsoleColor.Red;
+					break;
+				case StatusCode.DEBUG:
+					Console.ForegroundColor = ConsoleColor.Cyan;
 					break;
 				default:
 					Console.ForegroundColor = ConsoleColor.White;

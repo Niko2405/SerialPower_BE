@@ -71,6 +71,9 @@ namespace SerialPower
 				Directory.CreateDirectory(ConfigHandler.DIR_CONFIGS);
 				Logger.Write("Checking " + ConfigHandler.DIR_CONFIGS, Logger.StatusCode.INFO);
 
+				Directory.CreateDirectory(ConfigHandler.DIR_SEQUENCES);
+				Logger.Write("Checking " + ConfigHandler.DIR_SEQUENCES, Logger.StatusCode.INFO);
+
 				Directory.CreateDirectory(ConfigHandler.DIR_DATABASE);
 				Logger.Write("Checking " + ConfigHandler.DIR_DATABASE, Logger.StatusCode.INFO);
 
@@ -126,6 +129,7 @@ namespace SerialPower
 			Logger.Write("Logger Test: Info logging", Logger.StatusCode.INFO);
 			Logger.Write("Logger Test: Warning logging", Logger.StatusCode.WARNING);
 			Logger.Write("Logger Test: Failed logging", Logger.StatusCode.ERROR);
+			Logger.Write("Logger Test: Debug logging", Logger.StatusCode.DEBUG);
 
 			// Create filesystem
 			BuildFilesystem();
