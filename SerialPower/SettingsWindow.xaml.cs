@@ -29,14 +29,16 @@ namespace SerialPower
 
 					serialPort.Open();
 					Logger.Write($"Check port: {currentCom}", Logger.StatusCode.INFO);
-					serialPort.Write("*IDN?" + Environment.NewLine);
+					serialPort.WriteLine("*IDN?");
 					string response = serialPort.ReadLine().Trim();
 
 					// if the answer contains CPX200; add to selection list or port verify is disabled
 					if (response.Contains("CPX200"))
 					{
+						Console.Beep(560, 500);
+
 						// Auto disconnect
-						serialPort.Write("LOCAL");
+						serialPort.WriteLine("LOCAL");
 						ComboBoxComPorts.Items.Add(currentCom);
 					}
 					serialPort.Close();

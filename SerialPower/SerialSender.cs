@@ -76,10 +76,10 @@ namespace SerialPower
 				if (serialPort != null)
 				{
 					serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
-					string voltageChannel1 = serialPort.ReadLine();
-					string currentChannel1 = serialPort.ReadLine();
-					string voltageChannel2 = serialPort.ReadLine();
-					string currentChannel2 = serialPort.ReadLine();
+					string voltageChannel1 = serialPort.ReadLine().Trim('\r', '\n');
+					string currentChannel1 = serialPort.ReadLine().Trim('\r', '\n');
+					string voltageChannel2 = serialPort.ReadLine().Trim('\r', '\n');
+					string currentChannel2 = serialPort.ReadLine().Trim('\r', '\n');
 					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
 				}
 			}
