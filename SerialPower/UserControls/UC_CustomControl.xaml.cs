@@ -16,16 +16,6 @@ namespace SerialPower.UserControls
 		}
 
 		/// <summary>
-		/// Removes V and A; Replace , to .
-		/// </summary>
-		/// <param name="rawData"></param>
-		/// <returns></returns>
-		private static string TrimData(string rawData)
-		{
-			return rawData.Replace(",", ".").Replace("V", "").Replace(" ", "").Replace("A", "");
-		}
-
-		/// <summary>
 		/// Convert the data from listbox to useable command
 		/// </summary>
 		/// <param name="selectedItem"></param>
@@ -78,31 +68,33 @@ namespace SerialPower.UserControls
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Send data to Channel 1", Logger.StatusCode.INFO);
-
-			// voltage setter
-			string voltage = TextBox_CH1Voltage.Text;
-			voltage = TrimData(voltage);
-
-			// current setter
-			string current = TextBox_CH1Current.Text;
-			current = TrimData(current);
-
-			SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
+			try
+			{
+				float voltage = float.Parse(TextBox_CH1Voltage.Text.Replace('.', ','));
+				float current = float.Parse(TextBox_CH1Current.Text.Replace('.', ','));
+				SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
+			}
+			catch (Exception)
+			{
+				Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+				MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 
 		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Send data to Channel 2", Logger.StatusCode.INFO);
-
-			// voltage setter
-			string voltage = TextBox_CH2Voltage.Text;
-			voltage = TrimData(voltage);
-
-			// current setter
-			string current = TextBox_CH2Current.Text;
-			current = TrimData(current);
-
-			SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
+			try
+			{
+				float voltage = float.Parse(TextBox_CH2Voltage.Text.Replace('.', ','));
+				float current = float.Parse(TextBox_CH2Current.Text.Replace('.', ','));
+				SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
+			}
+			catch (Exception)
+			{
+				Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+				MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 
 		private void VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -163,25 +155,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 3,300V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 1 - 3,300V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH1 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH1Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH1 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH1Voltage.Text = voltage.ToString();
+						TextBox_CH1Current.Text = current.ToString();
 
-					TextBox_CH1Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
-
-					// clear selection
-					ListBoxCH1Presets33.SelectedItem = null;
+						// clear selection
+						ListBoxCH1Presets33.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -199,25 +196,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 5,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 1 - 5,000V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH1 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH1Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH1 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH1Voltage.Text = voltage.ToString();
+						TextBox_CH1Current.Text = current.ToString();
 
-					TextBox_CH1Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
-
-					// clear selection
-					ListBoxCH1Presets50.SelectedItem = null;
+						// clear selection
+						ListBoxCH1Presets50.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -235,25 +237,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 12,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 1 - 12,000V");
+					
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH1 to {voltage}V", Logger.StatusCode.INFO);
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH1 to {current}A", Logger.StatusCode.INFO);
 
-					TextBox_CH1Voltage.Text = commandVoltage;
+						TextBox_CH1Voltage.Text = voltage.ToString();
+						TextBox_CH1Current.Text = current.ToString();
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
 
-					TextBox_CH1Current.Text = commandCurrent;
-
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
-
-					// clear selection
-					ListBoxCH1Presets120.SelectedItem = null;
+						// clear selection
+						ListBoxCH1Presets120.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -271,25 +278,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 1 - 24,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 1 - 24,000V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH1 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH1 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH1Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH1 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH1 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH1Voltage.Text = voltage.ToString();
+						TextBox_CH1Current.Text = current.ToString();
 
-					TextBox_CH1Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH1);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH1);
-
-					// clear selection
-					ListBoxCH1Presets240.SelectedItem = null;
+						// clear selection
+						ListBoxCH1Presets240.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -307,25 +319,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 3,300V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 2 - 3,300V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH2 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH2Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH2 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH2Voltage.Text = voltage.ToString();
+						TextBox_CH2Current.Text = current.ToString();
 
-					TextBox_CH2Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
-
-					// clear selection
-					ListBoxCH2Presets33.SelectedItem = null;
+						// clear selection
+						ListBoxCH2Presets33.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -343,25 +360,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 5,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 2 - 5,000V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH2 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH2Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH2 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH2Voltage.Text = voltage.ToString();
+						TextBox_CH2Current.Text = current.ToString();
 
-					TextBox_CH2Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
-
-					// clear selection
-					ListBoxCH2Presets50.SelectedItem = null;
+						// clear selection
+						ListBoxCH2Presets50.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -379,25 +401,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 12,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 2 - 12,000V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH2 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH2Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH2 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH2Voltage.Text = voltage.ToString();
+						TextBox_CH2Current.Text = current.ToString();
 
-					TextBox_CH2Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
-
-					// clear selection
-					ListBoxCH2Presets120.SelectedItem = null;
+						// clear selection
+						ListBoxCH2Presets120.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}
@@ -415,25 +442,30 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.Write("Channel 2 - 24,000V", Logger.StatusCode.INFO);
+					Logger.PrintHeader("Channel 2 - 24,000V");
 
-					// Set voltage
-					string commandVoltage = ConvertListBoxItemData(selectedItem).Item1;
-					Logger.Write($"Set voltage of CH2 to {commandVoltage}V", Logger.StatusCode.INFO);
+					try
+					{
+						float voltage = float.Parse(ConvertListBoxItemData(selectedItem).Item1);
+						Logger.Write($"Set voltage of CH2 to {voltage}V", Logger.StatusCode.INFO);
 
-					TextBox_CH2Voltage.Text = commandVoltage;
+						float current = float.Parse(ConvertListBoxItemData(selectedItem).Item2);
+						Logger.Write($"Set current of CH2 to {current}A", Logger.StatusCode.INFO);
 
-					// Set current
-					string commandCurrent = ConvertListBoxItemData(selectedItem).Item2;
-					Logger.Write($"Set current of CH2 to {commandCurrent}A", Logger.StatusCode.INFO);
+						TextBox_CH2Voltage.Text = voltage.ToString();
+						TextBox_CH2Current.Text = current.ToString();
 
-					TextBox_CH2Current.Text = commandCurrent;
+						// send
+						SerialSender.SetPowerSupplyValues(voltage, current, SerialSender.Channel.CH2);
 
-					// Send
-					SerialSender.SetPowerSupplyValues(commandVoltage, commandCurrent, SerialSender.Channel.CH2);
-
-					// clear selection
-					ListBoxCH2Presets240.SelectedItem = null;
+						// clear selection
+						ListBoxCH2Presets240.SelectedItem = null;
+					}
+					catch (Exception)
+					{
+						Logger.Write("Input is invalid", Logger.StatusCode.ERROR);
+						MessageBox.Show("Your input is not valid", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
 				}
 			}
 		}

@@ -4,6 +4,7 @@ namespace SerialPower
 {
 	internal class Logger
 	{
+		public static bool isDebugEnabled = false;
 		/// <summary>
 		/// Print status code of this running process
 		/// </summary>
@@ -17,6 +18,11 @@ namespace SerialPower
 
 		public static void Write(string text, StatusCode code)
 		{
+			if (code == StatusCode.DEBUG && !isDebugEnabled)
+			{
+				return;
+			}
+
 #pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
 			var methodInfo = new StackTrace().GetFrame(1).GetMethod();
 			var classname = methodInfo.ReflectedType.Name;
@@ -43,6 +49,12 @@ namespace SerialPower
 			}
 			Console.WriteLine(text);
 			Console.ForegroundColor = ConsoleColor.White;
+		}
+
+		public static void PrintHeader(string title)
+		{
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.WriteLine($"====================[ {title} ]====================");
 		}
 
 		private static string GetCurrentDate()

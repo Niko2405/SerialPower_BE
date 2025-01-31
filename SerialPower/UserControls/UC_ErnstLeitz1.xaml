@@ -26,22 +26,48 @@
 			</Grid.ColumnDefinitions>
 			
 			<!-- Programming -->
-			<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
-				<StackPanel>
-					<Label Style="{StaticResource LabelStyleDark}" Content="Programming mode 24V (Intern):"></Label>
-					<ToggleButton x:Name="ToggleButtonProgrammingMode" Style="{StaticResource ToggleButtonDark}" Margin="15" Content="Disabled" Click="ToggleButtonProgrammingMode_Click"></ToggleButton>
-				</StackPanel>
+			<Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<Label Grid.Row="0" Style="{StaticResource LabelTitleDark}" FontSize="21" Content="Programming mode 12V (Intern):"></Label>
+					<ToggleButton Grid.Row="1" x:Name="ToggleButtonProgrammingMode" Style="{StaticResource ToggleButtonDark}" Height="50" Width="180" Content="Disabled" Click="ToggleButtonProgrammingMode_Click"></ToggleButton>
+				</Grid>
 			</Border>
 			
-			<!-- Test -->
-			<Border Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
-				<StackPanel>
-					<Label Style="{StaticResource LabelStyleDark}" Content="Test Phase"></Label>
-					<Button x:Name="ButtonStart" Style="{StaticResource ButtonDark}" Content="Start Test" Margin="0,25,0,25" Height="40" Width="150" Click="ButtonStart_Click" HorizontalAlignment="Center"/>
-					<TextBox x:Name="TextBlockCurrentTestState" Text="READY" Style="{StaticResource TextBoxDark}" Margin="0,2,0,25" Height="40" Width="150" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Center"/>
-					<ProgressBar x:Name="ProgressBarTestPhase" VerticalAlignment="Center" Margin="50,0,50,0" Minimum="0" Maximum="100" Height="25"></ProgressBar>
-					<TextBox Style="{StaticResource TextBoxDark}" Background="Transparent" Margin="0,10,0,0" Text="{Binding ElementName=ProgressBarTestPhase, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-				</StackPanel>
+			<!-- Test Phase -->
+			<Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="4" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LabelTitleDark}" FontSize="21" Content="Automatic Test Phase"></Label>
+					<Button Grid.Row="1" Grid.Column="0" x:Name="ButtonStart" Style="{StaticResource ButtonDark}" Content="Start Test" Height="50" Width="180" Click="ButtonStart_Click" HorizontalAlignment="Center"/>
+					<TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBlockCurrentTestState" Text="Ready" Style="{StaticResource TextBoxDark}" Height="50" Width="180" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Center"/>
+					
+					<!-- Delay -->
+					<StackPanel Grid.Row="2" Grid.Column="0">
+						<Label Style="{StaticResource LabelStyleDark}" Content="Delay (ms):"></Label>
+						<TextBox x:Name="TextBoxDelay" Style="{StaticResource TextBoxDark}" Margin="50,0,50,0" Text="2000"></TextBox>
+					</StackPanel>
+					
+					<!-- Progress -->
+					<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="100,0,100,0">
+						<ProgressBar x:Name="ProgressBarTestPhase" VerticalAlignment="Center" Minimum="0" Maximum="100" Height="25"></ProgressBar>
+						<TextBox Style="{StaticResource TextBoxDark}" Background="Transparent" Text="{Binding ElementName=ProgressBarTestPhase, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Grid>
 			</Border>
 		</Grid>
 	</DockPanel>

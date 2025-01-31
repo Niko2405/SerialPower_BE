@@ -48,18 +48,6 @@ namespace SerialPower
 			SendData(command);
 		}
 
-		/// <summary>
-		/// Send new values to the power supply
-		/// </summary>
-		/// <param name="voltage"></param>
-		/// <param name="current"></param>
-		/// <param name="channel"></param>
-		public static void SetPowerSupplyValues(string voltage, string current, Channel channel)
-		{
-			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace (",", ".");
-			SendData(command);
-		}
-
 		public static string GetPowerSupplyValue(Channel channel, TargetType targetType)
 		{
 			return SendDataAndRecv($"{targetType}{(int)channel}?");

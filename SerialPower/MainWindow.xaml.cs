@@ -100,6 +100,7 @@ namespace SerialPower
 			UserControlIDE1.Visibility = Visibility.Collapsed;
 
 			UserControlCustomControl.Visibility = Visibility.Collapsed;
+			UserControlSequencer.Visibility = Visibility.Collapsed;
 			UserControlTerminal.Visibility = Visibility.Collapsed;
 			UserControlInfo.Visibility = Visibility.Collapsed;
 
@@ -141,6 +142,11 @@ namespace SerialPower
 			SetActiveUserControl(UserControlInfo);
 		}
 
+		private void MenuItemSequencer_Click(object sender, RoutedEventArgs e)
+		{
+			SetActiveUserControl(UserControlSequencer);
+		}
+
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Closing program. Disconnect power supply.", Logger.StatusCode.INFO);
@@ -174,11 +180,6 @@ namespace SerialPower
 		}
 
 		private void MenuItemLua_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Lua is currently not implemented", "Lua / Sequences", MessageBoxButton.OK, MessageBoxImage.Warning);
-		}
-
-		private void MenuItemSequencer_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Lua is currently not implemented", "Lua / Sequences", MessageBoxButton.OK, MessageBoxImage.Warning);
 		}

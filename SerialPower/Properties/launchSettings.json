@@ -5,7 +5,7 @@
     },
     "SerialPower Testing": {
       "commandName": "Project",
-      "commandLineArgs": "--disablePortVerify"
+      "commandLineArgs": "--disablePortVerify --debug"
     }
   }
 }

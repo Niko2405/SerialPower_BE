@@ -31,20 +31,20 @@
 
 					<!-- Voltage -->
 					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
 
 					<!-- Current -->
 					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
 					<!-- etc -->
 					<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="Red" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8" VerticalContentAlignment="Center" HorizontalAlignment="Left">Channel 1 - Offline</CheckBox>
-					<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send to Channel 1</Button>
+					<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send</Button>
 				</StackPanel>
 			</Border>
 			
 			<!-- Channel 1 - Presets -->
-			<Border Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+			<Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
 				<StackPanel>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -115,20 +115,20 @@
 
 					<!-- Voltage -->
 					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
 
 					<!-- Current -->
 					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
 					<!-- etc -->
 					<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="Red" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8" HorizontalAlignment="Left">Channel 2 - Offline</CheckBox>
-					<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send to Channel 2</Button>
+					<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send</Button>
 				</StackPanel>
 			</Border>
 			
 			<!-- Channel 2 - Presets -->
-			<Border Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+			<Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
 				<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
 					<Grid>
 						<Grid.ColumnDefinitions>

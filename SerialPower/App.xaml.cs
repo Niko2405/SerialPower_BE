@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using NLua;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -35,7 +36,7 @@ namespace SerialPower
 					if (versionFile != fileVersionInfo.FileVersion)
 					{
 						Logger.Write("Version of filesystem is not supported", Logger.StatusCode.ERROR);
-						MessageBox.Show("Current filesystem is unsupported. Please delete filesystem: " + System.Environment.CurrentDirectory.Replace("\\", "/") + "/" + ConfigHandler.DIR_ROOT, "Unsupported filesystem detected", MessageBoxButton.OK, MessageBoxImage.Warning);
+						MessageBox.Show($"Filesystem version: {versionFile}\nProgram version: {fileVersionInfo.FileVersion}\nCurrent filesystem is unsupported. Please delete filesystem: " + System.Environment.CurrentDirectory.Replace("\\", "/") + "/" + ConfigHandler.DIR_ROOT, "Unsupported filesystem detected", MessageBoxButton.OK, MessageBoxImage.Error);
 						Environment.Exit(1);
 					}
 					else if (versionFile == fileVersionInfo.FileVersion)
@@ -89,6 +90,20 @@ namespace SerialPower
 		}
 
 		/// <summary>
+		/// Get Lua Version for a simple test if lua is callable
+		/// </summary>
+		/// <returns></returns>
+		private static string GetLuaVersion()
+		{
+			Lua state = new();
+			if (state.DoString("return _VERSION")[0] is string version)
+			{
+				return version;
+			}
+			return "None";
+		}
+
+		/// <summary>
 		/// First entry-point
 		/// </summary>
 		/// <param name="sender"></param>
@@ -108,6 +123,10 @@ namespace SerialPower
 				{
 					SerialSender.DisablePortVerify = true;
 				}
+				if (arg == "--debug")
+				{
+					Logger.isDebugEnabled = true;
+				}
 				else if (arg == "--help")
 				{
 					Console.WriteLine("usable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
@@ -117,6 +136,7 @@ namespace SerialPower
 
 			// Print infos
 			Console.WriteLine("Config Handler:\t\t\tJSON");
+			Console.WriteLine($"Lua System version:\t\t{GetLuaVersion()}");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
 			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");

@@ -9,8 +9,6 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class UC_ErnstLeitz1 : UserControl
 	{
-		private readonly int DELAY = 2000;
-
 		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
@@ -19,7 +17,7 @@ namespace SerialPower.UserControls
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
 		{
-			BackgroundWorker backgroundWorker = new BackgroundWorker();
+			BackgroundWorker backgroundWorker = new();
 			backgroundWorker.WorkerReportsProgress = true;
 			backgroundWorker.DoWork += BackgroundWorker_DoWork;
 			backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
@@ -35,12 +33,25 @@ namespace SerialPower.UserControls
 
 		private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
+			int delay = 1000;
+			try
+			{
+				this.Dispatcher.Invoke(() =>
+				{
+					delay = int.Parse(TextBoxDelay.Text);
+				});
+				Logger.Write("Delay per test is set to: " + delay, Logger.StatusCode.DEBUG);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 			if (sender != null)
 			{
 				// Intern 0V
 				this.Dispatcher.Invoke(() =>
 				{
-					TextBlockCurrentTestState.Text = "TEST: INTERN";
+					TextBlockCurrentTestState.Text = "Current Test: Intern";
 					ToggleButtonProgrammingMode.IsEnabled = false;
 					ButtonStart.IsEnabled = false;
 				});
@@ -48,68 +59,68 @@ namespace SerialPower.UserControls
 				SerialSender.SetChannelState(0);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 6V
 				((BackgroundWorker)sender).ReportProgress(10);
 				SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
 				SerialSender.SetPowerSupplyValues(6f, 0.3f, SerialSender.Channel.CH1);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 12V
 				((BackgroundWorker)sender).ReportProgress(20);
 				SerialSender.SetPowerSupplyValues(12f, 0.2f, SerialSender.Channel.CH1);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 24V
 				((BackgroundWorker)sender).ReportProgress(30);
 				SerialSender.SetPowerSupplyValues(24f, 0.15f, SerialSender.Channel.CH1);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 48V
 				((BackgroundWorker)sender).ReportProgress(40);
 				SerialSender.SetPowerSupplyValues(48f, 0.15f, SerialSender.Channel.CH1);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				/// ------------------------------------------------------ ///
 
 				// Extern 0V
 				this.Dispatcher.Invoke(() =>
 				{
-					TextBlockCurrentTestState.Text = "TEST: EXTERN";
+					TextBlockCurrentTestState.Text = "Current Test: Extern";
 				});
 				((BackgroundWorker)sender).ReportProgress(50);
 				SerialSender.SetChannelState(0);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Extern 6V
 				((BackgroundWorker)sender).ReportProgress(60);
 				SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.ON);
 				SerialSender.SetPowerSupplyValues(6f, 0.3f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 12V
 				((BackgroundWorker)sender).ReportProgress(70);
 				SerialSender.SetPowerSupplyValues(12f, 0.2f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 24V
 				((BackgroundWorker)sender).ReportProgress(80);
 				SerialSender.SetPowerSupplyValues(24f, 0.15f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				// Intern 48V
 				((BackgroundWorker)sender).ReportProgress(90);
 				SerialSender.SetPowerSupplyValues(48f, 0.15f, SerialSender.Channel.CH2);
-				Thread.Sleep(DELAY);
+				Thread.Sleep(delay);
 
 				((BackgroundWorker)sender).ReportProgress(100);
 				SerialSender.SetChannelState(0);
 				this.Dispatcher.Invoke(() =>
 				{
-					TextBlockCurrentTestState.Text = "TEST: ENDED";
+					TextBlockCurrentTestState.Text = "Current: Finish";
 					ButtonStart.IsEnabled = true;
 					ToggleButtonProgrammingMode.IsEnabled = true;
 				});

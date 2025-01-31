@@ -58,6 +58,12 @@ namespace SerialPower
 						ComboBoxComPorts.Items.Add(currentCom);
 					}
 				}
+				catch (UnauthorizedAccessException)
+				{
+					if (serialPort != null)
+					Logger.Write("Port " + serialPort.PortName + " cannot open", Logger.StatusCode.WARNING);
+				}
+
 				Thread.Sleep(1000);
 			}
 
