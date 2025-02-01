@@ -36,7 +36,7 @@
 			</Trigger>
 		</Style.Triggers>
 	</Style>
-	
+
 	<!-- Title -->
 	<Style x:Key="LabelTitleDark" TargetType="{x:Type Label}">
 		<Setter Property="Foreground" Value="White"/>

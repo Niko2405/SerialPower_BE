@@ -5,8 +5,8 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
-			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
-	<DockPanel LastChildFill="True" Margin="10">
+			 d:DesignHeight="750" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
+	<DockPanel LastChildFill="True">
 		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Custom Control</Label>
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
 			<Label Style="{StaticResource LabelTitleDark}" FontSize="15" HorizontalAlignment="Left">Options:</Label>
@@ -26,21 +26,27 @@
 			
 			<!-- Channel 1 -->
 			<Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
-				<StackPanel Margin="10,0,0,0">
-					<Label Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalAlignment="Center">Channel 1</Label>
+				<DockPanel>
+					<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,100,0">
+						<Button x:Name="ButtonPowerCH1" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH1_Click">
+							<Image x:Name="ImagePowerCH1" Source="{StaticResource ImagePowerOff}"></Image>
+						</Button>
+					</StackPanel>
+					<StackPanel DockPanel.Dock="Left" Margin="10,0,0,0">
+						<Label Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalAlignment="Center">Channel 1</Label>
 
-					<!-- Voltage -->
-					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
+						<!-- Voltage -->
+						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
+						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
 
-					<!-- Current -->
-					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
+						<!-- Current -->
+						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
+						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
-					<!-- etc -->
-					<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="Red" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked" Padding="8" VerticalContentAlignment="Center" HorizontalAlignment="Left">Channel 1 - Offline</CheckBox>
-					<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH1_Click">Send</Button>
-				</StackPanel>
+						<!-- etc -->
+						<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH1_Click">Send data</Button>
+					</StackPanel>
+				</DockPanel>
 			</Border>
 			
 			<!-- Channel 1 - Presets -->
@@ -107,26 +113,32 @@
 					</Grid>
 				</StackPanel>
 			</Border>
-			
+
 			<!-- Channel 2 -->
 			<Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
-				<StackPanel Margin="10,0,0,0">
-					<Label Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalAlignment="Center">Channel 2</Label>
+				<DockPanel>
+					<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,100,0">
+						<Button x:Name="ButtonPowerCH2" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH2_Click">
+							<Image x:Name="ImagePowerCH2" Source="{StaticResource ImagePowerOff}"></Image>
+						</Button>
+					</StackPanel>
+					<StackPanel DockPanel.Dock="Left" Margin="10,0,0,0">
+						<Label Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalAlignment="Center">Channel 2</Label>
 
-					<!-- Voltage -->
-					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
+						<!-- Voltage -->
+						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
+						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0,00</TextBox>
 
-					<!-- Current -->
-					<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
-					<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
+						<!-- Current -->
+						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
+						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
-					<!-- etc -->
-					<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="Red" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked" Padding="8" HorizontalAlignment="Left">Channel 2 - Offline</CheckBox>
-					<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Click="ButtonCH2_Click">Send</Button>
-				</StackPanel>
+						<!-- etc -->
+						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH1_Click">Send data</Button>
+					</StackPanel>
+				</DockPanel>
 			</Border>
-			
+
 			<!-- Channel 2 - Presets -->
 			<Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
 				<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">

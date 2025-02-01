@@ -14,14 +14,13 @@
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Developed for: Brückmann Elektronik GmbH</Label>
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Repository: https://github.com/Niko2405/SerialPower_BE</Label>
 			<Label Style="{StaticResource LabelStyleDark}" x:Name="LabelVersion" HorizontalAlignment="Left" FontSize="15">Version: Unknown</Label>
-			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Compiled: 26.01.2025</Label>
 			<Label Style="{StaticResource LabelStyleDark}" x:Name="LabelDotNetVersion" HorizontalAlignment="Left" FontSize="15">Compiled with: Unknown</Label>
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">License: MIT</Label>
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Available connections: USB and RS232</Label>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Right">
 			<Label Style="{StaticResource LabelTitleDark}" HorizontalAlignment="Right" FontSize="16">Only for: AIM TTi CPX200 - Series</Label>
-			<Image Source="{StaticResource ImagePowerSupplie}" Margin="50,0,50,0" Stretch="Fill"/>
+			<Image Source="{StaticResource ImagePowerSupply}" Margin="50,0,50,0" Stretch="Fill"/>
 		</StackPanel>
 	</DockPanel>
 </UserControl>

@@ -53,8 +53,9 @@ namespace SerialPower
 
 		public static void PrintHeader(string title)
 		{
-			Console.ForegroundColor = ConsoleColor.Cyan;
-			Console.WriteLine($"====================[ {title} ]====================");
+			Console.ForegroundColor = ConsoleColor.DarkMagenta;
+			Console.WriteLine($"=========================[ {title} ]=========================");
+			Console.ForegroundColor = ConsoleColor.White;
 		}
 
 		private static string GetCurrentDate()

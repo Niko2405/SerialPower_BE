@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
-    <FileVersion>1.5.1.0</FileVersion>
+    <AssemblyVersion>1.5.2.0</AssemblyVersion>
+    <FileVersion>1.5.2.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -44,6 +44,8 @@
     <None Remove="fonts\OpenSans-ExtraBold.ttf" />
     <None Remove="fonts\OpenSans-Regular.ttf" />
     <None Remove="fonts\OpenSans-SemiBold.ttf" />
+    <None Remove="images\power-off.png" />
+    <None Remove="images\power-on.png" />
     <None Remove="images\powersupplie.png" />
   </ItemGroup>
 
@@ -68,6 +70,8 @@
     <Resource Include="fonts\OpenSans-ExtraBold.ttf" />
     <Resource Include="fonts\OpenSans-Regular.ttf" />
     <Resource Include="fonts\OpenSans-SemiBold.ttf" />
+    <Resource Include="images\power-off.png" />
+    <Resource Include="images\power-on.png" />
     <Resource Include="images\powersupplie.png" />
   </ItemGroup>
 

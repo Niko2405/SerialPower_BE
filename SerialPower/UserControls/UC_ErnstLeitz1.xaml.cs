@@ -12,7 +12,7 @@ namespace SerialPower.UserControls
 		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
-			SerialSender.SetChannelState(0);
+			SerialSender.SetChannelState(SerialSender.State.OFF);
 		}
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace SerialPower.UserControls
 					ButtonStart.IsEnabled = false;
 				});
 				((BackgroundWorker)sender).ReportProgress(0);
-				SerialSender.SetChannelState(0);
+				SerialSender.SetChannelState(SerialSender.State.OFF);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
 				Thread.Sleep(delay);
@@ -90,7 +90,7 @@ namespace SerialPower.UserControls
 					TextBlockCurrentTestState.Text = "Current Test: Extern";
 				});
 				((BackgroundWorker)sender).ReportProgress(50);
-				SerialSender.SetChannelState(0);
+				SerialSender.SetChannelState(SerialSender.State.OFF);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH1);
 				SerialSender.SetPowerSupplyValues(0f, 0.5f, SerialSender.Channel.CH2);
 				Thread.Sleep(delay);

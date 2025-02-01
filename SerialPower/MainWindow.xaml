@@ -10,7 +10,7 @@
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen"
 		Title="SerialPower"
-		Height="720" Width="1380" Closed="WindowClosed">
+		Height="780" Width="1380" Closed="WindowClosed">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
