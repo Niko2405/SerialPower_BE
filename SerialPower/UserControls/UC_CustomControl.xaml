@@ -134,7 +134,7 @@
 						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
 						<!-- etc -->
-						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH1_Click">Send data</Button>
+						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH2_Click">Send data</Button>
 					</StackPanel>
 				</DockPanel>
 			</Border>
