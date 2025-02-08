@@ -206,7 +206,8 @@ namespace SerialPower
 		/// <param name="data">Command</param>
 		/// <param name="showLogging">Should the message logged</param>
 		/// <returns>Response of given data</returns>
-		private static string SendDataAndRecv(string data, bool showLogging = true)
+		[Obsolete("Only use with caution")]
+		public static string SendDataAndRecv(string data, bool showLogging = true)
 		{
 			if (serialPort != null)
 			{

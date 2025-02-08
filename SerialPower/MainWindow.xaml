@@ -19,6 +19,7 @@
 					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
 				</MenuItem>
 				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
+				<MenuItem x:Name="MenuItemLicense" Header="_License" Click="MenuItemLicense_Click"/>
 				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
 			</MenuItem>
 			
@@ -45,9 +46,7 @@
 			<!-- Tools -->
 			<MenuItem Header="_Tools">
 				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
-				<MenuItem x:Name="MenuItemSequencer" Header="_Sequencer" Click="MenuItemSequencer_Click"/>
 				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
-				<MenuItem x:Name="MenuItemLua" Header="_Lua" Click="MenuItemLua_Click"/>
 			</MenuItem>
 		</Menu>
 		
@@ -57,19 +56,16 @@
 				<StackPanel Orientation="Horizontal">
 					<!-- Tick -->
 					<Rectangle x:Name="RectangleData" Fill="Blue" Margin="5,0,5,0" Height="16" Width="16" ToolTip="Heartbeat"/>
-
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+					
 					<!-- CH1 -->
 					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
 					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
-
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+					
 					<!-- CH2 -->
 					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
 					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
-
-					<!-- Sequencer -->
-					<TextBlock x:Name="TextBlockSequencer" Text="Sequencer:" Margin="5,0,5,0" Padding="15,0,15,0"></TextBlock>
-					<ProgressBar x:Name="ProgressBarSequencer" Width="320" Margin="5,0,5,0" Padding="15,0,15,0" ToolTip="Progress of the sequencer" Foreground="Red"></ProgressBar>
-					<TextBlock Text="{Binding ElementName=ProgressBarSequencer, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>
@@ -78,7 +74,6 @@
 			<UserControls:UC_IDE1 x:Name="UserControlIDE1" Visibility="Collapsed"></UserControls:UC_IDE1>
 			<UserControls:UC_Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:UC_Info>
 			<UserControls:UC_Terminal x:Name="UserControlTerminal" Visibility="Collapsed"></UserControls:UC_Terminal>
-			<UserControls:UC_Sequencer x:Name="UserControlSequencer" Visibility="Collapsed"></UserControls:UC_Sequencer>
 			<UserControls:UC_CustomControl x:Name="UserControlCustomControl" Visibility="Visible"></UserControls:UC_CustomControl>
 		</Grid>
 	</DockPanel>

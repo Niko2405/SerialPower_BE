@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.5.2.1</AssemblyVersion>
-    <FileVersion>1.5.2.1</FileVersion>
+    <AssemblyVersion>1.5.2.2</AssemblyVersion>
+    <FileVersion>1.5.2.2</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -61,7 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLua" Version="1.7.4" />
     <PackageReference Include="System.IO.Ports" Version="9.0.1" />
   </ItemGroup>
 

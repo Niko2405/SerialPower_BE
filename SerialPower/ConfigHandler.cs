@@ -16,7 +16,6 @@ namespace SerialPower
 		public static readonly string DIR_ROOT = "serialPower/";
 		public static readonly string DIR_DATABASE = DIR_ROOT + "data/";
 		public static readonly string DIR_CONFIGS = DIR_ROOT + "config/";
-		public static readonly string DIR_SEQUENCES = DIR_ROOT + "sequences/";
 		public static readonly string DIR_TEMP = DIR_ROOT + "tmp/";
 
 		// Files

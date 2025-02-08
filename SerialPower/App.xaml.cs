@@ -1,5 +1,4 @@
-﻿using NLua;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -72,9 +71,6 @@ namespace SerialPower
 				Directory.CreateDirectory(ConfigHandler.DIR_CONFIGS);
 				Logger.Write("Checking " + ConfigHandler.DIR_CONFIGS, Logger.StatusCode.INFO);
 
-				Directory.CreateDirectory(ConfigHandler.DIR_SEQUENCES);
-				Logger.Write("Checking " + ConfigHandler.DIR_SEQUENCES, Logger.StatusCode.INFO);
-
 				Directory.CreateDirectory(ConfigHandler.DIR_DATABASE);
 				Logger.Write("Checking " + ConfigHandler.DIR_DATABASE, Logger.StatusCode.INFO);
 
@@ -87,20 +83,6 @@ namespace SerialPower
 			{
 				Logger.Write("Build filesystem", Logger.StatusCode.ERROR);
 			}
-		}
-
-		/// <summary>
-		/// Get Lua Version for a simple test if lua is callable
-		/// </summary>
-		/// <returns></returns>
-		private static string GetLuaVersion()
-		{
-			Lua state = new();
-			if (state.DoString("return _VERSION")[0] is string version)
-			{
-				return version;
-			}
-			return "None";
 		}
 
 		/// <summary>
@@ -127,7 +109,7 @@ namespace SerialPower
 				{
 					Logger.isDebugEnabled = true;
 				}
-				else if (arg == "--help")
+				if (arg == "--help")
 				{
 					Console.WriteLine("usable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
 					Environment.Exit(0);
@@ -136,7 +118,6 @@ namespace SerialPower
 
 			// Print infos
 			Console.WriteLine("Config Handler:\t\t\tJSON");
-			Console.WriteLine($"Lua System version:\t\t{GetLuaVersion()}");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
 			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");

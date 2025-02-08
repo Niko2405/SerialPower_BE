@@ -27,7 +27,7 @@ namespace SerialPower.UserControls
 		{
 			Logger.Write("CH1 - Send voltage", Logger.StatusCode.INFO);
 			float voltage = float.Parse(TextBoxCH1Voltage.Text);
-			Logger.Write($"[CH1] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
+			Logger.Write($"Set voltage to [{voltage}]", Logger.StatusCode.INFO);
 			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
@@ -40,7 +40,7 @@ namespace SerialPower.UserControls
 		{
 			Logger.Write("CH2 - Send voltage", Logger.StatusCode.INFO);
 			float voltage = float.Parse(TextBoxCH2Voltage.Text);
-			Logger.Write($"[CH2] Set voltage to [{voltage}]", Logger.StatusCode.INFO);
+			Logger.Write($"Set voltage to [{voltage}]", Logger.StatusCode.INFO);
 			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH2);
 		}
 
@@ -59,7 +59,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH1] {currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -83,7 +83,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH1] {currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH1Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -107,7 +107,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH2] {currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)
@@ -131,7 +131,7 @@ namespace SerialPower.UserControls
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
 				newValue = (float)Math.Round(newValue, 3);
-				Logger.Write($"{currentValue} => {newValue}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH2] {currentValue} => {newValue}", Logger.StatusCode.INFO);
 				TextBoxCH2Voltage.Text = newValue.ToString();
 			}
 			catch (Exception ex)

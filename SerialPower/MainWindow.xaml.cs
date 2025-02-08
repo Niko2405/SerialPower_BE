@@ -13,36 +13,15 @@ namespace SerialPower
 	{
 		private readonly BackgroundWorker MeasurementWorker = new();
 		private readonly BackgroundWorker HeartbeatIndicatorWorker = new();
-		private readonly BackgroundWorker SequencerRunningIndicatorWorker = new();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
 			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
-
-			SequencerRunningIndicatorWorker.WorkerReportsProgress = true;
-			SequencerRunningIndicatorWorker.DoWork += SequencerRunningIndicatorWorker_DoWork;
-			SequencerRunningIndicatorWorker.ProgressChanged += SequencerRunningIndicatorWorker_ProgressChanged;
 			
 			MeasurementWorker.RunWorkerAsync();
 			HeartbeatIndicatorWorker.RunWorkerAsync();
-
-			// TODO: Implement LUA Sequencers
-			//SequencerRunningIndicatorWorker.RunWorkerAsync();
-		}
-
-		private void SequencerRunningIndicatorWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-		{
-			ProgressBarSequencer.Value = e.ProgressPercentage;
-		}
-
-		private void SequencerRunningIndicatorWorker_DoWork(object? sender, DoWorkEventArgs e)
-		{
-			if (sender != null)
-			{
-				((BackgroundWorker)sender).ReportProgress(0);
-			}
 		}
 
 		/// <summary>
@@ -100,7 +79,6 @@ namespace SerialPower
 			UserControlIDE1.Visibility = Visibility.Collapsed;
 
 			UserControlCustomControl.Visibility = Visibility.Collapsed;
-			UserControlSequencer.Visibility = Visibility.Collapsed;
 			UserControlTerminal.Visibility = Visibility.Collapsed;
 			UserControlInfo.Visibility = Visibility.Collapsed;
 
@@ -142,11 +120,6 @@ namespace SerialPower
 			SetActiveUserControl(UserControlInfo);
 		}
 
-		private void MenuItemSequencer_Click(object sender, RoutedEventArgs e)
-		{
-			SetActiveUserControl(UserControlSequencer);
-		}
-
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Write("Closing program. Disconnect power supply.", Logger.StatusCode.INFO);
@@ -179,9 +152,9 @@ namespace SerialPower
 			process.StandardInput.WriteLine("exit");
 		}
 
-		private void MenuItemLua_Click(object sender, RoutedEventArgs e)
+		private void MenuItemLicense_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Lua is currently not implemented", "Lua / Sequences", MessageBoxButton.OK, MessageBoxImage.Warning);
+			MessageBox.Show("MIT License\r\n\r\nCopyright (c) 2024 Niko2405\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.", "MIT License - SerialPower_BE", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 	}
 }
