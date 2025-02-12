@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Reflection;
+using System.Diagnostics;
 using System.IO;
-using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace SerialPower
@@ -10,6 +11,9 @@ namespace SerialPower
 	/// </summary>
 	public partial class App : Application
 	{
+		[DllImport("user32.dll")]
+		public static extern long SetCursorPos(int x, int y);
+
 		private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 		{
 			MessageBox.Show(e.Exception.ToString(), "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -93,6 +97,7 @@ namespace SerialPower
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			Console.WriteLine("Loading program...\n");
+			SetCursorPos(0, 0);
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
