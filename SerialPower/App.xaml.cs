@@ -117,6 +117,7 @@ namespace SerialPower
 			}
 
 			// Print infos
+			Logger.PrintHeader("Systeminfo");
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
@@ -126,6 +127,7 @@ namespace SerialPower
 			Console.WriteLine($"Operating system:\t\t{Environment.OSVersion}");
 
 			// Test logger
+			Logger.PrintHeader("Logger");
 			Logger.Write("Testing Logger System", Logger.StatusCode.INFO);
 			Logger.Write("Logger Test: Info logging", Logger.StatusCode.INFO);
 			Logger.Write("Logger Test: Warning logging", Logger.StatusCode.WARNING);
@@ -133,12 +135,14 @@ namespace SerialPower
 			Logger.Write("Logger Test: Debug logging", Logger.StatusCode.DEBUG);
 
 			// Create filesystem
+			Logger.PrintHeader("Filesystem check");
 			BuildFilesystem();
 
 			// Check Filesystem Version
 			CheckFilesystemVersion();
 
 			// Load primary config
+			Logger.PrintHeader("Config system");
 			ConfigHandler.Init();
 			ConfigHandler.PrintConfig();
 

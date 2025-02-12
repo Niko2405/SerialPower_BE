@@ -87,8 +87,8 @@ namespace SerialPower
 			public int SerialPortParity { get; set; } = 0;
 			public int SerialPortStopBits { get; set; } = 1;
 			public int SerialPortDataBits { get; set; } = 8;
-			public int SerialPortReadTimeOut { get; set; } = 50;
-			public int SerialPortWriteTimeOut { get; set; } = 50;
+			public int SerialPortReadTimeOut { get; set; } = 100;
+			public int SerialPortWriteTimeOut { get; set; } = 100;
 		}
 	}
 }

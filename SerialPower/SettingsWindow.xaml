@@ -52,11 +52,11 @@
 
 			<!-- ReadTimeout Settings -->
 			<Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelTitleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">ReadTimeout (ms):</Label>
-			<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxReadTimeout" Grid.Row="5" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">50</TextBox>
+			<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxReadTimeout" Grid.Row="5" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
 
 			<!-- WriteTimeout Settings -->
 			<Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelTitleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">WriteTimeout (ms):</Label>
-			<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxWriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">50</TextBox>
+			<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxWriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
 
 			<!-- Connect -->
 			<Button Grid.Column="1" Grid.Row="9" x:Name="ButtonConnect" Style="{StaticResource ButtonDark}" Margin="5" Click="ButtonConnect_Click" IsEnabled="True">Connect</Button>
