@@ -10,7 +10,7 @@
 		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Custom Control</Label>
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
 			<Label Style="{StaticResource LabelTitleDark}" FontSize="15" HorizontalAlignment="Left">Options:</Label>
-			<CheckBox x:Name="CheckBoxSyncSwitch" Foreground="White" FontSize="14" Margin="15,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckBoxSyncSwitch_Checked" Unchecked="CheckBoxSyncSwitch_Unchecked">Synchronous activation</CheckBox>
+			<CheckBox x:Name="CheckBoxSyncSwitch" Foreground="White" FontSize="14" Margin="15,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckBoxSyncSwitch_Checked" Unchecked="CheckBoxSyncSwitch_Unchecked" ToolTip="(De)Activate Channel 1 and 2 at the same time">Synchronous activation</CheckBox>
 		</StackPanel>
 		
 		<!-- Overview -->
@@ -28,7 +28,7 @@
 			<Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
 				<DockPanel>
 					<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,100,0">
-						<Button x:Name="ButtonPowerCH1" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH1_Click">
+						<Button x:Name="ButtonPowerCH1" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH1_Click" ToolTip="Change state of channel 1">
 							<Image x:Name="ImagePowerCH1" Source="{StaticResource ImagePowerOff}"></Image>
 						</Button>
 					</StackPanel>
@@ -44,7 +44,7 @@
 						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
 						<!-- etc -->
-						<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH1_Click">Send data</Button>
+						<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH1_Click" ToolTip="Send new data to channel 1">Send data</Button>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -118,7 +118,7 @@
 			<Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
 				<DockPanel>
 					<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,100,0">
-						<Button x:Name="ButtonPowerCH2" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH2_Click">
+						<Button x:Name="ButtonPowerCH2" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH2_Click" ToolTip="Change state of channel 2">
 							<Image x:Name="ImagePowerCH2" Source="{StaticResource ImagePowerOff}"></Image>
 						</Button>
 					</StackPanel>
@@ -134,7 +134,7 @@
 						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Current" Width="180" HorizontalAlignment="Left" FontSize="16">1,00</TextBox>
 
 						<!-- etc -->
-						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH2_Click">Send data</Button>
+						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="210" Height="30" HorizontalAlignment="Left" Margin="0,30,0,0" Click="ButtonCH2_Click" ToolTip="Send new data to channel 2">Send data</Button>
 					</StackPanel>
 				</DockPanel>
 			</Border>

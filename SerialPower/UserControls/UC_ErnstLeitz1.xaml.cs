@@ -33,18 +33,24 @@ namespace SerialPower.UserControls
 
 		private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
-			int delay = 1000;
+			int delay = 2000;
 			try
 			{
 				this.Dispatcher.Invoke(() =>
 				{
 					delay = int.Parse(TextBoxDelay.Text);
 				});
+				if (delay <= 1000)
+				{
+					MessageBox.Show("Junge übertreib es nicht! Delay sollte min. 2000ms benötigen. Setze delay auf 2000ms.", "Verarsch mich nicht!", MessageBoxButton.OK, MessageBoxImage.Warning);
+					delay = 2000;
+				}
 				Logger.Write("Delay per test is set to: " + delay, Logger.StatusCode.DEBUG);
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
 			}
 			if (sender != null)
 			{

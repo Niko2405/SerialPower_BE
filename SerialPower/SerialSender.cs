@@ -68,6 +68,15 @@ namespace SerialPower
 					string currentChannel1 = serialPort.ReadLine().Trim('\r', '\n');
 					string voltageChannel2 = serialPort.ReadLine().Trim('\r', '\n');
 					string currentChannel2 = serialPort.ReadLine().Trim('\r', '\n');
+
+					if (string.IsNullOrEmpty(voltageChannel1))
+						voltageChannel1 = "No data";
+					if (string.IsNullOrEmpty(voltageChannel2))
+						voltageChannel2 = "No data";
+					if (string.IsNullOrEmpty(currentChannel1))
+						currentChannel1 = "No data";
+					if (string.IsNullOrEmpty(currentChannel2))
+						currentChannel2 = "No data";
 					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
 				}
 			}

@@ -59,13 +59,14 @@
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- CH1 -->
-					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
-					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCoral"/>
+					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Tomato" ToolTip="Voltage on Channel 1"/>
+					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Tomato" ToolTip="Current on Channel 1"/>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- CH2 -->
-					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
-					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"/>
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGreen" ToolTip="Voltage on Channel 2"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGreen" ToolTip="Current on Channel 2"/>
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 				</StackPanel>
 			</StatusBarItem>
 		</StatusBar>

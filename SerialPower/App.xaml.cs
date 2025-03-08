@@ -152,6 +152,9 @@ namespace SerialPower
 			ConfigHandler.PrintConfig();
 
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
+#if DEBUG
+			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion} - DEBUG";
+#endif
 			Thread.Sleep(1000);
 		}
 	}
