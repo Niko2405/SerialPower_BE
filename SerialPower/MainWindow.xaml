@@ -25,18 +25,18 @@
 			
 			<!-- Baugruppen -->
 			<MenuItem Header="_Programs">
-				<MenuItem Header="_Tucker">
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
-				</MenuItem>
 				<MenuItem Header="_Ernst Leitz">
 					<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
 				</MenuItem>
 				<MenuItem Header="_IDE">
 					<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
 				</MenuItem>
-				<MenuItem Header="_LEIMI">
+				<MenuItem Header="_Leimi">
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+				</MenuItem>
+				<MenuItem Header="_Tucker">
 					<MenuItem Header="_Example"/>
 					<MenuItem Header="_Example"/>
 					<MenuItem Header="_Example"/>

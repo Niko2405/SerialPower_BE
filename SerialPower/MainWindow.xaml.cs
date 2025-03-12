@@ -34,7 +34,7 @@ namespace SerialPower
 			bool toggled = false;
 			while (true)
 			{
-				Thread.Sleep(500);
+				Thread.Sleep(250);
 				this.Dispatcher.Invoke(() =>
 				{
 					if (toggled)

@@ -22,7 +22,6 @@ namespace SerialPower
 			{
 				return;
 			}
-
 #pragma warning disable CS8602 // Dereferenzierung eines möglichen Nullverweises.
 			var methodInfo = new StackTrace().GetFrame(1).GetMethod();
 			var classname = methodInfo.ReflectedType.Name;

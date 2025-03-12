@@ -7,7 +7,21 @@ namespace SerialPower
 	internal class SerialSender
 	{
 		public static SerialPort? serialPort;
+
+		/// <summary>
+		/// Disable port verify. Usefull for system there connected with rs232
+		/// </summary>
 		public static bool DisablePortVerify = false;
+
+		/// <summary>
+		/// Current fault counter
+		/// </summary>
+		private static int faultCounter = 0;
+
+		/// <summary>
+		/// Fault limit
+		/// </summary>
+		private readonly static int faultLimit = 10;
 
 		/// <summary>
 		/// Channels of the power supply
@@ -48,6 +62,12 @@ namespace SerialPower
 			SendData(command);
 		}
 
+		/// <summary>
+		/// Get values from the power supply
+		/// </summary>
+		/// <param name="channel"></param>
+		/// <param name="targetType"></param>
+		/// <returns></returns>
 		public static string GetPowerSupplyValue(Channel channel, TargetType targetType)
 		{
 			return SendDataAndRecv($"{targetType}{(int)channel}?");
@@ -59,32 +79,34 @@ namespace SerialPower
 		/// <returns>Tuple with V1, I1, V2, I2</returns>
 		public static Tuple<string, string, string, string> GetPowerSupplyValues()
 		{
-			try
+			if (faultCounter >= faultLimit)
 			{
-				if (serialPort != null)
-				{
-					serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
-					string voltageChannel1 = serialPort.ReadLine().Trim('\r', '\n');
-					string currentChannel1 = serialPort.ReadLine().Trim('\r', '\n');
-					string voltageChannel2 = serialPort.ReadLine().Trim('\r', '\n');
-					string currentChannel2 = serialPort.ReadLine().Trim('\r', '\n');
+				Logger.Write($"GetPowerSupplyValues: Fault limit reached", Logger.StatusCode.ERROR);
+				return Tuple.Create("max", "fault", "limit", "reached");
+			}
+			if (serialPort != null)
+			{
+				string voltageChannel1 = SendDataAndRecv("V1O?");
+				string voltageChannel2 = SendDataAndRecv("V2O?");
+				string currentChannel1 = SendDataAndRecv("I1O?");
+				string currentChannel2 = SendDataAndRecv("I2O?");
 
-					if (string.IsNullOrEmpty(voltageChannel1))
-						voltageChannel1 = "No data";
-					if (string.IsNullOrEmpty(voltageChannel2))
-						voltageChannel2 = "No data";
-					if (string.IsNullOrEmpty(currentChannel1))
-						currentChannel1 = "No data";
-					if (string.IsNullOrEmpty(currentChannel2))
-						currentChannel2 = "No data";
-					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
+				/*
+				serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
+				string voltageChannel1 = serialPort.ReadLine().Trim('\r', '\n');
+				string currentChannel1 = serialPort.ReadLine().Trim('\r', '\n');
+				string voltageChannel2 = serialPort.ReadLine().Trim('\r', '\n');
+				string currentChannel2 = serialPort.ReadLine().Trim('\r', '\n');
+				*/
+
+				if (string.IsNullOrEmpty(voltageChannel1) || !voltageChannel1.Contains('V') || voltageChannel1.Equals("TIMEOUT") || string.IsNullOrEmpty(voltageChannel2) || !voltageChannel2.Contains('V') || voltageChannel2.Equals("TIMEOUT") || string.IsNullOrEmpty(currentChannel1) || !currentChannel1.Contains('A') || currentChannel1.Equals("TIMEOUT") || string.IsNullOrEmpty(currentChannel2) || !currentChannel2.Contains('A') || currentChannel2.Equals("TIMEOUT"))
+				{
+					faultCounter++;
+					Logger.Write($"Timeout. Current fail counter: [{faultCounter}] limit: [{faultLimit}]", Logger.StatusCode.WARNING);
+					return Tuple.Create("System", "fault", "System", "fault");
 				}
 			}
-			catch (TimeoutException)
-			{
-				return Tuple.Create("No", "Connection", "No", "Connection");
-			}
-			return Tuple.Create("Err", "Err", "Err", "Err");
+			return Tuple.Create("serialPort is null", "serialPort is null", "serialPort is null", "serialPort is null");
 		}
 
 		/// <summary>
