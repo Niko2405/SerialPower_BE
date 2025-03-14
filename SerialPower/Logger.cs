@@ -5,6 +5,7 @@ namespace SerialPower
 	internal class Logger
 	{
 		public static bool isDebugEnabled = false;
+
 		/// <summary>
 		/// Print status code of this running process
 		/// </summary>

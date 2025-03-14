@@ -86,10 +86,10 @@ namespace SerialPower
 			}
 			if (serialPort != null)
 			{
-				string voltageChannel1 = SendDataAndRecv("V1O?");
-				string voltageChannel2 = SendDataAndRecv("V2O?");
-				string currentChannel1 = SendDataAndRecv("I1O?");
-				string currentChannel2 = SendDataAndRecv("I2O?");
+				string voltageChannel1 = SendDataAndRecv("V1O?", false);
+				string voltageChannel2 = SendDataAndRecv("V2O?", false);
+				string currentChannel1 = SendDataAndRecv("I1O?", false);
+				string currentChannel2 = SendDataAndRecv("I2O?", false);
 
 				/*
 				serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
@@ -105,6 +105,7 @@ namespace SerialPower
 					Logger.Write($"Timeout. Current fail counter: [{faultCounter}] limit: [{faultLimit}]", Logger.StatusCode.WARNING);
 					return Tuple.Create("System", "fault", "System", "fault");
 				}
+				return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
 			}
 			return Tuple.Create("serialPort is null", "serialPort is null", "serialPort is null", "serialPort is null");
 		}
