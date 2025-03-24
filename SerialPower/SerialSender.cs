@@ -81,14 +81,18 @@ namespace SerialPower
 		{
 			if (faultCounter >= faultLimit)
 			{
-				Logger.Write($"GetPowerSupplyValues: Fault limit reached", Logger.StatusCode.ERROR);
+				Logger.Write($"GetPowerSupplyValues: Fail counter limit reached", Logger.StatusCode.ERROR);
 				return Tuple.Create("max", "fault", "limit", "reached");
 			}
 			if (serialPort != null)
 			{
+				Thread.Sleep(1);
 				string voltageChannel1 = SendDataAndRecv("V1O?", false);
+				Thread.Sleep(1);
 				string voltageChannel2 = SendDataAndRecv("V2O?", false);
+				Thread.Sleep(1);
 				string currentChannel1 = SendDataAndRecv("I1O?", false);
+				Thread.Sleep(1);
 				string currentChannel2 = SendDataAndRecv("I2O?", false);
 
 				/*

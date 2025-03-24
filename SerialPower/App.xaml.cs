@@ -32,10 +32,10 @@ namespace SerialPower
 
 			try
 			{
-				if (File.Exists(ConfigHandler.DIR_DATABASE + "version.dat"))
+				if (File.Exists(ConfigHandler.VERSION_FILE))
 				{
 					Logger.Write("Version file found. Reading version...", Logger.StatusCode.INFO);
-					string versionFile = File.ReadAllText(ConfigHandler.DIR_DATABASE + "version.dat");
+					string versionFile = File.ReadAllText(ConfigHandler.VERSION_FILE);
 					if (versionFile != fileVersionInfo.FileVersion)
 					{
 						Logger.Write("Version of filesystem is not supported", Logger.StatusCode.ERROR);
@@ -50,7 +50,7 @@ namespace SerialPower
 				}
 				else
 				{
-					File.WriteAllText(ConfigHandler.DIR_DATABASE + "version.dat", fileVersionInfo.FileVersion);
+					File.WriteAllText(ConfigHandler.VERSION_FILE, fileVersionInfo.FileVersion);
 					Logger.Write("New version file created", Logger.StatusCode.INFO);
 					return;
 				}
@@ -155,7 +155,7 @@ namespace SerialPower
 #if DEBUG
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion} - DEBUG";
 #endif
-			Thread.Sleep(1000);
+			Thread.Sleep(2000);
 		}
 	}
 }

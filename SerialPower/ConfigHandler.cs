@@ -20,6 +20,7 @@ namespace SerialPower
 
 		// Files
 		public static readonly string CONFIG_FILE = DIR_CONFIGS + "config.json";
+		public static readonly string VERSION_FILE = DIR_DATABASE + "version.dat";
 
 		public static ConfigObject? currentConfig;
 
