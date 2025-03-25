@@ -69,7 +69,11 @@
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- Version -->
-					<TextBlock x:Name="TextBlockVersion"> Version: 0.0.0.0 </TextBlock>
+					<TextBlock x:Name="TextBlockVersion" Padding="15,0,15,0">Version: 0.0.0.0</TextBlock>
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+
+					<!-- Debug Status -->
+					<TextBlock x:Name="TextBlockDebugState" Padding="15,0,15,0">DebugEnabled: N/A</TextBlock>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 				</StackPanel>
 			</StatusBarItem>

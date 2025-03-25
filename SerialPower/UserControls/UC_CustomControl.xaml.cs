@@ -106,7 +106,7 @@ namespace SerialPower.UserControls
 
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Send data to Channel 1", Logger.StatusCode.INFO);
+			Logger.Write("Send current data to Channel 1", Logger.StatusCode.INFO);
 			try
 			{
 				float voltage = float.Parse(TextBox_CH1Voltage.Text.Replace('.', ','));
@@ -122,7 +122,7 @@ namespace SerialPower.UserControls
 
 		private void ButtonCH2_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Send data to Channel 2", Logger.StatusCode.INFO);
+			Logger.Write("Send current data to Channel 2", Logger.StatusCode.INFO);
 			try
 			{
 				float voltage = float.Parse(TextBox_CH2Voltage.Text.Replace('.', ','));

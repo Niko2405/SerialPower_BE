@@ -90,6 +90,7 @@ namespace SerialPower
 			public int SerialPortDataBits { get; set; } = 8;
 			public int SerialPortReadTimeOut { get; set; } = 100;
 			public int SerialPortWriteTimeOut { get; set; } = 100;
+			public short MeasureUpdateInterval { get; set; } = 1000;
 		}
 	}
 }

@@ -116,7 +116,7 @@ namespace SerialPower
 				}
 				if (arg == "--help")
 				{
-					Console.WriteLine("usable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.");
+					Console.WriteLine("Usable commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug");
 					Environment.Exit(0);
 				}
 			}

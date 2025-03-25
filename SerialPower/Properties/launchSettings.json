@@ -1,11 +1,11 @@
 {
   "profiles": {
-    "SerialPower Normal": {
-      "commandName": "Project"
-    },
-    "SerialPower Testing": {
+    "Testing": {
       "commandName": "Project",
       "commandLineArgs": "--disablePortVerify --debug"
+    },
+    "Normal": {
+      "commandName": "Project"
     }
   }
 }

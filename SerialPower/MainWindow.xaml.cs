@@ -14,20 +14,26 @@ namespace SerialPower
 	{
 		private readonly BackgroundWorker MeasurementWorker = new();
 		private readonly BackgroundWorker HeartbeatIndicatorWorker = new();
-		private readonly int UpdateInterval = 1000;
+		private static short updateDelay = 1000;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			try
 			{
-				TextBlockVersion.Text = " Version: " + File.ReadAllText(ConfigHandler.VERSION_FILE) + " ";
+				TextBlockVersion.Text = "Version: " + File.ReadAllText(ConfigHandler.VERSION_FILE);
+				TextBlockDebugState.Text = "DebugEnabled: " + Logger.isDebugEnabled.ToString();
 			}
 			catch (Exception)
 			{
 				Logger.Write($"Reading version file: {ConfigHandler.VERSION_FILE}", Logger.StatusCode.ERROR);
 			}
-			
+
+			if (ConfigHandler.currentConfig != null)
+			{
+				updateDelay = ConfigHandler.currentConfig.MeasureUpdateInterval;
+			}
+
 			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
 			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
 			
@@ -45,7 +51,7 @@ namespace SerialPower
 			bool toggled = false;
 			while (true)
 			{
-				Thread.Sleep(UpdateInterval / 2);
+				Thread.Sleep(updateDelay / 2);
 				this.Dispatcher.Invoke(() =>
 				{
 					if (toggled)
@@ -66,14 +72,13 @@ namespace SerialPower
 		{
 			while (true)
 			{
-				Thread.Sleep(UpdateInterval);
+				Thread.Sleep(updateDelay);
 				this.Dispatcher.Invoke(() =>
 				{
-					var data = SerialSender.GetPowerSupplyValues();
-					TextBlockVoltageCH1.Text = "CH1 Voltage: " + data.Item1;
-					TextBlockCurrentCH1.Text = "CH1 Current: " + data.Item2;
-					TextBlockVoltageCH2.Text = "CH2 Voltage: " + data.Item3;
-					TextBlockCurrentCH2.Text = "CH2 Current: " + data.Item4;
+					TextBlockVoltageCH1.Text = "CH1 Voltage: " + SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.V); // V1 5.45 ...
+					TextBlockCurrentCH1.Text = "CH1 Current: " + SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.I); // I1 2.15 ...
+					TextBlockVoltageCH2.Text = "CH2 Voltage: " + SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
+					TextBlockCurrentCH2.Text = "CH2 Current: " + SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
 				});
 			}
 		}

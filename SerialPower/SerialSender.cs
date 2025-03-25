@@ -74,47 +74,6 @@ namespace SerialPower
 		}
 
 		/// <summary>
-		/// Get all datas from power supply like voltage and current
-		/// </summary>
-		/// <returns>Tuple with V1, I1, V2, I2</returns>
-		public static Tuple<string, string, string, string> GetPowerSupplyValues()
-		{
-			if (faultCounter >= faultLimit)
-			{
-				Logger.Write($"GetPowerSupplyValues: Fail counter limit reached", Logger.StatusCode.ERROR);
-				return Tuple.Create("max", "fault", "limit", "reached");
-			}
-			if (serialPort != null)
-			{
-				Thread.Sleep(1);
-				string voltageChannel1 = SendDataAndRecv("V1O?", false);
-				Thread.Sleep(1);
-				string voltageChannel2 = SendDataAndRecv("V2O?", false);
-				Thread.Sleep(1);
-				string currentChannel1 = SendDataAndRecv("I1O?", false);
-				Thread.Sleep(1);
-				string currentChannel2 = SendDataAndRecv("I2O?", false);
-
-				/*
-				serialPort.WriteLine("V1O?; I1O?; V2O?; I2O?");
-				string voltageChannel1 = serialPort.ReadLine().Trim('\r', '\n');
-				string currentChannel1 = serialPort.ReadLine().Trim('\r', '\n');
-				string voltageChannel2 = serialPort.ReadLine().Trim('\r', '\n');
-				string currentChannel2 = serialPort.ReadLine().Trim('\r', '\n');
-				*/
-
-				if (string.IsNullOrEmpty(voltageChannel1) || !voltageChannel1.Contains('V') || voltageChannel1.Equals("TIMEOUT") || string.IsNullOrEmpty(voltageChannel2) || !voltageChannel2.Contains('V') || voltageChannel2.Equals("TIMEOUT") || string.IsNullOrEmpty(currentChannel1) || !currentChannel1.Contains('A') || currentChannel1.Equals("TIMEOUT") || string.IsNullOrEmpty(currentChannel2) || !currentChannel2.Contains('A') || currentChannel2.Equals("TIMEOUT"))
-				{
-					faultCounter++;
-					Logger.Write($"Timeout. Current fail counter: [{faultCounter}] limit: [{faultLimit}]", Logger.StatusCode.WARNING);
-					return Tuple.Create("System", "fault", "System", "fault");
-				}
-				return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
-			}
-			return Tuple.Create("serialPort is null", "serialPort is null", "serialPort is null", "serialPort is null");
-		}
-
-		/// <summary>
 		/// Switch on or off the channels
 		/// </summary>
 		/// <param name="channel"></param>
@@ -209,7 +168,7 @@ namespace SerialPower
 		/// </summary>
 		/// <param name="data">Command</param>
 		/// <param name="showLogging">Should the message logged</param>
-		private static void SendData(string data, bool showLogging = true)
+		private static void SendData(string data)
 		{
 			if (serialPort != null)
 			{
@@ -221,8 +180,8 @@ namespace SerialPower
 				{
 					serialPort.WriteLine(data);
 
-					if (showLogging)
-						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
+					if (Logger.isDebugEnabled)
+						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.DEBUG);
 				}
 				catch (TimeoutException)
 				{
@@ -243,7 +202,7 @@ namespace SerialPower
 		/// <param name="showLogging">Should the message logged</param>
 		/// <returns>Response of given data</returns>
 		[Obsolete("Only use with caution")]
-		public static string SendDataAndRecv(string data, bool showLogging = true)
+		public static string SendDataAndRecv(string data)
 		{
 			if (serialPort != null)
 			{
@@ -255,14 +214,14 @@ namespace SerialPower
 				{
 					serialPort.WriteLine(data);
 
-					if (showLogging)
-						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.INFO);
+					if (Logger.isDebugEnabled)
+						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.DEBUG);
 
 					string response = serialPort.ReadLine().Trim();
 					//string response = "return";
 
-					if (showLogging)
-						Logger.Write($"[{serialPort.PortName}] Received data: " + response, Logger.StatusCode.INFO);
+					if (Logger.isDebugEnabled)
+						Logger.Write($"[{serialPort.PortName}] Received data: " + response, Logger.StatusCode.DEBUG);
 
 					return response;
 				}
