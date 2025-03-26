@@ -64,8 +64,8 @@
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- CH2 -->
-					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGreen" ToolTip="Voltage on Channel 2"/>
-					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGreen" ToolTip="Current on Channel 2"/>
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="SpringGreen" ToolTip="Voltage on Channel 2"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="SpringGreen" ToolTip="Current on Channel 2"/>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- Version -->

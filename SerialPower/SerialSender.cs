@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using System.Windows;
 
 namespace SerialPower
@@ -21,7 +20,7 @@ namespace SerialPower
 		/// <summary>
 		/// Fault limit
 		/// </summary>
-		private readonly static int faultLimit = 10;
+		private readonly static int faultLimit = 10 * 4;
 
 		/// <summary>
 		/// Channels of the power supply
@@ -71,6 +70,66 @@ namespace SerialPower
 		public static string GetPowerSupplyValue(Channel channel, TargetType targetType)
 		{
 			return SendDataAndRecv($"{targetType}{(int)channel}?");
+		}
+
+		/// <summary>
+		/// Get all datas from power supply like voltage and current
+		/// </summary>
+		/// <returns>Tuple with V1, I1, V2, I2</returns>
+		public static Tuple<string, string, string, string> GetPowerSupplyValues()
+		{
+			if (faultCounter >= faultLimit)
+			{
+				Logger.Write($"GetPowerSupplyValues: Fail counter limit reached", Logger.StatusCode.ERROR);
+				return Tuple.Create("FAULT", "LIMIT", "FAULT", "LIMIT");
+			}
+
+			short size = 4; //V1 I1 V2 I2
+			string voltageChannel1;
+			string voltageChannel2;
+			string currentChannel1;
+			string currentChannel2;
+
+			string[] values = new string[size];
+
+			try
+			{
+				if (serialPort != null)
+				{
+					values[0] = SendDataAndRecv("V1O?");
+					values[1] = SendDataAndRecv("V2O?");
+					values[2] = SendDataAndRecv("I1O?");
+					values[3] = SendDataAndRecv("I2O?");
+
+					if (values.Contains("TIMEOUT"))
+					{
+						faultCounter++;
+						Logger.Write($"Timeout. Current fail counter: [{faultCounter}] limit: [{faultLimit}]", Logger.StatusCode.WARNING);
+						return Tuple.Create("TIMEOUT", "TIMEOUT", "TIMEOUT", "TIMEOUT");
+					}
+
+					Array.Sort(values);
+					/*
+					 * 0. I1
+					 * 1. I2
+					 * 2. V1
+					 * 3. V2
+					 */
+					currentChannel1 = values[0].Replace("I1", string.Empty).Replace(" ", string.Empty) + "A";
+					currentChannel2 = values[1].Replace("I2", string.Empty).Replace(" ", string.Empty) + "A";
+					voltageChannel1 = values[2].Replace("V1", string.Empty).Replace(" ", string.Empty) + "V";
+					voltageChannel2 = values[3].Replace("V2", string.Empty).Replace(" ", string.Empty) + "V";
+
+					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
+				}
+				Logger.Write($"SerialPort is null", Logger.StatusCode.ERROR);
+				return Tuple.Create("ERROR", "ERROR", "ERROR", "ERROR");
+			}
+			catch (Exception ex)
+			{
+				Logger.Write(ex.Message, Logger.StatusCode.ERROR);
+				return Tuple.Create("ERROR", "ERROR", "ERROR", "ERROR");
+			}
 		}
 
 		/// <summary>
@@ -195,13 +254,6 @@ namespace SerialPower
 			}
 		}
 
-		/// <summary>
-		/// Send data and wait for response
-		/// </summary>
-		/// <param name="data">Command</param>
-		/// <param name="showLogging">Should the message logged</param>
-		/// <returns>Response of given data</returns>
-		[Obsolete("Only use with caution")]
 		public static string SendDataAndRecv(string data)
 		{
 			if (serialPort != null)
@@ -232,7 +284,10 @@ namespace SerialPower
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					if (MessageBox.Show("ERROR: " + ex.Message + "\nDo you want to continue?", "Critical error", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.No)
+					{
+						Environment.Exit(2);
+					}
 				}
 			}
 			return "SerialPort is null";
