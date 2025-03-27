@@ -142,10 +142,10 @@ namespace SerialPower.UserControls
 			if (Convert.ToBoolean(e.NewValue.ToString()))
 			{
 				// get last data from device
-				string voltageCH1 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.V); // V1 5.45 ...
-				string currentCH1 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH1, SerialSender.TargetType.I); // I1 2.15 ...
-				string voltageCH2 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
-				string currentCH2 = SerialSender.GetPowerSupplyValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
+				string voltageCH1 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH1, SerialSender.TargetType.V); // V1 5.45 ...
+				string currentCH1 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH1, SerialSender.TargetType.I); // I1 2.15 ...
+				string voltageCH2 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
+				string currentCH2 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
 
 				if (voltageCH1.StartsWith("V1") && voltageCH2.StartsWith("V2") && currentCH1.StartsWith("I1") && currentCH2.StartsWith("I2"))
 				{

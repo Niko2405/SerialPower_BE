@@ -62,74 +62,55 @@ namespace SerialPower
 		}
 
 		/// <summary>
-		/// Get values from the power supply
+		/// Retrieve nominal (current) target value from the power supply
 		/// </summary>
 		/// <param name="channel"></param>
 		/// <param name="targetType"></param>
 		/// <returns></returns>
-		public static string GetPowerSupplyValue(Channel channel, TargetType targetType)
+		public static string GetPowerSupplyNominalValue(Channel channel, TargetType targetType)
 		{
-			return SendDataAndRecv($"{targetType}{(int)channel}?");
+			// Example output: V1 24.00
+			if (faultCounter >= faultLimit)
+			{
+				return "Fault limit reached";
+			}
+
+			string value = SendDataAndRecv($"{targetType}{(int)channel}?");
+
+			if (value.Equals("TIMEOUT"))
+			{
+				faultCounter++;
+				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
+			}
+			if (value.StartsWith("V1") || value.StartsWith("V2") || value.StartsWith("I1") || value.StartsWith("I2"))
+			{
+				value = value.Remove(0, 3); // remove V1, I2 or something
+			}
+			return value;
 		}
 
 		/// <summary>
-		/// Get all datas from power supply like voltage and current
+		/// Retrieve actual value from the power supply
 		/// </summary>
-		/// <returns>Tuple with V1, I1, V2, I2</returns>
-		public static Tuple<string, string, string, string> GetPowerSupplyValues()
+		/// <param name="channel"></param>
+		/// <param name="targetType"></param>
+		/// <returns></returns>
+		public static string GetPowerSupplyActualValue(Channel channel, TargetType targetType)
 		{
+			// Example output: 24.00V
 			if (faultCounter >= faultLimit)
 			{
-				Logger.Write($"GetPowerSupplyValues: Fail counter limit reached", Logger.StatusCode.ERROR);
-				return Tuple.Create("FAULT", "LIMIT", "FAULT", "LIMIT");
+				return "Fault limit reached";
 			}
 
-			short size = 4; //V1 I1 V2 I2
-			string voltageChannel1;
-			string voltageChannel2;
-			string currentChannel1;
-			string currentChannel2;
+			string value = SendDataAndRecv($"{targetType}{(int)channel}O?");
 
-			string[] values = new string[size];
-
-			try
+			if (value.Equals("TIMEOUT"))
 			{
-				if (serialPort != null)
-				{
-					values[0] = SendDataAndRecv("V1O?");
-					values[1] = SendDataAndRecv("V2O?");
-					values[2] = SendDataAndRecv("I1O?");
-					values[3] = SendDataAndRecv("I2O?");
-
-					if (values.Contains("TIMEOUT"))
-					{
-						faultCounter++;
-						Logger.Write($"Timeout. Current fail counter: [{faultCounter}] limit: [{faultLimit}]", Logger.StatusCode.WARNING);
-						return Tuple.Create("TIMEOUT", "TIMEOUT", "TIMEOUT", "TIMEOUT");
-					}
-
-					Array.Sort(values);
-					/*
-					 * 0. I1
-					 * 1. I2
-					 * 2. V1
-					 * 3. V2
-					 */
-					currentChannel1 = values[0].Replace("I1", string.Empty).Replace(" ", string.Empty) + "A";
-					currentChannel2 = values[1].Replace("I2", string.Empty).Replace(" ", string.Empty) + "A";
-					voltageChannel1 = values[2].Replace("V1", string.Empty).Replace(" ", string.Empty) + "V";
-					voltageChannel2 = values[3].Replace("V2", string.Empty).Replace(" ", string.Empty) + "V";
-
-					return Tuple.Create(voltageChannel1, currentChannel1, voltageChannel2, currentChannel2);
-				}
-				Logger.Write($"SerialPort is null", Logger.StatusCode.ERROR);
-				return Tuple.Create("ERROR", "ERROR", "ERROR", "ERROR");
+				faultCounter++;
+				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
 			}
-			catch (Exception ex)
-			{
-				Logger.Write(ex.Message, Logger.StatusCode.ERROR);
-				return Tuple.Create("ERROR", "ERROR", "ERROR", "ERROR");
-			}
+			return value;
 		}
 
 		/// <summary>

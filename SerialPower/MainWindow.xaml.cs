@@ -75,11 +75,10 @@ namespace SerialPower
 				Thread.Sleep(updateDelay);
 				this.Dispatcher.Invoke(() =>
 				{
-					var data = SerialSender.GetPowerSupplyValues();
-					TextBlockVoltageCH1.Text = "CH1 Voltage: " + data.Item1;
-					TextBlockCurrentCH1.Text = "CH1 Current: " + data.Item2;
-					TextBlockVoltageCH2.Text = "CH2 Voltage: " + data.Item3;
-					TextBlockCurrentCH2.Text = "CH2 Current: " + data.Item4;
+					TextBlockVoltageCH1.Text = "CH1 Voltage: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.V);
+					TextBlockCurrentCH1.Text = "CH1 Current: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.I);
+					TextBlockVoltageCH2.Text = "CH2 Voltage: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
+					TextBlockCurrentCH2.Text = "CH2 Current: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
 				});
 			}
 		}

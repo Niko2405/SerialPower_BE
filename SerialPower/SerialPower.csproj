@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.5.3.1</AssemblyVersion>
-    <FileVersion>1.5.3.1</FileVersion>
+    <AssemblyVersion>1.5.3.2</AssemblyVersion>
+    <FileVersion>1.5.3.2</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -30,6 +30,7 @@
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -37,6 +38,7 @@
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>
