@@ -7,10 +7,10 @@
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
 		MinHeight="640" MinWidth="720"
+		Height="720" Width="1240"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen"
-		Title="SerialPower"
-		Height="780" Width="1380" Closed="WindowClosed">
+		Title="SerialPower" Closed="WindowClosed">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">

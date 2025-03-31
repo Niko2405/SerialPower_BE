@@ -49,6 +49,12 @@ namespace SerialPower
 			I
 		}
 
+		public enum STATUSCODE
+		{
+			OK = 0,
+			TIMEOUT = 1,
+		}
+
 		/// <summary>
 		/// Send new values to the power supply
 		/// </summary>
@@ -72,12 +78,12 @@ namespace SerialPower
 			// Example output: V1 24.00
 			if (faultCounter >= faultLimit)
 			{
-				return "Fault limit reached";
+				return STATUSCODE.TIMEOUT.ToString();
 			}
 
 			string value = SendDataAndRecv($"{targetType}{(int)channel}?");
 
-			if (value.Equals("TIMEOUT"))
+			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
 				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
@@ -100,12 +106,12 @@ namespace SerialPower
 			// Example output: 24.00V
 			if (faultCounter >= faultLimit)
 			{
-				return "Fault limit reached";
+				return STATUSCODE.TIMEOUT.ToString();
 			}
 
 			string value = SendDataAndRecv($"{targetType}{(int)channel}O?");
 
-			if (value.Equals("TIMEOUT"))
+			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
 				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
@@ -192,7 +198,7 @@ namespace SerialPower
 					}
 					catch (TimeoutException)
 					{
-						Logger.Write("Timeout", Logger.StatusCode.ERROR);
+						Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
 					}
 					catch (Exception ex)
 					{
@@ -225,7 +231,7 @@ namespace SerialPower
 				}
 				catch (TimeoutException)
 				{
-					Logger.Write("Timeout", Logger.StatusCode.ERROR);
+					Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
 				}
 				catch (Exception ex)
 				{
@@ -260,8 +266,8 @@ namespace SerialPower
 				}
 				catch (TimeoutException)
 				{
-					Logger.Write("Timeout", Logger.StatusCode.ERROR);
-					return "TIMEOUT";
+					Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
+					return STATUSCODE.TIMEOUT.ToString();
 				}
 				catch (Exception ex)
 				{

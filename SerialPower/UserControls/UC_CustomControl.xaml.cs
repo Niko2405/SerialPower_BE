@@ -147,32 +147,23 @@ namespace SerialPower.UserControls
 				string voltageCH2 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
 				string currentCH2 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
 
-				if (voltageCH1.StartsWith("V1") && voltageCH2.StartsWith("V2") && currentCH1.StartsWith("I1") && currentCH2.StartsWith("I2"))
+				if (voltageCH1.Contains(SerialSender.STATUSCODE.TIMEOUT.ToString()) || currentCH1.Contains(SerialSender.STATUSCODE.TIMEOUT.ToString()) || voltageCH2.Contains(SerialSender.STATUSCODE.TIMEOUT.ToString()) || currentCH2.Contains(SerialSender.STATUSCODE.TIMEOUT.ToString()))
 				{
-					voltageCH1 = voltageCH1.Split(' ')[1];
-					currentCH1 = currentCH1.Split(' ')[1];
-					voltageCH2 = voltageCH2.Split(' ')[1];
-					currentCH2 = currentCH2.Split(' ')[1];
-					Logger.Write("Get last given data from device", Logger.StatusCode.INFO);
-
-					Logger.Write($"[CH1] Voltage = {voltageCH1}", Logger.StatusCode.INFO);
-					Logger.Write($"[CH1] Current = {currentCH1}", Logger.StatusCode.INFO);
-					Logger.Write($"[CH2] Voltage = {voltageCH2}", Logger.StatusCode.INFO);
-					Logger.Write($"[CH2] Current = {currentCH2}", Logger.StatusCode.INFO);
-
-					// Remove V1 or I1 from data (V1 5.45 => 5.45)
-					TextBox_CH1Voltage.Text = voltageCH1;
-					TextBox_CH1Current.Text = currentCH1;
-
-					TextBox_CH2Voltage.Text = voltageCH2;
-					TextBox_CH2Current.Text = currentCH2;
-					Logger.Write("Insert data into textboxes", Logger.StatusCode.INFO);
+					Logger.Write("No nominal value recv. from power supply", Logger.StatusCode.ERROR);
 					return;
 				}
-				else
-				{
-					Logger.Write("Reading data from device", Logger.StatusCode.ERROR);
-				}
+				Logger.Write("Get last given data from device", Logger.StatusCode.INFO);
+				Logger.Write($"[CH1] Voltage = {voltageCH1}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH1] Current = {currentCH1}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH2] Voltage = {voltageCH2}", Logger.StatusCode.INFO);
+				Logger.Write($"[CH2] Current = {currentCH2}", Logger.StatusCode.INFO);
+
+				TextBox_CH1Voltage.Text = voltageCH1;
+				TextBox_CH1Current.Text = currentCH1;
+
+				TextBox_CH2Voltage.Text = voltageCH2;
+				TextBox_CH2Current.Text = currentCH2;
+				Logger.Write("Insert data into textboxes", Logger.StatusCode.INFO);
 			}
 		}
 
