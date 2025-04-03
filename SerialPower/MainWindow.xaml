@@ -6,7 +6,6 @@
 		xmlns:local="clr-namespace:SerialPower"
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
-		MinHeight="640" MinWidth="720"
 		Height="720" Width="1240"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen"
@@ -69,11 +68,11 @@
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- Version -->
-					<TextBlock x:Name="TextBlockVersion" Padding="15,0,15,0">Version: 0.0.0.0</TextBlock>
+					<TextBlock x:Name="TextBlockVersion" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center">Version: 0.0.0.0</TextBlock>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 
 					<!-- Debug Status -->
-					<TextBlock x:Name="TextBlockDebugState" Padding="15,0,15,0">DebugEnabled: N/A</TextBlock>
+					<TextBlock x:Name="TextBlockDebugState" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center">DebugEnabled: N/A</TextBlock>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 				</StackPanel>
 			</StatusBarItem>

@@ -13,6 +13,11 @@ namespace SerialPower
 		public static bool DisablePortVerify = false;
 
 		/// <summary>
+		/// Disable communication for com devices. (Dummy)
+		/// </summary>
+		public static bool DisableCommunication = false;
+
+		/// <summary>
 		/// Current fault counter
 		/// </summary>
 		private static int faultCounter = 0;
@@ -145,6 +150,12 @@ namespace SerialPower
 		/// </summary>
 		public static void ConnectDevice()
 		{
+			if (DisableCommunication)
+			{
+				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
+				return;
+			}
+
 			if (ConfigHandler.currentConfig != null)
 			{
 				try
@@ -216,6 +227,11 @@ namespace SerialPower
 		/// <param name="showLogging">Should the message logged</param>
 		private static void SendData(string data)
 		{
+			if (DisableCommunication)
+			{
+				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
+				return;
+			}
 			if (serialPort != null)
 			{
 				if (!serialPort.IsOpen)
@@ -243,6 +259,11 @@ namespace SerialPower
 
 		public static string SendDataAndRecv(string data)
 		{
+			if (DisableCommunication)
+			{
+				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
+				return "DEACTIVATED";
+			}
 			if (serialPort != null)
 			{
 				if (!serialPort.IsOpen)

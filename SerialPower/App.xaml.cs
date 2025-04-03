@@ -114,9 +114,14 @@ namespace SerialPower
 				{
 					Logger.isDebugEnabled = true;
 				}
+				if (arg == "--disableCommunication")
+				{
+					SerialSender.DisableCommunication = true;
+					MessageBox.Show("You're communication was disabled", "COMMUNICATION IS OFFLINE", MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
 				if (arg == "--help")
 				{
-					Console.WriteLine("Available commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug");
+					Console.WriteLine("Available commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug\n--disableCommunication\tDisable communication with COM. DUMMY MODE");
 					Environment.Exit(0);
 				}
 			}

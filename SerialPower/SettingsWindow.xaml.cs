@@ -64,6 +64,11 @@ namespace SerialPower
 					Logger.Write("Port " + serialPort.PortName + " cannot open", Logger.StatusCode.WARNING);
 				}
 
+				// Add DUMMY (Placeholder)
+				if (SerialSender.DisableCommunication)
+				{
+					ComboBoxComPorts.Items.Add("PLACEHOLDER");
+				}
 				Thread.Sleep(1000);
 			}
 
