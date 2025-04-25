@@ -1,11 +1,12 @@
 ﻿using System.IO.Ports;
 using System.Windows;
+using TLogger;
 
 namespace SerialPower
 {
 	internal class SerialSender
 	{
-		public static SerialPort? serialPort;
+		private static SerialPort? serialPort;
 
 		/// <summary>
 		/// Disable port verify. Usefull for system there connected with rs232
@@ -25,7 +26,7 @@ namespace SerialPower
 		/// <summary>
 		/// Fault limit
 		/// </summary>
-		private readonly static int faultLimit = 10 * 4;
+		private static readonly int faultLimit = 40;
 
 		/// <summary>
 		/// Channels of the power supply
@@ -68,6 +69,7 @@ namespace SerialPower
 		/// <param name="channel"></param>
 		public static void SetPowerSupplyValues(float voltage, float current, Channel channel)
 		{
+			Logger.Info($"[{channel}] Set voltage to {voltage}V and current to {current}A");
 			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace(",", ".");
 			SendData(command);
 		}
@@ -91,7 +93,7 @@ namespace SerialPower
 			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
-				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
+				Logger.Warn($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]");
 			}
 			if (value.StartsWith("V1") || value.StartsWith("V2") || value.StartsWith("I1") || value.StartsWith("I2"))
 			{
@@ -119,7 +121,7 @@ namespace SerialPower
 			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
-				Logger.Write($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]", Logger.StatusCode.WARNING);
+				Logger.Warn($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]");
 			}
 			return value;
 		}
@@ -131,7 +133,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(Channel channel, State state)
 		{
-			Logger.Write($"Change channel {channel} state to {state}", Logger.StatusCode.INFO);
+			Logger.Info($"Change channel {channel} state to {state}");
 			SendData($"OP{(int)channel} {(int)state}");
 		}
 
@@ -141,7 +143,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(State state)
 		{
-			Logger.Write($"Change both channels state to {state}", Logger.StatusCode.INFO);
+			Logger.Info($"Change both channels state to {state}");
 			SendData($"OPALL {(int)state}");
 		}
 
@@ -152,7 +154,7 @@ namespace SerialPower
 		{
 			if (DisableCommunication)
 			{
-				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
+				Logger.Warn("Communication is deactivated");
 				return;
 			}
 
@@ -175,12 +177,12 @@ namespace SerialPower
 					if (!serialPort.IsOpen)
 					{
 						serialPort.Open();
-						Logger.Write($"Connected to device [{serialPort.PortName}]", Logger.StatusCode.INFO);
+						Logger.Info($"Connected to device [{serialPort.PortName}]");
 					}
 				}
 				catch (Exception ex)
 				{
-					Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
+					Logger.Error(ex.Message);
 					MessageBox.Show(ex.ToString(), "Error at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
@@ -188,35 +190,32 @@ namespace SerialPower
 
 		private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
 		{
-			// TODO: Erweitern
-			
+			// TODO: expand
 		}
 
 		/// <summary>
-		/// Diconnect device
+		/// Disconnect device
 		/// </summary>
 		public static void DisconnectDevice()
 		{
-			if (serialPort != null)
+			if (serialPort == null || !serialPort.IsOpen)
 			{
-				if (serialPort.IsOpen)
-				{
-					try
-					{
-						serialPort.WriteLine("LOCAL");
-						serialPort.Close();
-						Logger.Write("Disconnect device", Logger.StatusCode.INFO);
-					}
-					catch (TimeoutException)
-					{
-						Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
-					}
-					catch (Exception ex)
-					{
-						Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
-						MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
-					}
-				}
+				return;
+			}
+			try
+			{
+				serialPort.WriteLine("LOCAL");
+				serialPort.Close();
+				Logger.Info("Disconnect device");
+			}
+			catch (TimeoutException)
+			{
+				Logger.Error(STATUSCODE.TIMEOUT.ToString());
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex.Message);
+				MessageBox.Show(ex.Message, "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -224,36 +223,31 @@ namespace SerialPower
 		/// Send data to device
 		/// </summary>
 		/// <param name="data">Command</param>
-		/// <param name="showLogging">Should the message logged</param>
 		private static void SendData(string data)
 		{
-			if (DisableCommunication)
+			if (DisableCommunication || serialPort == null)
 			{
-				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
 				return;
 			}
-			if (serialPort != null)
+			
+			// open connection
+			if (!serialPort.IsOpen)
 			{
-				if (!serialPort.IsOpen)
-				{
-					ConnectDevice();
-				}
-				try
-				{
-					serialPort.WriteLine(data);
-
-					if (Logger.isDebugEnabled)
-						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.DEBUG);
-				}
-				catch (TimeoutException)
-				{
-					Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
-				}
-				catch (Exception ex)
-				{
-					Logger.Write(ex.ToString(), Logger.StatusCode.ERROR);
-					MessageBox.Show(ex.ToString(), "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
+				ConnectDevice();
+			}
+			try
+			{
+				serialPort.WriteLine(data);
+				Logger.Debug($"[{serialPort.PortName}] Sending data: {data}");
+			}
+			catch (TimeoutException)
+			{
+				Logger.Error(STATUSCODE.TIMEOUT.ToString());
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex.Message);
+				MessageBox.Show(ex.Message, "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 
@@ -261,44 +255,42 @@ namespace SerialPower
 		{
 			if (DisableCommunication)
 			{
-				Logger.Write("Communication is deactivated", Logger.StatusCode.WARNING);
-				return "DEACTIVATED";
+				return "Disabled";
 			}
-			if (serialPort != null)
+			if (serialPort == null)
 			{
-				if (!serialPort.IsOpen)
-				{
-					ConnectDevice();
-				}
-				try
-				{
-					serialPort.WriteLine(data);
+				return "SerialPort is null";
+			}
+			
+			// open connection
+			if (!serialPort.IsOpen)
+			{
+				ConnectDevice();
+			}
+			
+			try
+			{
+				serialPort.WriteLine(data);
+				Logger.Debug($"[{serialPort.PortName}] Sending data: {data}");
 
-					if (Logger.isDebugEnabled)
-						Logger.Write($"[{serialPort.PortName}] Sending data: " + data, Logger.StatusCode.DEBUG);
+				string response = serialPort.ReadLine().Trim();
+				Logger.Debug($"[{serialPort.PortName}] Received data: {response}");
 
-					string response = serialPort.ReadLine().Trim();
-					//string response = "return";
-
-					if (Logger.isDebugEnabled)
-						Logger.Write($"[{serialPort.PortName}] Received data: " + response, Logger.StatusCode.DEBUG);
-
-					return response;
-				}
-				catch (TimeoutException)
+				return response;
+			}
+			catch (TimeoutException)
+			{
+				Logger.Error(STATUSCODE.TIMEOUT.ToString());
+				return STATUSCODE.TIMEOUT.ToString();
+			}
+			catch (Exception ex)
+			{
+				if (MessageBox.Show("ERROR: " + ex.Message + "\nDo you want to continue?", "Critical error", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.No)
 				{
-					Logger.Write(STATUSCODE.TIMEOUT.ToString(), Logger.StatusCode.ERROR);
-					return STATUSCODE.TIMEOUT.ToString();
-				}
-				catch (Exception ex)
-				{
-					if (MessageBox.Show("ERROR: " + ex.Message + "\nDo you want to continue?", "Critical error", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.No)
-					{
-						Environment.Exit(2);
-					}
+					Environment.Exit(2);
 				}
 			}
-			return "SerialPort is null";
+			return "FATAL ERROR";
 		}
 	}
 }

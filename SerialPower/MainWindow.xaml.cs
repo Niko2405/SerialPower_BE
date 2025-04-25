@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TLogger;
 
 namespace SerialPower
 {
@@ -22,11 +23,11 @@ namespace SerialPower
 			try
 			{
 				TextBlockVersion.Text = "Version: " + File.ReadAllText(ConfigHandler.VERSION_FILE);
-				TextBlockDebugState.Text = "DebugEnabled: " + Logger.isDebugEnabled.ToString();
+				TextBlockDebugState.Text = "DebugEnabled: " + Logger.DebugEnabled;
 			}
 			catch (Exception)
 			{
-				Logger.Write($"Reading version file: {ConfigHandler.VERSION_FILE}", Logger.StatusCode.ERROR);
+				Logger.Error($"Reading version file: {ConfigHandler.VERSION_FILE}");
 			}
 
 			if (ConfigHandler.currentConfig != null)
@@ -90,7 +91,7 @@ namespace SerialPower
 		public void SetActiveUserControl(UserControl userControl)
 		{
 			Console.Clear();
-			Logger.Write($"Change UserControl to: {userControl.GetType().FullName}", Logger.StatusCode.INFO);
+			Logger.Info($"Change UserControl to: {userControl.GetType().FullName}");
 			UserControlErnstLeitz1.Visibility = Visibility.Collapsed;
 			UserControlIDE1.Visibility = Visibility.Collapsed;
 
@@ -104,7 +105,7 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.Write("Closing program. Disconnect device.", Logger.StatusCode.INFO);
+			Logger.Info("Closing program. Disconnect device.");
 			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
 
@@ -138,7 +139,7 @@ namespace SerialPower
 
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
-			Logger.Write("Closing program. Disconnect power supply.", Logger.StatusCode.INFO);
+			Logger.Info("Closing program. Disconnect power supply.");
 			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
 

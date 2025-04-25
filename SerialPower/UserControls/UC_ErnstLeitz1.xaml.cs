@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using TLogger;
 
 namespace SerialPower.UserControls
 {
@@ -9,6 +10,7 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class UC_ErnstLeitz1 : UserControl
 	{
+		private static readonly short DEFAULT_DELAY = 2000;
 		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
@@ -23,7 +25,7 @@ namespace SerialPower.UserControls
 			backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
 			backgroundWorker.RunWorkerAsync();
 
-			Logger.Write("Starting automatic test phase", Logger.StatusCode.INFO);
+			Logger.Info("Starting automatic test phase");
 		}
 
 		private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
@@ -33,20 +35,21 @@ namespace SerialPower.UserControls
 
 		private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
 		{
-			short delay = 2000;
+			short delay = DEFAULT_DELAY;
 			try
 			{
 				this.Dispatcher.Invoke(() =>
 				{
 					delay = short.Parse(TextBoxDelay.Text);
+					Logger.Debug("Given delay: " + delay);
+					if (delay <= 1000)
+					{
+						Logger.Warn($"Given delay is to short. Set default value [{DEFAULT_DELAY}ms]");
+						TextBoxDelay.Text = DEFAULT_DELAY.ToString();
+						delay = DEFAULT_DELAY;
+					}
 				});
-				if (delay <= 1000)
-				{
-					MessageBox.Show("Junge übertreib es nicht! Delay sollte min. 2000ms benötigen. Setze delay auf 2000ms.", "Verarsch mich nicht!", MessageBoxButton.OK, MessageBoxImage.Warning);
-					TextBoxDelay.Text = "2000";
-					delay = 2000;
-				}
-				Logger.Write("Delay per test is set to: " + delay, Logger.StatusCode.DEBUG);
+				Logger.Info("Delay per test is now set to: " + delay);
 			}
 			catch (Exception ex)
 			{
@@ -56,6 +59,7 @@ namespace SerialPower.UserControls
 			if (sender != null)
 			{
 				// Intern 0V
+				Logger.PrintHeader("INTERN");
 				this.Dispatcher.Invoke(() =>
 				{
 					TextBlockCurrentTestState.Text = "Current Test: Intern";
@@ -92,6 +96,7 @@ namespace SerialPower.UserControls
 				/// ------------------------------------------------------ ///
 
 				// Extern 0V
+				Logger.PrintHeader("EXTERN");
 				this.Dispatcher.Invoke(() =>
 				{
 					TextBlockCurrentTestState.Text = "Current Test: Extern";

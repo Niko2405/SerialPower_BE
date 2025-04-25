@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.5.3.5</AssemblyVersion>
-    <FileVersion>1.5.3.5</FileVersion>
+    <AssemblyVersion>1.5.4.0</AssemblyVersion>
+    <FileVersion>1.5.4.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -23,6 +23,7 @@
     <ApplicationIcon>Program.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageProjectUrl>https://github.com/Niko2405/SerialPower_BE</PackageProjectUrl>
+    <Authors>Niko2405</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -63,7 +64,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="9.0.3" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +75,12 @@
     <Resource Include="images\power-off.png" />
     <Resource Include="images\power-on.png" />
     <Resource Include="images\powersupplie.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TLogger">
+      <HintPath>..\..\Tartaros-Logger\TLogger\bin\Release\net9.0\TLogger.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

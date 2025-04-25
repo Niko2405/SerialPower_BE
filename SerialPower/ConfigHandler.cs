@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
+using TLogger;
 
 namespace SerialPower
 {
@@ -34,21 +35,21 @@ namespace SerialPower
 				try
 				{
 					File.WriteAllText(CONFIG_FILE, JsonSerializer.Serialize(new ConfigObject(), JsonOptions));
-					Logger.Write("Create config at " + CONFIG_FILE, Logger.StatusCode.INFO);
+					Logger.Info("Create config at " + CONFIG_FILE);
 				}
 				catch (UnauthorizedAccessException)
 				{
-					Logger.Write("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.ERROR);
+					Logger.Error("No permission to create config file at " + CONFIG_FILE);
 					Environment.Exit(1);
 				}
 			}
 			currentConfig = JsonSerializer.Deserialize<ConfigObject>(File.ReadAllText(CONFIG_FILE), JsonOptions);
 			if (currentConfig == null)
 			{
-				Logger.Write("Init config", Logger.StatusCode.ERROR);
+				Logger.Error("Init config");
 				return;
 			}
-			Logger.Write("Init config", Logger.StatusCode.INFO);
+			Logger.Info("Init config");
 		}
 
 		/// <summary>
@@ -59,11 +60,11 @@ namespace SerialPower
 			try
 			{
 				File.WriteAllText(CONFIG_FILE, JsonSerializer.Serialize(currentConfig, JsonOptions));
-				Logger.Write("Config file saved at " + CONFIG_FILE, Logger.StatusCode.INFO);
+				Logger.Info("Config file saved at " + CONFIG_FILE);
 			}
 			catch (UnauthorizedAccessException)
 			{
-				Logger.Write("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.ERROR);
+				Logger.Error("No permission to create config file at " + CONFIG_FILE);
 				Environment.Exit(1);
 			}
 		}
@@ -74,7 +75,7 @@ namespace SerialPower
 		public static void PrintConfig()
 		{
 			string configData = File.ReadAllText(CONFIG_FILE);
-			Logger.Write("Current config settings:" + Environment.NewLine + configData, Logger.StatusCode.INFO);
+			Logger.Info("Current config settings:" + Environment.NewLine + configData);
 		}
 
 		/// <summary>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
+using TLogger;
 
 namespace SerialPower
 {
@@ -12,7 +13,7 @@ namespace SerialPower
 	public partial class App : Application
 	{
 		[DllImport("user32.dll")]
-		public static extern long SetCursorPos(int x, int y);
+		private static extern long SetCursorPos(int x, int y);
 
 		private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 		{
@@ -34,24 +35,24 @@ namespace SerialPower
 			{
 				if (File.Exists(ConfigHandler.VERSION_FILE))
 				{
-					Logger.Write("Version file found. Reading version...", Logger.StatusCode.INFO);
+					Logger.Info("Version file found. Reading version...");
 					string versionFile = File.ReadAllText(ConfigHandler.VERSION_FILE);
 					if (versionFile != fileVersionInfo.FileVersion)
 					{
-						Logger.Write("Version of filesystem is not supported", Logger.StatusCode.ERROR);
+						Logger.Error("Version of filesystem is not supported");
 						MessageBox.Show($"Filesystem version: {versionFile}\nProgram version: {fileVersionInfo.FileVersion}\nCurrent filesystem is unsupported. Please delete filesystem: " + System.Environment.CurrentDirectory.Replace("\\", "/") + "/" + ConfigHandler.DIR_ROOT, "Unsupported filesystem detected", MessageBoxButton.OK, MessageBoxImage.Error);
 						Environment.Exit(1);
 					}
 					else if (versionFile == fileVersionInfo.FileVersion)
 					{
-						Logger.Write("Version of filesystem is supported", Logger.StatusCode.INFO);
+						Logger.Info("Version of filesystem is supported");
 					}
 					return;
 				}
 				else
 				{
 					File.WriteAllText(ConfigHandler.VERSION_FILE, fileVersionInfo.FileVersion);
-					Logger.Write("New version file created", Logger.StatusCode.INFO);
+					Logger.Info("New version file created");
 					return;
 				}
 			}
@@ -70,22 +71,22 @@ namespace SerialPower
 			try
 			{
 				Directory.CreateDirectory(ConfigHandler.DIR_ROOT);
-				Logger.Write("Checking " + ConfigHandler.DIR_ROOT, Logger.StatusCode.INFO);
+				Logger.Info("Checking " + ConfigHandler.DIR_ROOT);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_CONFIGS);
-				Logger.Write("Checking " + ConfigHandler.DIR_CONFIGS, Logger.StatusCode.INFO);
+				Logger.Info("Checking " + ConfigHandler.DIR_CONFIGS);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_DATABASE);
-				Logger.Write("Checking " + ConfigHandler.DIR_DATABASE, Logger.StatusCode.INFO);
+				Logger.Info("Checking " + ConfigHandler.DIR_DATABASE);
 
 				Directory.CreateDirectory(ConfigHandler.DIR_TEMP);
-				Logger.Write("Checking " + ConfigHandler.DIR_TEMP, Logger.StatusCode.INFO);
+				Logger.Info("Checking " + ConfigHandler.DIR_TEMP);
 
-				Logger.Write("Build filesystem", Logger.StatusCode.INFO);
+				Logger.Info("Build filesystem");
 			}
 			catch (Exception)
 			{
-				Logger.Write("Build filesystem", Logger.StatusCode.ERROR);
+				Logger.Error("Build filesystem");
 			}
 		}
 
@@ -112,7 +113,7 @@ namespace SerialPower
 				}
 				if (arg == "--debug")
 				{
-					Logger.isDebugEnabled = true;
+					Logger.DebugEnabled = true;
 				}
 				if (arg == "--disableCommunication")
 				{
@@ -127,7 +128,7 @@ namespace SerialPower
 			}
 
 			// Print infos
-			Logger.PrintHeader("Systeminfo");
+			Logger.PrintHeader("SYSTEMINFO");
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
@@ -138,11 +139,11 @@ namespace SerialPower
 
 			// Test logger
 			Logger.PrintHeader("Logger");
-			Logger.Write("Testing Logger System", Logger.StatusCode.INFO);
-			Logger.Write("Logger Test: Info logging", Logger.StatusCode.INFO);
-			Logger.Write("Logger Test: Warning logging", Logger.StatusCode.WARNING);
-			Logger.Write("Logger Test: Failed logging", Logger.StatusCode.ERROR);
-			Logger.Write("Logger Test: Debug logging", Logger.StatusCode.DEBUG);
+			Logger.Info("TLogger Version: " + Logger.Version);
+			Logger.Info("Info Message");
+			Logger.Warn("Warning Message");
+			Logger.Error("Error Message");
+			Logger.Debug("Debug Message");
 
 			// Create filesystem
 			Logger.PrintHeader("Filesystem check");

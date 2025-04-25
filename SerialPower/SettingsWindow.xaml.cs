@@ -1,5 +1,6 @@
 ﻿using System.IO.Ports;
 using System.Windows;
+using TLogger;
 
 namespace SerialPower
 {
@@ -17,7 +18,7 @@ namespace SerialPower
 			SerialPort? serialPort = null;
 			foreach (string currentCom in coms)
 			{
-				Logger.Write($"New serial device found: {currentCom}", Logger.StatusCode.INFO);
+				Logger.Info($"New serial device found: {currentCom}");
 				try
 				{
 					// check if connected device is a power supply
@@ -28,7 +29,7 @@ namespace SerialPower
 					};
 
 					serialPort.Open();
-					Logger.Write($"Check port: {currentCom}", Logger.StatusCode.INFO);
+					Logger.Info($"Check port: {currentCom}");
 					serialPort.WriteLine("*IDN?");
 					string response = serialPort.ReadLine().Trim();
 
@@ -54,22 +55,22 @@ namespace SerialPower
 								serialPort.Close();
 							}
 						}
-						Logger.Write("Port verify failed. But verify is disabled. Forcing add COM to list. Use with caution!", Logger.StatusCode.WARNING);
+						Logger.Warn("Port verify failed. But verify is disabled. Forcing add COM to list. Use with caution!");
 						ComboBoxComPorts.Items.Add(currentCom);
 					}
 				}
 				catch (UnauthorizedAccessException)
 				{
-					if (serialPort != null)
-					Logger.Write("Port " + serialPort.PortName + " cannot open", Logger.StatusCode.WARNING);
-				}
-
-				// Add DUMMY (Placeholder)
-				if (SerialSender.DisableCommunication)
-				{
-					ComboBoxComPorts.Items.Add("PLACEHOLDER");
+					if (serialPort != null) 
+						Logger.Warn("Port " + serialPort.PortName + " cannot open");
 				}
 				Thread.Sleep(1000);
+			}
+			
+			// Add DUMMY (Placeholder)
+			if (SerialSender.DisableCommunication)
+			{
+				ComboBoxComPorts.Items.Add("TestPort");
 			}
 
 			// reading config file and load data
@@ -83,7 +84,7 @@ namespace SerialPower
 				TextBoxReadTimeout.Text = ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
 				TextBoxWriteTimeout.Text = ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
 
-				Logger.Write("Config file found. Load data into window.", Logger.StatusCode.INFO);
+				Logger.Info("Config file found. Load data into window.");
 			}
 		}
 
@@ -117,7 +118,7 @@ namespace SerialPower
 							ConfigHandler.currentConfig.SerialPortWriteTimeOut = writeTimeout;
 
 							ConfigHandler.SaveConfig();
-							Logger.Write("Config saved", Logger.StatusCode.INFO);
+							Logger.Info("Config saved");
 						}
 
 						SerialSender.ConnectDevice();

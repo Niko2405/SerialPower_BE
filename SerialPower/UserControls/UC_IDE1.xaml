@@ -75,7 +75,7 @@
 				<StackPanel>
 					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">Output</Label>
 					<StackPanel>
-						<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked"  Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
+						<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
 						<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
 					</StackPanel>
 				</StackPanel>
