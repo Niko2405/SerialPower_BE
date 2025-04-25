@@ -4,6 +4,8 @@
     <option name="locations">
       <list>
         <option value="$PROJECT_DIR$/../output" />
+        <option value="$PROJECT_DIR$/../output/x86" />
+        <option value="$PROJECT_DIR$/../output/x64" />
       </list>
     </option>
   </component>
