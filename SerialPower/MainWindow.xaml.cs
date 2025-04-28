@@ -55,10 +55,15 @@ namespace SerialPower
 				Thread.Sleep(updateDelay / 2);
 				this.Dispatcher.Invoke(() =>
 				{
-					if (toggled)
-						RectangleData.Fill = new SolidColorBrush(Colors.Green);
-					if (!toggled)
-						RectangleData.Fill = new SolidColorBrush(Colors.Red);
+					switch (toggled)
+					{
+						case true:
+							RectangleData.Fill = new SolidColorBrush(Colors.Green);
+							break;
+						case false:
+							RectangleData.Fill = new SolidColorBrush(Colors.Red);
+							break;
+					}
 					toggled = !toggled;
 				});
 			}
