@@ -1,6 +1,6 @@
 ﻿using System.IO.Ports;
 using System.Windows;
-using TLogger;
+using TartarosLogger;
 
 namespace SerialPower
 {
@@ -74,15 +74,15 @@ namespace SerialPower
 			}
 
 			// reading config file and load data
-			if (ConfigHandler.currentConfig != null)
+			if (ConfigHandler.serialConfig != null)
 			{
-				TextBoxBaudrate.Text = ConfigHandler.currentConfig.SerialPortBaudrate.ToString();
-				TextBoxStopBits.Text = ConfigHandler.currentConfig.SerialPortStopBits.ToString();
-				TextBoxDataBits.Text = ConfigHandler.currentConfig.SerialPortDataBits.ToString();
-				TextBoxParity.Text = ConfigHandler.currentConfig.SerialPortParity.ToString();
+				TextBoxBaudrate.Text = ConfigHandler.serialConfig.Baudrate.ToString();
+				TextBoxStopBits.Text = ConfigHandler.serialConfig.StopBits.ToString();
+				TextBoxDataBits.Text = ConfigHandler.serialConfig.DataBits.ToString();
+				TextBoxParity.Text = ConfigHandler.serialConfig.Parity.ToString();
 
-				TextBoxReadTimeout.Text = ConfigHandler.currentConfig.SerialPortReadTimeOut.ToString();
-				TextBoxWriteTimeout.Text = ConfigHandler.currentConfig.SerialPortWriteTimeOut.ToString();
+				TextBoxReadTimeout.Text = ConfigHandler.serialConfig.ReadTimeout.ToString();
+				TextBoxWriteTimeout.Text = ConfigHandler.serialConfig.WriteTimeout.ToString();
 
 				Logger.Info("Config file found. Load data into window.");
 			}
@@ -106,19 +106,18 @@ namespace SerialPower
 					if (portName != null)
 					{
 						// save current settings in config file
-						if (ConfigHandler.currentConfig != null)
+						if (ConfigHandler.serialConfig != null)
 						{
-							ConfigHandler.currentConfig.SerialPortName = portName;
-							ConfigHandler.currentConfig.SerialPortBaudrate = baudrate;
-							ConfigHandler.currentConfig.SerialPortStopBits = stopbits;
-							ConfigHandler.currentConfig.SerialPortDataBits = databits;
-							ConfigHandler.currentConfig.SerialPortParity = parity;
+							ConfigHandler.serialConfig.SerialPortName = portName;
+							ConfigHandler.serialConfig.Baudrate = baudrate;
+							ConfigHandler.serialConfig.StopBits = stopbits;
+							ConfigHandler.serialConfig.DataBits = databits;
+							ConfigHandler.serialConfig.Parity = parity;
 
-							ConfigHandler.currentConfig.SerialPortReadTimeOut = readTimeout;
-							ConfigHandler.currentConfig.SerialPortWriteTimeOut = writeTimeout;
+							ConfigHandler.serialConfig.ReadTimeout = readTimeout;
+							ConfigHandler.serialConfig.WriteTimeout = writeTimeout;
 
-							ConfigHandler.SaveConfig();
-							Logger.Info("Config saved");
+							ConfigHandler.Save();
 						}
 
 						SerialSender.ConnectDevice();

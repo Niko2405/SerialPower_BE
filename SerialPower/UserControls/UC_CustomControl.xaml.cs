@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using TLogger;
+using TartarosLogger;
 
 namespace SerialPower.UserControls
 {

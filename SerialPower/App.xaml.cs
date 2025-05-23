@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
-using TLogger;
+using TartarosLogger;
 
 namespace SerialPower
 {
@@ -136,31 +136,32 @@ namespace SerialPower
 			Console.WriteLine($"Machine name:\t\t\t{Environment.MachineName}");
 			Console.WriteLine($"Admin override:\t\t\t{Environment.IsPrivilegedProcess}");
 			Console.WriteLine($"Operating system:\t\t{Environment.OSVersion}");
+			Thread.Sleep(1000);
 
 			// Test logger
 			Logger.PrintHeader("Logger");
-			Logger.Info("TLogger Version: " + Logger.Version);
+			Logger.Info("TartarosLogger Version: " + Logger.Version);
 			Logger.Info("Info Message");
 			Logger.Warn("Warning Message");
 			Logger.Error("Error Message");
 			Logger.Debug("Debug Message");
+            Thread.Sleep(1000);
 
-			// Create filesystem
-			Logger.PrintHeader("Filesystem check");
+            // Create filesystem
+            Logger.PrintHeader("Filesystem check");
 			BuildFilesystem();
+            Thread.Sleep(1000);
 
-			// Check Filesystem Version
-			CheckFilesystemVersion();
+            // Check Filesystem Version
+            CheckFilesystemVersion();
+            Thread.Sleep(1000);
 
-			// Load primary config
-			Logger.PrintHeader("Config system");
-			ConfigHandler.Init();
-			ConfigHandler.PrintConfig();
+            // Load primary config
+            Logger.PrintHeader("Config system");
+			ConfigHandler.Load();
+            Thread.Sleep(1000);
 
-			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
-#if DEBUG
-			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion} - DEBUG";
-#endif
+            Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2000);
 		}
 	}

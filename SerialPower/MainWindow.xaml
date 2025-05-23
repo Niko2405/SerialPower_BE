@@ -15,8 +15,9 @@
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
 				<MenuItem Header="_Options">
-					<MenuItem x:Name="MenuItemOpenConfig" Header="_Open Config" Click="MenuItemOpenConfig_Click"/>
-					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
+					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="_Open serial config file" Click="MenuItemOpenSerialConfig_Click"/>
+                    <MenuItem x:Name="MenuItemGetCurrentInstanceSettings" Header="Get current instance settings" Click="MenuItemGetCurrentInstanceSettings_Click"/>
+                    <MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
 				</MenuItem>
 				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
 				<MenuItem x:Name="MenuItemLicense" Header="_License" Click="MenuItemLicense_Click"/>

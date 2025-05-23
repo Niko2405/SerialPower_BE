@@ -1,17 +1,27 @@
 ﻿using System.IO.Ports;
 using System.Windows;
-using TLogger;
+using TartarosLogger;
 
 namespace SerialPower
 {
 	internal class SerialSender
 	{
-		private static SerialPort? serialPort;
+		public static SerialPort? serialPort;
 
-		/// <summary>
-		/// Disable port verify. Usefull for system there connected with rs232
-		/// </summary>
-		public static bool DisablePortVerify = false;
+		public string SerialPortName { get; set; } = "COM1";
+		public int Baudrate { get; set; } = 9600;
+		public int DataBits { get; set; } = 8;
+		public int StopBits { get; set; } = 1;
+		public int WriteTimeout { get; set; } = 500;
+		public int ReadTimeout { get; set; } = 500;
+		public int Parity { get; set; } = 0;
+		public short MeasureUpdateInterval { get; set; } = 1000;
+
+
+        /// <summary>
+        /// Disable port verify. Usefull for system there connected with rs232
+        /// </summary>
+        public static bool DisablePortVerify = false;
 
 		/// <summary>
 		/// Disable communication for com devices. (Dummy)
@@ -158,19 +168,19 @@ namespace SerialPower
 				return;
 			}
 
-			if (ConfigHandler.currentConfig != null)
+			if (ConfigHandler.serialConfig != null)
 			{
 				try
 				{
 					serialPort = new SerialPort
 					{
-						PortName = ConfigHandler.currentConfig.SerialPortName,
-						BaudRate = ConfigHandler.currentConfig.SerialPortBaudrate,
-						StopBits = (StopBits)ConfigHandler.currentConfig.SerialPortStopBits,
-						DataBits = ConfigHandler.currentConfig.SerialPortDataBits,
-						Parity = (Parity)ConfigHandler.currentConfig.SerialPortParity,
-						ReadTimeout = ConfigHandler.currentConfig.SerialPortReadTimeOut,
-						WriteTimeout = ConfigHandler.currentConfig.SerialPortWriteTimeOut,
+						PortName = ConfigHandler.serialConfig.SerialPortName,
+						BaudRate = ConfigHandler.serialConfig.Baudrate,
+						StopBits = (StopBits)ConfigHandler.serialConfig.StopBits,
+						DataBits = ConfigHandler.serialConfig.DataBits,
+						Parity = (Parity)ConfigHandler.serialConfig.Parity,
+						ReadTimeout = ConfigHandler.serialConfig.ReadTimeout,
+						WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
 
 					};
 					serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
