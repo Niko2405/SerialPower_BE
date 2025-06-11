@@ -18,10 +18,10 @@ namespace SerialPower
 		public short MeasureUpdateInterval { get; set; } = 1000;
 
 
-        /// <summary>
-        /// Disable port verify. Usefull for system there connected with rs232
-        /// </summary>
-        public static bool DisablePortVerify = false;
+		/// <summary>
+		/// Disable port verify. Usefull for system there connected with rs232
+		/// </summary>
+		public static bool DisablePortVerify = false;
 
 		/// <summary>
 		/// Disable communication for com devices. (Dummy)
