@@ -21,6 +21,7 @@ namespace SerialPower.UserControls
 		{
 			BackgroundWorker backgroundWorker = new();
 			backgroundWorker.WorkerReportsProgress = true;
+
 			backgroundWorker.DoWork += BackgroundWorker_DoWork;
 			backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
 			backgroundWorker.RunWorkerAsync();
@@ -137,6 +138,7 @@ namespace SerialPower.UserControls
 					ToggleButtonProgrammingMode.IsEnabled = true;
 				});
 				MessageBox.Show("Test is now finished", "Test phase ended", MessageBoxButton.OK, MessageBoxImage.Information);
+				((BackgroundWorker)sender).ReportProgress(0);
 			}
 		}
 

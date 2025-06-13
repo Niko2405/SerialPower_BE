@@ -5,10 +5,10 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d" 
-			 Background="{StaticResource BackgroundStyle}"
+			 Background="White"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Ernst Leitz [85/15186]</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleLight}">Ernst Leitz [85/15186]</Label>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -26,7 +26,7 @@
 			</Grid.ColumnDefinitions>
 			
 			<!-- Programming -->
-			<Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+			<Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Style="{StaticResource BorderLight}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition></RowDefinition>
@@ -34,13 +34,13 @@
 						<RowDefinition></RowDefinition>
 						<RowDefinition></RowDefinition>
 					</Grid.RowDefinitions>
-					<Label Grid.Row="0" Style="{StaticResource LabelTitleDark}" FontSize="21" Content="Programming mode 12V (Intern):"></Label>
-					<ToggleButton Grid.Row="1" x:Name="ToggleButtonProgrammingMode" Style="{StaticResource ToggleButtonDark}" Height="50" Width="180" Content="Disabled" Click="ToggleButtonProgrammingMode_Click"></ToggleButton>
+					<Label Grid.Row="0" Style="{StaticResource LabelStyleLight}" FontSize="21" Content="Programming mode 12V (Intern):"></Label>
+					<ToggleButton Grid.Row="1" x:Name="ToggleButtonProgrammingMode" Style="{StaticResource ToggleButtonLight}" Height="50" Width="180" Content="Disabled" Click="ToggleButtonProgrammingMode_Click"></ToggleButton>
 				</Grid>
 			</Border>
 			
 			<!-- Test Phase -->
-			<Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="4" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="2">
+			<Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="4" Style="{StaticResource BorderLight}">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition></ColumnDefinition>
@@ -52,20 +52,20 @@
 						<RowDefinition></RowDefinition>
 						<RowDefinition></RowDefinition>
 					</Grid.RowDefinitions>
-					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LabelTitleDark}" FontSize="21" Content="Automatic Test Phase"></Label>
-					<Button Grid.Row="1" Grid.Column="0" x:Name="ButtonStart" Style="{StaticResource ButtonDark}" Content="Start Test" Height="50" Width="180" Click="ButtonStart_Click" HorizontalAlignment="Center"/>
-					<TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBlockCurrentTestState" Text="Ready" Style="{StaticResource TextBoxDark}" Height="50" Width="180" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Center"/>
+					<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LabelStyleLight}" FontSize="21" Content="Automatic Test Phase"></Label>
+					<Button Grid.Row="1" Grid.Column="0" x:Name="ButtonStart" Style="{StaticResource ButtonLight}" Content="Start Test" Height="50" Width="180" Click="ButtonStart_Click" HorizontalAlignment="Center"/>
+					<TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBlockCurrentTestState" Text="Ready" Style="{StaticResource TextBoxLight}" Height="50" Width="180" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Center"/>
 					
 					<!-- Delay -->
 					<StackPanel Grid.Row="2" Grid.Column="0">
-						<Label Style="{StaticResource LabelStyleDark}" Content="Delay (ms):"></Label>
-						<TextBox x:Name="TextBoxDelay" Style="{StaticResource TextBoxDark}" Margin="50,0,50,0" Text="2000"></TextBox>
+						<Label Style="{StaticResource LabelStyleLight}" Content="Delay (ms):"></Label>
+						<TextBox x:Name="TextBoxDelay" Style="{StaticResource TextBoxLight}" Margin="50,0,50,0" Text="2000"></TextBox>
 					</StackPanel>
 					
 					<!-- Progress -->
 					<StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="100,0,100,0">
-						<ProgressBar x:Name="ProgressBarTestPhase" VerticalAlignment="Center" Minimum="0" Maximum="100" Height="25"></ProgressBar>
-						<TextBox Style="{StaticResource TextBoxDark}" Background="Transparent" Text="{Binding ElementName=ProgressBarTestPhase, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						<ProgressBar x:Name="ProgressBarTestPhase" VerticalAlignment="Center" Minimum="0" Maximum="100" Height="25" Background="White" Foreground="Turquoise"></ProgressBar>
+						<TextBox Style="{StaticResource TextBoxLight}" Text="{Binding ElementName=ProgressBarTestPhase, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 					</StackPanel>
 				</Grid>
 			</Border>

@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.5.5.0</AssemblyVersion>
-    <FileVersion>1.5.5.0</FileVersion>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -25,6 +25,8 @@
     <PackageProjectUrl>https://github.com/Niko2405/SerialPower_BE</PackageProjectUrl>
     <Authors>Niko2405</Authors>
     <NeutralLanguage>de-DE</NeutralLanguage>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -49,7 +51,9 @@
     <None Remove="fonts\OpenSans-Regular.ttf" />
     <None Remove="fonts\OpenSans-SemiBold.ttf" />
     <None Remove="images\power-off.png" />
+    <None Remove="images\power-off_light.png" />
     <None Remove="images\power-on.png" />
+    <None Remove="images\power-on_light.png" />
     <None Remove="images\powersupplie.png" />
   </ItemGroup>
 
@@ -58,6 +62,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\TartarosLogger\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -75,7 +83,9 @@
     <Resource Include="fonts\OpenSans-Regular.ttf" />
     <Resource Include="fonts\OpenSans-SemiBold.ttf" />
     <Resource Include="images\power-off.png" />
+    <Resource Include="images\power-off_light.png" />
     <Resource Include="images\power-on.png" />
+    <Resource Include="images\power-on_light.png" />
     <Resource Include="images\powersupplie.png" />
   </ItemGroup>
 

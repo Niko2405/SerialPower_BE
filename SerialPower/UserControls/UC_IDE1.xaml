@@ -5,9 +5,10 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
+			 Background="White"
 			 d:DesignHeight="720" d:DesignWidth="1280">
 	<DockPanel LastChildFill="True">
-		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">IDE [87/10582]</Label>
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleLight}">IDE [87/10582]</Label>
 		<Grid DockPanel.Dock="Bottom">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
@@ -21,80 +22,80 @@
 			</Grid.ColumnDefinitions>
 			
 			<!-- CH1 - Valve Control -->
-			<Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Valve Control</Label>
-					<RadioButton x:Name="RadioButtonValveControl1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl1_Click">1V</RadioButton>
-					<RadioButton x:Name="RadioButtonValveControl2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl2_Click">9V</RadioButton>
-					<RadioButton x:Name="RadioButtonValveControl3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonValveControl3_Click">0V</RadioButton>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelStyleLight}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Valve Control</Label>
+					<RadioButton x:Name="RadioButtonValveControl1" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonValveControl1_Click">1V</RadioButton>
+					<RadioButton x:Name="RadioButtonValveControl2" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonValveControl2_Click">9V</RadioButton>
+					<RadioButton x:Name="RadioButtonValveControl3" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonValveControl3_Click">0V</RadioButton>
 				</StackPanel>
 			</Border>
 
 			<!--- CH1 - Position Amplifier -->
-			<Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Position Amplifier</Label>
-					<RadioButton x:Name="RadioButtonPosAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp1_Click">1,629V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp2_Click">4,829V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp3_Click">8,029V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp4" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp4_Click">0,900V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp5" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp5_Click">4,789V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp6" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp6_Click">8,678V</RadioButton>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelStyleLight}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Position Amplifier</Label>
+					<RadioButton x:Name="RadioButtonPosAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp1_Click">1,629V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp2_Click">4,829V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp3_Click">8,029V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp4" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp4_Click">0,900V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp5" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp5_Click">4,789V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp6" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp6_Click">8,678V</RadioButton>
 				</StackPanel>
 			</Border>
 
 			<!-- CH1 - Temperature Amplifier -->
-			<Border Grid.Row="0" Grid.Column="2" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="0" Grid.Column="2" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Temperature Amplifier</Label>
-					<RadioButton x:Name="RadioButtonTempAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp1_Click">2,928V</RadioButton>
-					<RadioButton x:Name="RadioButtonTempAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp2_Click">3,239V</RadioButton>
-					<RadioButton x:Name="RadioButtonTempAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp3_Click">3,549V</RadioButton>
+					<Label DockPanel.Dock="Top" Style="{StaticResource LabelStyleLight}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Temperature Amplifier</Label>
+					<RadioButton x:Name="RadioButtonTempAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp1_Click">2,928V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp2_Click">3,239V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonLight}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp3_Click">3,549V</RadioButton>
 				</StackPanel>
 			</Border>
 			
 			<!-- CH2 - Voltage -->
-			<Border Grid.Row="1" Grid.Column="3" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="1" Grid.Column="3" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">CH2 - Fine adjustment</Label>
-					<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<Label Style="{StaticResource LabelStyleLight}" FontSize="20">CH2 - Fine adjustment</Label>
+					<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxLight}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
 					<Grid Margin="10">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
-						<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
+						<Button x:Name="ButtonMinusCH2" Grid.Column="0" Style="{StaticResource ButtonLight}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH2_Click" ClickMode="Press">-</Button>
+						<Button x:Name="ButtonPlusCH2" Grid.Column="1" Style="{StaticResource ButtonLight}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH2_Click" ClickMode="Press">+</Button>
 					</Grid>
-					<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource ButtonDark}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+					<Button x:Name="ButtonCH2_SendVoltage" Style="{StaticResource ButtonLight}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH2_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 				</StackPanel>
 			</Border>
 
 			<!-- Control output -->
-			<Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">Output</Label>
+					<Label Style="{StaticResource LabelStyleLight}" FontSize="20">Output</Label>
 					<StackPanel>
-						<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
-						<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="White" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
+						<CheckBox x:Name="CheckBoxCH1" FontSize="18" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH1_Checked" Unchecked="CheckBoxCH1_Unchecked">Channel 1 Online</CheckBox>
+						<CheckBox x:Name="CheckBoxCH2" FontSize="18" Foreground="Black" VerticalContentAlignment="Center" Checked="CheckBoxCH2_Checked" Unchecked="CheckBoxCH2_Unchecked">Channel 2 Online</CheckBox>
 					</StackPanel>
 				</StackPanel>
 			</Border>
 			
 			<!-- CH1 - Temperature Amplifier [Feineinstellung] -->
-			<Border Grid.Row="0" Grid.Column="3" BorderBrush="{StaticResource BackgroundStyleAlternativ}" BorderThickness="1">
+			<Border Grid.Row="0" Grid.Column="3" Style="{StaticResource BorderLight}">
 				<StackPanel>
-					<Label Style="{StaticResource LabelTitleDark}" FontSize="20">CH1 - Fine adjustment</Label>
-					<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<Label Style="{StaticResource LabelStyleLight}" FontSize="20">CH1 - Fine adjustment</Label>
+					<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxLight}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
 					<Grid Margin="10">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
-						<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource ButtonDark}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
+						<Button x:Name="ButtonMinusCH1" Grid.Column="0" Style="{StaticResource ButtonLight}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonMinusCH1_Click" ClickMode="Press">-</Button>
+						<Button x:Name="ButtonPlusCH1" Grid.Column="1" Style="{StaticResource ButtonLight}" Margin="10,0,10,0" HorizontalAlignment="Stretch" Click="ButtonPlusCH1_Click" ClickMode="Press">+</Button>
 					</Grid>
-					<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource ButtonDark}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
+					<Button x:Name="ButtonCH1_SendVoltage" Style="{StaticResource ButtonLight}" Margin="20,0,20,0" FontSize="18" HorizontalAlignment="Stretch" Click="ButtonCH1_SendVoltage_Click" ClickMode="Press">Send voltage</Button>
 				</StackPanel>
 			</Border>
 		</Grid>

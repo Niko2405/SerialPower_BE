@@ -3,4 +3,8 @@
 	<BitmapImage x:Key="ImagePowerSupply" UriSource="/SerialPower;component/images/powersupplie.png"></BitmapImage>
 	<BitmapImage x:Key="ImagePowerOn" UriSource="/SerialPower;component/images/power-on.png"></BitmapImage>
 	<BitmapImage x:Key="ImagePowerOff" UriSource="/SerialPower;component/images/power-off.png"></BitmapImage>
+
+	<!-- Light Theme -->
+	<BitmapImage x:Key="ImagePowerOnLight" UriSource="/SerialPower;component/images/power-on_light.png"></BitmapImage>
+	<BitmapImage x:Key="ImagePowerOffLight" UriSource="/SerialPower;component/images/power-off_light.png"></BitmapImage>
 </ResourceDictionary>

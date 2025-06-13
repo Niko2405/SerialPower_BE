@@ -34,12 +34,12 @@ namespace SerialPower.UserControls
 				Logger.Debug("Set Property of Channel1Active to: " + value);
 				if (value)
 				{
-					ImagePowerCH1.Source = (ImageSource)this.TryFindResource("ImagePowerOn");
+					ImagePowerCH1.Source = (ImageSource)this.TryFindResource("ImagePowerOnLight");
 					SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.ON);
 				}
 				else if (!value)
 				{
-					ImagePowerCH1.Source = (ImageSource)this.TryFindResource("ImagePowerOff");
+					ImagePowerCH1.Source = (ImageSource)this.TryFindResource("ImagePowerOffLight");
 					SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
 				}
 			}
@@ -61,12 +61,12 @@ namespace SerialPower.UserControls
 				Logger.Debug("Set Property of Channel2Active to: " + value);
 				if (value)
 				{
-					ImagePowerCH2.Source = (ImageSource)this.TryFindResource("ImagePowerOn");
+					ImagePowerCH2.Source = (ImageSource)this.TryFindResource("ImagePowerOnLight");
 					SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.ON);
 				}
 				else
 				{
-					ImagePowerCH2.Source = (ImageSource)this.TryFindResource("ImagePowerOff");
+					ImagePowerCH2.Source = (ImageSource)this.TryFindResource("ImagePowerOffLight");
 					SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
 				}
 			}
