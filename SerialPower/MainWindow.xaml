@@ -8,74 +8,74 @@
 		mc:Ignorable="d"
 		Height="720" Width="1240"
 		MinHeight="200" MinWidth="200"
-		Background="White"
+		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen"
 		Title="SerialPower" Closed="WindowClosed">
 	<DockPanel>
-		<Menu DockPanel.Dock="Top" Background="Black" Foreground="White">
+		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
-				<MenuItem Header="_Options" Background="Black" Foreground="White">
-					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="_Open serial config file" Click="MenuItemOpenSerialConfig_Click" Background="Black" Foreground="White"/>
-					<MenuItem x:Name="MenuItemGetCurrentInstanceSettings" Header="Get current instance settings" Click="MenuItemGetCurrentInstanceSettings_Click" Background="Black" Foreground="White"/>
-					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click" Background="Black" Foreground="White"/>
+				<MenuItem Header="_Options">
+					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="_Open serial config file" Click="MenuItemOpenSerialConfig_Click"/>
+					<MenuItem x:Name="MenuItemGetCurrentInstanceSettings" Header="Get current instance settings" Click="MenuItemGetCurrentInstanceSettings_Click"/>
+					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
 				</MenuItem>
-				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click" Background="Black" Foreground="White"/>
-				<MenuItem x:Name="MenuItemLicense" Header="_License" Click="MenuItemLicense_Click" Background="Black" Foreground="White"/>
-				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click" Background="Black" Foreground="White"/>
+				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
+				<MenuItem x:Name="MenuItemLicense" Header="_License" Click="MenuItemLicense_Click"/>
+				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
 			</MenuItem>
-			
+
 			<!-- Baugruppen -->
-			<MenuItem Header="_Programs" Background="Black" Foreground="White">
-				<MenuItem Header="_Ernst Leitz" Background="Black" Foreground="White">
-					<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click" Background="Black" Foreground="White"/>
+			<MenuItem Header="_Programs">
+				<MenuItem Header="_Ernst Leitz">
+					<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
 				</MenuItem>
-				<MenuItem Header="_IDE"  Background="Black" Foreground="White">
-					<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click" Background="Black" Foreground="White"/>
+				<MenuItem Header="_IDE">
+					<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
 				</MenuItem>
-				<MenuItem Header="_Leimi" Background="Black" Foreground="White">
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
+				<MenuItem Header="_Leimi">
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
 				</MenuItem>
-				<MenuItem Header="_Tucker" Background="Black" Foreground="White">
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
-					<MenuItem Header="_Example" Background="Black" Foreground="White"/>
+				<MenuItem Header="_Tucker">
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
+					<MenuItem Header="_Example"/>
 				</MenuItem>
 			</MenuItem>
-			
+
 			<!-- Tools -->
 			<MenuItem Header="_Tools">
-				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click" Background="Black" Foreground="White"/>
-				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click" Background="Black" Foreground="White"/>
+				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
+				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
 			</MenuItem>
 		</Menu>
-		
+
 		<!-- Status Bar -->
 		<StatusBar DockPanel.Dock="Bottom">
-			<StatusBarItem Background="Black">
+			<StatusBarItem Background="{StaticResource BackgroundStyleAlternativ}">
 				<StackPanel Orientation="Horizontal">
 					<!-- Tick -->
-					<TextBlock Text="Update:" Margin="5,0,5,0" Background="Black" Foreground="White"/>
+					<TextBlock Text="Update:" Margin="5,0,5,0" Foreground="White"/>
 					<Rectangle x:Name="RectangleData" Fill="Blue" Margin="5,0,5,0" Height="16" Width="16" ToolTip="Heartbeat"/>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- CH1 -->
-					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black" Foreground="White" ToolTip="Voltage on Channel 1"/>
-					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black" Foreground="White" ToolTip="Current on Channel 1"/>
+					<TextBlock x:Name="TextBlockVoltageCH1" Text="Voltage CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" ToolTip="Voltage on Channel 1"/>
+					<TextBlock x:Name="TextBlockCurrentCH1" Text="Current CH1: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" ToolTip="Current on Channel 1"/>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- CH2 -->
-					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black" Foreground="White" ToolTip="Voltage on Channel 2"/>
-					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black" Foreground="White" ToolTip="Current on Channel 2"/>
+					<TextBlock x:Name="TextBlockVoltageCH2" Text="Voltage CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" ToolTip="Voltage on Channel 2"/>
+					<TextBlock x:Name="TextBlockCurrentCH2" Text="Current CH2: None" Margin="5,0,5,0" Padding="15,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" ToolTip="Current on Channel 2"/>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 					
 					<!-- Version -->
-					<TextBlock x:Name="TextBlockVersion" Padding="15,0,15,0" HorizontalAlignment="Center" Background="Black" Foreground="White" VerticalAlignment="Center">Version: 0.0.0.0</TextBlock>
+					<TextBlock x:Name="TextBlockVersion" Padding="15,0,15,0" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">Version: 0.0.0.0</TextBlock>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 
 					<!-- Debug Status -->
-					<TextBlock x:Name="TextBlockDebugState" Padding="15,0,15,0" HorizontalAlignment="Center" Background="Black" Foreground="White" VerticalAlignment="Center">DebugEnabled: N/A</TextBlock>
+					<TextBlock x:Name="TextBlockDebugState" Padding="15,0,15,0" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center">DebugEnabled: N/A</TextBlock>
 					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 				</StackPanel>
 			</StatusBarItem>

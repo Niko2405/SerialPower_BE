@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <AssemblyVersion>1.6.0.1</AssemblyVersion>
+    <FileVersion>1.6.0.1</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -62,7 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\TartarosLogger\LICENSE">
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

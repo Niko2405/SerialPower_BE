@@ -2,7 +2,7 @@
   "profiles": {
     "Testing": {
       "commandName": "Project",
-      "commandLineArgs": "--disablePortVerify --debug --disableCommunication"
+      "commandLineArgs": "--testing"
     },
     "Normal": {
       "commandName": "Project"

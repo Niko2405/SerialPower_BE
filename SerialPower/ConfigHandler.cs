@@ -36,7 +36,7 @@ namespace SerialPower
 		{
 			try
 			{
-				File.WriteAllTextAsync(FILE_CONFIG_SERIAL, JsonSerializer.Serialize(new SerialSender(), JsonOptions));
+				File.WriteAllText(FILE_CONFIG_SERIAL, JsonSerializer.Serialize(new SerialSender(), JsonOptions));
 			}
 			catch (Exception e)
 			{
@@ -52,6 +52,7 @@ namespace SerialPower
 			Logger.Info("Save current config into json file");
 			try
 			{
+				// async!
                 File.WriteAllTextAsync(FILE_CONFIG_SERIAL, JsonSerializer.Serialize(serialConfig, JsonOptions));
             }
 			catch (Exception e)

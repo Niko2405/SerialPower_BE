@@ -40,7 +40,7 @@ namespace SerialPower
 					if (versionFile != fileVersionInfo.FileVersion)
 					{
 						Logger.Error("Version of filesystem is not supported");
-						MessageBox.Show($"Filesystem version: {versionFile}\nProgram version: {fileVersionInfo.FileVersion}\nCurrent filesystem is unsupported. Please delete filesystem: " + System.Environment.CurrentDirectory.Replace("\\", "/") + "/" + ConfigHandler.DIR_ROOT, "Unsupported filesystem detected", MessageBoxButton.OK, MessageBoxImage.Error);
+						MessageBox.Show($"Filesystem version: {versionFile}\nProgram version: {fileVersionInfo.FileVersion}\nCurrent filesystem is unsupported. Please delete filesystem: [" + System.Environment.CurrentDirectory.Replace("\\", "/") + "/" + ConfigHandler.DIR_ROOT + "] ", "Unsupported filesystem detected", MessageBoxButton.OK, MessageBoxImage.Error);
 						Environment.Exit(1);
 					}
 					else if (versionFile == fileVersionInfo.FileVersion)
@@ -98,12 +98,13 @@ namespace SerialPower
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			Console.WriteLine("Loading program...\n");
-			SetCursorPos(0, 0);
+			SetCursorPos(500, 500);
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
 			// read args
 			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
+			Console.WriteLine("====================");
 			foreach (var arg in e.Args)
 			{
 				Console.WriteLine(arg);
@@ -115,19 +116,22 @@ namespace SerialPower
 				{
 					Logger.DebugEnabled = true;
 				}
-				if (arg == "--disableCommunication")
+				if (arg == "--testing")
 				{
+					SerialSender.DisablePortVerify = true;
 					SerialSender.DisableCommunication = true;
-					MessageBox.Show("You're communication was disabled", "COMMUNICATION IS OFFLINE", MessageBoxButton.OK, MessageBoxImage.Warning);
+					Logger.DebugEnabled = true;
+					MessageBox.Show("(1) You're communication was disabled\n(2) DEBUG Logging activated\n(3) Port Verify Disabled", "TESTING MODE", MessageBoxButton.OK, MessageBoxImage.Warning);
 				}
 				if (arg == "--help")
 				{
-					Console.WriteLine("Available commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug\n--disableCommunication\tDisable communication with COM. DUMMY MODE");
+					Console.WriteLine("Available commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug\n--testing\tActivate Test mode");
 					Environment.Exit(0);
 				}
 			}
 
 			// Print infos
+			Logger.ResetLog();
 			Logger.PrintHeader("SYSTEMINFO");
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
@@ -145,23 +149,23 @@ namespace SerialPower
 			Logger.Warn("Warning Message");
 			Logger.Error("Error Message");
 			Logger.Debug("Debug Message");
-            Thread.Sleep(1000);
+			Thread.Sleep(1000);
 
-            // Create filesystem
-            Logger.PrintHeader("Filesystem check");
+			// Create filesystem
+			Logger.PrintHeader("Filesystem check");
 			BuildFilesystem();
-            Thread.Sleep(1000);
+			Thread.Sleep(1000);
 
-            // Check Filesystem Version
-            CheckFilesystemVersion();
-            Thread.Sleep(1000);
+			// Check Filesystem Version
+			CheckFilesystemVersion();
+			Thread.Sleep(1000);
 
-            // Load primary config
-            Logger.PrintHeader("Config system");
+			// Load primary config
+			Logger.PrintHeader("Config system");
 			ConfigHandler.Load();
-            Thread.Sleep(1000);
+			Thread.Sleep(1000);
 
-            Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
+			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2000);
 		}
 	}

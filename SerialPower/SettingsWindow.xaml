@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerialPower"
         mc:Ignorable="d"
+		Background="{StaticResource BackgroundStyle}"
 		Title="SerialPower - Settings"
 		WindowStartupLocation="CenterScreen"
-		Background="White"
 		Height="540" Width="1050">
 	<DockPanel LastChildFill="True" Margin="5">
-		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleLight}">CONFIGURATION</Label>
-		<Border Style="{StaticResource BorderLight}">
+		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">CONFIGURATION</Label>
+		<Border Style="{StaticResource BorderDark}">
 			<Grid DockPanel.Dock="Top">
 				<Grid.RowDefinitions>
 					<RowDefinition></RowDefinition>
@@ -32,35 +32,35 @@
 				</Grid.ColumnDefinitions>
 
 				<!-- COM Settings -->
-				<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Selected Serial Port:</Label>
+				<Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Selected Serial Port:</Label>
 				<ComboBox x:Name="ComboBoxComPorts" Grid.Row="0" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center"/>
 
 				<!-- Baudrate Settings -->
-				<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Baudrate:</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxBaudrate" Grid.Row="1" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">115200</TextBox>
+				<Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Baudrate:</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxBaudrate" Grid.Row="1" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">115200</TextBox>
 
 				<!-- StopBits Settings -->
-				<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">StopBits:</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxStopBits" Grid.Row="2" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">1</TextBox>
+				<Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">StopBits:</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxStopBits" Grid.Row="2" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">1</TextBox>
 
 				<!-- DataBits Settings -->
-				<Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">DataBits:</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxDataBits" Grid.Row="3" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">8</TextBox>
+				<Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">DataBits:</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxDataBits" Grid.Row="3" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">8</TextBox>
 
 				<!-- Parity Settings -->
-				<Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Parity:</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxParity" Grid.Row="4" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">0</TextBox>
+				<Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">Parity:</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxParity" Grid.Row="4" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">0</TextBox>
 
 				<!-- ReadTimeout Settings -->
-				<Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">ReadTimeout (ms):</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxReadTimeout" Grid.Row="5" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
+				<Label Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">ReadTimeout (ms):</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxReadTimeout" Grid.Row="5" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
 
 				<!-- WriteTimeout Settings -->
-				<Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyleLight}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">WriteTimeout (ms):</Label>
-				<TextBox Style="{StaticResource TextBoxLight}" x:Name="TextBoxWriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
+				<Label Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyleDark}" FontSize="18" Margin="50,0,50,0" HorizontalAlignment="Right">WriteTimeout (ms):</Label>
+				<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBoxWriteTimeout" Grid.Row="6" Grid.Column="1" FontSize="16" Margin="50,0,50,0" VerticalAlignment="Center">100</TextBox>
 
 				<!-- Connect -->
-				<Button Grid.Column="1" Grid.Row="9" x:Name="ButtonConnect" Style="{StaticResource ButtonLight}" Margin="0,0,0,5" Click="ButtonConnect_Click" IsEnabled="True">Connect</Button>
+				<Button Grid.Column="1" Grid.Row="9" x:Name="ButtonConnect" Style="{StaticResource ButtonDark}" Margin="0,0,0,5" Click="ButtonConnect_Click" IsEnabled="True">Connect</Button>
 			</Grid>
 		</Border>
 	</DockPanel>

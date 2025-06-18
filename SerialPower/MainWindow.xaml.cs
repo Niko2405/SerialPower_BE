@@ -58,10 +58,10 @@ namespace SerialPower
 					switch (toggled)
 					{
 						case true:
-							RectangleData.Fill = new SolidColorBrush(Colors.Green);
+							RectangleData.Fill = new SolidColorBrush(Colors.Black);
 							break;
 						case false:
-							RectangleData.Fill = new SolidColorBrush(Colors.Red);
+							RectangleData.Fill = new SolidColorBrush(Colors.White);
 							break;
 					}
 					toggled = !toggled;
