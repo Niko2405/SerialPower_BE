@@ -7,7 +7,7 @@
 		xmlns:UserControls="clr-namespace:SerialPower.UserControls"
 		mc:Ignorable="d"
 		Height="720" Width="1240"
-		MinHeight="200" MinWidth="200"
+		MinHeight="240" MinWidth="220"
 		Background="{StaticResource BackgroundStyle}"
 		WindowStartupLocation="CenterScreen"
 		Title="SerialPower" Closed="WindowClosed">
@@ -48,6 +48,7 @@
 			<MenuItem Header="_Tools">
 				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
 				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
+				<MenuItem x:Name="MenuItemMinimalControl" Header="_Open minimal control" Click="MenuItemMinimalControl_Click"/>
 			</MenuItem>
 		</Menu>
 
@@ -86,6 +87,7 @@
 			<UserControls:UC_Info x:Name="UserControlInfo" Visibility="Collapsed"></UserControls:UC_Info>
 			<UserControls:UC_Terminal x:Name="UserControlTerminal" Visibility="Collapsed"></UserControls:UC_Terminal>
 			<UserControls:UC_CustomControl x:Name="UserControlCustomControl" Visibility="Visible"></UserControls:UC_CustomControl>
+			<UserControls:UC_MinimalCustomControl x:Name="UserControlMinimalCustomControl" Visibility="Collapsed"></UserControls:UC_MinimalCustomControl>
 		</Grid>
 	</DockPanel>
 </Window>

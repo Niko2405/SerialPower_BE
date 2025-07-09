@@ -34,12 +34,12 @@
 			<Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderDark}">
 				<StackPanel>
 					<Label DockPanel.Dock="Top" Style="{StaticResource LabelStyleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Position Amplifier</Label>
-					<RadioButton x:Name="RadioButtonPosAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp1_Click">1,629V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp2_Click">4,829V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp3_Click">8,029V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp4" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp4_Click">0,900V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp5" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp5_Click">4,789V</RadioButton>
-					<RadioButton x:Name="RadioButtonPosAmp6" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp6_Click">8,678V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp1_Click">1.629V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp2_Click">4.829V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp3_Click">8.029V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp4" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp4_Click">0.900V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp5" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp5_Click">4.789V</RadioButton>
+					<RadioButton x:Name="RadioButtonPosAmp6" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonPosAmp6_Click">8.678V</RadioButton>
 				</StackPanel>
 			</Border>
 
@@ -47,9 +47,9 @@
 			<Border Grid.Row="0" Grid.Column="2" Style="{StaticResource BorderDark}">
 				<StackPanel>
 					<Label DockPanel.Dock="Top" Style="{StaticResource LabelStyleDark}" FontSize="20" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">CH1 - Temperature Amplifier</Label>
-					<RadioButton x:Name="RadioButtonTempAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp1_Click">2,928V</RadioButton>
-					<RadioButton x:Name="RadioButtonTempAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp2_Click">3,239V</RadioButton>
-					<RadioButton x:Name="RadioButtonTempAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp3_Click">3,549V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp1" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp1_Click">2.928V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp2" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp2_Click">3.239V</RadioButton>
+					<RadioButton x:Name="RadioButtonTempAmp3" GroupName="ChannelOne" Style="{StaticResource RadioButtonDark}" VerticalContentAlignment="Center" Click="RadioButtonTempAmp3_Click">3.549V</RadioButton>
 				</StackPanel>
 			</Border>
 			
@@ -57,7 +57,7 @@
 			<Border Grid.Row="1" Grid.Column="3" Style="{StaticResource BorderDark}">
 				<StackPanel>
 					<Label Style="{StaticResource LabelStyleDark}" FontSize="20">CH2 - Fine adjustment</Label>
-					<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<TextBox x:Name="TextBoxCH2Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24.000</TextBox>
 					<Grid Margin="10">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition></ColumnDefinition>
@@ -85,7 +85,7 @@
 			<Border Grid.Row="0" Grid.Column="3" Style="{StaticResource BorderDark}">
 				<StackPanel>
 					<Label Style="{StaticResource LabelStyleDark}" FontSize="20">CH1 - Fine adjustment</Label>
-					<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24,000</TextBox>
+					<TextBox x:Name="TextBoxCH1Voltage" Style="{StaticResource TextBoxDark}" Margin="20,0,20,0" FontSize="18">24.000</TextBox>
 					<Grid Margin="10">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition></ColumnDefinition>

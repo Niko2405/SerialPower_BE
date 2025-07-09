@@ -142,73 +142,73 @@ namespace SerialPower.UserControls
 
 		private void RadioButtonValveControl1_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "1,000";
+			TextBoxCH1Voltage.Text = "1.000";
 			SerialSender.SetPowerSupplyValues(1f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonValveControl2_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "9,000";
+			TextBoxCH1Voltage.Text = "9.000";
 			SerialSender.SetPowerSupplyValues(9f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonValveControl3_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "0,000";
+			TextBoxCH1Voltage.Text = "0.000";
 			SerialSender.SetPowerSupplyValues(0f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp1_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "1,629";
+			TextBoxCH1Voltage.Text = "1.629";
 			SerialSender.SetPowerSupplyValues(1.629f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp2_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "4,829";
+			TextBoxCH1Voltage.Text = "4.829";
 			SerialSender.SetPowerSupplyValues(4.829f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp3_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "8,029";
+			TextBoxCH1Voltage.Text = "8.029";
 			SerialSender.SetPowerSupplyValues(8.029f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp4_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "0,900";
+			TextBoxCH1Voltage.Text = "0.900";
 			SerialSender.SetPowerSupplyValues(0.9f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp5_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "4,789";
+			TextBoxCH1Voltage.Text = "4.789";
 			SerialSender.SetPowerSupplyValues(4.789f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonPosAmp6_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "8,678";
+			TextBoxCH1Voltage.Text = "8.678";
 			SerialSender.SetPowerSupplyValues(8.678f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonTempAmp1_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "2,928";
+			TextBoxCH1Voltage.Text = "2.928";
 			SerialSender.SetPowerSupplyValues(2.928f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonTempAmp2_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "3,239";
+			TextBoxCH1Voltage.Text = "3.239";
 			SerialSender.SetPowerSupplyValues(3.239f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 
 		private void RadioButtonTempAmp3_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxCH1Voltage.Text = "3,549";
+			TextBoxCH1Voltage.Text = "3.549";
 			SerialSender.SetPowerSupplyValues(3.549f, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
 

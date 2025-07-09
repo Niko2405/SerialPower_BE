@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using TartarosLogger;
+using System.Globalization;
 
 namespace SerialPower
 {
@@ -104,7 +105,11 @@ namespace SerialPower
 
 			// read args
 			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
-			Console.WriteLine("====================");
+
+			Console.WriteLine($"Current culture is: " + CultureInfo.CurrentCulture);
+			Console.WriteLine("Change culture to en-US");
+			CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+
 			foreach (var arg in e.Args)
 			{
 				Console.WriteLine(arg);
@@ -132,7 +137,7 @@ namespace SerialPower
 
 			// Print infos
 			Logger.ResetLog();
-			Logger.PrintHeader("SYSTEMINFO");
+			Logger.PrintHeader("Systeminfo");
 			Console.WriteLine("Config Handler:\t\t\tJSON");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");

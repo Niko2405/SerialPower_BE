@@ -58,10 +58,10 @@ namespace SerialPower
 					switch (toggled)
 					{
 						case true:
-							RectangleData.Fill = new SolidColorBrush(Colors.Black);
+							RectangleData.Fill = new SolidColorBrush(Colors.Green);
 							break;
 						case false:
-							RectangleData.Fill = new SolidColorBrush(Colors.White);
+							RectangleData.Fill = new SolidColorBrush(Colors.Red);
 							break;
 					}
 					toggled = !toggled;
@@ -78,13 +78,62 @@ namespace SerialPower
 		{
 			while (true)
 			{
+				// get values
 				Thread.Sleep(updateDelay);
+				string textCH1Voltage = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.V);
+				string textCH1Current = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.I);
+				string textCH2Voltage = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
+				string textCH2Current = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
+
+
+				#region ShortProtection
+				if (ConfigHandler.serialConfig != null)
+				{
+					if (ConfigHandler.serialConfig.ShortCircuitProtection)
+					{
+						float nominalCH1Current = float.Parse(SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH1, SerialSender.TargetType.I).Replace('A', ' '));
+						float nominalCH2Current = float.Parse(SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH2, SerialSender.TargetType.I).Replace('A', ' '));
+
+						float currentCH1 = float.Parse(textCH1Current.Replace('A', ' '));
+						float currentCH2 = float.Parse(textCH2Current.Replace('A', ' '));
+
+						Logger.Debug($"[ShortCircuitProtection] Current CH1: {currentCH1}A\t max. current: {nominalCH1Current}A");
+						Logger.Debug($"[ShortCircuitProtection] Current CH2: {currentCH2}A\t max. current: {nominalCH2Current}A");
+
+						if ((currentCH1 / nominalCH1Current) >= 1.00)
+						{
+							Logger.Warn($"[ShortCircuitProtection] Current to high on CH1");
+							SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
+							this.Dispatcher.Invoke(() =>
+							{
+								UserControlCustomControl.Channel1Active = false;
+								UserControlMinimalCustomControl.Channel1Active = false;
+							});
+							
+							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom am Kanal 1 wurde erreicht. Ausgang deaktiviert.", "Channel 1 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
+						}
+						if ((currentCH2 / nominalCH2Current) >= 1.00)
+						{
+							Logger.Warn($"[ShortCircuitProtection] Current to high on CH2");
+							SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
+							this.Dispatcher.Invoke(() =>
+							{
+								UserControlCustomControl.Channel2Active = false;
+								UserControlMinimalCustomControl.Channel2Active = false;
+							});
+
+							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom am Kanal 2 wurde erreicht. Ausgang deaktiviert.", "Channel 2 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
+						}
+					}
+				}
+				#endregion
+
 				this.Dispatcher.Invoke(() =>
 				{
-					TextBlockVoltageCH1.Text = "CH1 Voltage: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.V);
-					TextBlockCurrentCH1.Text = "CH1 Current: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.I);
-					TextBlockVoltageCH2.Text = "CH2 Voltage: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);
-					TextBlockCurrentCH2.Text = "CH2 Current: " + SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.I);
+					TextBlockVoltageCH1.Text = "CH1 Voltage: " + textCH1Voltage;
+					TextBlockCurrentCH1.Text = "CH1 Current: " + textCH1Current;
+					TextBlockVoltageCH2.Text = "CH2 Voltage: " + textCH2Voltage;
+					TextBlockCurrentCH2.Text = "CH2 Current: " + textCH2Current;
 				});
 			}
 		}
@@ -103,6 +152,7 @@ namespace SerialPower
 			UserControlCustomControl.Visibility = Visibility.Collapsed;
 			UserControlTerminal.Visibility = Visibility.Collapsed;
 			UserControlInfo.Visibility = Visibility.Collapsed;
+			UserControlMinimalCustomControl.Visibility = Visibility.Collapsed;
 
 			// only show current usercontrol
 			userControl.Visibility = Visibility.Visible;
@@ -142,6 +192,11 @@ namespace SerialPower
 			SetActiveUserControl(UserControlInfo);
 		}
 
+		private void MenuItemMinimalControl_Click(object sender, RoutedEventArgs e)
+		{
+			SetActiveUserControl(UserControlMinimalCustomControl);
+		}
+
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Info("Closing program. Disconnect power supply.");
@@ -179,12 +234,12 @@ namespace SerialPower
 			MessageBox.Show("MIT License\r\n\r\nCopyright (c) 2025 Niko2405\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.", "MIT License - SerialPower_BE", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
-        private void MenuItemGetCurrentInstanceSettings_Click(object sender, RoutedEventArgs e)
-        {
+		private void MenuItemGetCurrentInstanceSettings_Click(object sender, RoutedEventArgs e)
+		{
 			if (ConfigHandler.serialConfig != null)
 			{
-				MessageBox.Show($"PortName: {ConfigHandler.serialConfig.SerialPortName}\nBaudrate: {ConfigHandler.serialConfig.Baudrate}\nDataBits: {ConfigHandler.serialConfig.DataBits}\nStopBits: {ConfigHandler.serialConfig.StopBits}\nParity: {ConfigHandler.serialConfig.Parity}\nWriteTimeout: {ConfigHandler.serialConfig.WriteTimeout}\nReadTimeout: {ConfigHandler.serialConfig.ReadTimeout}", "Serial config", MessageBoxButton.OK, MessageBoxImage.Information);
+				MessageBox.Show($"PortName: {ConfigHandler.serialConfig.SerialPortName}\nBaudrate: {ConfigHandler.serialConfig.Baudrate}\nDataBits: {ConfigHandler.serialConfig.DataBits}\nStopBits: {ConfigHandler.serialConfig.StopBits}\nParity: {ConfigHandler.serialConfig.Parity}\nWriteTimeout: {ConfigHandler.serialConfig.WriteTimeout}\nReadTimeout: {ConfigHandler.serialConfig.ReadTimeout}\nMeasureUpdateInterval: {ConfigHandler.serialConfig.MeasureUpdateInterval}\nShortCircuitProtection: {ConfigHandler.serialConfig.ShortCircuitProtection}", "Serial config", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
-        }
-    }
+		}
+	}
 }

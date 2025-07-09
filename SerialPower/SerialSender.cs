@@ -12,10 +12,11 @@ namespace SerialPower
 		public int Baudrate { get; set; } = 9600;
 		public int DataBits { get; set; } = 8;
 		public int StopBits { get; set; } = 1;
-		public int WriteTimeout { get; set; } = 500;
-		public int ReadTimeout { get; set; } = 500;
+		public int WriteTimeout { get; set; } = 250;
+		public int ReadTimeout { get; set; } = 250;
 		public int Parity { get; set; } = 0;
 		public short MeasureUpdateInterval { get; set; } = 1000;
+		public bool ShortCircuitProtection { get; set; } = true;
 
 
 		/// <summary>
@@ -24,7 +25,7 @@ namespace SerialPower
 		public static bool DisablePortVerify = false;
 
 		/// <summary>
-		/// Disable communication for com devices. (Dummy)
+		/// Disable communication for com devices. (Dummy test)
 		/// </summary>
 		public static bool DisableCommunication = false;
 
@@ -181,7 +182,6 @@ namespace SerialPower
 						Parity = (Parity)ConfigHandler.serialConfig.Parity,
 						ReadTimeout = ConfigHandler.serialConfig.ReadTimeout,
 						WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
-
 					};
 					serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 					if (!serialPort.IsOpen)

@@ -22,10 +22,10 @@ namespace SerialPower
 				try
 				{
 					// check if connected device is a power supply
-					serialPort = new(currentCom, 115200, Parity.None, 8, StopBits.One)
+					serialPort = new(currentCom, 9600, Parity.None, 8, StopBits.One)
 					{
-						ReadTimeout = 500,
-						WriteTimeout = 500
+						ReadTimeout = 250,
+						WriteTimeout = 250
 					};
 
 					serialPort.Open();
@@ -37,6 +37,8 @@ namespace SerialPower
 					if (response.Contains("CPX200"))
 					{
 						Console.Beep(560, 500);
+						Console.Beep(620, 500);
+						Console.Beep(720, 500);
 
 						// Auto disconnect
 						serialPort.WriteLine("LOCAL");
