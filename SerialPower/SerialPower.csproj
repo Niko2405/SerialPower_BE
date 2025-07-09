@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.7.0.0</AssemblyVersion>
-    <FileVersion>1.7.0.0</FileVersion>
+    <AssemblyVersion>1.7.0.1</AssemblyVersion>
+    <FileVersion>1.7.0.1</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -50,6 +50,7 @@
     <None Remove="fonts\OpenSans-ExtraBold.ttf" />
     <None Remove="fonts\OpenSans-Regular.ttf" />
     <None Remove="fonts\OpenSans-SemiBold.ttf" />
+    <None Remove="images\fakebsod.png" />
     <None Remove="images\power-off.png" />
     <None Remove="images\power-off_light.png" />
     <None Remove="images\power-on.png" />
@@ -73,8 +74,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="9.0.6" />
-    <PackageReference Include="TartarosLogger" Version="1.6.2" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.7" />
+    <PackageReference Include="TartarosLogger" Version="1.6.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -82,6 +83,8 @@
     <Resource Include="fonts\OpenSans-ExtraBold.ttf" />
     <Resource Include="fonts\OpenSans-Regular.ttf" />
     <Resource Include="fonts\OpenSans-SemiBold.ttf" />
+    <Resource Include="images\fakebsod.png" />
+    <Resource Include="images\JokeOne.jpeg" />
     <Resource Include="images\power-off.png" />
     <Resource Include="images\power-off_light.png" />
     <Resource Include="images\power-on.png" />

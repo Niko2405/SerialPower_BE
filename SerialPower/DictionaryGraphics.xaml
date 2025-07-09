@@ -1,10 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<BitmapImage x:Key="ImagePowerSupply" UriSource="/SerialPower;component/images/powersupplie.png"></BitmapImage>
-	<BitmapImage x:Key="ImagePowerOn" UriSource="/SerialPower;component/images/power-on.png"></BitmapImage>
-	<BitmapImage x:Key="ImagePowerOff" UriSource="/SerialPower;component/images/power-off.png"></BitmapImage>
+	<BitmapImage x:Key="ImagePowerSupply" UriSource="/SerialPower;component/images/powersupplie.png"/>
+	<BitmapImage x:Key="ImagePowerOn" UriSource="/SerialPower;component/images/power-on.png"/>
+	<BitmapImage x:Key="ImagePowerOff" UriSource="/SerialPower;component/images/power-off.png"/>
 
+	<BitmapImage x:Key="JokeOne" UriSource="/SerialPower;component/images/JokeOne.jpeg"/>
+	<BitmapImage x:Key="FakeBlueScreen" UriSource="/SerialPower;component/images/fakebsod.png"/>
+	
 	<!-- Light Theme -->
-	<BitmapImage x:Key="ImagePowerOnLight" UriSource="/SerialPower;component/images/power-on_light.png"></BitmapImage>
-	<BitmapImage x:Key="ImagePowerOffLight" UriSource="/SerialPower;component/images/power-off_light.png"></BitmapImage>
+	<BitmapImage x:Key="ImagePowerOnLight" UriSource="/SerialPower;component/images/power-on_light.png"/>
+	<BitmapImage x:Key="ImagePowerOffLight" UriSource="/SerialPower;component/images/power-off_light.png"/>
 </ResourceDictionary>

