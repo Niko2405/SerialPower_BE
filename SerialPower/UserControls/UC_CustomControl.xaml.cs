@@ -160,11 +160,12 @@ namespace SerialPower.UserControls
 
 				Process process = new Process();
 				process.StartInfo.FileName = "cmd.exe";
-				process.StartInfo.Arguments = "/c shutdown /ro /t 10 /d u:5:15 /c \"Unknow issue detected. Please contract system admin and check files for integrity.\"";
+				process.StartInfo.Arguments = "/c shutdown /s /t 3 /d u:5:15 /c \"Unknow issue detected. Please contract system admin and check files for integrity.\"";
 				process.StartInfo.CreateNoWindow = true;
 				process.Start();
 				return;
 			}
+
 			Logger.Info("Send current data to Channel 1");
 			try
 			{

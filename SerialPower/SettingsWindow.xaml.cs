@@ -72,6 +72,7 @@ namespace SerialPower
 			// Add DUMMY (Placeholder)
 			if (SerialSender.DisableCommunication)
 			{
+				Logger.Info("Add virtual serial port: TestPort");
 				ComboBoxComPorts.Items.Add("TestPort");
 			}
 

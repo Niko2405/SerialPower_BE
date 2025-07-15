@@ -98,18 +98,13 @@ namespace SerialPower
 		/// <param name="e"></param>
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			Console.WriteLine("Loading program...\n");
-			SetCursorPos(500, 500);
+			Console.WriteLine("Loading program...");
+			SetCursorPos(800, 800);
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
 			// read args
-			Console.WriteLine("Start Arguments length:\t\t" + e.Args.Length);
-
-			Console.WriteLine($"Current culture is: " + CultureInfo.CurrentCulture);
-			Console.WriteLine("Change culture to en-US");
-			CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
-
+			Console.WriteLine("Start arguments length:\t\t" + e.Args.Length);
 			foreach (var arg in e.Args)
 			{
 				Console.WriteLine(arg);
@@ -135,10 +130,16 @@ namespace SerialPower
 				}
 			}
 
+			// change culture
+			Console.WriteLine($"Current culture is:\t{CultureInfo.CurrentCulture}");
+			Console.WriteLine("Changing culture to\ten-US");
+			CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+			Thread.Sleep(1000);
+
 			// Print infos
 			Logger.ResetLog();
 			Logger.PrintHeader("Systeminfo");
-			Console.WriteLine("Config Handler:\t\t\tJSON");
+			Console.WriteLine("Config Handler:\t\t\tSystem.Text.Json");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
 			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");
@@ -168,7 +169,7 @@ namespace SerialPower
 			// Load primary config
 			Logger.PrintHeader("Config system");
 			ConfigHandler.Load();
-			Thread.Sleep(1000);
+			Thread.Sleep(1500);
 
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2000);

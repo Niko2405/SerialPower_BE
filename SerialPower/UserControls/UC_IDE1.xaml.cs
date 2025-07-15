@@ -26,7 +26,7 @@ namespace SerialPower.UserControls
 		private void ButtonCH1_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Info("CH1 - Send voltage");
-			float voltage = float.Parse(TextBoxCH1Voltage.Text);
+			float voltage = float.Parse(TextBoxCH1Voltage.Text.Replace(',', '.'));
 			Logger.Info($"Set voltage to [{voltage}]");
 			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH1);
 		}
@@ -39,7 +39,7 @@ namespace SerialPower.UserControls
 		private void ButtonCH2_SendVoltage_Click(object sender, RoutedEventArgs e)
 		{
 			Logger.Info("CH2 - Send voltage");
-			float voltage = float.Parse(TextBoxCH2Voltage.Text);
+			float voltage = float.Parse(TextBoxCH2Voltage.Text.Replace(',', '.'));
 			Logger.Info($"Set voltage to [{voltage}]");
 			SerialSender.SetPowerSupplyValues(voltage, CURRENT_LIMIT, SerialSender.Channel.CH2);
 		}
@@ -54,7 +54,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH1Voltage.Text);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(',', '.'));
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
@@ -78,7 +78,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH1Voltage.Text);
+				float currentValue = float.Parse(TextBoxCH1Voltage.Text.Replace(',', '.'));
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;
@@ -102,7 +102,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."));
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue - STEPS;
@@ -126,7 +126,7 @@ namespace SerialPower.UserControls
 			try
 			{
 				// Komma durch Punkt ersetzen
-				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
+				float currentValue = float.Parse(TextBoxCH2Voltage.Text.Replace(',', '.'));
 
 				// Wert um 0,001 verringern
 				float newValue = currentValue + STEPS;

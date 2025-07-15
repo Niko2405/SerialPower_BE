@@ -144,7 +144,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(Channel channel, State state)
 		{
-			Logger.Info($"Change channel {channel} state to {state}");
+			Logger.Info($"[{channel}] change state to {state}");
 			SendData($"OP{(int)channel} {(int)state}");
 		}
 
@@ -154,7 +154,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(State state)
 		{
-			Logger.Info($"Change both channels state to {state}");
+			Logger.Info($"[CH1 and CH2] change state to {state}");
 			SendData($"OPALL {(int)state}");
 		}
 
@@ -183,7 +183,7 @@ namespace SerialPower
 						ReadTimeout = ConfigHandler.serialConfig.ReadTimeout,
 						WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
 					};
-					serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+					//serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 					if (!serialPort.IsOpen)
 					{
 						serialPort.Open();
@@ -198,10 +198,12 @@ namespace SerialPower
 			}
 		}
 
+		/*
 		private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
 		{
 			// TODO: expand
 		}
+		*/
 
 		/// <summary>
 		/// Disconnect device
@@ -214,9 +216,11 @@ namespace SerialPower
 			}
 			try
 			{
+				Logger.Info("Disconnect device...");
+				SetChannelState(State.OFF);
 				serialPort.WriteLine("LOCAL");
+				Thread.Sleep(500);
 				serialPort.Close();
-				Logger.Info("Disconnect device");
 			}
 			catch (TimeoutException)
 			{
