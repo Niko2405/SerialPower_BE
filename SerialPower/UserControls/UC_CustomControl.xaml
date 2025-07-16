@@ -5,13 +5,13 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
-			 d:DesignHeight="750" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
+			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="VisibleChanged">
 	<DockPanel LastChildFill="True">
 		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">CUSTOM CONTROL</Label>
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
 			<Label Style="{StaticResource LabelStyleDark}" FontSize="13" HorizontalAlignment="Left">Options:</Label>
 			<CheckBox x:Name="CheckBoxSyncSwitch" Foreground="White" FontSize="14" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckBoxSyncSwitch_Checked" Unchecked="CheckBoxSyncSwitch_Unchecked" ToolTip="(De)activate Channel 1 and 2 at the same time">Synchronous activation</CheckBox>
-			<CheckBox x:Name="CheckBoxShortCircuitProtection" Foreground="White" FontSize="14" Margin="20,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckBoxShortCircuitProtection_Checked" Unchecked="CheckBoxShortCircuitProtection_Unchecked" IsChecked="True">Short circuit protection</CheckBox>
+			
 		</StackPanel>
 		
 		<!-- Overview -->

@@ -241,5 +241,25 @@ namespace SerialPower
 				MessageBox.Show($"PortName: {ConfigHandler.serialConfig.SerialPortName}\nBaudrate: {ConfigHandler.serialConfig.Baudrate}\nDataBits: {ConfigHandler.serialConfig.DataBits}\nStopBits: {ConfigHandler.serialConfig.StopBits}\nParity: {ConfigHandler.serialConfig.Parity}\nWriteTimeout: {ConfigHandler.serialConfig.WriteTimeout}\nReadTimeout: {ConfigHandler.serialConfig.ReadTimeout}\nMeasureUpdateInterval: {ConfigHandler.serialConfig.MeasureUpdateInterval}\nShortCircuitProtection: {ConfigHandler.serialConfig.ShortCircuitProtection}", "Serial config", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 		}
-	}
+
+		private void MenuItemShortCircuitProtection_Checked(object sender, RoutedEventArgs e)
+		{
+			if (ConfigHandler.serialConfig != null)
+			{
+				Logger.Info("ShortCircuitProtection = true");
+				ConfigHandler.serialConfig.ShortCircuitProtection = true;
+				ConfigHandler.Save();
+			}
+		}
+
+		private void MenuItemShortCircuitProtection_Unchecked(object sender, RoutedEventArgs e)
+		{
+			if (ConfigHandler.serialConfig != null)
+			{
+				Logger.Info("ShortCircuitProtection = false");
+				ConfigHandler.serialConfig.ShortCircuitProtection = false;
+				ConfigHandler.Save();
+			}
+		}
+    }
 }

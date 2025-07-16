@@ -12,43 +12,61 @@
 		WindowStartupLocation="CenterScreen"
 		Title="SerialPower" Closed="WindowClosed">
 	<DockPanel>
-		<Menu DockPanel.Dock="Top">
-			<MenuItem Header="_File">
-				<MenuItem Header="_Options">
-					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="_Open serial config file" Click="MenuItemOpenSerialConfig_Click"/>
+		<Menu DockPanel.Dock="Top" IsMainMenu="True">
+			<!-- File -->
+			<MenuItem Header="_File" FontSize="14">
+				<MenuItem.Icon>
+					<Image Source="pack://application:,,,/images/icon_file.png"></Image>
+				</MenuItem.Icon>
+				<MenuItem Header="Options">
+					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="Open serial config file" Click="MenuItemOpenSerialConfig_Click"/>
 					<MenuItem x:Name="MenuItemGetCurrentInstanceSettings" Header="Get current instance settings" Click="MenuItemGetCurrentInstanceSettings_Click"/>
-					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="_Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
+					<MenuItem x:Name="MenuItemOpenDeviceManager" Header="Open DeviceManager" Click="MenuItemOpenDeviceManager_Click"/>
 				</MenuItem>
-				<MenuItem x:Name="MenuItemInfo" Header="_Info" Click="MenuItemInfo_Click"/>
-				<MenuItem x:Name="MenuItemLicense" Header="_License" Click="MenuItemLicense_Click"/>
-				<MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click"/>
+				<MenuItem x:Name="MenuItemInfo" Header="Info" Click="MenuItemInfo_Click"/>
+				<MenuItem x:Name="MenuItemLicense" Header="License" Click="MenuItemLicense_Click"/>
+				<MenuItem x:Name="MenuItemExit" Header="Exit" Click="MenuItemExit_Click"/>
 			</MenuItem>
 
 			<!-- Baugruppen -->
-			<MenuItem Header="_Programs">
+			<MenuItem Header="_Programs" FontSize="14">
+				<MenuItem.Icon>
+					<Image Source="pack://application:,,,/images/icon_functions.png"></Image>
+				</MenuItem.Icon>
 				<MenuItem Header="_Ernst Leitz">
-					<MenuItem x:Name="MenuItemErnstLeitz1" Header="_85/15186" Click="MenuItemErnstLeitz1_Click"/>
+					<MenuItem x:Name="MenuItemErnstLeitz1" Header="85/15186" Click="MenuItemErnstLeitz1_Click"/>
 				</MenuItem>
 				<MenuItem Header="_IDE">
-					<MenuItem x:Name="MenuItemIDE1" Header="_87/10582" Click="MenuItemIDE1_Click"/>
+					<MenuItem x:Name="MenuItemIDE1" Header="87/10582" Click="MenuItemIDE1_Click"/>
 				</MenuItem>
 				<MenuItem Header="_Leimi">
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
+					<MenuItem Header="Example"/>
+					<MenuItem Header="Example"/>
+					<MenuItem Header="Example"/>
 				</MenuItem>
 				<MenuItem Header="_Tucker">
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
-					<MenuItem Header="_Example"/>
+					<MenuItem Header="Example"/>
+					<MenuItem Header="Example"/>
+					<MenuItem Header="Example"/>
 				</MenuItem>
 			</MenuItem>
 
 			<!-- Tools -->
-			<MenuItem Header="_Tools">
-				<MenuItem x:Name="MenuItemCustomControl" Header="_Custom Control" Click="MenuItemCustomControl_Click"/>
-				<MenuItem x:Name="MenuItemTerminal" Header="_Terminal" Click="MenuItemTerminal_Click"/>
-				<MenuItem x:Name="MenuItemMinimalControl" Header="_Open minimal control" Click="MenuItemMinimalControl_Click"/>
+			<MenuItem Header="_Tools" FontSize="14">
+				<MenuItem.Icon>
+					<Image Source="pack://application:,,,/images/icon_tools.png"></Image>
+				</MenuItem.Icon>
+				<MenuItem x:Name="MenuItemCustomControl" Header="Custom Control" Click="MenuItemCustomControl_Click"/>
+				<MenuItem x:Name="MenuItemTerminal" Header="Terminal" Click="MenuItemTerminal_Click"/>
+				<MenuItem x:Name="MenuItemMinimalControl" Header="Open minimal control" Click="MenuItemMinimalControl_Click"/>
+			</MenuItem>
+
+			<!-- Functions -->
+			<MenuItem Header="_Functions" FontSize="14">
+				<MenuItem.Icon>
+					<Image Source="pack://application:,,,/images/icon_control.png"></Image>
+				</MenuItem.Icon>
+				<MenuItem x:Name="MenuItemShortCircuitProtection" Header="_Short circuit protection" Checked="MenuItemShortCircuitProtection_Checked" Unchecked="MenuItemShortCircuitProtection_Unchecked" IsCheckable="True"/>
 			</MenuItem>
 		</Menu>
 

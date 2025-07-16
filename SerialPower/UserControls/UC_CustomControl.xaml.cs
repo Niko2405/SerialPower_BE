@@ -501,28 +501,6 @@ namespace SerialPower.UserControls
 			Channel1Active = false;
 			Channel2Active = false;
 		}
-		
-		private void CheckBoxShortCircuitProtection_Checked(object sender, RoutedEventArgs e)
-		{
-			if (ConfigHandler.serialConfig != null)
-			{
-				Logger.Info("ShortCircuitProtection = true");
-				ConfigHandler.serialConfig.ShortCircuitProtection = true;
-				ConfigHandler.Save();
-			}
-			
-			//MessageBox.Show("Der Maximale Strom wurde erreicht. Netzteil wird augeschaltet.\nKurzschluss?", "MAX CURRENT", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-		}
-
-		private void CheckBoxShortCircuitProtection_Unchecked(object sender, RoutedEventArgs e)
-		{
-			if (ConfigHandler.serialConfig != null)
-			{
-				Logger.Info("ShortCircuitProtection = false");
-				ConfigHandler.serialConfig.ShortCircuitProtection = false;
-				ConfigHandler.Save();
-			}
-		}
 		#endregion
 	}
 }
