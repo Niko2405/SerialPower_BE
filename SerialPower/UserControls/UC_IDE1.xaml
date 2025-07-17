@@ -5,7 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
-			 d:DesignHeight="720" d:DesignWidth="1280">
+			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="UserControl_IsVisibleChanged">
 	<DockPanel LastChildFill="True">
 		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">IDE [87/10582]</Label>
 		<Grid DockPanel.Dock="Bottom">

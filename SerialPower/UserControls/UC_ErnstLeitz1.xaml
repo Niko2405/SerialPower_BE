@@ -5,7 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d"
-			 d:DesignHeight="720" d:DesignWidth="1280">
+			 d:DesignHeight="720" d:DesignWidth="1280" IsVisibleChanged="UserControl_IsVisibleChanged">
 	<DockPanel LastChildFill="True" Margin="5">
 		<Label DockPanel.Dock="Top" Style="{StaticResource LabelTitleDark}">Ernst Leitz [85/15186]</Label>
 		<Grid>

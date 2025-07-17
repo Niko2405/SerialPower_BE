@@ -14,7 +14,6 @@ namespace SerialPower.UserControls
 		public UC_ErnstLeitz1()
 		{
 			InitializeComponent();
-			SerialSender.SetChannelState(SerialSender.State.OFF);
 		}
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
@@ -159,5 +158,13 @@ namespace SerialPower.UserControls
 				ButtonStart.IsEnabled = true;
 			}
 		}
-	}
+
+		private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if (Convert.ToBoolean(e.NewValue.ToString()))
+			{
+				SerialSender.SetChannelState(SerialSender.State.OFF);
+			}
+        }
+    }
 }

@@ -231,5 +231,13 @@ namespace SerialPower.UserControls
 		{
 			SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
 		}
-	}
+
+		private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if (Convert.ToBoolean(e.NewValue.ToString()))
+			{
+				SerialSender.SetChannelState(SerialSender.State.OFF);
+			}
+		}
+    }
 }

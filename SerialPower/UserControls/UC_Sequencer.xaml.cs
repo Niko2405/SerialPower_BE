@@ -27,7 +27,10 @@ namespace SerialPower.UserControls
 
 		private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
-
-        }
-    }
+			if (Convert.ToBoolean(e.NewValue.ToString()))
+			{
+				SerialSender.SetChannelState(SerialSender.State.OFF);
+			}
+		}
+	}
 }

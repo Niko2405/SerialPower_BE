@@ -6,6 +6,7 @@
 			 xmlns:local="clr-namespace:SerialPower.UserControls"
 			 mc:Ignorable="d" 
 			 Height="180" Width="180"
+			 IsVisibleChanged="UserControl_IsVisibleChanged"
 			 Background="{StaticResource BackgroundStyle}">
 	<StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Margin="4">
 			<StackPanel Orientation="Horizontal">

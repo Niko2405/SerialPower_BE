@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.7.0.3</AssemblyVersion>
-    <FileVersion>1.7.0.3</FileVersion>
+    <AssemblyVersion>1.7.0.4</AssemblyVersion>
+    <FileVersion>1.7.0.4</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -54,6 +54,7 @@
     <None Remove="images\icon_control.png" />
     <None Remove="images\icon_file.png" />
     <None Remove="images\icon_functions.png" />
+    <None Remove="images\icon_sequencer.png" />
     <None Remove="images\icon_tools.png" />
     <None Remove="images\power-off.png" />
     <None Remove="images\power-off_light.png" />
@@ -91,6 +92,7 @@
     <Resource Include="images\icon_control.png" />
     <Resource Include="images\icon_file.png" />
     <Resource Include="images\icon_functions.png" />
+    <Resource Include="images\icon_sequencer.png" />
     <Resource Include="images\icon_tools.png" />
     <Resource Include="images\JokeOne.jpeg" />
     <Resource Include="images\power-off.png" />

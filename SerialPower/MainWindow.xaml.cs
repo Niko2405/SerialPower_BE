@@ -153,6 +153,7 @@ namespace SerialPower
 			UserControlTerminal.Visibility = Visibility.Collapsed;
 			UserControlInfo.Visibility = Visibility.Collapsed;
 			UserControlMinimalCustomControl.Visibility = Visibility.Collapsed;
+			UserControlSequencer.Visibility = Visibility.Collapsed;
 
 			// only show current usercontrol
 			userControl.Visibility = Visibility.Visible;
@@ -195,6 +196,10 @@ namespace SerialPower
 		private void MenuItemMinimalControl_Click(object sender, RoutedEventArgs e)
 		{
 			SetActiveUserControl(UserControlMinimalCustomControl);
+		}
+		private void MenuItemSequencer_Click(object sender, RoutedEventArgs e)
+		{
+			SetActiveUserControl(UserControlSequencer);
 		}
 
 		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -261,5 +266,5 @@ namespace SerialPower
 				ConfigHandler.Save();
 			}
 		}
-    }
+	}
 }

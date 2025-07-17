@@ -92,5 +92,13 @@ namespace SerialPower.UserControls
 		{
 			Channel2Active = !Channel2Active;
 		}
-	}
+
+		private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if (Convert.ToBoolean(e.NewValue.ToString()))
+			{
+				SerialSender.SetChannelState(SerialSender.State.OFF);
+			}
+		}
+    }
 }

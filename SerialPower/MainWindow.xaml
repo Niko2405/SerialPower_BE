@@ -16,7 +16,7 @@
 			<!-- File -->
 			<MenuItem Header="_File" FontSize="14">
 				<MenuItem.Icon>
-					<Image Source="pack://application:,,,/images/icon_file.png"></Image>
+					<Image Source="pack://application:,,,/images/icon_file.png" Width="16" Height="16" Stretch="Fill"></Image>
 				</MenuItem.Icon>
 				<MenuItem Header="Options">
 					<MenuItem x:Name="MenuItemOpenSerialConfig" Header="Open serial config file" Click="MenuItemOpenSerialConfig_Click"/>
@@ -31,7 +31,7 @@
 			<!-- Baugruppen -->
 			<MenuItem Header="_Programs" FontSize="14">
 				<MenuItem.Icon>
-					<Image Source="pack://application:,,,/images/icon_functions.png"></Image>
+					<Image Source="pack://application:,,,/images/icon_functions.png" Width="16" Height="16" Stretch="Fill"></Image>
 				</MenuItem.Icon>
 				<MenuItem Header="_Ernst Leitz">
 					<MenuItem x:Name="MenuItemErnstLeitz1" Header="85/15186" Click="MenuItemErnstLeitz1_Click"/>
@@ -54,19 +54,26 @@
 			<!-- Tools -->
 			<MenuItem Header="_Tools" FontSize="14">
 				<MenuItem.Icon>
-					<Image Source="pack://application:,,,/images/icon_tools.png"></Image>
+					<Image Source="pack://application:,,,/images/icon_tools.png" Width="16" Height="16" Stretch="Fill"></Image>
 				</MenuItem.Icon>
 				<MenuItem x:Name="MenuItemCustomControl" Header="Custom Control" Click="MenuItemCustomControl_Click"/>
 				<MenuItem x:Name="MenuItemTerminal" Header="Terminal" Click="MenuItemTerminal_Click"/>
 				<MenuItem x:Name="MenuItemMinimalControl" Header="Open minimal control" Click="MenuItemMinimalControl_Click"/>
 			</MenuItem>
 
+			<!-- Sequencer -->
+			<MenuItem x:Name="MenuItemSequencer" Header="_Sequencer" FontSize="14" Click="MenuItemSequencer_Click">
+				<MenuItem.Icon>
+					<Image Source="pack://application:,,,/images/icon_sequencer.png" Width="16" Height="16" Stretch="Fill"></Image>
+				</MenuItem.Icon>
+			</MenuItem>
+
 			<!-- Functions -->
 			<MenuItem Header="_Functions" FontSize="14">
 				<MenuItem.Icon>
-					<Image Source="pack://application:,,,/images/icon_control.png"></Image>
+					<Image Source="pack://application:,,,/images/icon_control.png" Width="16" Height="16" Stretch="Fill"></Image>
 				</MenuItem.Icon>
-				<MenuItem x:Name="MenuItemShortCircuitProtection" Header="_Short circuit protection" Checked="MenuItemShortCircuitProtection_Checked" Unchecked="MenuItemShortCircuitProtection_Unchecked" IsCheckable="True"/>
+				<MenuItem x:Name="MenuItemShortCircuitProtection" Header="_Short circuit protection" Checked="MenuItemShortCircuitProtection_Checked" Unchecked="MenuItemShortCircuitProtection_Unchecked" IsCheckable="True" IsChecked="True"/>
 			</MenuItem>
 		</Menu>
 
@@ -106,6 +113,7 @@
 			<UserControls:UC_Terminal x:Name="UserControlTerminal" Visibility="Collapsed"></UserControls:UC_Terminal>
 			<UserControls:UC_CustomControl x:Name="UserControlCustomControl" Visibility="Visible"></UserControls:UC_CustomControl>
 			<UserControls:UC_MinimalCustomControl x:Name="UserControlMinimalCustomControl" Visibility="Collapsed"></UserControls:UC_MinimalCustomControl>
+			<UserControls:UC_Sequencer x:Name="UserControlSequencer" Visibility="Collapsed"></UserControls:UC_Sequencer>
 		</Grid>
 	</DockPanel>
 </Window>
