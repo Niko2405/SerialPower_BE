@@ -25,7 +25,7 @@
 			</Grid.RowDefinitions>
 			
 			<!-- Channel 1 -->
-			<Border Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderDark}">
+			<GroupBox Grid.Row="0" Grid.Column="0" Header="Channel 1" Foreground="White" Margin="5">
 				<Grid>
 					<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0">
 						<Button x:Name="ButtonPowerCH1" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH1_Click" ToolTip="Change state of channel 1">
@@ -33,24 +33,22 @@
 						</Button>
 					</StackPanel>
 					<StackPanel Margin="10,0,0,0">
-						<Label Style="{StaticResource LabelStyleDark}" FontSize="20" HorizontalAlignment="Center">Channel 1</Label>
+							<!-- Voltage -->
+							<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
+							<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">5.00</TextBox>
 
-						<!-- Voltage -->
-						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
-						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+							<!-- Current -->
+							<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
+							<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
 
-						<!-- Current -->
-						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
-						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH1Current" Width="180" HorizontalAlignment="Left" FontSize="16">1.00</TextBox>
+							<!-- etc -->
+							<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="200" Height="40" HorizontalAlignment="Left" Margin="0,20,0,0" Click="ButtonCH1_Click" ToolTip="Send new data to channel 1">SEND DATA</Button>
+						</StackPanel>
+					</Grid>
+			</GroupBox>
 
-						<!-- etc -->
-						<Button x:Name="ButtonCH1" Style="{StaticResource ButtonDark}" Width="200" Height="40" HorizontalAlignment="Left" Margin="0,20,0,0" Click="ButtonCH1_Click" ToolTip="Send new data to channel 1">SEND DATA</Button>
-					</StackPanel>
-				</Grid>
-			</Border>
-			
-			<!-- Channel 1 - Presets -->
-			<Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderDark}">
+			<GroupBox Grid.Row="0" Grid.Column="1" Header="Presets" Foreground="White" Margin="5">
+				<!-- Channel 1 - Presets -->
 				<StackPanel>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -112,10 +110,11 @@
 						</StackPanel>
 					</Grid>
 				</StackPanel>
-			</Border>
+			</GroupBox>
+			
 
 			<!-- Channel 2 -->
-			<Border Grid.Row="1" Grid.Column="0" Style="{StaticResource BorderDark}">
+			<GroupBox Grid.Row="1" Grid.Column="0" Header="Channel 2" Foreground="White" Margin="5">
 				<Grid>
 					<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,100,0">
 						<Button x:Name="ButtonPowerCH2" Width="80" Height="80" Background="Transparent" BorderBrush="Transparent" Click="ButtonPowerCH2_Click" ToolTip="Change state of channel 2">
@@ -123,11 +122,9 @@
 						</Button>
 					</StackPanel>
 					<StackPanel Margin="10,0,0,0">
-						<Label Style="{StaticResource LabelStyleDark}" FontSize="20" HorizontalAlignment="Center">Channel 2</Label>
-
 						<!-- Voltage -->
 						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Voltage</Label>
-						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">0.00</TextBox>
+						<TextBox Style="{StaticResource TextBoxDark}" x:Name="TextBox_CH2Voltage" Width="180" HorizontalAlignment="Left" FontSize="16">5.00</TextBox>
 
 						<!-- Current -->
 						<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" Padding="8">Current limit:</Label>
@@ -137,10 +134,10 @@
 						<Button x:Name="ButtonCH2" Style="{StaticResource ButtonDark}" Width="200" Height="40" HorizontalAlignment="Left" Margin="0,20,0,0" Click="ButtonCH2_Click" ToolTip="Send new data to channel 2">SEND DATA</Button>
 					</StackPanel>
 				</Grid>
-			</Border>
+			</GroupBox>
 
 			<!-- Channel 2 - Presets -->
-			<Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderDark}">
+			<GroupBox Grid.Row="1" Grid.Column="1" Header="Presets" Foreground="White" Margin="5">
 				<StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -202,7 +199,7 @@
 						</StackPanel>
 					</Grid>
 				</StackPanel>
-			</Border>
+			</GroupBox>
 		</Grid>
 	</DockPanel>
 </UserControl>

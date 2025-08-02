@@ -52,8 +52,8 @@ namespace SerialPower
 			try
 			{
 				// async!
-                File.WriteAllTextAsync(FILE_CONFIG_SERIAL, JsonSerializer.Serialize(serialConfig, JsonOptions));
-            }
+				File.WriteAllTextAsync(FILE_CONFIG_SERIAL, JsonSerializer.Serialize(serialConfig, JsonOptions));
+			}
 			catch (Exception e)
 			{
 				Logger.Error("ConfigHandler: " + e.Message);

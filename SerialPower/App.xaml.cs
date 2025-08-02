@@ -1,10 +1,10 @@
-﻿using System.Reflection;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using TartarosLogger;
-using System.Globalization;
 
 namespace SerialPower
 {
@@ -118,10 +118,9 @@ namespace SerialPower
 				}
 				if (arg == "--testing")
 				{
-					SerialSender.DisablePortVerify = true;
-					SerialSender.DisableCommunication = true;
+					SerialSender.TestingMode = true;
 					Logger.DebugEnabled = true;
-					MessageBox.Show("(1) You're communication was disabled\n(2) DEBUG Logging activated\n(3) Port Verify Disabled", "TESTING MODE", MessageBoxButton.OK, MessageBoxImage.Warning);
+					MessageBox.Show("(1) You're communication was disabled\n(2) DEBUG Logging activated\n(3) Port Verify Disabled\n(4) Adding test data...", "Testing mode is active", MessageBoxButton.OK, MessageBoxImage.Warning);
 				}
 				if (arg == "--help")
 				{
@@ -132,8 +131,9 @@ namespace SerialPower
 
 			// change culture
 			Console.WriteLine($"Current culture is:\t{CultureInfo.CurrentCulture}");
-			Console.WriteLine("Changing culture to\ten-US");
 			CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+			Console.WriteLine($"Changing culture to:\t{CultureInfo.CurrentCulture}");
+
 			Thread.Sleep(1000);
 
 			// Print infos
@@ -150,7 +150,9 @@ namespace SerialPower
 
 			// Test logger
 			Logger.PrintHeader("Logger");
-			Logger.Info("TartarosLogger Version: " + Logger.Version);
+			Logger.Info("TartarosLogger Version:\t" + Logger.Version);
+			Logger.Info("Logging WriteLogInFile:\t" + Logger.WriteLogInFile);
+			Logger.Info("Logging path:\t\t" + Logger.LogPath);
 			Logger.Info("Info Message");
 			Logger.Warn("Warning Message");
 			Logger.Error("Error Message");

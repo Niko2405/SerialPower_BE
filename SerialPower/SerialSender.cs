@@ -17,6 +17,7 @@ namespace SerialPower
 		public int Parity { get; set; } = 0;
 		public short MeasureUpdateInterval { get; set; } = 1000;
 		public bool ShortCircuitProtection { get; set; } = true;
+		public bool IsSequencerRunning { get; set; } = false;
 
 
 		/// <summary>
@@ -27,7 +28,7 @@ namespace SerialPower
 		/// <summary>
 		/// Disable communication for com devices. (Dummy test)
 		/// </summary>
-		public static bool DisableCommunication = false;
+		public static bool TestingMode = false;
 
 		/// <summary>
 		/// Current fault counter
@@ -72,6 +73,7 @@ namespace SerialPower
 			TIMEOUT = 1,
 		}
 
+		#region SetPowerSupplyValues
 		/// <summary>
 		/// Send new values to the power supply
 		/// </summary>
@@ -84,6 +86,20 @@ namespace SerialPower
 			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace(",", ".");
 			SendData(command);
 		}
+
+		/// <summary>
+		/// Send new values to the power supply
+		/// </summary>
+		/// <param name="voltage"></param>
+		/// <param name="current"></param>
+		/// <param name="channel"></param>
+		public static void SetPowerSupplyValues(float voltage, float current, int channel)
+		{
+			Logger.Info($"[{channel}] Set voltage to {voltage}V and current to {current}A");
+			string command = $"V{channel} {voltage}; I{channel} {current}".Replace(",", ".");
+			SendData(command);
+		}
+		#endregion
 
 		/// <summary>
 		/// Retrieve nominal (current) target value from the power supply
@@ -137,6 +153,7 @@ namespace SerialPower
 			return value;
 		}
 
+		#region SetChannelState
 		/// <summary>
 		/// Switch on or off the channels
 		/// </summary>
@@ -146,6 +163,28 @@ namespace SerialPower
 		{
 			Logger.Info($"[{channel}] change state to {state}");
 			SendData($"OP{(int)channel} {(int)state}");
+		}
+
+		/// <summary>
+		/// Switch on or off the channels
+		/// </summary>
+		/// <param name="channel"></param>
+		/// <param name="state"></param>
+		public static void SetChannelState(int channel, State state)
+		{
+			Logger.Info($"[{channel}] change state to {state}");
+			SendData($"OP{channel} {(int)state}");
+		}
+
+		/// <summary>
+		/// Switch on or off the channels
+		/// </summary>
+		/// <param name="channel"></param>
+		/// <param name="state"></param>
+		public static void SetChannelState(int channel, int state)
+		{
+			Logger.Info($"[{channel}] change state to {state}");
+			SendData($"OP{channel} {state}");
 		}
 
 		/// <summary>
@@ -159,13 +198,24 @@ namespace SerialPower
 		}
 
 		/// <summary>
+		/// Switch state of all channels
+		/// </summary>
+		/// <param name="state"></param>
+		public static void SetChannelState(int state)
+		{
+			Logger.Info($"[CH1 and CH2] change state to {state}");
+			SendData($"OPALL {state}");
+		}
+		#endregion
+
+		/// <summary>
 		/// Connect to target COM Port
 		/// </summary>
 		public static void ConnectDevice()
 		{
-			if (DisableCommunication)
+			if (TestingMode)
 			{
-				Logger.Warn("Communication is deactivated");
+				Logger.Warn("Testing mode. Communication is deactivated");
 				return;
 			}
 
@@ -239,11 +289,11 @@ namespace SerialPower
 		/// <param name="data">Command</param>
 		private static void SendData(string data)
 		{
-			if (DisableCommunication || serialPort == null)
+			if (TestingMode || serialPort == null)
 			{
 				return;
 			}
-			
+
 			// open connection
 			if (!serialPort.IsOpen)
 			{
@@ -267,7 +317,7 @@ namespace SerialPower
 
 		public static string SendDataAndRecv(string data)
 		{
-			if (DisableCommunication)
+			if (TestingMode)
 			{
 				return "Disabled";
 			}
@@ -275,13 +325,13 @@ namespace SerialPower
 			{
 				return "SerialPort is null";
 			}
-			
+
 			// open connection
 			if (!serialPort.IsOpen)
 			{
 				ConnectDevice();
 			}
-			
+
 			try
 			{
 				serialPort.WriteLine(data);

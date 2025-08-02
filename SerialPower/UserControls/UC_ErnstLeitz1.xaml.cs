@@ -165,6 +165,6 @@ namespace SerialPower.UserControls
 			{
 				SerialSender.SetChannelState(SerialSender.State.OFF);
 			}
-        }
-    }
+		}
+	}
 }

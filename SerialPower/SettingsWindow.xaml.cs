@@ -48,7 +48,7 @@ namespace SerialPower
 				}
 				catch (TimeoutException)
 				{
-					if (SerialSender.DisablePortVerify)
+					if (SerialSender.DisablePortVerify || SerialSender.TestingMode)
 					{
 						if (serialPort != null)
 						{
@@ -63,14 +63,14 @@ namespace SerialPower
 				}
 				catch (UnauthorizedAccessException)
 				{
-					if (serialPort != null) 
+					if (serialPort != null)
 						Logger.Warn("Port " + serialPort.PortName + " cannot open");
 				}
 				Thread.Sleep(1000);
 			}
-			
+
 			// Add DUMMY (Placeholder)
-			if (SerialSender.DisableCommunication)
+			if (SerialSender.TestingMode)
 			{
 				Logger.Info("Add virtual serial port: TestPort");
 				ComboBoxComPorts.Items.Add("TestPort");

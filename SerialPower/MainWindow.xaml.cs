@@ -15,6 +15,7 @@ namespace SerialPower
 	{
 		private readonly BackgroundWorker MeasurementWorker = new();
 		private readonly BackgroundWorker HeartbeatIndicatorWorker = new();
+		private readonly BackgroundWorker SeqIndicatorWorker = new();
 		private static short updateDelay = 1000;
 
 		public MainWindow()
@@ -37,9 +38,11 @@ namespace SerialPower
 
 			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
 			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
-			
+			SeqIndicatorWorker.DoWork += SequencerIndicatorWorker_DoWork;
+
 			MeasurementWorker.RunWorkerAsync();
 			HeartbeatIndicatorWorker.RunWorkerAsync();
+			SeqIndicatorWorker.RunWorkerAsync();
 		}
 
 		/// <summary>
@@ -58,14 +61,51 @@ namespace SerialPower
 					switch (toggled)
 					{
 						case true:
-							RectangleData.Fill = new SolidColorBrush(Colors.Green);
+							RectangleTick.Fill = new SolidColorBrush(Colors.ForestGreen);
 							break;
 						case false:
-							RectangleData.Fill = new SolidColorBrush(Colors.Red);
+							RectangleTick.Fill = new SolidColorBrush(Colors.Black);
 							break;
 					}
 					toggled = !toggled;
 				});
+			}
+		}
+
+		/// <summary>
+		/// Show's the user, sequencer is running. Current only simulation!
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SequencerIndicatorWorker_DoWork(object? sender, DoWorkEventArgs e)
+		{
+			bool toggled = false;
+			while (true)
+			{
+				Thread.Sleep(100);
+				if (ConfigHandler.serialConfig != null && ConfigHandler.serialConfig.IsSequencerRunning)
+				{
+					this.Dispatcher.Invoke(() =>
+					{
+						switch (toggled)
+						{
+							case true:
+								RectangleSequencer.Fill = new SolidColorBrush(Colors.ForestGreen);
+								break;
+							case false:
+								RectangleSequencer.Fill = new SolidColorBrush(Colors.Black);
+								break;
+						}
+						toggled = !toggled;
+					});
+				}
+				if (ConfigHandler.serialConfig != null && !ConfigHandler.serialConfig.IsSequencerRunning)
+				{
+					this.Dispatcher.Invoke(() =>
+					{
+						RectangleSequencer.Fill = new SolidColorBrush(Colors.Black);
+					});
+				}
 			}
 		}
 
@@ -109,7 +149,7 @@ namespace SerialPower
 								UserControlCustomControl.Channel1Active = false;
 								UserControlMinimalCustomControl.Channel1Active = false;
 							});
-							
+
 							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom am Kanal 1 wurde erreicht. Ausgang deaktiviert.", "Channel 1 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
 						}
 						if ((currentCH2 / nominalCH2Current) >= 1.00)
@@ -161,9 +201,10 @@ namespace SerialPower
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			Logger.Info("Closing program. Disconnect device.");
+			Logger.Info("Closing program. Disconnect power supply.");
 			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
+			Thread.Sleep(100);
 
 			Environment.Exit(0);
 		}
@@ -207,6 +248,7 @@ namespace SerialPower
 			Logger.Info("Closing program. Disconnect power supply.");
 			Thread.Sleep(100);
 			SerialSender.DisconnectDevice();
+			Thread.Sleep(100);
 
 			Environment.Exit(0);
 		}

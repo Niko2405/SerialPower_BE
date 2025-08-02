@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.7.0.4</AssemblyVersion>
-    <FileVersion>1.7.0.4</FileVersion>
+    <AssemblyVersion>1.8.0.0</AssemblyVersion>
+    <FileVersion>1.8.0.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -80,7 +80,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.IO.Ports" Version="9.0.7" />
-    <PackageReference Include="TartarosLogger" Version="1.6.3" />
+    <PackageReference Include="TartarosLogger" Version="1.6.4" />
   </ItemGroup>
 
   <ItemGroup>

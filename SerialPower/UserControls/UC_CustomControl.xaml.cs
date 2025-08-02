@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,6 +19,7 @@ namespace SerialPower.UserControls
 		public UC_CustomControl()
 		{
 			InitializeComponent();
+			this.DataContext = this;
 		}
 
 		/// <summary>

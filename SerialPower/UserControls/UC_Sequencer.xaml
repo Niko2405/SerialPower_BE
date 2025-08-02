@@ -13,6 +13,91 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			
+			<!-- Process -->
+			<GroupBox Grid.Column="0" Grid.Row="0" Header="Process" Foreground="White" Margin="5">
+				<StackPanel Orientation="Horizontal">
+					<Button x:Name="ButtonStart" Style="{StaticResource ButtonDark}" Width="60" Height="60" Margin="10" Click="ButtonStart_Click">Start</Button>
+					<Button x:Name="ButtonStop" Style="{StaticResource ButtonDark}" Width="60" Height="60" Margin="10" Click="ButtonStop_Click">Stop</Button>
+					<Button x:Name="ButtonReset" Style="{StaticResource ButtonDark}" Width="60" Height="60" Margin="10" Click="ButtonReset_Click">Reset</Button>
+				</StackPanel>
+			</GroupBox>
+
+			<!-- Input data -->
+			<GroupBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Header="Data" Foreground="White" Margin="5">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<Label Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyleDark}" FontSize="24" Content="Bezeichnung"/>
+					<Label Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelStyleDark}" FontSize="24" Content="Wert"/>
+					<Label Grid.Column="2" Grid.Row="0" Style="{StaticResource LabelStyleDark}" FontSize="24" Content="Beispiel"/>
+
+					<Label Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyleDark}" Content="Comment"/>
+					<TextBox x:Name="TextBoxComment" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxDark}" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="1" Style="{StaticResource LabelStyleDark}" Content="5V Aktivieren"/>
+
+					<Label Grid.Column="0" Grid.Row="2" Style="{StaticResource LabelStyleDark}" Content="Channel"/>
+					<TextBox x:Name="TextBoxChannel" Grid.Column="1" Grid.Row="2" Style="{StaticResource TextBoxDark}" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="2" Style="{StaticResource LabelStyleDark}" Content="1 oder 2"/>
+
+					<Label Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelStyleDark}" Content="Voltage"/>
+					<TextBox x:Name="TextBoxVoltage" Grid.Column="1" Grid.Row="3" Style="{StaticResource TextBoxDark}" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="3" Style="{StaticResource LabelStyleDark}" Content="0.0 bis 60.0"/>
+
+					<Label Grid.Column="0" Grid.Row="4" Style="{StaticResource LabelStyleDark}" Content="Current"/>
+					<TextBox x:Name="TextBoxCurrent" Grid.Column="1" Grid.Row="4" Style="{StaticResource TextBoxDark}" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="4" Style="{StaticResource LabelStyleDark}" Content="0 bis 10"/>
+
+					<Label Grid.Column="0" Grid.Row="5" Style="{StaticResource LabelStyleDark}" Content="State"/>
+					<TextBox x:Name="TextBoxState" Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxDark}" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="5" Style="{StaticResource LabelStyleDark}" Content="0 oder 1"/>
+
+					<Label Grid.Column="0" Grid.Row="6" Style="{StaticResource LabelStyleDark}" Content="Delay"/>
+					<TextBox x:Name="TextBoxDelay" Grid.Column="1" Grid.Row="6" Style="{StaticResource TextBoxDark}" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+					<Label Grid.Column="2" Grid.Row="6" Style="{StaticResource LabelStyleDark}" Content="0.0 bis 600.0 (Sek.)"/>
+
+					<Button x:Name="ButtonAdd" Grid.Column="1" Grid.Row="7" Style="{StaticResource ButtonDark}" Margin="10" Content="Add to data grid" Click="ButtonAdd_Click"/>
+					<Button x:Name="ButtonDelete" Grid.Column="1" Grid.Row="8" Style="{StaticResource ButtonDark}" Margin="10" Content="Delete newest entry" Click="ButtonDelete_Click"/>
+				</Grid>
+			</GroupBox>
+			
+			<!-- Program -->
+			<GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Header="Program" Foreground="White" Margin="5">
+				<ListView x:Name="ListViewProgram" Style="{StaticResource ListBoxDark}">
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Header="Id" Width="40" DisplayMemberBinding="{Binding Id}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="Comment" Width="160" DisplayMemberBinding="{Binding Comment}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="Channel" Width="60" DisplayMemberBinding="{Binding Channel}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="Voltage" Width="60" DisplayMemberBinding="{Binding Voltage}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="Current" Width="60" DisplayMemberBinding="{Binding Current}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="State" Width="60" DisplayMemberBinding="{Binding State}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+							<GridViewColumn Header="Delay" Width="120" DisplayMemberBinding="{Binding Delay}" HeaderContainerStyle="{StaticResource ListViewHeaderDark}"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</GroupBox>
 		</Grid>
 	</DockPanel>
 </UserControl>

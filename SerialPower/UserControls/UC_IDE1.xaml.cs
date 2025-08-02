@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using TartarosLogger;
 
@@ -239,5 +238,5 @@ namespace SerialPower.UserControls
 				SerialSender.SetChannelState(SerialSender.State.OFF);
 			}
 		}
-    }
+	}
 }
