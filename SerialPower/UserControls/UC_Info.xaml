@@ -15,7 +15,7 @@
 			<Label Style="{StaticResource LabelStyleDark}" x:Name="LabelVersion" HorizontalAlignment="Left" FontSize="15">Version: Unknown</Label>
 			<Label Style="{StaticResource LabelStyleDark}" x:Name="LabelDotNetVersion" HorizontalAlignment="Left" FontSize="15">Compiled with: Unknown</Label>
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">License: MIT</Label>
-			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Available connections: USB and RS232</Label>
+			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Left" FontSize="15">Available connections: USB and RS232, Future: LAN</Label>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Right">
 			<Label Style="{StaticResource LabelStyleDark}" HorizontalAlignment="Right" FontSize="16">Only for: AIM TTi CPX200 - Series</Label>

@@ -171,7 +171,19 @@ namespace SerialPower
 			// Load primary config
 			Logger.PrintHeader("Config system");
 			ConfigHandler.Load();
+
+			#region RESET_CONFIG_VALUES
+			if (ConfigHandler.serialConfig != null)
+			{
+				Logger.Info("Reset Configs:\tShortCircuitProtection = true");
+				ConfigHandler.serialConfig.ShortCircuitProtection = true;
+
+				Logger.Info("Reset Configs:\tIsSequencerRunning = false");
+				ConfigHandler.serialConfig.IsSequencerRunning = false;
+				ConfigHandler.Save();
+			}
 			Thread.Sleep(1500);
+			#endregion
 
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2000);

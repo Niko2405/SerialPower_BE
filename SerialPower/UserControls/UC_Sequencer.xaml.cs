@@ -11,61 +11,25 @@ namespace SerialPower.UserControls
 	/// </summary>
 	public partial class UC_Sequencer : UserControl
 	{
-		private readonly BackgroundWorker BackgroundWorkerSequencer = new();
-		public static ObservableCollection<Sequence> SequenceCollection = new();
+		private BackgroundWorker? _backgroundWorkerSequencer;
+
+		private static ObservableCollection<Sequence> _sequenceCollection = new();
 
 		public UC_Sequencer()
 		{
 			InitializeComponent();
-			BackgroundWorkerSequencer.DoWork += BackgroundWorkerSequencerWorker_DoWork;
-			ListViewProgram.ItemsSource = SequenceCollection;
+			//_backgroundWorkerSequencer.DoWork += BackgroundWorkerSequencerWorker_DoWork;
+			ListViewProgram.ItemsSource = _sequenceCollection;
 
 			if (SerialSender.TestingMode)
 			{
-				SequenceCollection.Add(new Sequence() { Id = 0, Comment = "Kanal 1 High", Channel = 1, Voltage = 5.0f, Current = 0.5f, State = 1, Delay = 5 });
-				SequenceCollection.Add(new Sequence() { Id = 1, Comment = "Kanal 2 High", Channel = 2, Voltage = 5.0f, Current = 0.5f, State = 1, Delay = 5 });
+				_sequenceCollection.Add(new Sequence() { Id = 0, Comment = "Kanal 1 High", Channel = 1, Voltage = 5.0f, Current = 0.5f, State = 1, Delay = 1 });
+				_sequenceCollection.Add(new Sequence() { Id = 1, Comment = "Kanal 2 High", Channel = 2, Voltage = 5.0f, Current = 0.5f, State = 1, Delay = 1 });
 
-				SequenceCollection.Add(new Sequence() { Id = 2, Comment = "Kanal 1 Low", Channel = 1, Voltage = 5.0f, Current = 0.5f, State = 0, Delay = 5 });
-				SequenceCollection.Add(new Sequence() { Id = 3, Comment = "Kanal 2 Low", Channel = 2, Voltage = 5.0f, Current = 0.5f, State = 0, Delay = 5 });
+				_sequenceCollection.Add(new Sequence() { Id = 2, Comment = "Kanal 1 Low", Channel = 1, Voltage = 5.0f, Current = 0.5f, State = 0, Delay = 1 });
+				_sequenceCollection.Add(new Sequence() { Id = 3, Comment = "Kanal 2 Low", Channel = 2, Voltage = 5.0f, Current = 0.5f, State = 0, Delay = 1 });
 			}
-			BackgroundWorkerSequencer.WorkerSupportsCancellation = true;
-		}
-
-		private void BackgroundWorkerSequencerWorker_DoWork(object? sender, DoWorkEventArgs e)
-		{
-			int counter = 0;
-			if (ConfigHandler.serialConfig != null)
-			{
-				// endless check if IsSequencerRunning is True
-				while (true)
-				{
-					if (ConfigHandler.serialConfig.IsSequencerRunning)
-					{
-						counter++;
-						for (int i = 0; i < SequenceCollection.Count; i++)
-						{
-							if (BackgroundWorkerSequencer.CancellationPending)
-							{
-								Logger.Warn("BackgroundWorkerSequencer: CancellationPending = true");
-								e.Cancel = true;
-								break;
-							}
-
-							Logger.PrintHeader($"ID [{SequenceCollection[i].Id}]\t{SequenceCollection[i].Comment}");
-
-							Logger.Info($"Run: {counter}");
-							SerialSender.SetChannelState(SequenceCollection[i].Channel, SequenceCollection[i].State);
-							SerialSender.SetPowerSupplyValues(SequenceCollection[i].Voltage, SequenceCollection[i].Current, SequenceCollection[i].Channel);
-							Thread.Sleep((int)SequenceCollection[i].Delay * 1000);
-						}
-						Logger.PrintHeader("Current sequence ended");
-					}
-					else if (!ConfigHandler.serialConfig.IsSequencerRunning)
-					{
-						Thread.Sleep(1000);
-					}
-				}
-			}
+			//_backgroundWorkerSequencer.WorkerSupportsCancellation = true;
 		}
 
 		public class Sequence
@@ -91,7 +55,7 @@ namespace SerialPower.UserControls
 		{
 			try
 			{
-				int _id = SequenceCollection.Count;
+				int _id = _sequenceCollection.Count;
 				string _comment = TextBoxComment.Text;
 				int _channel = int.Parse(TextBoxChannel.Text);
 				float _voltage = float.Parse(TextBoxVoltage.Text);
@@ -129,7 +93,7 @@ namespace SerialPower.UserControls
 				}
 
 				// add to list
-				SequenceCollection.Add(new Sequence() { Id = _id, Comment = TextBoxComment.Text, Channel = _channel, Voltage = _voltage, Current = _current, State = _state, Delay = _delay });
+				_sequenceCollection.Add(new Sequence() { Id = _id, Comment = TextBoxComment.Text, Channel = _channel, Voltage = _voltage, Current = _current, State = _state, Delay = _delay });
 			}
 			catch (Exception ex)
 			{
@@ -151,17 +115,17 @@ namespace SerialPower.UserControls
 		{
 			try
 			{
-				SequenceCollection.RemoveAt(SequenceCollection.Count - 1);
+				_sequenceCollection.RemoveAt(_sequenceCollection.Count - 1);
 			}
 			catch (ArgumentOutOfRangeException)
 			{
-				Logger.Warn($"Cannot delete item in SequenceCollection. Index [{SequenceCollection.Count - 1}] is out of range.");
+				Logger.Warn($"Cannot delete item in SequenceCollection. Index [{_sequenceCollection.Count - 1}] is out of range.");
 			}
 		}
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
 		{
-			if (SequenceCollection.Count == 0)
+			if (_sequenceCollection.Count == 0)
 			{
 				Logger.Warn("Program is empty");
 				return;
@@ -169,13 +133,21 @@ namespace SerialPower.UserControls
 
 			if (ConfigHandler.serialConfig != null)
 			{
-				Logger.Info("Sequencer is running");
 				ConfigHandler.serialConfig.IsSequencerRunning = true;
 				ConfigHandler.Save();
 
+				_backgroundWorkerSequencer = new()
+				{
+					WorkerSupportsCancellation = true
+				};
+				_backgroundWorkerSequencer.DoWork += BackgroundWorkerSequencer_DoWork;
+				_backgroundWorkerSequencer.RunWorkerAsync();
+
 				ButtonStart.IsEnabled = false;
 				ButtonStop.IsEnabled = true;
-				BackgroundWorkerSequencer.RunWorkerAsync();
+
+				Thread.Sleep(50);
+				Logger.Info("Sequencer is running");
 			}
 		}
 
@@ -190,22 +162,47 @@ namespace SerialPower.UserControls
 				ButtonStart.IsEnabled = true;
 				ButtonStop.IsEnabled = false;
 
-				BackgroundWorkerSequencer.CancelAsync();
+				if (_backgroundWorkerSequencer == null)
+				{
+					Logger.Error("BackgroundWorkerSequencer is null");
+					return;
+				}
+				_backgroundWorkerSequencer.CancelAsync();
+				_backgroundWorkerSequencer.Dispose();
+
 			}
 		}
 
-		private void ButtonReset_Click(object sender, RoutedEventArgs e)
+		private void BackgroundWorkerSequencer_DoWork(object? sender, DoWorkEventArgs e)
 		{
-			if (ConfigHandler.serialConfig != null)
+			int counter = 0;
+			if (ConfigHandler.serialConfig == null || _backgroundWorkerSequencer == null)
 			{
-				Logger.Info("Sequencer stopping");
-				ConfigHandler.serialConfig.IsSequencerRunning = false;
-				ConfigHandler.Save();
+				Logger.Error("BackgroundWorkerSequencer / Config is null");
+				return;
+			}
 
-				ButtonStart.IsEnabled = true;
-				ButtonStop.IsEnabled = false;
+			// endless check if IsSequencerRunning is True
+			while (ConfigHandler.serialConfig.IsSequencerRunning)
+			{
+				counter++;
+				for (int i = 0; i < _sequenceCollection.Count; i++)
+				{
+					if (_backgroundWorkerSequencer.CancellationPending)
+					{
+						Logger.Warn("BackgroundWorkerSequencer: CancellationPending = true");
+						e.Cancel = true;
+						break;
+					}
 
-				BackgroundWorkerSequencer.CancelAsync();
+					Logger.PrintHeader($"ID [{_sequenceCollection[i].Id}]\t{_sequenceCollection[i].Comment}");
+
+					Logger.Info($"Run: {counter}");
+					SerialSender.SetChannelState(_sequenceCollection[i].Channel, _sequenceCollection[i].State);
+					SerialSender.SetPowerSupplyValues(_sequenceCollection[i].Voltage, _sequenceCollection[i].Current, _sequenceCollection[i].Channel);
+					Thread.Sleep((int)_sequenceCollection[i].Delay * 1000);
+				}
+				Console.WriteLine("\n########################################################################\n");
 			}
 		}
 	}

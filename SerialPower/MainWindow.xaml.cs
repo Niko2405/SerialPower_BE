@@ -61,7 +61,7 @@ namespace SerialPower
 					switch (toggled)
 					{
 						case true:
-							RectangleTick.Fill = new SolidColorBrush(Colors.ForestGreen);
+							RectangleTick.Fill = new SolidColorBrush(Colors.LimeGreen);
 							break;
 						case false:
 							RectangleTick.Fill = new SolidColorBrush(Colors.Black);
@@ -90,7 +90,7 @@ namespace SerialPower
 						switch (toggled)
 						{
 							case true:
-								RectangleSequencer.Fill = new SolidColorBrush(Colors.ForestGreen);
+								RectangleSequencer.Fill = new SolidColorBrush(Colors.LimeGreen);
 								break;
 							case false:
 								RectangleSequencer.Fill = new SolidColorBrush(Colors.Black);

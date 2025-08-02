@@ -82,7 +82,7 @@ namespace SerialPower
 		/// <param name="channel"></param>
 		public static void SetPowerSupplyValues(float voltage, float current, Channel channel)
 		{
-			Logger.Info($"[{channel}] Set voltage to {voltage}V and current to {current}A");
+			Logger.Info($"[CH{channel}] Set voltage to {voltage}V and current to {current}A");
 			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace(",", ".");
 			SendData(command);
 		}
@@ -95,7 +95,7 @@ namespace SerialPower
 		/// <param name="channel"></param>
 		public static void SetPowerSupplyValues(float voltage, float current, int channel)
 		{
-			Logger.Info($"[{channel}] Set voltage to {voltage}V and current to {current}A");
+			Logger.Info($"[CH{channel}] Set voltage to {voltage}V and current to {current}A");
 			string command = $"V{channel} {voltage}; I{channel} {current}".Replace(",", ".");
 			SendData(command);
 		}
@@ -161,7 +161,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(Channel channel, State state)
 		{
-			Logger.Info($"[{channel}] change state to {state}");
+			Logger.Info($"[CH{channel}] change state to {state}");
 			SendData($"OP{(int)channel} {(int)state}");
 		}
 
@@ -172,7 +172,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(int channel, State state)
 		{
-			Logger.Info($"[{channel}] change state to {state}");
+			Logger.Info($"[CH{channel}] change state to {state}");
 			SendData($"OP{channel} {(int)state}");
 		}
 
@@ -183,7 +183,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(int channel, int state)
 		{
-			Logger.Info($"[{channel}] change state to {state}");
+			Logger.Info($"[CH{channel}] change state to {state}");
 			SendData($"OP{channel} {state}");
 		}
 
