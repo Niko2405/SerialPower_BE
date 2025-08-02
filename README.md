@@ -18,5 +18,15 @@ In manual control, the voltage and current can be set and activated per channel.
 Press “Send new data” to send the entered values to the power supply unit.  
 ![Controlling](https://github.com/Niko2405/SerialPower_BE/blob/main/assets/CustomControl.png)
 
+### Sequencer
+You can create your own sequences in the sequencer. To activate or deactivate a certain voltage and current at a certain point in time.
+In the "Data" field, you can program your own sequences.
+You can write a comment to describe what this step does.
+The channel, voltage, current, on or off and delay can then be set. Press “Add” to load the specified data into the program (right).
+As soon as a sequence is ready, you can start the sequence with “Start”. It can be stopped with “Stop”.
+The last entry can be delete with the “Delete” button.
+![Sequencer](https://github.com/Niko2405/SerialPower_BE/blob/main/assets/Sequencer.png)
+
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
