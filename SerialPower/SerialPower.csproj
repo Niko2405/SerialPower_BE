@@ -10,8 +10,8 @@
     <Title>SerialPower</Title>
     <Copyright>Niko2405</Copyright>
     <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.8.0.1</AssemblyVersion>
-    <FileVersion>1.8.0.1</FileVersion>
+    <AssemblyVersion>1.8.0.2</AssemblyVersion>
+    <FileVersion>1.8.0.2</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SignAssembly>False</SignAssembly>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -27,6 +27,7 @@
     <NeutralLanguage>de-DE</NeutralLanguage>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -38,7 +39,43 @@
     <IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DebugType>none</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>9999</WarningLevel>
+    <IsAotCompatible>False</IsAotCompatible>
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebugType>none</DebugType>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <FileAlignment>512</FileAlignment>
@@ -102,6 +139,10 @@
     <Resource Include="images\power-on.png" />
     <Resource Include="images\power-on_light.png" />
     <Resource Include="images\powersupplie.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.IO" />
   </ItemGroup>
 
 </Project>

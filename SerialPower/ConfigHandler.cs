@@ -27,6 +27,8 @@ namespace SerialPower
 		public static readonly string FILE_CONFIG_SERIAL = DIR_CONFIGS + "serial.json";
 		public static readonly string VERSION_FILE = DIR_DATABASE + "version.dat";
 
+		// etc
+		public static readonly string CRYPT_PASSWORD = "Test123";
 
 		/// <summary>
 		/// Create config files

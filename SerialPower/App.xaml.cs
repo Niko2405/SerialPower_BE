@@ -185,6 +185,12 @@ namespace SerialPower
 			Thread.Sleep(1500);
 			#endregion
 
+			// run test module
+			if (SerialSender.TestingMode)
+			{
+				TestModule.Start();
+			}
+			
 			Console.Title = $"SerialPower - v{fileVersionInfo.FileVersion}";
 			Thread.Sleep(2000);
 		}
