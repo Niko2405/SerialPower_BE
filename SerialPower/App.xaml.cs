@@ -69,6 +69,7 @@ namespace SerialPower
 		/// </summary>
 		private static void BuildFilesystem()
 		{
+			Logger.Info("Build filesystem");
 			try
 			{
 				Directory.CreateDirectory(ConfigHandler.DIR_ROOT);
@@ -82,8 +83,6 @@ namespace SerialPower
 
 				Directory.CreateDirectory(ConfigHandler.DIR_TEMP);
 				Logger.Info("Checking " + ConfigHandler.DIR_TEMP);
-
-				Logger.Info("Build filesystem");
 			}
 			catch (Exception)
 			{
@@ -108,10 +107,6 @@ namespace SerialPower
 			foreach (var arg in e.Args)
 			{
 				Console.WriteLine(arg);
-				if (arg == "--disablePortVerify")
-				{
-					SerialSender.DisablePortVerify = true;
-				}
 				if (arg == "--debug")
 				{
 					Logger.DebugEnabled = true;
@@ -124,7 +119,7 @@ namespace SerialPower
 				}
 				if (arg == "--help")
 				{
-					Console.WriteLine("Available commands:\n--disablePortVerify\tDisable port verify to scan for power supplies.\n--debug\tEnable Debug\n--testing\tActivate Test mode");
+					Console.WriteLine("Available commands:\n--debug\tEnable Debug\n--testing\tActivate Test mode");
 					Environment.Exit(0);
 				}
 			}

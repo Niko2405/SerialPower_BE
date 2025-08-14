@@ -48,7 +48,7 @@ namespace SerialPower
 				}
 				catch (TimeoutException)
 				{
-					if (SerialSender.DisablePortVerify || SerialSender.TestingMode)
+					if (SerialSender.TestingMode)
 					{
 						if (serialPort != null)
 						{

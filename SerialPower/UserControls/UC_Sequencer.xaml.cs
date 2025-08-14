@@ -92,6 +92,18 @@ namespace SerialPower.UserControls
 					return;
 				}
 
+				// delay cannot be lower than serial write / readtimeout
+				if (ConfigHandler.serialConfig != null)
+				{
+					float rwTimeout = (ConfigHandler.serialConfig.ReadTimeout + ConfigHandler.serialConfig.WriteTimeout); //ms
+					int offset = 100; //ms
+					if (_delay < (rwTimeout / 1000))
+					{
+						Logger.Warn($"Current delay is lower than Read- and WriteTimeout: {rwTimeout}ms. Set delay to: {rwTimeout + offset}ms [{(rwTimeout + offset) / 1000}s]");
+						_delay = (rwTimeout + offset) / 1000;
+					}
+				}
+
 				// add to list
 				_sequenceCollection.Add(new Sequence() { Id = _id, Comment = TextBoxComment.Text, Channel = _channel, Voltage = _voltage, Current = _current, State = _state, Delay = _delay });
 			}
@@ -178,31 +190,30 @@ namespace SerialPower.UserControls
 			int counter = 0;
 			if (ConfigHandler.serialConfig == null || _backgroundWorkerSequencer == null)
 			{
-				Logger.Error("BackgroundWorkerSequencer / Config is null");
+				Logger.Error("BackgroundWorkerSequencer or Config is null");
 				return;
 			}
 
-			// endless check if IsSequencerRunning is True
-			while (ConfigHandler.serialConfig.IsSequencerRunning)
+			while (true)
 			{
 				counter++;
+				Console.Clear();
 				for (int i = 0; i < _sequenceCollection.Count; i++)
 				{
 					if (_backgroundWorkerSequencer.CancellationPending)
 					{
 						Logger.Warn("BackgroundWorkerSequencer: CancellationPending = true");
 						e.Cancel = true;
-						break;
+						return;
 					}
 
-					Logger.PrintHeader($"ID [{_sequenceCollection[i].Id}]\t{_sequenceCollection[i].Comment}");
+					Logger.PrintHeader($"ID [{_sequenceCollection[i].Id}] - {_sequenceCollection[i].Comment}");
 
 					Logger.Info($"Run: {counter}");
 					SerialSender.SetChannelState(_sequenceCollection[i].Channel, _sequenceCollection[i].State);
 					SerialSender.SetPowerSupplyValues(_sequenceCollection[i].Voltage, _sequenceCollection[i].Current, _sequenceCollection[i].Channel);
 					Thread.Sleep((int)_sequenceCollection[i].Delay * 1000);
 				}
-				Console.WriteLine("\n########################################################################\n");
 			}
 		}
 	}

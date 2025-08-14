@@ -22,6 +22,8 @@ namespace SerialPower
 
 		public static void Start()
 		{
+			Console.WriteLine("TEST MODULE STARTING...");
+			Console.Beep(450, 2000);
 			Thread.Sleep(1000);
 			if (!TestIO())
 			{

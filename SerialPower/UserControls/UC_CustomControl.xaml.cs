@@ -235,7 +235,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 3,300V");
+					Logger.PrintHeader("Channel 1 - 3.3V");
 					Channel1Active = false;
 					try
 					{
@@ -267,7 +267,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 5,000V");
+					Logger.PrintHeader("Channel 1 - 5V");
 					Channel1Active = false;
 					try
 					{
@@ -299,7 +299,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 12,000V");
+					Logger.PrintHeader("Channel 1 - 12V");
 					Channel1Active = false;
 					try
 					{
@@ -331,7 +331,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 1 - 24,000V");
+					Logger.PrintHeader("Channel 1 - 24V");
 					Channel1Active = false;
 					try
 					{
@@ -363,7 +363,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 3,300V");
+					Logger.PrintHeader("Channel 2 - 3.3V");
 					Channel2Active = false;
 					try
 					{
@@ -395,7 +395,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 5,000V");
+					Logger.PrintHeader("Channel 2 - 5V");
 					Channel2Active = false;
 					try
 					{
@@ -427,7 +427,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 12,000V");
+					Logger.PrintHeader("Channel 2 - 12V");
 					Channel2Active = false;
 					try
 					{
@@ -459,7 +459,7 @@ namespace SerialPower.UserControls
 				string? selectedItem = e.AddedItems[0]?.ToString();
 				if (selectedItem != null)
 				{
-					Logger.PrintHeader("Channel 2 - 24,000V");
+					Logger.PrintHeader("Channel 2 - 24V");
 					Channel2Active = false;
 					try
 					{

@@ -23,7 +23,7 @@ namespace SerialPower.UserControls
 				if (inputData != null)
 				{
 					responseData = SerialSender.SendDataAndRecv(inputData);
-					if (responseData == "TIMEOUT")
+					if (responseData == SerialSender.STATUSCODE.TIMEOUT.ToString())
 					{
 						responseData = string.Empty;
 					}

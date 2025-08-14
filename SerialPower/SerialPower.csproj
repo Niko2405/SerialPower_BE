@@ -1,148 +1,142 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <!--<TargetFramework>net8.0-windows7.0</TargetFramework> -->
-	<TargetFramework>net9.0-windows7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-    <Title>SerialPower</Title>
-    <Copyright>Niko2405</Copyright>
-    <StartupObject>SerialPower.App</StartupObject>
-    <AssemblyVersion>1.8.0.3</AssemblyVersion>
-    <FileVersion>1.8.0.3</FileVersion>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <SignAssembly>False</SignAssembly>
-    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-    <Company>$(Authors)</Company>
-    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <EnableNETAnalyzers>True</EnableNETAnalyzers>
-    <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
-    <IncludeSymbols>False</IncludeSymbols>
-    <ApplicationIcon>Program.ico</ApplicationIcon>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <PackageProjectUrl>https://github.com/Niko2405/SerialPower_BE</PackageProjectUrl>
-    <Authors>Niko2405</Authors>
-    <NeutralLanguage>de-DE</NeutralLanguage>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+	<OutputType>Exe</OutputType>
+	<TargetFramework>net9.0-windows</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<UseWPF>true</UseWPF>
+	<Title>SerialPower</Title>
+	<Copyright>Niko2405</Copyright>
+	<StartupObject>SerialPower.App</StartupObject>
+	<AssemblyVersion>1.8.0.5</AssemblyVersion>
+	<FileVersion>1.8.0.5</FileVersion>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<SignAssembly>False</SignAssembly>
+	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+	<Company>$(Authors)</Company>
+	<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	<EnableNETAnalyzers>True</EnableNETAnalyzers>
+	<RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
+	<IncludeSymbols>False</IncludeSymbols>
+	<ApplicationIcon>Program.ico</ApplicationIcon>
+	<PackageProjectUrl>https://github.com/Niko2405/SerialPower_BE</PackageProjectUrl>
+	<Authors>Niko2405</Authors>
+	<NeutralLanguage>de-DE</NeutralLanguage>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	<Platforms>AnyCPU;x64;x86</Platforms>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DebugType>none</DebugType>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <FileAlignment>512</FileAlignment>
-    <WarningLevel>9999</WarningLevel>
-    <IsAotCompatible>False</IsAotCompatible>
-    <IsPublishable>True</IsPublishable>
+	<DebugType>none</DebugType>
+	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	<FileAlignment>512</FileAlignment>
+	<WarningLevel>9999</WarningLevel>
+	<IsAotCompatible>False</IsAotCompatible>
+	<IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="fonts\OpenSans-Bold.ttf" />
-    <None Remove="fonts\OpenSans-ExtraBold.ttf" />
-    <None Remove="fonts\OpenSans-Regular.ttf" />
-    <None Remove="fonts\OpenSans-SemiBold.ttf" />
-    <None Remove="images\fakebsod.png" />
-    <None Remove="images\icon_control.png" />
-    <None Remove="images\icon_file.png" />
-    <None Remove="images\icon_functions.png" />
-    <None Remove="images\icon_sequencer.png" />
-    <None Remove="images\icon_tools.png" />
-    <None Remove="images\power-off.png" />
-    <None Remove="images\power-off_light.png" />
-    <None Remove="images\power-on.png" />
-    <None Remove="images\power-on_light.png" />
-    <None Remove="images\powersupplie.png" />
+	<None Remove="fonts\OpenSans-Bold.ttf" />
+	<None Remove="fonts\OpenSans-ExtraBold.ttf" />
+	<None Remove="fonts\OpenSans-Regular.ttf" />
+	<None Remove="fonts\OpenSans-SemiBold.ttf" />
+	<None Remove="images\fakebsod.png" />
+	<None Remove="images\icon_control.png" />
+	<None Remove="images\icon_file.png" />
+	<None Remove="images\icon_functions.png" />
+	<None Remove="images\icon_sequencer.png" />
+	<None Remove="images\icon_tools.png" />
+	<None Remove="images\power-off.png" />
+	<None Remove="images\power-off_light.png" />
+	<None Remove="images\power-on.png" />
+	<None Remove="images\power-on_light.png" />
+	<None Remove="images\powersupplie.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Program.ico" />
+	<Content Include="Program.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+	<None Include="..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+	<None Include="..\README.md">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="9.0.8" />
-    <PackageReference Include="TartarosLogger" Version="1.6.4" />
+	<PackageReference Include="System.IO.Ports" Version="9.0.8" />
+	<PackageReference Include="TartarosLogger" Version="1.6.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="fonts\OpenSans-Bold.ttf" />
-    <Resource Include="fonts\OpenSans-ExtraBold.ttf" />
-    <Resource Include="fonts\OpenSans-Regular.ttf" />
-    <Resource Include="fonts\OpenSans-SemiBold.ttf" />
-    <Resource Include="images\fakebsod.png" />
-    <Resource Include="images\icon_control.png" />
-    <Resource Include="images\icon_file.png" />
-    <Resource Include="images\icon_functions.png" />
-    <Resource Include="images\icon_sequencer.png" />
-    <Resource Include="images\icon_tools.png" />
-    <Resource Include="images\JokeOne.jpeg" />
-    <Resource Include="images\power-off.png" />
-    <Resource Include="images\power-off_light.png" />
-    <Resource Include="images\power-on.png" />
-    <Resource Include="images\power-on_light.png" />
-    <Resource Include="images\powersupplie.png" />
+	<Resource Include="fonts\OpenSans-Bold.ttf" />
+	<Resource Include="fonts\OpenSans-ExtraBold.ttf" />
+	<Resource Include="fonts\OpenSans-Regular.ttf" />
+	<Resource Include="fonts\OpenSans-SemiBold.ttf" />
+	<Resource Include="images\fakebsod.png" />
+	<Resource Include="images\icon_control.png" />
+	<Resource Include="images\icon_file.png" />
+	<Resource Include="images\icon_functions.png" />
+	<Resource Include="images\icon_sequencer.png" />
+	<Resource Include="images\icon_tools.png" />
+	<Resource Include="images\JokeOne.jpeg" />
+	<Resource Include="images\power-off.png" />
+	<Resource Include="images\power-off_light.png" />
+	<Resource Include="images\power-on.png" />
+	<Resource Include="images\power-on_light.png" />
+	<Resource Include="images\powersupplie.png" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Using Include="System.IO" />
-  </ItemGroup>
-
 </Project>

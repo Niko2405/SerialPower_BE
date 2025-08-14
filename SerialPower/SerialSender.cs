@@ -19,12 +19,6 @@ namespace SerialPower
 		public bool ShortCircuitProtection { get; set; } = true;
 		public bool IsSequencerRunning { get; set; } = false;
 
-
-		/// <summary>
-		/// Disable port verify. Usefull for system there connected with rs232
-		/// </summary>
-		public static bool DisablePortVerify = false;
-
 		/// <summary>
 		/// Disable communication for com devices. (Dummy test)
 		/// </summary>
@@ -71,6 +65,7 @@ namespace SerialPower
 		{
 			OK = 0,
 			TIMEOUT = 1,
+			TESTINGMODE = 2,
 		}
 
 		#region SetPowerSupplyValues
@@ -82,7 +77,7 @@ namespace SerialPower
 		/// <param name="channel"></param>
 		public static void SetPowerSupplyValues(float voltage, float current, Channel channel)
 		{
-			Logger.Info($"[CH{channel}] Set voltage to {voltage}V and current to {current}A");
+			Logger.Info($"[{channel}] Set voltage to {voltage}V and current to {current}A");
 			string command = $"V{(int)channel} {voltage}; I{(int)channel} {current}".Replace(",", ".");
 			SendData(command);
 		}
@@ -161,7 +156,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(Channel channel, State state)
 		{
-			Logger.Info($"[CH{channel}] change state to {state}");
+			Logger.Info($"[{channel}] change state to {state}");
 			SendData($"OP{(int)channel} {(int)state}");
 		}
 
@@ -193,7 +188,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(State state)
 		{
-			Logger.Info($"[CH1 and CH2] change state to {state}");
+			Logger.Info($"[CH1 & CH2] change state to {state}");
 			SendData($"OPALL {(int)state}");
 		}
 
@@ -203,7 +198,7 @@ namespace SerialPower
 		/// <param name="state"></param>
 		public static void SetChannelState(int state)
 		{
-			Logger.Info($"[CH1 and CH2] change state to {state}");
+			Logger.Info($"[CH1 & CH2] change state to {state}");
 			SendData($"OPALL {state}");
 		}
 		#endregion
@@ -289,7 +284,12 @@ namespace SerialPower
 		/// <param name="data">Command</param>
 		private static void SendData(string data)
 		{
-			if (TestingMode || serialPort == null)
+			if (TestingMode)
+			{
+				Logger.Debug($"[TestingMode] Sending data: {data}");
+				return;
+			}
+			if (serialPort == null)
 			{
 				return;
 			}
@@ -310,16 +310,24 @@ namespace SerialPower
 			}
 			catch (Exception ex)
 			{
-				Logger.Error(ex.Message);
-				MessageBox.Show(ex.Message, "ERROR at SerialSender", MessageBoxButton.OK, MessageBoxImage.Error);
+				if (MessageBox.Show("ERROR: " + ex.Message + "\nDo you want to continue?", "Critical error", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.No)
+				{
+					Environment.Exit(2);
+				}
 			}
 		}
 
+		/// <summary>
+		/// Send data to device and recv feedback
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
 		public static string SendDataAndRecv(string data)
 		{
 			if (TestingMode)
 			{
-				return "Disabled";
+				Logger.Debug($"[TestingMode] Sending data: {data}");
+				return STATUSCODE.TESTINGMODE.ToString();
 			}
 			if (serialPort == null)
 			{

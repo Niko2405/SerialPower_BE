@@ -108,6 +108,7 @@
 		<Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}"/>
 		<Setter Property="FontSize" Value="12"/>
 	</Style>
+	
 
 	<Style TargetType="{x:Type ListViewItem}">
 		<Setter Property="Background" Value="Transparent"/>
@@ -118,7 +119,6 @@
 				<ControlTemplate TargetType="{x:Type ListViewItem}">
 					<Grid Background="{TemplateBinding Background}">
 						<Border Name="Selection" Visibility="Collapsed"/>
-						<!-- This is used when GridView is put inside the ListView -->
 						<GridViewRowPresenter Grid.RowSpan="2"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -131,6 +131,19 @@
 		</Setter>
 	</Style>
 
+	<!-- Only works in MVVM!
+	<Style TargetType="{x:Type ListViewItem}">
+		<Style.Triggers>
+			<DataTrigger Binding ="{Binding IsRunning}" Value="true">
+				<Setter Property="Background" Value="Green"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding ="{Binding IsRunning}" Value="false">
+				<Setter Property="Background" Value="Red"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	-->
 	<Style x:Key="ListViewHeaderDark" TargetType="{x:Type GridViewColumnHeader}">
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="{StaticResource BackgroundStyleAlternativ}"/>

@@ -285,7 +285,7 @@ namespace SerialPower
 		{
 			if (ConfigHandler.serialConfig != null)
 			{
-				MessageBox.Show($"PortName: {ConfigHandler.serialConfig.SerialPortName}\nBaudrate: {ConfigHandler.serialConfig.Baudrate}\nDataBits: {ConfigHandler.serialConfig.DataBits}\nStopBits: {ConfigHandler.serialConfig.StopBits}\nParity: {ConfigHandler.serialConfig.Parity}\nWriteTimeout: {ConfigHandler.serialConfig.WriteTimeout}\nReadTimeout: {ConfigHandler.serialConfig.ReadTimeout}\nMeasureUpdateInterval: {ConfigHandler.serialConfig.MeasureUpdateInterval}\nShortCircuitProtection: {ConfigHandler.serialConfig.ShortCircuitProtection}", "Serial config", MessageBoxButton.OK, MessageBoxImage.Information);
+				MessageBox.Show($"PortName: {ConfigHandler.serialConfig.SerialPortName}\nBaudrate: {ConfigHandler.serialConfig.Baudrate}\nDataBits: {ConfigHandler.serialConfig.DataBits}\nStopBits: {ConfigHandler.serialConfig.StopBits}\nParity: {ConfigHandler.serialConfig.Parity}\nWriteTimeout: {ConfigHandler.serialConfig.WriteTimeout}\nReadTimeout: {ConfigHandler.serialConfig.ReadTimeout}\nMeasureUpdateInterval: {ConfigHandler.serialConfig.MeasureUpdateInterval}\nShortCircuitProtection: {ConfigHandler.serialConfig.ShortCircuitProtection}\nIsSequencerRunning: {ConfigHandler.serialConfig.IsSequencerRunning}", "Serial config", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 		}
 
