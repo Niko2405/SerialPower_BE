@@ -134,13 +134,17 @@ namespace SerialPower
 			// Print infos
 			Logger.ResetLog();
 			Logger.PrintHeader("Systeminfo");
-			Console.WriteLine("Config Handler:\t\t\tSystem.Text.Json");
+			Console.WriteLine($"Platform:\t\t\t{Environment.OSVersion.Platform}");
+			Console.WriteLine($"OS Version:\t\t\t{Environment.OSVersion.VersionString}");
+			Console.WriteLine($"OS Description:\t\t\t{System.Runtime.InteropServices.RuntimeInformation.OSDescription}");
+			Console.WriteLine($"OS Arch:\t\t\t{System.Runtime.InteropServices.RuntimeInformation.OSArchitecture}");
+
+			Console.WriteLine($"Config Handler:\t\t\tSystem.Text.Json");
 			Console.WriteLine($"Current release version:\t{fileVersionInfo.FileVersion}");
 			Console.WriteLine($"DotNet version:\t\t\t{Environment.Version}");
 			Console.WriteLine($"CPUs:\t\t\t\t{Environment.ProcessorCount}");
 			Console.WriteLine($"Machine name:\t\t\t{Environment.MachineName}");
 			Console.WriteLine($"Admin override:\t\t\t{Environment.IsPrivilegedProcess}");
-			Console.WriteLine($"Operating system:\t\t{Environment.OSVersion}");
 			Thread.Sleep(1000);
 
 			// Test logger

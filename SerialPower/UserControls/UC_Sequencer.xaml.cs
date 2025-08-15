@@ -188,6 +188,7 @@ namespace SerialPower.UserControls
 		private void BackgroundWorkerSequencer_DoWork(object? sender, DoWorkEventArgs e)
 		{
 			int counter = 0;
+
 			if (ConfigHandler.serialConfig == null || _backgroundWorkerSequencer == null)
 			{
 				Logger.Error("BackgroundWorkerSequencer or Config is null");
@@ -212,7 +213,7 @@ namespace SerialPower.UserControls
 					Logger.Info($"Run: {counter}");
 					SerialSender.SetChannelState(_sequenceCollection[i].Channel, _sequenceCollection[i].State);
 					SerialSender.SetPowerSupplyValues(_sequenceCollection[i].Voltage, _sequenceCollection[i].Current, _sequenceCollection[i].Channel);
-					Thread.Sleep((int)_sequenceCollection[i].Delay * 1000);
+					Thread.Sleep(Convert.ToInt32(_sequenceCollection[i].Delay * 1000));
 				}
 			}
 		}
