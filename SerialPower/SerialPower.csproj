@@ -117,6 +117,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="System.Data.SQLite" Version="1.0.119" />
 	<PackageReference Include="System.IO.Ports" Version="9.0.8" />
 	<PackageReference Include="TartarosLogger" Version="1.6.4" />
   </ItemGroup>
