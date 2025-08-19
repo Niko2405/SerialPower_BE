@@ -104,9 +104,9 @@ namespace SerialPower
 		/// <returns></returns>
 		public static string GetPowerSupplyNominalValue(Channel channel, TargetType targetType)
 		{
-			// Example output: V1 24.00
 			if (faultCounter >= faultLimit)
 			{
+				Logger.Warn("Fault counter limit reached");
 				return STATUSCODE.TIMEOUT.ToString();
 			}
 
@@ -132,9 +132,9 @@ namespace SerialPower
 		/// <returns></returns>
 		public static string GetPowerSupplyActualValue(Channel channel, TargetType targetType)
 		{
-			// Example output: 24.00V
 			if (faultCounter >= faultLimit)
 			{
+				Logger.Warn("Fault counter limit reached");
 				return STATUSCODE.TIMEOUT.ToString();
 			}
 
@@ -226,7 +226,8 @@ namespace SerialPower
 						DataBits = ConfigHandler.serialConfig.DataBits,
 						Parity = (Parity)ConfigHandler.serialConfig.Parity,
 						ReadTimeout = ConfigHandler.serialConfig.ReadTimeout,
-						WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
+						//WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
+						WriteTimeout = SerialPort.InfiniteTimeout,
 					};
 					//serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 					if (!serialPort.IsOpen)

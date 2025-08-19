@@ -137,12 +137,12 @@ namespace SerialPower
 						float currentCH1 = float.Parse(textCH1Current.Replace('A', ' '));
 						float currentCH2 = float.Parse(textCH2Current.Replace('A', ' '));
 
-						Logger.Debug($"[ShortCircuitProtection] Current CH1: {currentCH1}A\t max. current: {nominalCH1Current}A");
-						Logger.Debug($"[ShortCircuitProtection] Current CH2: {currentCH2}A\t max. current: {nominalCH2Current}A");
+						Logger.Debug($"[SCP] Current CH1: {currentCH1}A\t max. current: {nominalCH1Current}A");
+						Logger.Debug($"[SCP] Current CH2: {currentCH2}A\t max. current: {nominalCH2Current}A");
 
 						if ((currentCH1 / nominalCH1Current) >= 1.00)
 						{
-							Logger.Warn($"[ShortCircuitProtection] Current to high on CH1");
+							Logger.Warn($"[SCP] Current to high on CH1");
 							SerialSender.SetChannelState(SerialSender.Channel.CH1, SerialSender.State.OFF);
 							this.Dispatcher.Invoke(() =>
 							{
@@ -150,11 +150,11 @@ namespace SerialPower
 								UserControlMinimalCustomControl.Channel1Active = false;
 							});
 
-							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom am Kanal 1 wurde erreicht. Ausgang deaktiviert.", "Channel 1 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
+							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom an Kanal 1 wurde erreicht. Ausgang deaktiviert.", "Channel 1 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
 						}
 						if ((currentCH2 / nominalCH2Current) >= 1.00)
 						{
-							Logger.Warn($"[ShortCircuitProtection] Current to high on CH2");
+							Logger.Warn($"[SCP] Current to high on CH2");
 							SerialSender.SetChannelState(SerialSender.Channel.CH2, SerialSender.State.OFF);
 							this.Dispatcher.Invoke(() =>
 							{
@@ -162,7 +162,7 @@ namespace SerialPower
 								UserControlMinimalCustomControl.Channel2Active = false;
 							});
 
-							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom am Kanal 2 wurde erreicht. Ausgang deaktiviert.", "Channel 2 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
+							MessageBox.Show("Die Alte Firma brennt.\nSag ich mal so: Der maximale Strom an Kanal 2 wurde erreicht. Ausgang deaktiviert.", "Channel 2 maximum current reached", MessageBoxButton.OK, MessageBoxImage.Warning);
 						}
 					}
 				}

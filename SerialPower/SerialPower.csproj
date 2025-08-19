@@ -9,8 +9,8 @@
 	<Title>SerialPower</Title>
 	<Copyright>Niko2405</Copyright>
 	<StartupObject>SerialPower.App</StartupObject>
-	<AssemblyVersion>1.8.0.6</AssemblyVersion>
-	<FileVersion>1.8.0.6</FileVersion>
+	<AssemblyVersion>1.8.0.7</AssemblyVersion>
+	<FileVersion>1.8.0.7</FileVersion>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<SignAssembly>False</SignAssembly>
 	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
