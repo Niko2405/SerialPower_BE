@@ -120,6 +120,7 @@ namespace SerialPower
 			{
 				// get values
 				Thread.Sleep(updateDelay);
+				Logger.Debug("Asking for actual values");
 				string textCH1Voltage = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.V);
 				string textCH1Current = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH1, SerialSender.TargetType.I);
 				string textCH2Voltage = SerialSender.GetPowerSupplyActualValue(SerialSender.Channel.CH2, SerialSender.TargetType.V);

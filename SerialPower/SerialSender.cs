@@ -111,11 +111,14 @@ namespace SerialPower
 			}
 
 			string value = SendDataAndRecv($"{targetType}{(int)channel}?");
-
 			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
 				Logger.Warn($"Timeout. Increase fault counter: current[{faultCounter}] limit[{faultLimit}]");
+			}
+			if (value.Equals(STATUSCODE.TESTINGMODE.ToString()))
+			{
+				return "0.0";
 			}
 			if (value.StartsWith("V1") || value.StartsWith("V2") || value.StartsWith("I1") || value.StartsWith("I2"))
 			{
@@ -139,7 +142,10 @@ namespace SerialPower
 			}
 
 			string value = SendDataAndRecv($"{targetType}{(int)channel}O?");
-
+			if (value.Equals(STATUSCODE.TESTINGMODE.ToString()))
+			{
+				return "0.0";
+			}
 			if (value.Equals(STATUSCODE.TIMEOUT.ToString()))
 			{
 				faultCounter++;
@@ -226,8 +232,8 @@ namespace SerialPower
 						DataBits = ConfigHandler.serialConfig.DataBits,
 						Parity = (Parity)ConfigHandler.serialConfig.Parity,
 						ReadTimeout = ConfigHandler.serialConfig.ReadTimeout,
-						//WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
-						WriteTimeout = SerialPort.InfiniteTimeout,
+						WriteTimeout = ConfigHandler.serialConfig.WriteTimeout,
+						//WriteTimeout = SerialPort.InfiniteTimeout,
 					};
 					//serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 					if (!serialPort.IsOpen)
