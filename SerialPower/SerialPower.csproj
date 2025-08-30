@@ -9,8 +9,8 @@
 	<Title>SerialPower</Title>
 	<Copyright>Niko2405</Copyright>
 	<StartupObject>SerialPower.App</StartupObject>
-	<AssemblyVersion>1.8.0.8</AssemblyVersion>
-	<FileVersion>1.8.0.8</FileVersion>
+	<AssemblyVersion>1.8.0.9</AssemblyVersion>
+	<FileVersion>1.8.0.9</FileVersion>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<SignAssembly>False</SignAssembly>
 	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -117,7 +117,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+	<PackageReference Include="System.Data.SQLite" Version="2.0.1" />
 	<PackageReference Include="System.IO.Ports" Version="9.0.8" />
 	<PackageReference Include="TartarosLogger" Version="1.6.4" />
   </ItemGroup>

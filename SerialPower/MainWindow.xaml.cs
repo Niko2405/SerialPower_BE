@@ -36,7 +36,7 @@ namespace SerialPower
 				updateDelay = ConfigHandler.serialConfig.MeasureUpdateInterval;
 			}
 
-			MeasurementWorker.DoWork += MeasurementWorker_DoWork;
+			//MeasurementWorker.DoWork += MeasurementWorker_DoWork;
 			HeartbeatIndicatorWorker.DoWork += HeartbeatIndicatorWorker_DoWork;
 			SeqIndicatorWorker.DoWork += SequencerIndicatorWorker_DoWork;
 
@@ -108,7 +108,7 @@ namespace SerialPower
 				}
 			}
 		}
-
+		/*
 		/// <summary>
 		/// Measure voltage and current
 		/// </summary>
@@ -178,6 +178,7 @@ namespace SerialPower
 				});
 			}
 		}
+		*/
 
 		/// <summary>
 		/// Change primary user control

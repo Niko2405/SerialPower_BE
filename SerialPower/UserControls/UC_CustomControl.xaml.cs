@@ -196,11 +196,13 @@ namespace SerialPower.UserControls
 			}
 		}
 
+
 		private void VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			// If current window is visible
 			if (Convert.ToBoolean(e.NewValue.ToString()))
 			{
+				/*
 				// get last data from device
 				string voltageCH1 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH1, SerialSender.TargetType.V); // V1 5.45 ...
 				string currentCH1 = SerialSender.GetPowerSupplyNominalValue(SerialSender.Channel.CH1, SerialSender.TargetType.I); // I1 2.15 ...
@@ -224,8 +226,10 @@ namespace SerialPower.UserControls
 				TextBox_CH2Voltage.Text = voltageCH2;
 				TextBox_CH2Current.Text = currentCH2;
 				Logger.Info("Insert data into textboxes");
+				*/
 			}
 		}
+	
 
 		#region Presets
 		private void ListBoxCH1Presets33_SelectionChanged(object sender, SelectionChangedEventArgs e)
